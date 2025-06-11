@@ -1,0 +1,2026 @@
+/*Обнуление*/
+*{padding:0;margin:0;border:0;}
+*,*:before,*:after{-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;}
+:focus,:active{outline:none;}
+a:focus,a:active{outline:none;}
+nav,footer,header,aside{display:block;}
+html,body{height:100%;width:100%;font-size:100%;line-height:1;font-size:14px;-ms-text-size-adjust:100%;-moz-text-size-adjust:100%;-webkit-text-size-adjust:100%;}
+input,button,textarea{font-family:inherit;}
+input::-ms-clear{display:none;}
+button{cursor:pointer;}
+button::-moz-focus-inner{padding:0;border:0;}
+a,a:visited{text-decoration:none;}
+a:hover{text-decoration:none;}
+ul li{list-style:none;}
+img{vertical-align:top;}
+h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit;}
+
+
+
+
+body{
+    font-family:Helvetica;
+}
+
+
+.menu{
+    background-color:#000000;
+    width: auto;
+    height: 99px;
+    gap: 200px;
+    padding-top: 15px;
+    padding-right: 40px;
+    padding-bottom: 15px;
+    padding-left: 40px;;
+}
+
+.container{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.menu__row{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;    
+    width: auto;
+    height: 69px;
+    padding: 10px;
+
+}
+
+.menu__body {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.menu__logo {
+    width: 214px;
+    height: 49px;
+    margin-right: 40px;
+}
+
+
+.menu__pages {
+  display: flex;
+  align-items: center;
+  color: #ffffff;
+  font-size: 18px;
+  line-height: 24px;
+  gap: 20px; 
+
+}
+
+
+.menu__item--gap-40 {
+  margin-right: 40px;
+}
+
+
+.has-submenu {
+  position: relative;
+}
+
+.submenu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: white; /* Цвет фона подменю */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  z-index: 1000;
+  min-width: 180px;
+}
+
+.submenu li a {
+  display: block;
+  padding: 10px 15px;
+  color: black;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.submenu li a:hover {
+  background-color: #f0f0f0;
+}
+
+.has-submenu:hover .submenu {
+  display: block;
+}
+
+
+
+a{
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.language-switcher {
+  margin-left: auto; 
+  display: flex;
+  align-items: center;
+}
+
+.language-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 8px 12px;
+}
+
+.language-button:hover {
+  opacity: 0.8;
+}  
+.icon-earth {
+  fill: white;
+}
+/* Языковой переключатель (мобильный вид) */
+@media (max-width: 768px) {
+  .menu__row {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .menu__body {
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    background: black;
+    padding: 15px 0;
+  }
+
+  .menu__body.active {
+    display: flex;
+  }
+
+  .menu__pages {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .language-switcher {
+    justify-content: flex-end;
+    width: 100%;
+    margin-top: 10px;
+  }
+}
+
+.menu {
+  background-color: #000;
+  padding: 15px 40px;
+}
+
+
+.menu__logo {
+  width: 150px;
+}
+
+.menu__pages {
+  display: flex;
+  gap: 20px;
+}
+
+.menu__item a {
+  color: white;
+  text-decoration: none;
+}
+
+/* Бургер-меню */
+.burger-button {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.burger-button span {
+  width: 25px;
+  height: 3px;
+  background-color: white;
+  border-radius: 2px;
+}
+
+/* Подменю */
+.submenu {
+  display: none;
+  position: absolute;
+  background: white;
+  color: black;
+  top: 100%;
+  left: 0;
+  list-style: none;
+  padding: 0;
+}
+
+.has-submenu:hover .submenu {
+  display: block;
+}
+
+/* --- МЕДИА --- */
+@media (max-width: 768px) {
+  .burger-button {
+    display: flex;
+  }
+
+  .menu__pages {
+    display: none;
+    flex-direction: column;
+    background: black;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    z-index: 999;
+  }
+
+  .menu__pages.active {
+    display: flex;
+  }
+
+  .submenu {
+    position: static;
+    background: #222;
+  }
+
+  .submenu li a {
+    color: white;
+  }
+}
+
+
+
+
+/* Скрыть бургер по умолчанию */
+.burger-button {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 25px;
+  height: 20px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 1001;
+}
+.burger-button span {
+  height: 3px;
+  background-color: white;
+  border-radius: 2px;
+}
+
+/* Мобильный вид */
+@media (max-width: 768px) {
+  .burger-button {
+    display: flex;
+    margin-left: 60px;
+  }
+
+  .menu__pages {
+    position: absolute;
+    top: 99px;
+    left: 0;
+    right: 0;
+    background-color: black;
+    flex-direction: column;
+    align-items: flex-start;
+    padding:  20px 20px 30px 20px;
+    gap: 10px;
+    display: none;
+  }
+
+  .menu__pages.active {
+    display: flex;
+  }
+
+  .submenu {
+    position: static;
+    background-color: #111;
+    width: 100%;
+  }
+
+  .has-submenu:hover .submenu {
+    display: block;
+  }
+}
+
+a{
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.language-switcher {
+  margin-left: auto; 
+  display: flex;
+  align-items: center;
+}
+
+.language-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 8px 12px;
+}
+
+.language-button:hover {
+  opacity: 0.8;
+}  
+.icon-earth {
+  fill: white;
+}
+/* Языковой переключатель (мобильный вид) */
+@media (max-width: 768px) {
+  .menu__row {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .menu__body {
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    background: black;
+    padding: 15px 0;
+  }
+
+  .menu__body.active {
+    display: flex;
+  }
+
+  .menu__pages {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .language-switcher {
+    justify-content: flex-end;
+    width: 100%;
+    margin-top: 10px;
+  }
+}
+
+.menu {
+  background-color: #000;
+  padding: 15px 40px;
+}
+
+
+.menu__logo {
+  width: 150px;
+}
+
+.menu__pages {
+  display: flex;
+  gap: 20px;
+}
+
+.menu__item a {
+  color: white;
+  text-decoration: none;
+}
+
+/* Бургер-меню */
+.burger-button {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.burger-button span {
+  width: 25px;
+  height: 3px;
+  background-color: white;
+  border-radius: 2px;
+}
+
+/* Подменю */
+.submenu {
+  display: none;
+  position: absolute;
+  background: white;
+  color: black;
+  top: 100%;
+  left: 0;
+  list-style: none;
+  padding: 0;
+}
+
+.has-submenu:hover .submenu {
+  display: block;
+}
+
+/* --- МЕДИА --- */
+@media (max-width: 768px) {
+  .burger-button {
+    display: flex;
+  }
+
+  .menu__pages {
+    display: none;
+    flex-direction: column;
+    background: black;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    z-index: 999;
+  }
+
+  .menu__pages.active {
+    display: flex;
+  }
+
+  .submenu {
+    position: static;
+    background: #222;
+  }
+
+  .submenu li a {
+    color: white;
+  }
+}
+
+
+
+
+/* Скрыть бургер по умолчанию */
+.burger-button {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 25px;
+  height: 20px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 1001;
+}
+.burger-button span {
+  height: 3px;
+  background-color: white;
+  border-radius: 2px;
+}
+
+/* Мобильный вид */
+@media (max-width: 768px) {
+  .burger-button {
+    display: flex;
+    margin-left: 60px;
+  }
+
+  .menu__pages {
+    position: absolute;
+    top: 99px;
+    left: 0;
+    right: 0;
+    background-color: black;
+    flex-direction: column;
+    align-items: flex-start;
+    padding:  20px 20px 30px 20px;
+    gap: 10px;
+    display: none;
+  }
+
+  .menu__pages.active {
+    display: flex;
+  }
+
+  .submenu {
+    position: static;
+    background-color: #111;
+    width: 100%;
+  }
+
+  .has-submenu:hover .submenu {
+    display: block;
+  }
+}
+
+
+
+/* Students */
+.Students {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #F5F5F5;
+  width: 1200px;
+  height: auto;
+}
+
+.Students__row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Students__body {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 40px; /* расстояние между изображением и текстом */
+}
+
+.Students__woman {
+  width: 600px;
+  height: 700px;
+  border-radius: 10px;
+}
+
+.Students__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  max-width: 500px;
+}
+
+.Students__title {
+  font-size: 40px;
+  background-color: #004080;
+  height: 50px;
+  width: 100%;
+  border-radius: 5px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  border: none;
+  cursor: pointer;
+}
+button.Students__title2 {
+  font-size: 20px;
+  background-color: #004080;
+  height: 50px;
+  width: 100%;
+  border-radius: 5px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  border: none;
+  cursor: pointer;
+}
+
+
+.Students__text {
+  max-height: 60vh;  
+  overflow-y: auto; 
+  padding-right: 10px
+
+}
+
+.accordion-content {
+  display: none;
+  margin-bottom: 20px;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.accordion-toggle {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Обёртка модалки */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  overflow: auto;
+  padding: 40px 20px;
+}
+
+/* Содержимое модалки */
+.modal-content {
+  background-color: #fff;
+  margin: auto;
+  padding: 30px;
+  border-radius: 10px;
+  max-width: 1200px;
+  position: relative;
+}
+
+/* Кнопка закрытия */
+.close {
+  position: absolute;
+  right: 20px;
+  top: 15px;
+  font-size: 28px;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+}
+
+/* Кнопка открытия */
+.open-students-modal {
+  background-color: #000000;
+  color: #fff;
+  font-size: 20px;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin: 20px 20px 0px 20px;
+  width: 300px;
+}
+
+.open-students-modal:hover {
+  background-color: #0059b3;
+}
+
+
+
+@media (max-width: 1024px) {
+  .Students {
+    width: 90vw;
+    padding: 20px;
+    flex-direction: column;
+  }
+
+  .Students__row {
+    flex-direction: column;
+  }
+
+  .Students__body {
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+  }
+
+  .Students__woman {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    border-radius: 12px;
+    object-fit: cover;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+  }
+
+  .Students__woman:hover {
+    transform: scale(1.05);
+  }
+
+  .Students__content {
+    max-width: 100%;
+    width: 100%;
+    padding: 0 15px;
+  }
+
+  .Students__title {
+    font-size: 34px;
+    height: 50px;
+    margin-bottom: 25px;
+  }
+
+  button.Students__title2 {
+    font-size: 18px;
+    height: 48px;
+    margin-bottom: 25px;
+    border-radius: 8px;
+  }
+
+  .Students__text {
+    max-height: 55vh;
+    overflow-y: auto;
+    padding-right: 12px;
+    line-height: 1.5;
+    font-size: 17px;
+    color: #222;
+  }
+}
+
+@media (max-width: 600px) {
+  .Students {
+    width: 95vw;
+    padding: 15px 10px;
+  }
+
+  .Students__woman {
+    max-width: 100%;
+    max-height: 350px;
+  }
+
+  .Students__title {
+    font-size: 28px;
+    height: 45px;
+  }
+
+  button.Students__title2 {
+    font-size: 16px;
+    height: 45px;
+  }
+
+  .Students__text {
+    max-height: 45vh;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 375px) {
+  .Students__title {
+    font-size: 24px;
+    height: 40px;
+  }
+
+  button.Students__title2 {
+    font-size: 14px;
+    height: 40px;
+  }
+
+  .Students__text {
+    max-height: 40vh;
+    font-size: 14px;
+  }
+}
+
+
+
+
+/* Teacher */
+.Teacher {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #F5F5F5;
+  width: 1200px;
+  height: auto;
+}
+
+.Teacher__row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Teacher__body {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 40px;
+}
+
+.Teacher__man {
+  width: 600px;
+  height: 700px;
+  border-radius: 10px;
+}
+
+.Teacher__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  max-width: 500px;
+}
+
+.Teacher__title {
+  font-size: 40px;
+  background-color: #004080;
+  height: 50px;
+  width: 100%;
+  border-radius: 5px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  border: none;
+  cursor: pointer;
+}
+
+button.Teacher__title2 {
+  font-size: 20px;
+  background-color: #004080;
+  height: 50px;
+  width: 100%;
+  border-radius: 5px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  border: none;
+  cursor: pointer;
+}
+
+button.Teacher__title3 {
+  font-size: 15px;
+  background-color: #005011;
+  height: 50px;
+  width: 300px;
+  border-radius: 10px;
+  color: rgb(255, 255, 255);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  border: none;
+  cursor: pointer;
+}
+
+button.Teacher__title4 {
+  font-size: 15px;
+  background-color: #b9b9b9;
+  height: 50px;
+  width: 100%;
+  border-radius: 25px;
+  color: rgb(0, 0, 0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.Teacher__text {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.accordion-content {
+  display: none;
+  margin-bottom: 20px;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.accordion-toggle {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Модальное окно */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  overflow: auto;
+  padding: 40px 20px;
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: auto;
+  padding: 30px;
+  border-radius: 10px;
+  max-width: 1200px;
+  position: relative;
+}
+
+.close {
+  position: absolute;
+  right: 20px;
+  top: 15px;
+  font-size: 28px;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+}
+
+.open-teacher-modal {
+  background-color: #000000;
+  color: #fff;
+  font-size: 20px;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin: 20px;
+  width: 300px;
+}
+
+.open-teacher-modal:hover {
+  background-color: #0059b3;
+}
+
+.Teacher__text{
+  max-height: 60vh;  
+  overflow-y: auto; 
+  padding-right: 10px
+}
+
+
+@media (max-width: 1024px) {
+  .Teacher {
+    width: 90vw;
+    padding: 20px;
+    flex-direction: column;
+  }
+
+  .Teacher__row {
+    flex-direction: column;
+  }
+
+  .Teacher__body {
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+  }
+
+  .Teacher__man {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    border-radius: 12px;
+    object-fit: cover;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+  }
+
+  .Teacher__man:hover {
+    transform: scale(1.05);
+  }
+
+  .Teacher__content {
+    max-width: 100%;
+    width: 100%;
+    padding: 0 15px;
+  }
+
+  .Teacher__title {
+    font-size: 34px;
+    height: 50px;
+    margin-bottom: 25px;
+  }
+
+  button.Teacher__title2 {
+    font-size: 18px;
+    height: 48px;
+    margin-bottom: 25px;
+    border-radius: 8px;
+  }
+
+  .Teacher__text {
+    max-height: 55vh;
+    overflow-y: auto;
+    padding-right: 12px;
+    line-height: 1.5;
+    font-size: 17px;
+    color: #222;
+  }
+  
+}
+
+@media (max-width: 600px) {
+  .Teacher {
+    width: 95vw;
+    padding: 15px 10px;
+  }
+
+  .Teacher__man {
+    max-width: 100%;
+    max-height: 350px;
+  }
+
+  .Teacher__title {
+    font-size: 28px;
+    height: 45px;
+  }
+
+  button.Teacher__title2 {
+    font-size: 16px;
+    height: 45px;
+  }
+
+  .Teacher__text {
+    max-height: 45vh;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 400px) {
+  .modal-content {
+    padding: 15px;
+    max-width: 100%;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .Teacher {
+    width: 100%;
+    padding: 0;
+    flex-direction: column;
+  }
+
+  .Teacher__man {
+    width: 100%;
+    height: auto;
+    max-height: 250px;
+    object-fit: cover;
+  }
+
+  .Teacher__title {
+    font-size: 20px;
+    height: auto;
+    padding: 10px;
+    text-align: center;
+  }
+
+  .Teacher__text {
+    font-size: 14px;
+    max-height: 40vh;
+    overflow-y: auto;
+    padding-right: 5px;
+  }
+
+  .Teacher__content {
+    padding: 0 10px;
+    width: 100%;
+  }
+
+  button.Teacher__title2,
+  button.Teacher__title3,
+  button.Teacher__title4 {
+    font-size: 14px;
+    height: auto;
+    padding: 10px;
+    width: 100%;
+  }
+}
+
+
+
+/* Erasmus кнопки дизайн */
+
+.submenu li a{
+    background-color: #000000;
+    color: #fff;
+    font-size: 20px;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 300px;
+    margin: 20px 20px 0px 20px;
+    
+}
+.submenu .Erasmus-CirculEC a{
+  margin-bottom: 20px;
+}
+
+.submenu li a:hover {
+  background-color: #0059b3;  
+  color: #ffffff;             
+}
+
+/* Часть с картинкой международное сотруднечество */
+
+.section__top {
+  position: relative;
+  background: url('/img/first-photo.jpg') center/cover no-repeat;
+  height: 950px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  color: white;
+  font-size: 36px;
+  line-height: 56px;
+  overflow: hidden;
+}
+
+.section__top img{
+    filter: brightness(0.7);
+}
+.section__top::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3); 
+  z-index: 1;
+}
+
+.section__top > * {
+  position: relative;
+  z-index: 2;
+}
+
+.section-first-row {
+  display: flex;
+  gap: 10px;
+  font-size: 20px;
+  margin: 0px 0px 0px 43px;
+
+}
+
+.section__top h2{
+  margin: 0px 0px 100px 43px;
+}
+
+.section-second{
+  margin-left: 43px;    
+}
+
+
+
+
+.section__bottom {
+  display: flex;
+  /* gap: 20px; */
+  flex-wrap: wrap;
+}
+
+.section__item {
+  flex: 1;
+  min-width: 300px;
+  background-color: #000;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.section__item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.section__text {
+  position: absolute;
+  bottom: 30px;
+  right: 20px;
+  left: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  color: white;
+  gap: 20px;
+}
+
+.section__info {
+  text-align: left; /* Выравниваем текст справа */
+}
+
+.section__info h3 {
+  font-size: 70px;
+  margin-bottom: 10px;
+}
+
+.section__info p {
+  font-size: 22px;
+  line-height: 1.5;
+}
+
+.section__text button {
+  margin-top: 60px;
+  font-size: 30px;
+  background: rgba(0, 0, 0, 0.5); 
+  border: 1px solid white;
+  border-radius: 35px;
+  color: white;
+  cursor: pointer;
+  align-self: flex-start;
+  height: 80px;
+  width: 190px;
+}
+
+/* Section адоптивность */
+@media (max-width: 768px) {
+  .section__top {
+    height: 500px;
+    font-size: 24px;
+    line-height: 36px;
+  }
+
+  .section-first-row {
+    flex-direction: column;
+    margin: 20px;
+    font-size: 16px;
+  }
+
+  .section__top h2 {
+    font-size: 24px;
+    margin: 20px;
+  }
+
+  .section__bottom {
+    flex-direction: column;
+  }
+
+  .section__item {
+    min-width: 100%;
+    height: auto;
+  }
+
+  .section__info h3 {
+    font-size: 36px;
+  }
+
+  .section__info p {
+    font-size: 16px;
+  }
+
+  .section__text {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    bottom: 20px;
+  }
+
+  .section__text button {
+    font-size: 20px;
+    height: 60px;
+    width: 150px;
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .section__top {
+    height: 400px;
+  }
+
+  .section__top h2 {
+    font-size: 20px;
+    margin: 10px;
+  }
+
+  .section-first-row {
+    font-size: 14px;
+    margin: 10px;
+  }
+
+  .section__info h3 {
+    font-size: 28px;
+  }
+
+  .section__info p {
+    font-size: 14px;
+  }
+
+  .section__text button {
+    font-size: 18px;
+    width: 130px;
+    height: 50px;
+  }
+}
+
+
+
+
+
+
+        :root {
+            --primary-color: #005baa; /* Синий цвет Erasmus */
+            --secondary-color: #ffcc00; /* Желтый цвет Erasmus */
+            --text-color: #333;
+            --light-bg: #f8f9fa;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        .erasmus-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        
+        .erasmus-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .erasmus-title {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .erasmus-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--secondary-color);
+            border-radius: 2px;
+        }
+        
+        .erasmus-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .erasmus-logo-container {
+            flex: 1;
+            min-width: 300px;
+            max-width: 400px;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .erasmus-logo {
+            width: 100%;
+            max-width: 350px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .erasmus-logo:hover {
+            transform: translateY(-5px);
+        }
+        
+        .erasmus-logo img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .erasmus-info {
+            flex: 1;
+            min-width: 300px;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .erasmus-description {
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+            color: #555;
+        }
+        
+        .erasmus-link {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid var(--primary-color);
+        }
+        
+        .erasmus-link:hover {
+            background-color: transparent;
+            color: var(--primary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 91, 170, 0.2);
+        }
+        
+        @media (max-width: 768px) {
+            .erasmus-title {
+                font-size: 2rem;
+            }
+            
+            .erasmus-content {
+                flex-direction: column;
+            }
+            
+            .erasmus-logo-container {
+                margin-bottom: 20px;
+            }
+        }
+
+        :root {
+            --primary-color: #005baa; /* Синий цвет Erasmus */
+            --secondary-color: #ffcc00; /* Желтый цвет Erasmus */
+            --text-color: #333;
+            --light-bg: #f8f9fa;
+            --doc-card-bg: #ffffff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        .erasmus-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        
+        .erasmus-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .erasmus-title {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .erasmus-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--secondary-color);
+            border-radius: 2px;
+        }
+        
+        .erasmus-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 50px;
+        }
+        
+        .erasmus-logo-container {
+            flex: 1;
+            min-width: 300px;
+            max-width: 400px;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .erasmus-logo {
+            width: 100%;
+            max-width: 350px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .erasmus-logo:hover {
+            transform: translateY(-5px);
+        }
+        
+        .erasmus-logo img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .erasmus-info {
+            flex: 1;
+            min-width: 300px;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .erasmus-description {
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+            color: #555;
+        }
+        
+        .erasmus-link {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid var(--primary-color);
+        }
+        
+        .erasmus-link:hover {
+            background-color: transparent;
+            color: var(--primary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 91, 170, 0.2);
+        }
+        
+        /* Стили для раздела с документами */
+        .documents-section {
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 1px solid #eee;
+        }
+        
+        .documents-title {
+            text-align: center;
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+        }
+        
+        .documents-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 0 auto;
+            max-width: 900px;
+        }
+        
+        .document-card {
+            background: var(--doc-card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .document-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .document-link {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .document-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .document-info {
+            padding: 20px;
+        }
+        
+        .document-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        .document-description {
+            color: #666;
+            font-size: 0.95rem;
+        }
+        
+        @media (max-width: 768px) {
+            .erasmus-title {
+                font-size: 2rem;
+            }
+            
+            .erasmus-content {
+                flex-direction: column;
+            }
+            
+            .erasmus-logo-container {
+                margin-bottom: 20px;
+            }
+            
+            .documents-title {
+                font-size: 1.7rem;
+            }
+            
+            .documents-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        :root {
+            --primary-color: #005baa; /* Синий цвет Erasmus */
+            --secondary-color: #ffcc00; /* Желтый цвет Erasmus */
+            --text-color: #333;
+            --light-bg: #f8f9fa;
+            --doc-card-bg: #ffffff;
+            --partner-card-bg: #ffffff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        .erasmus-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .section-title {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--secondary-color);
+            border-radius: 2px;
+        }
+        
+        .erasmus-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 50px;
+        }
+        
+        .erasmus-logo-container {
+            flex: 1;
+            min-width: 300px;
+            max-width: 400px;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .erasmus-logo {
+            width: 100%;
+            max-width: 350px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .erasmus-logo:hover {
+            transform: translateY(-5px);
+        }
+        
+        .erasmus-logo img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .erasmus-info {
+            flex: 1;
+            min-width: 300px;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .erasmus-description {
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+            color: #555;
+        }
+        
+        .erasmus-link {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid var(--primary-color);
+        }
+        
+        .erasmus-link:hover {
+            background-color: transparent;
+            color: var(--primary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 91, 170, 0.2);
+        }
+        
+        /* Стили для раздела с документами */
+        .documents-section {
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 1px solid #eee;
+        }
+        
+        .documents-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 0 auto;
+            max-width: 900px;
+        }
+        
+        .document-card {
+            background: var(--doc-card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .document-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .document-link {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .document-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .document-info {
+            padding: 20px;
+        }
+        
+        .document-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        .document-description {
+            color: #666;
+            font-size: 0.95rem;
+        }
+        
+        /* Стили для раздела вузов-партнеров */
+        .partners-section {
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 1px solid #eee;
+        }
+        
+        .partners-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 0 auto;
+            max-width: 1200px;
+        }
+        
+        .partner-card {
+            background: var(--partner-card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .partner-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .partner-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .partner-info {
+            padding: 20px;
+        }
+        
+        .partner-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+        
+        .partner-country {
+            color: #666;
+            font-size: 0.9rem;
+            font-style: italic;
+        }
+        
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .erasmus-content {
+                flex-direction: column;
+            }
+            
+            .erasmus-logo-container {
+                margin-bottom: 20px;
+            }
+            
+            .documents-grid,
+            .partners-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+ /* Главный футер */
+.footer__ {
+  background-color: #000000;
+  color: #ffffff;
+  font-size: 16px;
+  padding-top: 40px;
+}
+
+/* Контейнер с колонками */
+.footer__row {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding: 60px 40px;
+  gap: 24px;
+}
+
+/* Каждая колонка */
+.footer__column {
+  flex: 1 1 250px;
+  max-width: 400px;
+  color: white;
+}
+
+/* Логотип */
+.logo__footer img {
+  width: 214px;
+  height: 49px;
+  margin-bottom: 20px;
+}
+@media (max-width: 768px) {
+.logo__title{
+
+}
+
+}
+/* Телефон */
+.footer__phone {
+  margin-top: 20px;
+  line-height: 32px;
+  font-size: 18px;
+}
+
+/* Email */
+.footer__email {
+  margin-top: 20px;
+  margin-bottom: 40px;
+  line-height: 32px;
+  font-size: 18px;
+}
+
+/* Навигация и сотрудники заголовки */
+.footer__column h4 {
+  margin-bottom: 16px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* Текст внутри колонок */
+.footer__column p {
+  margin: 4px 0;
+  line-height: 28px;
+}
+
+/* Линия-разделитель */
+.stripe {
+  border: 1px solid white;
+  margin: 0 40px;
+}
+
+/* Нижний текст © */
+.footer__bottom {
+  padding: 20px 40px;
+  font-size: 14px;
+}
+
+/* Адаптив: на узких экранах колонки в столбик */
+@media (max-width: 768px) {
+  .footer__row {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .footer__column {
+    max-width: 100%;
+  }
+
+  .stripe {
+    margin: 20px 0;
+  }
+
+  .footer__bottom {
+    text-align: center;
+  }
+}
+
+
+/* Адаптив: на узких экранах колонки в столбик */
+@media (max-width: 768px) {
+    .footer__row {
+    flex-direction: column;
+    gap: 24px;
+    }
+
+    .footer__column {
+    max-width: 100%;
+    }
+
+    .stripe {
+    margin: 20px 0;
+    }
+
+    .footer__bottom {
+    text-align: center;
+    }
+}
