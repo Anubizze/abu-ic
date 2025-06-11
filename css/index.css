@@ -915,19 +915,6 @@ button.Teacher__title4 {
 
 /* Часть с картинкой международное сотруднечество */
 
-.section__top {
-  position: relative;
-  background: url('/img/first-photo.jpg') center/cover no-repeat;
-  height: 950px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  color: white;
-  font-size: 36px;
-  line-height: 56px;
-  overflow: hidden;
-}
-
 .section__top img{
     filter: brightness(0.7);
 }
