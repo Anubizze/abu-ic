@@ -18,11 +18,16 @@ h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit;}
 
 
 
+
+/* ================= ОСНОВНОЙ BODY ================= */
 body{
     font-family:Helvetica;
+    background-color: #E9EAEF;
 }
 
 
+
+/* ================= МЕНЮ ================= */
 .menu{
     background-color:#000000;
     width: auto;
@@ -58,9 +63,9 @@ body{
 }
 
 .menu__logo {
-    width: 214px;
+    width: 220px;
     height: 49px;
-    margin-right: 40px;
+    margin-right: 20px;
 }
 
 
@@ -117,10 +122,25 @@ body{
 
 
 a{
-    color: #ffffff;
-    text-decoration: none;
+  color: #000;
+  text-decoration: none;
 }
 
+.footer__column a{
+  color: #ffffff;
+}
+
+.ABU__brochure a{
+  color: #ffffff;
+}
+
+.section a{
+  color: #ffffff;
+}
+
+.modal a{
+  color: #ffffff;
+}
 .language-switcher {
   margin-left: auto; 
   display: flex;
@@ -184,9 +204,6 @@ a{
 }
 
 
-.menu__logo {
-  width: 150px;
-}
 
 .menu__pages {
   display: flex;
@@ -199,6 +216,8 @@ a{
 }
 
 /* Бургер-меню */
+
+/* ================= БУРГЕР-МЕНЮ ================= */
 .burger-button {
   display: none;
   flex-direction: column;
@@ -237,6 +256,8 @@ a{
     display: flex;
   }
 
+
+/* ================= МЕНЮ ================= */
   .menu__pages {
     display: none;
     flex-direction: column;
@@ -267,6 +288,8 @@ a{
 
 
 /* Скрыть бургер по умолчанию */
+
+/* ================= БУРГЕР-МЕНЮ ================= */
 .burger-button {
   display: none;
   flex-direction: column;
@@ -291,6 +314,8 @@ a{
     margin-left: 60px;
   }
 
+
+/* ================= МЕНЮ ================= */
   .menu__pages {
     position: absolute;
     top: 99px;
@@ -322,6 +347,8 @@ a{
 
 
 /* Students */
+
+/* ================= БЛОК STUDENTS ================= */
 .Students {
   display: flex;
   align-items: center;
@@ -416,6 +443,8 @@ button.Students__title2 {
 }
 
 /* Обёртка модалки */
+
+/* ================= ОБЩИЕ СТИЛИ МОДАЛКИ ================= */
 .modal {
   display: none;
   position: fixed;
@@ -468,6 +497,8 @@ button.Students__title2 {
 
 
 @media (max-width: 1024px) {
+
+/* ================= БЛОК STUDENTS ================= */
   .Students {
     width: 90vw;
     padding: 20px;
@@ -575,6 +606,8 @@ button.Students__title2 {
 
 
 /* Teacher */
+
+/* ================= БЛОК TEACHER ================= */
 .Teacher {
   display: flex;
   align-items: center;
@@ -697,6 +730,8 @@ button.Teacher__title4 {
 }
 
 /* Модальное окно */
+
+/* ================= ОБЩИЕ СТИЛИ МОДАЛКИ ================= */
 .modal {
   display: none;
   position: fixed;
@@ -743,6 +778,8 @@ button.Teacher__title4 {
   background-color: #0059b3;
 }
 
+
+/* ================= БЛОК TEACHER ================= */
 .Teacher__text{
   max-height: 60vh;  
   overflow-y: auto; 
@@ -839,6 +876,8 @@ button.Teacher__title4 {
 }
 
 @media (max-width: 400px) {
+
+/* ================= ОБЩИЕ СТИЛИ МОДАЛКИ ================= */
   .modal-content {
     padding: 15px;
     max-width: 100%;
@@ -846,6 +885,8 @@ button.Teacher__title4 {
     box-sizing: border-box;
   }
 
+
+/* ================= БЛОК TEACHER ================= */
   .Teacher {
     width: 100%;
     padding: 0;
@@ -891,7 +932,9 @@ button.Teacher__title4 {
 
 
 /* Erasmus кнопки дизайн */
-
+.submenu {
+  padding: 0 10px 0 0;
+}
 .submenu li a{
     background-color: #000000;
     color: #fff;
@@ -915,8 +958,11 @@ button.Teacher__title4 {
 
 /* Часть с картинкой международное сотруднечество */
 
+
+/* ================= СЕКЦИЯ С КАРТИНКОЙ (TOP) ================= */
 .section__top {
   position: relative;
+  /* background: url('/img/first-photo.jpg') center/cover no-repeat; */
   height: 950px;
   display: flex;
   flex-direction: column;
@@ -962,6 +1008,8 @@ button.Teacher__title4 {
 
 
 
+
+/* ================= СЕКЦИЯ С БЛОКАМИ (BOTTOM) ================= */
 .section__bottom {
   display: flex;
   /* gap: 20px; */
@@ -1024,6 +1072,8 @@ button.Teacher__title4 {
 
 /* Section адоптивность */
 @media (max-width: 768px) {
+
+/* ================= СЕКЦИЯ С КАРТИНКОЙ (TOP) ================= */
   .section__top {
     height: 500px;
     font-size: 24px;
@@ -1041,6 +1091,8 @@ button.Teacher__title4 {
     margin: 20px;
   }
 
+
+/* ================= СЕКЦИЯ С БЛОКАМИ (BOTTOM) ================= */
   .section__bottom {
     flex-direction: column;
   }
@@ -1074,6 +1126,8 @@ button.Teacher__title4 {
 }
 
 @media (max-width: 480px) {
+
+/* ================= СЕКЦИЯ С КАРТИНКОЙ (TOP) ================= */
   .section__top {
     height: 400px;
   }
@@ -1107,6 +1161,8 @@ button.Teacher__title4 {
 
 
 /* Фон затемнения */
+
+/* ================= ОБЩИЕ СТИЛИ МОДАЛКИ ================= */
 .modal-window {
     display: none; /* скрыто по умолчанию */
     position: fixed;
@@ -1324,6 +1380,8 @@ button.Teacher__title4 {
 
 
 
+
+/* ================= БЛОК NEWS-ПАРТНЕРЫ ================= */
 .news-partners{
     background-color: #E9EAEF;
     color: #3E3232;
@@ -1403,11 +1461,6 @@ button.Teacher__title4 {
     padding: 10px;
 }
 
-.first__block img{
-    width: 402px;
-    height: 362px;
-    border-radius: 12px;
-}
 
 .first__block h3,
 .first__block p{
@@ -1452,7 +1505,7 @@ button.Teacher__title4 {
 .btn-universities {
   display: block;
   margin: 10px auto 0 auto;
-  width: 400px;
+  width: 250px;
   height: 45px;
   background-color: black;
   color: white;
@@ -1491,15 +1544,12 @@ button.Teacher__title4 {
 /* news-partners адаптив */
 @media (max-width: 1200px) {
   .news__block_main {
-    margin: 40px 20px;
-    gap: 16px;
-    flex-wrap: wrap;
     justify-content: center;
+    margin: 40px 0;
+    gap: 16px;
   }
 
   .news__title {
-    margin: 0 20px 24px 20px;
-    padding-top: 32px;
     flex-direction: column;
     align-items: flex-start;
     gap: 12px;
@@ -1521,22 +1571,21 @@ button.Teacher__title4 {
 @media (max-width: 768px) {
   .news__slider-wrapper {
     overflow-x: auto;
-    padding-left: 16px; /* добавляем отступ, чтобы 1 карточка не обрезалась */
+    padding-left: 16px;
   }
 
   .news__block_main {
     flex-wrap: nowrap;
     gap: 16px;
-    scroll-snap-type: x mandatory;
     padding-bottom: 8px;
-    width: max-content;
+    width: fit-content; /* заменил max-content */
   }
 
   .first__block {
     flex: 0 0 280px;
-    scroll-snap-align: start;
     max-width: 85vw;
     height: 350px;
+    scroll-snap-align: start;
   }
 
   .first__block img {
@@ -1546,10 +1595,8 @@ button.Teacher__title4 {
   }
 
   .btn-universities {
-    width: 100%;
     font-size: 16px;
     height: 42px;
-
   }
 
   .country-name {
@@ -1583,6 +1630,7 @@ button.Teacher__title4 {
 
 
 
+/* ================= БЛОК ABU БРОШЮРА ================= */
 .ABU__brochure {
     background-color: #E9EAEF;
     width: auto;
@@ -1693,6 +1741,8 @@ button.Teacher__title4 {
 
 
 
+
+/* ================= ОБЩИЕ СТИЛИ МОДАЛКИ ================= */
 .modal-content {
   background: #ffffff;
   margin: 60px auto;
@@ -1764,7 +1814,9 @@ button.Teacher__title4 {
 .modal-content li{
   margin: 15px 0px;
 }
-/* Главный футер */
+
+
+/* ================= ФУТЕР ================= */
 .footer__ {
   background-color: #000000;
   color: #ffffff;
@@ -1794,12 +1846,7 @@ button.Teacher__title4 {
   height: 49px;
   margin-bottom: 20px;
 }
-@media (max-width: 768px) {
-.logo__title{
 
-}
-
-}
 /* Телефон */
 .footer__phone {
   margin-top: 20px;
@@ -1863,6 +1910,8 @@ button.Teacher__title4 {
 
 
 
+
+/* ================= ФОН MATRIX ================= */
 .matrix__background img{
   width: 100%;
   height: 1000px;
@@ -1876,6 +1925,8 @@ button.Teacher__title4 {
 
 
 /* for_foreign_students Иностранным студентам*/
+
+/* ================= ИНОСТРАННЫЕ СТУДЕНТЫ ================= */
 .foreign_students__title {
     text-align: center;
     font-size: 42px;
@@ -1971,129 +2022,180 @@ button.Teacher__title4 {
 
 
 /* Наши партнеры Our-partners */
-.partners-table {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: #f9f9f9;
-  margin: 0 70px;
+
+/* ================= НАШИ ПАРТНЕРЫ (ТАБЛИЦА) ================= */
+.cards-wrapper {
+  display: flex;
+  flex-wrap: wrap;               /* позволяет переносить карточки */
+  justify-content: center;       /* центрирует карточки по горизонтали */
+  gap: 20px;                     /* отступы между карточками */
+  max-width: 1280px;             /* ограничение по ширине */
+  margin: 0 auto;                /* центрирование всей обёртки */
   padding: 20px;
+}
+
+.country-card {
+  flex: 1 1 300px;               /* растяжение карточки до 300px */
+  max-width: 400px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 20px;          /* отступ снизу */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  text-align: center;
+}
+
+
+.country-card a{
+  color: #007acc;
+  font-size: 17px;
+}
+.flag {
   width: 100%;
-  max-width: 1600px; /* например, ограничим максимумом, чтобы не было слишком широко на больших мониторах */
-  height: auto;
-  font-size: 20px;
-  box-sizing: border-box;
+  border-radius: 8px;
+  margin-bottom: 10px;
 }
 
-    .partners-table h2 {
-      text-align: center;
-      margin-bottom: 30px;
-      color: #333;
-    }
-
-    .partners-table table {
-      border-collapse: collapse;
-      width: 100%;
-      background: #fff;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
-
-    .partners-table thead {
-      background: #0077b6;
-      color: #fff;
-    }
-
-    .partners-table th, .partners-table td {
-      padding: 15px 20px;
-      text-align: left;
-      border-bottom: 1px solid #eee;
-    }
-
-    .partners-table tbody tr:hover {
-      background-color: #f1f9ff;
-    }
-
-    .partners-table a {
-      color: #0077b6;
-      text-decoration: none;
-      transition: 0.3s;
-    }
-
-    .partners-table a:hover {
-      text-decoration: underline;
-    }
-
-    /* Стили по умолчанию — показываем таблицу, скрываем карточки */
-.table-container {
-    display: block;
-    margin: 0 0 0 70px;
+.toggle-btn {
+  background-color: #1976d2;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin-top: 10px;
+  border-radius: 6px;
+  cursor: pointer;
 }
 
-.mobile-cards {
-    display: none;
+.toggle-btn:hover {
+  background-color: #1565c0;
 }
 
-.partners-table {
+.university-list {
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  padding: 10px;
+  margin-top: 10px;
+  text-align: left;
+}
+
+.hidden {
+  display: none;
+}
+
+
+.university-list ul {
+  padding-left: 20px; /* небольшой отступ слева */
+}
+
+.university-list li {
+  margin-bottom: 10px; /* отступ между строками */
+}
+
+.university-list a {
+  display: inline-block; /* чтобы margin/padding работал нормально */
+  color: #007acc;
+  font-size: 16px;
+  text-decoration: none;
+}
+
+.university-list a:hover {
+  text-decoration: underline;
+}
+
+
+
+
+/* ==== ДЛЯ компов ширина 1280 ==== */
+@media (min-width: 1024px) {
+  .news__cards {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+    width: 1280px;
+  }
+
+  .first__block {
+    width: 1280px;
+    height: 400px;
+    min-width: calc((100% - 2 * 24px) / 4);
+    max-width: calc((100% - 2 * 24px) / 4);
+    flex: 0 0 auto;
+  }
+
+  .first__block img {
+    width: 250px;
+    height: 200px;
+    border-radius: 10px;
+    margin-left: 4px;
+    margin-top: 4px;
+  }
+
+  .partners__cards,
+  .footer__container,
+  .ABU__container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 5px 20px;
+    box-sizing: border-box;
+  }
+
+  .news__slider-wrapper {
+    overflow: hidden;
     width: 100%;
-    border-collapse: collapse;
-}
+  }
 
-.partners-table td, .partners-table th {
-    padding: 10px;
-    border: 1px solid #ddd;
-}
+  .news__block_main {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 24px;
+    transition: transform 0.3s ease;
+  }
 
-/* Адаптивность для мобильных */
-@media screen and (max-width: 768px) {
-    /* Скрываем таблицу */
-    .table-container {
-        display: none;
-    }
+  /* Кнопка открытия */
+  .more-button {
+    padding: 14px 17px;
+    background: linear-gradient(135deg, #003366, #0055aa);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 17px;
+    font-weight: 600;
+    box-shadow: 0 5px 15px rgba(0, 51, 102, 0.4);
+    transition: all 0.3s ease;
+  }
 
-    /* Показываем карточки */
-    .mobile-cards {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 20px;
-        justify-content: center;
-        padding: 20px;
-    }
+  .submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.85);
+    padding: 10px 0;
+    border-radius: 8px;
+    min-width: 220px;
+    z-index: 1000;
+  }
 
-    /* Стили карточек */
-    .partner-card {
-        background-color: #f9f9f9;
-        border: 1px solid #ddd;
-        border-radius: 10px;
-        padding: 20px;
-        width: 100%;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        transition: transform 0.3s ease;
-    }
+  .has-submenu:hover .submenu {
+    display: block;
+  }
 
-    .partner-card h3 {
-        margin-top: 0;
-        font-size: 20px;
-        color: #333;
-        border-bottom: 1px solid #ddd;
-        padding-bottom: 10px;
-    }
+  .submenu li a,
+  .submenu li button {
+    all: unset;
+    display: block;
+    padding: 12px 20px;
+    color: #fff;
+    font-size: 16px;
+    width: 100%;
+    cursor: pointer;
+  }
 
-    .partner-card ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
-
-    .partner-card ul li {
-        margin-bottom: 10px;
-    }
-
-    .partner-card a {
-        color: #007bff;
-        text-decoration: none;
-    }
-
-    .partner-card a:hover {
-        text-decoration: underline;
-    }
+  .submenu li a:hover,
+  .submenu li button:hover {
+    color: #dddddd;
+  }
 }
