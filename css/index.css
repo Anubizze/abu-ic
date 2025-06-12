@@ -917,7 +917,6 @@ button.Teacher__title4 {
 
 .section__top {
   position: relative;
-  background: url('/img/first-photo.jpg') center/cover no-repeat;
   height: 950px;
   display: flex;
   flex-direction: column;
