@@ -1823,4 +1823,21 @@ button.Teacher__title4 {
         font-size: 16px;
         width: 100%;
         cursor: pointer;
+        
+}
+
+.submenu li a {
+  background: none !important;
+  outline: none;
+  box-shadow: none;
+  color: white; /* или нужный тебе цвет */
+}
+
+.submenu li a:focus,
+.submenu li a:active,
+.submenu li a:hover {
+  background: none !important;
+  outline: none;
+  box-shadow: none;
+  color: white; /* чтобы текст не исчез */
 }
