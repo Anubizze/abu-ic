@@ -1823,6 +1823,35 @@ button.Teacher__title4 {
         
 }
 
-.submenu a:hover {
-  text-decoration: underline;
+
+.submenu {
+  min-width: max-content;                /* ширина по содержимому */
+  padding: 10px 15px;                    /* внутренние отступы */
+  background: #111;                      /* тёмный фон */
+  border-radius: 8px;                    /* скруглённые углы */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* тень выпадающего блока */
+  z-index: 1000;                         /* поверх других элементов */
 }
+
+.submenu li {
+  white-space: nowrap;                  /* запрет переноса текста */
+}
+
+.submenu li a {
+  display: block;                        /* занимает всю ширину li */
+  padding: 8px 12px;                     /* отступы внутри ссылок */
+  color: white;                          /* белый текст */
+  background: none;                      /* прозрачный фон */
+  border-radius: 6px;                    /* скругление при наведении */
+  transition: all 0.2s ease;             /* плавные эффекты */
+  text-decoration: none;                 /* убираем подчёркивание */
+}
+
+/* Наведение на ссылку — свечением и лёгким фоном */
+.submenu li a:hover {
+  background-color: rgba(255, 255, 255, 0.05); /* лёгкий полупрозрачный фон */
+  box-shadow: 0 2px 10px rgba(255, 255, 255, 0.15); /* свечение */
+  text-decoration: underline;             /* подчёркивание при наведении */
+}
+
+
