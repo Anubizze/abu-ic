@@ -796,15 +796,7 @@ button.Teacher__title4 {
 }
 
 
-/* Erasmus кнопки дизайн */
 
-.submenu .Erasmus-CirculEC a{
-  margin-bottom: 20px;
-}
-
-.submenu li a:hover {
-  color: #ffffff;             
-}
 
 
 
@@ -1753,4 +1745,3 @@ button.Teacher__title4 {
   box-shadow: 0 2px 10px rgba(255, 255, 255, 0.15);
   text-decoration: underline;
 }
-
