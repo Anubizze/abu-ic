@@ -96,9 +96,6 @@ body{
   white-space: nowrap;
 }
 
-.submenu li a:hover {
-  background-color: #f0f0f0;
-}
 
 .has-submenu:hover .submenu {
   display: block;
@@ -1826,18 +1823,6 @@ button.Teacher__title4 {
         
 }
 
-.submenu li a {
-  background: none !important;
-  outline: none;
-  box-shadow: none;
-  color: white; /* или нужный тебе цвет */
-}
-
-.submenu li a:focus,
-.submenu li a:active,
-.submenu li a:hover {
-  background: none !important;
-  outline: none;
-  box-shadow: none;
-  color: white; /* чтобы текст не исчез */
+.submenu a:hover {
+  text-decoration: underline;
 }
