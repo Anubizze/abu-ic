@@ -1,603 +1,4 @@
-
-
-
-        :root {
-            --primary-color: #005baa; /* Синий цвет Erasmus */
-            --secondary-color: #ffcc00; /* Желтый цвет Erasmus */
-            --text-color: #333;
-            --light-bg: #f8f9fa;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background-color: var(--light-bg);
-            color: var(--text-color);
-            line-height: 1.6;
-        }
-        
-        .erasmus-container {
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
-        
-        .erasmus-header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        
-        .erasmus-title {
-            color: var(--primary-color);
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            position: relative;
-            display: inline-block;
-        }
-        
-        .erasmus-title:after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 4px;
-            background: var(--secondary-color);
-            border-radius: 2px;
-        }
-        
-        .erasmus-content {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 30px;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .erasmus-logo-container {
-            flex: 1;
-            min-width: 300px;
-            max-width: 400px;
-            display: flex;
-            justify-content: center;
-        }
-        
-        .erasmus-logo {
-            width: 100%;
-            max-width: 350px;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-        }
-        
-        .erasmus-logo:hover {
-            transform: translateY(-5px);
-        }
-        
-        .erasmus-logo img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-        
-        .erasmus-info {
-            flex: 1;
-            min-width: 300px;
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-        }
-        
-        .erasmus-description {
-            margin-bottom: 25px;
-            font-size: 1.1rem;
-            color: #555;
-        }
-        
-        .erasmus-link {
-            display: inline-block;
-            background-color: var(--primary-color);
-            color: white;
-            padding: 12px 25px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: 2px solid var(--primary-color);
-        }
-        
-        .erasmus-link:hover {
-            background-color: transparent;
-            color: var(--primary-color);
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 91, 170, 0.2);
-        }
-        
-        @media (max-width: 768px) {
-            .erasmus-title {
-                font-size: 2rem;
-            }
-            
-            .erasmus-content {
-                flex-direction: column;
-            }
-            
-            .erasmus-logo-container {
-                margin-bottom: 20px;
-            }
-        }
-
-        :root {
-            --primary-color: #005baa; /* Синий цвет Erasmus */
-            --secondary-color: #ffcc00; /* Желтый цвет Erasmus */
-            --text-color: #333;
-            --light-bg: #f8f9fa;
-            --doc-card-bg: #ffffff;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background-color: var(--light-bg);
-            color: var(--text-color);
-            line-height: 1.6;
-        }
-        
-        .erasmus-container {
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
-        
-        .erasmus-header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        
-        .erasmus-title {
-            color: var(--primary-color);
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            position: relative;
-            display: inline-block;
-        }
-        
-        .erasmus-title:after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 4px;
-            background: var(--secondary-color);
-            border-radius: 2px;
-        }
-        
-        .erasmus-content {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 30px;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 50px;
-        }
-        
-        .erasmus-logo-container {
-            flex: 1;
-            min-width: 300px;
-            max-width: 400px;
-            display: flex;
-            justify-content: center;
-        }
-        
-        .erasmus-logo {
-            width: 100%;
-            max-width: 350px;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-        }
-        
-        .erasmus-logo:hover {
-            transform: translateY(-5px);
-        }
-        
-        .erasmus-logo img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-        
-        .erasmus-info {
-            flex: 1;
-            min-width: 300px;
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-        }
-        
-        .erasmus-description {
-            margin-bottom: 25px;
-            font-size: 1.1rem;
-            color: #555;
-        }
-        
-        .erasmus-link {
-            display: inline-block;
-            background-color: var(--primary-color);
-            color: white;
-            padding: 12px 25px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: 2px solid var(--primary-color);
-        }
-        
-        .erasmus-link:hover {
-            background-color: transparent;
-            color: var(--primary-color);
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 91, 170, 0.2);
-        }
-        
-        /* Стили для раздела с документами */
-        .documents-section {
-            margin-top: 60px;
-            padding-top: 40px;
-            border-top: 1px solid #eee;
-        }
-        
-        .documents-title {
-            text-align: center;
-            font-size: 2rem;
-            color: var(--primary-color);
-            margin-bottom: 30px;
-        }
-        
-        .documents-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin: 0 auto;
-            max-width: 900px;
-        }
-        
-        .document-card {
-            background: var(--doc-card-bg);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            text-align: center;
-        }
-        
-        .document-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-        }
-        
-        .document-link {
-            display: block;
-            text-decoration: none;
-            color: inherit;
-        }
-        
-        .document-image {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .document-info {
-            padding: 20px;
-        }
-        
-        .document-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: var(--primary-color);
-            margin-bottom: 10px;
-        }
-        
-        .document-description {
-            color: #666;
-            font-size: 0.95rem;
-        }
-        
-        @media (max-width: 768px) {
-            .erasmus-title {
-                font-size: 2rem;
-            }
-            
-            .erasmus-content {
-                flex-direction: column;
-            }
-            
-            .erasmus-logo-container {
-                margin-bottom: 20px;
-            }
-            
-            .documents-title {
-                font-size: 1.7rem;
-            }
-            
-            .documents-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        :root {
-            --primary-color: #005baa; /* Синий цвет Erasmus */
-            --secondary-color: #ffcc00; /* Желтый цвет Erasmus */
-            --text-color: #333;
-            --light-bg: #f8f9fa;
-            --doc-card-bg: #ffffff;
-            --partner-card-bg: #ffffff;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background-color: var(--light-bg);
-            color: var(--text-color);
-            line-height: 1.6;
-        }
-        
-        .erasmus-container {
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
-        
-        .section-header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        
-        .section-title {
-            color: var(--primary-color);
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            position: relative;
-            display: inline-block;
-        }
-        
-        .section-title:after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 4px;
-            background: var(--secondary-color);
-            border-radius: 2px;
-        }
-        
-        .erasmus-content {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 30px;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 50px;
-        }
-        
-        .erasmus-logo-container {
-            flex: 1;
-            min-width: 300px;
-            max-width: 400px;
-            display: flex;
-            justify-content: center;
-        }
-        
-        .erasmus-logo {
-            width: 100%;
-            max-width: 350px;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-        }
-        
-        .erasmus-logo:hover {
-            transform: translateY(-5px);
-        }
-        
-        .erasmus-logo img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-        
-        .erasmus-info {
-            flex: 1;
-            min-width: 300px;
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-        }
-        
-        .erasmus-description {
-            margin-bottom: 25px;
-            font-size: 1.1rem;
-            color: #555;
-        }
-        
-        .erasmus-link {
-            display: inline-block;
-            background-color: var(--primary-color);
-            color: white;
-            padding: 12px 25px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: 2px solid var(--primary-color);
-        }
-        
-        .erasmus-link:hover {
-            background-color: transparent;
-            color: var(--primary-color);
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 91, 170, 0.2);
-        }
-        
-        /* Стили для раздела с документами */
-        .documents-section {
-            margin-top: 60px;
-            padding-top: 40px;
-            border-top: 1px solid #eee;
-        }
-        
-        .documents-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin: 0 auto;
-            max-width: 900px;
-        }
-        
-        .document-card {
-            background: var(--doc-card-bg);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            text-align: center;
-        }
-        
-        .document-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-        }
-        
-        .document-link {
-            display: block;
-            text-decoration: none;
-            color: inherit;
-        }
-        
-        .document-image {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .document-info {
-            padding: 20px;
-        }
-        
-        .document-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: var(--primary-color);
-            margin-bottom: 10px;
-        }
-        
-        .document-description {
-            color: #666;
-            font-size: 0.95rem;
-        }
-        
-        /* Стили для раздела вузов-партнеров */
-        .partners-section {
-            margin-top: 60px;
-            padding-top: 40px;
-            border-top: 1px solid #eee;
-        }
-        
-        .partners-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin: 0 auto;
-            max-width: 1200px;
-        }
-        
-        .partner-card {
-            background: var(--partner-card-bg);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            text-align: center;
-        }
-        
-        .partner-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-        }
-        
-        .partner-image {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .partner-info {
-            padding: 20px;
-        }
-        
-        .partner-name {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--primary-color);
-            margin-bottom: 5px;
-        }
-        
-        .partner-country {
-            color: #666;
-            font-size: 0.9rem;
-            font-style: italic;
-        }
-        
-        @media (max-width: 768px) {
-            .section-title {
-                font-size: 2rem;
-            }
-            
-            .erasmus-content {
-                flex-direction: column;
-            }
-            
-            .erasmus-logo-container {
-                margin-bottom: 20px;
-            }
-            
-            .documents-grid,
-            .partners-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-/*Обнуление*/
+/*Обнуление*/More actions
 *{padding:0;margin:0;border:0;}
 *,*:before,*:after{-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;}
 :focus,:active{outline:none;}
@@ -617,16 +18,18 @@ h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit;}
 
 
 
-
-/* ================= ОСНОВНОЙ BODY ================= */
 body{
     font-family:Helvetica;
-    background-color: #E9EAEF;
 }
 
 
-
-/* ================= МЕНЮ ================= */
+.menu{
+    background-color:#000000;
+    width: auto;
+    height: 130px;
+    gap: 200px;
+    padding: 15px 15px 15px 15px;
+}
 
 .container{
     display: flex;
@@ -642,6 +45,7 @@ body{
     width: auto;
     height: 69px;
     padding: 10px;
+
 }
 
 .menu__body {
@@ -649,6 +53,7 @@ body{
   align-items: center;
   gap: 20px;
 }
+
 
 .menu__pages {
   display: flex;
@@ -675,7 +80,6 @@ body{
   position: absolute;
   top: 100%;
   left: 0;
-  background-color: white; /* Цвет фона подменю */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   list-style: none;
   padding: 0;
@@ -692,6 +96,7 @@ body{
   white-space: nowrap;
 }
 
+
 .has-submenu:hover .submenu {
   display: block;
 }
@@ -699,25 +104,10 @@ body{
 
 
 a{
-  color: #000;
-  text-decoration: none;
+    color: #ffffff;
+    text-decoration: none;
 }
 
-.footer__column a{
-  color: #ffffff;
-}
-
-.ABU__brochure a{
-  color: #ffffff;
-}
-
-.section a{
-  color: #ffffff;
-}
-
-.modal a{
-  color: #ffffff;
-}
 .language-switcher {
   margin-left: auto; 
   display: flex;
@@ -776,7 +166,6 @@ a{
 }
 
 
-
 .menu__pages {
   display: flex;
   gap: 20px;
@@ -788,8 +177,6 @@ a{
 }
 
 /* Бургер-меню */
-
-/* ================= БУРГЕР-МЕНЮ ================= */
 .burger-button {
   display: none;
   flex-direction: column;
@@ -828,8 +215,6 @@ a{
     display: flex;
   }
 
-
-/* ================= МЕНЮ ================= */
   .menu__pages {
     display: none;
     flex-direction: column;
@@ -860,8 +245,6 @@ a{
 
 
 /* Скрыть бургер по умолчанию */
-
-/* ================= БУРГЕР-МЕНЮ ================= */
 .burger-button {
   display: none;
   flex-direction: column;
@@ -886,8 +269,6 @@ a{
     margin-left: 60px;
   }
 
-
-/* ================= МЕНЮ ================= */
   .menu__pages {
     position: absolute;
     top: 99px;
@@ -918,7 +299,6 @@ a{
 
 
 
-/* Students */
 
 /* ================= БЛОК STUDENTS ================= */
 .Students {
@@ -1014,7 +394,7 @@ button.Students__title2 {
   to { opacity: 1; }
 }
 
-/* Обёртка модалки */
+* Обёртка модалки */
 
 /* ================= ОБЩИЕ СТИЛИ МОДАЛКИ ================= */
 .modal {
@@ -1053,8 +433,6 @@ button.Students__title2 {
 
 
 @media (max-width: 1024px) {
-
-/* ================= БЛОК STUDENTS ================= */
   .Students {
     width: 90vw;
     padding: 20px;
@@ -1387,7 +765,7 @@ button.Teacher__title4 {
     font-size: 17px;
     color: #222;
   }
-  
+
 }
 
 @media (max-width: 600px) {
@@ -1472,16 +850,11 @@ button.Teacher__title4 {
 }
 
 
-
 /* Erasmus кнопки дизайн */
-.submenu {
-  padding: 0 10px 0 0;
-}
 .submenu li a{
     background-color: #000000;
     color: #fff;
     font-size: 20px;
-
     border: none;
     border-radius: 8px;
     cursor: pointer;
@@ -1496,867 +869,609 @@ button.Teacher__title4 {
   color: #ffffff;             
 }
 
-/* Часть с картинкой международное сотруднечество */
-
-
-/* ================= СЕКЦИЯ С КАРТИНКОЙ (TOP) ================= */
-.section__top {
-  position: relative;
-  /* background: url('/img/first-photo.jpg') center/cover no-repeat; */
-  height: 950px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  color: white;
-  font-size: 36px;
-  line-height: 56px;
-  overflow: hidden;
-}
-
-.section__top img{
-    filter: brightness(0.7);
-}
-.section__top::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.3); 
-  z-index: 1;
-}
-
-.section__top > * {
-  position: relative;
-  z-index: 2;
-}
-
-.section-first-row {
-  display: flex;
-  gap: 10px;
-  font-size: 20px;
-  margin: 0px 0px 0px 43px;
-
-}
-
-.section__top h2{
-  margin: 0px 0px 100px 43px;
-}
-
-.section-second{
-  margin-left: 43px;    
-}
-
-
-
-
-
-/* ================= СЕКЦИЯ С БЛОКАМИ (BOTTOM) ================= */
-.section__bottom {
-  display: flex;
-  /* gap: 20px; */
-  flex-wrap: wrap;
-}
-
-.section__item {
-  flex: 1;
-  min-width: 300px;
-  background-color: #000;
-  color: white;
-  position: relative;
-  overflow: hidden;
-}
-
-.section__item img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.section__text {
-  position: absolute;
-  bottom: 30px;
-  right: 20px;
-  left: 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  color: white;
-  gap: 20px;
-}
-
-.section__info {
-  text-align: left; /* Выравниваем текст справа */
-}
-
-.section__info h3 {
-  font-size: 70px;
-  margin-bottom: 10px;
-}
-
-.section__info p {
-  font-size: 22px;
-  line-height: 1.5;
-}
-
-.section__text button {
-  margin-top: 60px;
-  font-size: 30px;
-  background: rgba(0, 0, 0, 0.5); 
-  border: 1px solid white;
-  border-radius: 35px;
-  color: white;
-  cursor: pointer;
-  align-self: flex-start;
-  height: 80px;
-  width: 190px;
-}
-
-/* Section адоптивность */
-@media (max-width: 768px) {
-
-/* ================= СЕКЦИЯ С КАРТИНКОЙ (TOP) ================= */
-  .section__top {
-    height: 500px;
-    font-size: 24px;
-    line-height: 36px;
-  }
-
-  .section-first-row {
-    flex-direction: column;
-    margin: 20px;
-    font-size: 16px;
-  }
-
-  .section__top h2 {
-    font-size: 24px;
-    margin: 20px;
-  }
-
-
-/* ================= СЕКЦИЯ С БЛОКАМИ (BOTTOM) ================= */
-  .section__bottom {
-    flex-direction: column;
-  }
-
-  .section__item {
-    min-width: 100%;
-    height: auto;
-  }
-
-  .section__info h3 {
-    font-size: 36px;
-  }
-
-  .section__info p {
-    font-size: 16px;
-  }
-
-  .section__text {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-    bottom: 20px;
-  }
-
-  .section__text button {
-    font-size: 20px;
-    height: 60px;
-    width: 150px;
-    margin-top: 20px;
-  }
-}
-
-@media (max-width: 480px) {
-
-/* ================= СЕКЦИЯ С КАРТИНКОЙ (TOP) ================= */
-  .section__top {
-    height: 400px;
-  }
-
-  .section__top h2 {
-    font-size: 20px;
-    margin: 10px;
-  }
-
-  .section-first-row {
-    font-size: 14px;
-    margin: 10px;
-  }
-
-  .section__info h3 {
-    font-size: 28px;
-  }
-
-  .section__info p {
-    font-size: 14px;
-  }
-
-  .section__text button {
-    font-size: 18px;
-    width: 130px;
-    height: 50px;
-  }
-}
-
-
-
-
-/* Фон затемнения */
-
-/* ================= ОБЩИЕ СТИЛИ МОДАЛКИ ================= */
-.modal-window {
-    display: none; /* скрыто по умолчанию */
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(5px);
-    z-index: 1000;
-    justify-content: center;
-    align-items: center;
-}
-
-/* Контейнер самого окна */
-.modal-container {
-    background: #fff;
-    max-width: 600px;
-    width: 90%;
-    max-height: 80vh;
-    overflow-y: auto;
-    border-radius: 12px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-    padding: 25px 35px;
-    position: relative;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #333;
-}
-
-/* Заголовок */
-.modal-title {
-    font-size: 1.8rem;
-    margin-bottom: 15px;
-    color: #2c3e50;
-    text-align: center;
-}
-
-/* Кнопка закрытия */
-.modal-close-btn {
-    position: absolute;
-    top: 15px;
-    right: 20px;
-    background: transparent;
-    border: none;
-    font-size: 2rem;
-    color: #999;
-    cursor: pointer;
-    transition: color 0.3s ease;
-}
-
-.modal-close-btn:hover {
-    color: #e74c3c;
-}
-
-/* Текст внутри окна */
-.modal-body p {
-    line-height: 1.6;
-    margin-bottom: 12px;
-    font-size: 1rem;
-}
-
-.modal-body strong {
-    color: #2980b9;
-}
-
-
-
-
-
-@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;600;700&display=swap');
-
-.modal {
-  font-family: 'Rubik', sans-serif;
-}
-
-/* Кнопка открытия */
-.more-button {
-  padding: 14px 28px;
-  background: linear-gradient(135deg, #003366, #0055aa);
-  color: #fff;
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
-  font-size: 17px;
-  font-weight: 600;
-  box-shadow: 0 5px 15px rgba(0, 51, 102, 0.4);
-  transition: all 0.3s ease;
-}
-
-.more-button:hover {
-  background: linear-gradient(135deg, #004080, #007acc);
-  transform: translateY(-2px);
-}
-
-/* Модалка */
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 9999;
-  inset: 0;
-  background-color: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(6px);
-  animation: fadeIn 0.4s ease-in-out forwards;
-}
-
-/* Анимация */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-.modal-content {
-  background: #ffffff;
-  margin: 60px auto;
-  padding: 40px;
-  width: 90%;
-  max-width: 1100px;
-  border-radius: 20px;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  position: relative;
-  overflow: hidden;
-  animation: slideUp 0.4s ease-in-out;
-}
-
-/* Анимация появления модалки */
-@keyframes slideUp {
-  from {
-    transform: translateY(30px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0px);
-    opacity: 1;
-  }
-}
-
-/* Кнопка закрытия */
-.close-button {
-  position: absolute;
-  top: 20px;
-  right: 30px;
-  font-size: 32px;
-  color: #999;
-  cursor: pointer;
-  transition: color 0.3s ease;
-}
-
-.close-button:hover {
-  color: #000;
-}
-
-/* Изображение */
-.back__sity img {
-  width: 100%;
-  max-height: 350px;
-  object-fit: cover;
-  border-radius: 14px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
-}
-
-/* Текст внутри */
-.modal-text {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  font-size: 18px;
-  color: #2c2c2c;
-}
-
-.modal-text p {
-  margin: 0;
-  line-height: 1.7;
-}
-
-
-/* Кнопка-ссылка */
-.Semey__btn_moredetails {
-  align-self: flex-start;
-  margin-top: 10px;
-  padding: 12px 22px;
-  background: linear-gradient(135deg, #007acc, #005fa3);
-  color: #fff;
-  border-radius: 10px;
-  font-weight: 600;
-  text-decoration: none;
-  transition: all 0.3s ease;
-}
-
-.Semey__btn_moredetails:hover {
-  background: linear-gradient(135deg, #005fa3, #004080);
-  transform: scale(1.05);
-  box-shadow: 0 4px 12px rgba(0, 122, 204, 0.4);
-}
-
-/* Адаптив */
-@media (max-width: 768px) {
-  .modal-content {
-    padding: 20px;
-    margin: 40px 10px;
-  }
-
-  .modal-text {
-    font-size: 16px;
-  }
-
-  .more-button {
-    font-size: 15px;
-    padding: 10px 20px;
-  }
-}
-
-
-
-
-
-/* ================= БЛОК NEWS-ПАРТНЕРЫ ================= */
-.news-partners{
-    background-color: #E9EAEF;
-    color: #3E3232;
-}
-
-.news__block_main{
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  margin: 60px 40px;
-  gap: 24px;
-}
-
-.news__title-label {
-  display: flex;
-  align-items: center;
-  gap: 12px; /* расстояние между блоком и текстом */
-}
-
-.mini__block {
-  width: 4px;
-  height: 10px; /* подстраиваем под высоту текста */
-  border-radius: 12px;
-  background-color: #F81539;
-}
-
-.news__title{
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  margin: 0px 40px 31px 40px;
-  padding-top: 42px;
-}
-
-.news__title h3{
-    font-family: Helvetica;
-    font-weight: 300px;
-    font-size: 32px;
-    line-height: 100%;
-    letter-spacing: 0px;
-    text-transform: capitalize;
-}
-
-.news-partners__block {
-  max-width: 1860px;
-  height: 665px;
-  margin: 0 auto;
-}
-
-.arrows{
-    display: flex;
-    gap: 20px;
-    border-radius: 15px;
-}
-
-.arrow-left{
-    padding: 12px;
-    width: 40px;
-    height: 40px;
-    border-radius: 15px;
-    background-color: #F5F5F5;
-}
-
-.arrow-right{
-    padding: 12px;
-    width: 40px;
-    height: 40px;
-    border-radius: 15px;
-    background-color: #F5F5F5;
-}
-
-.first__block{
-    background-color: #ffffff;
-    width: 422px;
-    height: 489px;
-    border-radius: 12px;
-    padding: 10px;
-}
-
-
-.first__block h3,
-.first__block p{
-  margin-top: 16px;
-  margin-left: 6px;
-}
-
-
-.first__block p{
-    font-size: 14px;
-    line-height: 20px;
-    color: #3E3232BF;
-}
-
-
-
-
-.news__slider-wrapper {
-  overflow-x: hidden; /* прячем полосу прокрутки */
-  position: relative;
-}
-
-.news__block_main {
-  display: flex;
-  flex-wrap: nowrap;
-  gap: 24px;
-}
-
-.text_partners{
-    font-size: 32px;
-    color: #9E9E9E;
-}
-
-.country-name {
-  margin-top: 16px;
-  font-size: 20px; 
-  font-weight: 600;
-  margin-left: 7px;
-}
-
-
-.btn-universities {
-  display: block;
-  margin: 10px auto 0 auto;
-  width: 250px;
-  height: 45px;
-  background-color: black;
-  color: white;
-  border: none;
-  border-radius: 30px;
-  cursor: pointer;
-  font-size: 20px;
-  transition: background-color 0.3s ease;
-}
-
-.btn-universities:hover {
-  background-color: #333;
-}
-
-/* Индивидуальный блок (оставь как есть) */
-.first__block {
-  flex: 0 0 422px; /* фиксированная ширина блока */
-  height: 489px;
-  background-color: #fff;
-  border-radius: 12px;
-  padding: 10px;
-}
-
-
-
-.news__block_main::-webkit-scrollbar {
-  display: none;
-}
-.news__block_main {
-  -ms-overflow-style: none;  /* IE и Edge */
-  scrollbar-width: none;     /* Firefox */
-}
-
-
-
-/* news-partners адаптив */
-@media (max-width: 1200px) {
-  .news__block_main {
-    justify-content: center;
-    margin: 40px 0;
-    gap: 16px;
-  }
-
-  .news__title {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-  }
-
-  .btn-universities {
-    width: 100%;
-  }
-
-  .text_partners {
-    font-size: 24px;
-  }
-
-  .news__title h3 {
-    font-size: 28px;
-  }
-}
-
-@media (max-width: 768px) {
-  .news__slider-wrapper {
-    overflow-x: auto;
-    padding-left: 16px;
-  }
-
-  .news__block_main {
-    flex-wrap: nowrap;
-    gap: 16px;
-    padding-bottom: 8px;
-    width: fit-content; /* заменил max-content */
-  }
-
-  .first__block {
-    flex: 0 0 280px;
-    max-width: 85vw;
-    height: 350px;
-    scroll-snap-align: start;
-  }
-
-  .first__block img {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
-  }
-
-  .btn-universities {
-    font-size: 16px;
-    height: 42px;
-  }
-
-  .country-name {
-    font-size: 18px;
-    margin-left: 6px;
-  }
-}
-
-@media (max-width: 480px) {
-  .first__block {
-    flex: 0 0 260px;
-    max-width: 90vw;
-  }
-
-  .btn-universities {
-    font-size: 14px;
-    height: 38px;
-  }
-
-  .country-name {
-    font-size: 16px;
-  }
-
-  .news__title h3,
-  .text_partners {
-    font-size: 18px;
-  }
-}
-
-
-
-
-
-/* ================= БЛОК ABU БРОШЮРА ================= */
-.ABU__brochure {
-    background-color: #E9EAEF;
-    width: auto;
-    height: 120px;
-    padding-top: 40px;
-}
-
-.ABU__brochure__body {
-    background-color: #000000;
-    height: 80px;
-    margin: 0 40px;
-    border-radius: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.ABU__brochure__text {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-}
-
-.ABU__text__left,
-.ABU__text__right {
-    display: flex;
-    align-items: center;
-    font-size: 28px;
-    color: #ffffff;
-}
-
-.ABU__divider {
-    font-size: 28px;
-    color: #ffffff;
-}
-
-/* ABU-brochure адаптив  */
-
-@media (max-width: 1024px) {
-  .ABU__brochure__body {
-    margin: 0 24px;
-    height: 70px;
-    border-radius: 40px;
-  }
-
-  .ABU__text__left,
-  .ABU__text__right,
-  .ABU__divider {
-    font-size: 22px;
-  }
-}
-
-@media (max-width: 768px) {
-  .ABU__brochure {
-    height: auto;
-    padding: 32px 16px 16px 16px;
-  }
-
-  .ABU__brochure__body {
-    flex-direction: column;
-    height: auto;
-    padding: 20px;
-    border-radius: 24px;
-  }
-
-  .ABU__brochure__text {
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
-  }
-
-  .ABU__text__left,
-  .ABU__text__right {
-    width: 100%;
-    text-align: center;
-    padding: 12px 16px;
-    border-radius: 30px;
-    background-color: #1a1a1a;
-    font-size: 18px;
-    transition: background-color 0.3s ease;
-    cursor: pointer;
-  }
-
-  .ABU__text__left:hover,
-  .ABU__text__right:hover {
-    background-color: #333;
-  }
-
-  .ABU__divider {
-    display: none;
-  }
-}
-
-@media (max-width: 480px) {
-  .ABU__text__left,
-  .ABU__text__right {
-    font-size: 16px;
-    padding: 10px;
-  }
-
-  .ABU__brochure__body {
-    padding: 16px;
-    gap: 12px;
-  }
-}
-
-
-
-
-
-/* ================= ОБЩИЕ СТИЛИ МОДАЛКИ ================= */
-.modal-content {
-  background: #ffffff;
-  margin: 60px auto;
-  padding: 40px;
-  width: 90%;
-  max-width: 1100px;
-  border-radius: 20px;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  position: relative;
-  overflow: hidden;
-  animation: slideUp 0.4s ease-in-out;
-  max-height: 90vh;
-}
-
-/* Добавим скролл к тексту */
-.modal-text {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  font-size: 18px;
-  color: #2c2c2c;
-  overflow-y: auto;
-  max-height: 45vh;
-  padding-right: 10px;
-}
-
-/* Стилизация заголовка */
-.modal-text h2 {
-  font-size: 28px;
-  margin-bottom: 16px;
-  color: #003366;
-}
-
-/* Стилизация текста */
-.modal-text p {
-  margin: 0;
-  line-height: 1.7;
-}
-
-
-.modal__text1{
-  color: #003366;
-  background-color: #e7e7e7;
-  width: auto;
-  height: 7px;
-  font-size: 23px;
-  border-radius: 5px;
-}
-.modal__text2{
-  color: #003366;
-}
-.modal__text{
-  color: #2980b9;
-}
-
-
-
-/* Страны модакли */
-.modal-content h3{
-  font-size:40px;
-}
-.modal-content ul{
-  font-size: 30px;
-
-}
-.modal-content li{
-  margin: 15px 0px;
-}
-
-
-/* ================= ФУТЕР ================= */
+
+
+
+
+
+
+        :root {
+            --primary-color: #005baa; /* Синий цвет Erasmus */
+            --secondary-color: #ffcc00; /* Желтый цвет Erasmus */
+            --text-color: #333;
+            --light-bg: #f8f9fa;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .erasmus-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .erasmus-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .erasmus-title {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .erasmus-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--secondary-color);
+            border-radius: 2px;
+        }
+
+        .erasmus-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .erasmus-logo-container {
+            flex: 1;
+            min-width: 300px;
+            max-width: 400px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .erasmus-logo {
+            width: 100%;
+            max-width: 350px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .erasmus-logo:hover {
+            transform: translateY(-5px);
+        }
+
+        .erasmus-logo img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .erasmus-info {
+            flex: 1;
+            min-width: 300px;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .erasmus-description {
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+            color: #555;
+        }
+
+        .erasmus-link {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid var(--primary-color);
+        }
+
+        .erasmus-link:hover {
+            background-color: transparent;
+            color: var(--primary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 91, 170, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .erasmus-title {
+                font-size: 2rem;
+            }
+
+            .erasmus-content {
+                flex-direction: column;
+            }
+
+            .erasmus-logo-container {
+                margin-bottom: 20px;
+            }
+        }
+
+        :root {
+            --primary-color: #005baa; /* Синий цвет Erasmus */
+            --secondary-color: #ffcc00; /* Желтый цвет Erasmus */
+            --text-color: #333;
+            --light-bg: #f8f9fa;
+            --doc-card-bg: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .erasmus-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .erasmus-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .erasmus-title {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .erasmus-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--secondary-color);
+            border-radius: 2px;
+        }
+
+        .erasmus-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 50px;
+        }
+
+        .erasmus-logo-container {
+            flex: 1;
+            min-width: 300px;
+            max-width: 400px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .erasmus-logo {
+            width: 100%;
+            max-width: 350px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .erasmus-logo:hover {
+            transform: translateY(-5px);
+        }
+
+        .erasmus-logo img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .erasmus-info {
+            flex: 1;
+            min-width: 300px;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .erasmus-description {
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+            color: #555;
+        }
+
+        .erasmus-link {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid var(--primary-color);
+        }
+
+        .erasmus-link:hover {
+            background-color: transparent;
+            color: var(--primary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 91, 170, 0.2);
+        }
+
+        /* Стили для раздела с документами */
+        .documents-section {
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 1px solid #eee;
+        }
+
+        .documents-title {
+            text-align: center;
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+        }
+
+        .documents-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 0 auto;
+            max-width: 900px;
+        }
+
+        .document-card {
+            background: var(--doc-card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .document-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .document-link {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .document-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid #eee;
+        }
+
+        .document-info {
+            padding: 20px;
+        }
+
+        .document-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .document-description {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 768px) {
+            .erasmus-title {
+                font-size: 2rem;
+            }
+
+            .erasmus-content {
+                flex-direction: column;
+            }
+
+            .erasmus-logo-container {
+                margin-bottom: 20px;
+            }
+
+            .documents-title {
+                font-size: 1.7rem;
+            }
+
+            .documents-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        :root {
+            --primary-color: #005baa; /* Синий цвет Erasmus */
+            --secondary-color: #ffcc00; /* Желтый цвет Erasmus */
+            --text-color: #333;
+            --light-bg: #f8f9fa;
+            --doc-card-bg: #ffffff;
+            --partner-card-bg: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .erasmus-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--secondary-color);
+            border-radius: 2px;
+        }
+
+        .erasmus-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 50px;
+        }
+
+        .erasmus-logo-container {
+            flex: 1;
+            min-width: 300px;
+            max-width: 400px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .erasmus-logo {
+            width: 100%;
+            max-width: 350px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .erasmus-logo:hover {
+            transform: translateY(-5px);
+        }
+
+        .erasmus-logo img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .erasmus-info {
+            flex: 1;
+            min-width: 300px;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .erasmus-description {
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+            color: #555;
+        }
+
+        .erasmus-link {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid var(--primary-color);
+        }
+
+        .erasmus-link:hover {
+            background-color: transparent;
+            color: var(--primary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 91, 170, 0.2);
+        }
+
+        /* Стили для раздела с документами */
+        .documents-section {
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 1px solid #eee;
+        }
+
+        .documents-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 0 auto;
+            max-width: 900px;
+        }
+
+        .document-card {
+            background: var(--doc-card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .document-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .document-link {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .document-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid #eee;
+        }
+
+        .document-info {
+            padding: 20px;
+        }
+
+        .document-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .document-description {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        /* Стили для раздела вузов-партнеров */
+        .partners-section {
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 1px solid #eee;
+        }
+
+        .partners-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 0 auto;
+            max-width: 1200px;
+        }
+
+        .partner-card {
+            background: var(--partner-card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .partner-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .partner-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-bottom: 1px solid #eee;
+        }
+
+        .partner-info {
+            padding: 20px;
+        }
+
+        .partner-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        .partner-country {
+            color: #666;
+            font-size: 0.9rem;
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .erasmus-content {
+                flex-direction: column;
+            }
+
+            .erasmus-logo-container {
+                margin-bottom: 20px;
+            }
+
+            .documents-grid,
+            .partners-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+ /* ================= ФУТЕР ================= */
 .footer__ {
   background-color: #000000;
   color: #ffffff;
@@ -2446,204 +1561,6 @@ button.Teacher__title4 {
     text-align: center;
   }
 }
-
-
-
-
-
-/* ================= ФОН MATRIX ================= */
-.matrix__background img{
-  width: 100%;
-  height: 1000px;
-}
-
-
-
-
-
-
-
-
-/* for_foreign_students Иностранным студентам*/
-
-/* ================= ИНОСТРАННЫЕ СТУДЕНТЫ ================= */
-.foreign_students__title {
-    text-align: center;
-    font-size: 42px;
-    font-weight: bold;
-    margin-bottom: 60px;
-    color: #222;
-    padding-top: 30px;
-}
-
-.foreign_students__cards {
-    display: flex;
-    justify-content: center;
-    gap: 60px;
-    flex-wrap: wrap;
-    padding: 0px 20px 100px 20px;
-}
-
-.foreign_students__card {
-    flex: 1 1 60%;
-    max-width: 800px;
-    background-color: #fff;
-    border-radius: 24px;
-    overflow: hidden;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.foreign_students__image-wrapper {
-    position: relative;
-    width: 100%;
-    height: 450px;
-    overflow: hidden;
-}
-
-.foreign_students__image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.foreign_students__card-title {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-    font-size: 32px;
-    font-weight: bold;
-    background: rgba(0, 0, 0, 0.6);
-    padding: 16px 32px;
-    border-radius: 12px;
-    text-align: center;
-}
-
-.foreign_students__btn {
-    margin: 30px auto;
-    padding: 16px 40px;
-    background-color: #000;
-    color: #fff;
-    border: none;
-    border-radius: 14px;
-    font-size: 20px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.foreign_students__btn:hover {
-    background-color: #333;
-}
-
-@media (max-width: 768px) {
-    .foreign_students__card {
-        flex: 1 1 100%;
-        max-width: 100%;
-    }
-
-    .foreign_students__image-wrapper {
-        height: 250px;
-    }
-
-    .foreign_students__card-title {
-        font-size: 22px;
-        padding: 10px 20px;
-    }
-
-    .foreign_students__btn {
-        font-size: 16px;
-        padding: 12px 25px;
-    }
-}
-
-
-/* Наши партнеры Our-partners */
-
-/* ================= НАШИ ПАРТНЕРЫ (ТАБЛИЦА) ================= */
-.cards-wrapper {
-  display: flex;
-  flex-wrap: wrap;               /* позволяет переносить карточки */
-  justify-content: center;       /* центрирует карточки по горизонтали */
-  gap: 20px;                     /* отступы между карточками */
-  max-width: 1280px;             /* ограничение по ширине */
-  margin: 0 auto;                /* центрирование всей обёртки */
-  padding: 20px;
-}
-
-.country-card {
-  flex: 1 1 300px;               /* растяжение карточки до 300px */
-  max-width: 400px;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  padding: 16px;
-  margin-bottom: 20px;          /* отступ снизу */
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  background-color: white;
-  text-align: center;
-}
-
-
-.country-card a{
-  color: #007acc;
-  font-size: 17px;
-}
-.flag {
-  width: 100%;
-  border-radius: 8px;
-  margin-bottom: 10px;
-}
-
-.toggle-btn {
-  background-color: #1976d2;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  margin-top: 10px;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-.toggle-btn:hover {
-  background-color: #1565c0;
-}
-
-.university-list {
-  background-color: #f5f5f5;
-  border-radius: 8px;
-  padding: 10px;
-  margin-top: 10px;
-  text-align: left;
-}
-
-.hidden {
-  display: none;
-}
-
-
-.university-list ul {
-  padding-left: 20px; /* небольшой отступ слева */
-}
-
-.university-list li {
-  margin-bottom: 10px; /* отступ между строками */
-}
-
-.university-list a {
-  display: inline-block; /* чтобы margin/padding работал нормально */
-  color: #007acc;
-  font-size: 16px;
-  text-decoration: none;
-}
-
-.university-list a:hover {
-  text-decoration: underline;
-}
-
-
 
 
 /* ==== ДЛЯ компов ширина 1280 ==== */
@@ -2887,73 +1804,54 @@ button.Teacher__title4 {
 .credit-mobility{
         all: unset;
         display: block;
-        padding: 12px 0px;
+        padding: 12px 20px;
         color: #fff;
         font-size: 16px;
         width: 100%;
         cursor: pointer;
-        text-align: left;
 }
 
 
 .Erasmus-CirculEC{
         all: unset;
         display: block;
-        padding: 12px 0px;
-        margin: 0 5px;
+        padding: 12px 20px;
         color: #fff;
         font-size: 16px;
         width: 100%;
         cursor: pointer;
-        text-align: left;
-        text-decoration: none;
+
 }
 
+.submenu a:hover {
+  text-decoration: underline;
 
-
-
-
-/* === ВЫПАДАЮЩЕЕ МЕНЮ === */
 .submenu {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.95);
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  padding: 10px 0;
-  min-width: 250px;
-  z-index: 1000;
-  display: none;
-}
-
-.has-submenu:hover .submenu {
-  display: block;
+  min-width: max-content;                /* ширина по содержимому */
+  padding: 10px 15px;                    /* внутренние отступы */
+  background: #111;                      /* тёмный фон */
+  border-radius: 8px;                    /* скруглённые углы */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* тень выпадающего блока */
+  z-index: 1000;                         /* поверх других элементов */
 }
 
 .submenu li {
-  white-space: nowrap;
+  white-space: nowrap;                  /* запрет переноса текста */
 }
 
 .submenu li a {
-  display: block;
-  width: 100%;
-  padding: 12px 20px;
-  background: none;
-  color: #fff;
-  font-size: 16px;
-  text-align: center;
-  text-decoration: none;
-  transition: all 0.2s ease;
-  border-radius: 6px;
+  display: block;                        /* занимает всю ширину li */
+  padding: 8px 12px;                     /* отступы внутри ссылок */
+  color: white;                          /* белый текст */
+  background: none;                      /* прозрачный фон */
+  border-radius: 6px;                    /* скругление при наведении */
+  transition: all 0.2s ease;             /* плавные эффекты */
+  text-decoration: none;                 /* убираем подчёркивание */
 }
 
+/* Наведение на ссылку — свечением и лёгким фоном */
 .submenu li a:hover {
-  background-color: rgba(255, 255, 255, 0.05);
-  box-shadow: 0 2px 10px rgba(255, 255, 255, 0.15);
-  text-decoration: underline;
+  background-color: rgba(255, 255, 255, 0.05); /* лёгкий полупрозрачный фон */
+  box-shadow: 0 2px 10px rgba(255, 255, 255, 0.15); /* свечение */
+  text-decoration: underline;             /* подчёркивание при наведении */
 }
-
-
-
-
