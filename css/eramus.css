@@ -80,7 +80,6 @@ body{
   position: absolute;
   top: 100%;
   left: 0;
-  background-color: white; /* Цвет фона подменю */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   list-style: none;
   padding: 0;
