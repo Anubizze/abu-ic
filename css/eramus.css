@@ -1733,9 +1733,8 @@ button.Teacher__title4 {
   margin: 0; /* убираем отступы */
 }
 
-.submenu li a:hover {
-  background-color: rgba(255, 255, 255, 0.05);
-  box-shadow: 0 2px 10px rgba(255, 255, 255, 0.15);
-  text-decoration: underline;
-}
 
+
+.submenu li {
+  background: none !important;
+}
