@@ -1731,8 +1731,9 @@ button.Teacher__title4 {
   transition: all 0.2s ease;
   text-decoration: none;
   margin: 0; /* убираем отступы */
-  background-color: #111;
 }
 
-
+.submenu a {
+  background-color: #111;
+}
 
