@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Новости проекта CirculEC</title>
+    <style>
+        /* Основные стили */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        .news-card {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            transition: transform 0.3s;
+            background: white;
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Стили для карусели */
+        .carousel {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            overflow: hidden;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .carousel-inner {
+            display: flex;
+            height: 100%;
+            transition: transform 0.5s ease;
+        }
+
+        .carousel-item {
+            min-width: 100%;
+            height: 100%;
+        }
+
+        .carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .carousel-control {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            transition: background 0.3s;
+            user-select: none;
+        }
+
+        .carousel-control:hover {
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .carousel-control.prev {
+            left: 15px;
+        }
+
+        .carousel-control.next {
+            right: 15px;
+        }
+
+        .carousel-indicators {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+        }
+
+        .carousel-indicators .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .carousel-indicators .indicator.active {
+            background: white;
+        }
+
+        /* Стили контента новости */
+        .news-detail-container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .news-detail-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .news-detail-content {
+            padding: 30px;
+        }
+
+        .news-detail-content h1 {
+            margin: 0 0 15px;
+            color: #222;
+            font-size: 1.8rem;
+        }
+
+        .news-date {
+            color: #666;
+            font-size: 0.9rem;
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        .news-full-text {
+            line-height: 1.7;
+            color: #444;
+        }
+
+        .news-full-text h3 {
+            margin: 25px 0 15px;
+            color: #333;
+        }
+
+        .news-full-text ul {
+            padding-left: 20px;
+        }
+
+        .news-full-text li {
+            margin-bottom: 8px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 8px 15px;
+            background: #f0f0f0;
+            border-radius: 4px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .back-link:hover {
+            background: #e0e0e0;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .carousel {
+                height: 350px;
+            }
+            
+            .news-detail-content {
+                padding: 20px;
+            }
+            
+            .news-detail-content h1 {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .carousel {
+                height: 250px;
+            }
+            
+            .carousel-control {
+                width: 30px;
+                height: 30px;
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="news-detail-container">
+        <div class="news-detail-card">
+            <div class="carousel" id="carousel-fhm">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="img/FHM/FHM1.jpeg" alt="FHM фото 1">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="img/FHM/FHM2.jpeg" alt="FHM фото 2">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="img/FHM/FHM3.jpeg" alt="FHM фото 3">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="img/FHM/FHM4.jpeg" alt="FHM фото 4">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="img/FHM/FHM5.jpeg" alt="FHM фото 5">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="img/FHM/FHM6.jpeg" alt="FHM фото 6">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="img/FHM/FHM7.jpeg" alt="FHM фото 7">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="img/FHM/FHM8.jpeg" alt="FHM фото 8">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="img/FHM/FHM9.jpeg" alt="FHM фото 9">
+                    </div>
+                </div>
+                <button class="carousel-control prev">❮</button>
+                <button class="carousel-control next">❯</button>
+                <div class="carousel-indicators"></div>
+            </div>
+            
+            <div class="news-detail-content">
+                <h1>Встреча в Fachhochschule des Mittelstands, 22.04.24</h1>
+                <span class="news-date">22 апреля 2024</span>
+                <div class="news-full-text">
+                    <p>Первая оффлайн-встреча в рамках совместного Европейско-Центральноазиатского проекта ЕС «CirculEC» (Создание ценности замкнутого цикла и циркулярная экономика в университетах) стартовала в FHM в Билефельде, Германия, и продолжилась в Сантьяго-де-Компостела, Испания и Неаполе, Италия.</p>
+        
+        <h3>Участники встречи</h3>
+        <p>Делегация Центральной Азии, представляющая четыре страны (Казахстан, Узбекистан, Таджикистан и Туркменистан) в рамках проекта CirculEC, прибыла в Билефельд. В понедельник, 22 апреля, 22 участника проекта из Центральной Азии начали двухдневную программу в Германии перед продолжением в Испанию и Италию.</p>
+        
+        <h3>Цели проекта</h3>
+        <p>Основные цели международной встречи:</p>
+        <ul>
+            <li>Первое очное знакомство участников проекта</li>
+            <li>Ознакомление партнеров из Центральной Азии с основами циклической экономики</li>
+            <li>Обмен опытом в научных исследованиях и преподавании</li>
+        </ul>
+        
+        <p>В период реализации проекта с 2023 по 2026 год планируется:</p>
+        <ul>
+            <li>Интеграция концепций циркулярной экономики в работу университетов Центральной Азии</li>
+            <li>Организация мероприятий (лекций, панельных дискуссий, хакатонов) для вовлечения студентов и преподавателей</li>
+        </ul>
+        
+        <h3>Программа в Германии</h3>
+        <h4>Первый день</h4>
+        <ul>
+            <li>Презентация Fachhochschule des Mittelstandes и ее деятельности в области циркулярной экономики</li>
+            <li>Семинар по адаптации курса «Экономика замкнутого цикла» для Центральной Азии</li>
+        </ul>
+        
+        <h4>Второй день</h4>
+        <ul>
+            <li>Знакомство с исследовательскими проектами FHM в области циклической экономики</li>
+            <li>Встреча с практиком - Марк-Филипп Ламм из пекарни Lamm (устойчивое развитие в бизнесе)</li>
+            <li>Практическое применение инструментов проекта ЕС «Linear 2 circular»</li>
+            <li>Презентация Армандо Гарсии Шмидта (Bertelsmann Stiftung) о политико-правовых аспектах циркулярной экономики в ЕС</li>
+            <li>Рабочая сессия по дизайн-мышлению для применения полученных знаний</li>
+        </ul>
+        
+        <blockquote>
+            "Если бы мы могли построить экономику, которая использует вещи, а не потребляет их, мы могли бы построить будущее."<br>
+            <cite>Эллен Макартур, Ellen MacArthur Foundation</cite>
+        </blockquote>
+        
+        <h3>Культурная программа</h3>
+        <p>Участники посетили замок Спарренбург, познакомились с немецкой кухней и центром Билефельда, получив массу впечатлений перед продолжением программы в Испании.</p>                   
+                    <a href="erasmus+circulen.html" class="back-link">← Вернуться к списку новостей</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Инициализация карусели
+            const carousel = document.querySelector('.carousel');
+            const inner = carousel.querySelector('.carousel-inner');
+            const items = carousel.querySelectorAll('.carousel-item');
+            const prevBtn = carousel.querySelector('.carousel-control.prev');
+            const nextBtn = carousel.querySelector('.carousel-control.next');
+            const indicatorsContainer = carousel.querySelector('.carousel-indicators');
+            
+            let currentIndex = 0;
+            const totalItems = items.length;
+            let interval;
+            
+            // Создаем индикаторы
+            function createIndicators() {
+                indicatorsContainer.innerHTML = '';
+                items.forEach((_, index) => {
+                    const indicator = document.createElement('div');
+                    indicator.classList.add('indicator');
+                    if (index === 0) indicator.classList.add('active');
+                    indicator.addEventListener('click', () => goToSlide(index));
+                    indicatorsContainer.appendChild(indicator);
+                });
+            }
+            
+            // Функция перехода к конкретному слайду
+            function goToSlide(index) {
+                currentIndex = (index + totalItems) % totalItems;
+                inner.style.transform = `translateX(-${currentIndex * 100}%)`;
+                
+                // Обновляем активный индикатор
+                const indicators = indicatorsContainer.querySelectorAll('.indicator');
+                indicators.forEach((indicator, i) => {
+                    indicator.classList.toggle('active', i === currentIndex);
+                });
+            }
+            
+            // Инициализация
+            function initCarousel() {
+                createIndicators();
+                
+                // Кнопка "Назад"
+                prevBtn.addEventListener('click', () => {
+                    resetInterval();
+                    goToSlide(currentIndex - 1);
+                });
+                
+                // Кнопка "Вперед"
+                nextBtn.addEventListener('click', () => {
+                    resetInterval();
+                     goToSlide(currentIndex + 1);
+                });
+
+                // Автопрокрутка
+                function startInterval() {
+                    interval = setInterval(() => {
+                        goToSlide(currentIndex + 1);
+                    }, 5000);
+                }
+
+                function resetInterval() {
+                    clearInterval(interval);
+                    startInterval();
+                }
+
+                startInterval();
+
+                // Пауза при наведении
+                carousel.addEventListener('mouseenter', () => {
+                    clearInterval(interval);
+                });
+
+                carousel.addEventListener('mouseleave', () => {
+                    startInterval();
+                });
+
+                // Свайпы для мобильных устройств
+                let touchStartX = 0;
+                let touchEndX = 0;
+
+                carousel.addEventListener('touchstart', (e) => {
+                    touchStartX = e.changedTouches[0].screenX;
+                    clearInterval(interval);
+                }, {passive: true});
+
+                carousel.addEventListener('touchend', (e) => {
+                    touchEndX = e.changedTouches[0].screenX;
+                    handleSwipe();
+                    startInterval();
+                }, {passive: true});
+
+                function handleSwipe() {
+                    const threshold = 50;
+                    if (touchStartX - touchEndX > threshold) {
+                        // Свайп влево
+                        goToSlide(currentIndex + 1);
+                    } else if (touchEndX - touchStartX > threshold) {
+                        // Свайп вправо
+                        goToSlide(currentIndex - 1);
+                    }
+                }
+            }
+
+            initCarousel();
+        });
+    </script>
+</body>
+</html>
