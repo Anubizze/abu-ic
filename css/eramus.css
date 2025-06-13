@@ -2024,3 +2024,262 @@ button.Teacher__title4 {
     text-align: center;
     }
 }
+
+/* ==== ДЛЯ компов ширина 1280 ==== */
+@media (min-width: 1024px) {
+  .news__cards {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+    width: 1280px;
+  }
+
+  .first__block {
+    width: 1280px;
+    height: 400px;
+    min-width: calc((100% - 2 * 24px) / 4);
+    max-width: calc((100% - 2 * 24px) / 4);
+    flex: 0 0 auto;
+  }
+
+  .first__block img {
+    width: 250px;
+    height: 200px;
+    border-radius: 10px;
+    margin-left: 4px;
+    margin-top: 4px;
+  }
+
+  .partners__cards,
+  .footer__container,
+  .ABU__container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 5px 20px;
+    box-sizing: border-box;
+  }
+
+  .news__slider-wrapper {
+    overflow: hidden;
+    width: 100%;
+  }
+
+  .news__block_main {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 24px;
+    transition: transform 0.3s ease;
+  }
+
+  /* Кнопка открытия */
+  .more-button {
+    padding: 14px 17px;
+    background: linear-gradient(135deg, #003366, #0055aa);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 17px;
+    font-weight: 600;
+    box-shadow: 0 5px 15px rgba(0, 51, 102, 0.4);
+    transition: all 0.3s ease;
+  }
+
+  .submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.85);
+    padding: 10px 0;
+    border-radius: 8px;
+    min-width: 220px;
+    z-index: 1000;
+  }
+
+  .has-submenu:hover .submenu {
+    display: block;
+  }
+
+  .submenu li a,
+  .submenu li button {
+    all: unset;
+    display: block;
+    padding: 10px 0;
+    color: #fff;
+    font-size: 16px;
+    width: 100%;
+    cursor: pointer;
+  }
+
+  .submenu li a:hover,
+  .submenu li button:hover {
+    color: #dddddd;
+  }
+}
+
+
+@media (max-width: 480px) {
+  /* Кнопка открытия */
+  .more-button {
+    padding: 14px 17px;
+    background: linear-gradient(135deg, #003366, #0055aa);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 17px;
+    font-weight: 600;
+    box-shadow: 0 5px 15px rgba(0, 51, 102, 0.4);
+    transition: all 0.3s ease;
+  }
+
+  .submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.85);
+    padding: 10px 0;
+    border-radius: 8px;
+    min-width: 220px;
+    z-index: 1000;
+  }
+
+  .has-submenu:hover .submenu {
+    display: block;
+  }
+
+  .submenu li a,
+  .submenu li button {
+    all: unset;
+    display: block;
+    padding: 10px 0;
+    color: #fff;
+    font-size: 16px;
+    width: 100%;
+    cursor: pointer;
+  }
+
+  .submenu li a:hover,
+  .submenu li button:hover {
+    color: #dddddd;
+  }
+}
+
+
+
+
+.menu{
+    background-color:#000000;
+    width: auto;
+    height: 130px;
+    gap: 200px;
+    padding: 15px 15px 15px 15px;
+}
+
+.menu__logo {
+    max-width: 290px;
+    height: 90px;
+    display: block;
+    margin-right: 20px;
+}
+
+/* Большие экраны */
+@media (min-width: 1025px) {
+  .menu__logo,
+  .logo__footer img {
+    max-width: 250px;
+    height: 85px;
+  }
+}
+
+/* Планшеты и средние экраны */
+@media (max-width: 1024px) {
+  .menu__logo,
+  .logo__footer img {
+    max-width: 180px;
+    height: auto;
+  }
+}
+
+/* Маленькие экраны (телефоны) */
+@media (max-width: 768px) {
+  .menu__logo,
+  .logo__footer img {
+    max-width: 290px;
+    height: 65px;
+  }
+}
+
+/* Очень маленькие телефоны */
+@media (max-width: 480px) {
+  .menu__logo,
+  .logo__footer img {
+    max-width: 220px;
+    height: 65px;
+  }
+}
+
+.menu__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  gap: 20px;
+}
+
+.menu__logo img {
+  max-height: 60px;
+  height: auto;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+
+
+
+/* Кнопка открытия */
+.open-students-modal {
+        all: unset;
+        display: block;
+        padding: 12px 20px;
+        color: #fff;
+        font-size: 16px;
+        width: 100%;
+        cursor: pointer;
+}
+
+.open-teacher-modal {
+        all: unset;
+        display: block;
+        padding: 12px 20px;
+        color: #fff;
+        font-size: 16px;
+        width: 100%;
+        cursor: pointer;
+}
+
+
+.credit-mobility{
+        all: unset;
+        display: block;
+        padding: 12px 20px;
+        color: #fff;
+        font-size: 16px;
+        width: 100%;
+        cursor: pointer;
+}
+
+
+.Erasmus-CirculEC{
+        all: unset;
+        display: block;
+        padding: 12px 20px;
+        color: #fff;
+        font-size: 16px;
+        width: 100%;
+        cursor: pointer;
+}
