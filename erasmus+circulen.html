@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/erasmus+circulen.css">
+    <title>Erasmus+ CirculEC</title>
+    <link rel="icon" type="img/abuicon" href="img/abuicon.webp">
+</head>
+<body>
+     <div class="wrapper">
+        <div class="content">
+            <div class="menu">
+                <div class="container">
+                    <div class="menu__row">
+                        <div class="logo__title">
+                        <img class="menu__logo" src="img/Logo-ABU.png" alt="ABU-logo">
+                        </div>
+
+                        <!-- БУРГЕР -->
+                        <button id="burger-button" class="burger-button" aria-label="Открыть меню">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </button>
+
+                        <div id="menu-body" class="menu__body">
+                            <div class="menu__pages">
+                                <span class="menu__item"><a href="index.html">Главная</a></span>
+                                <span class="menu__item"><a href="for_foreign_students.html">Иностранным студентам</a></span>
+                                <span class="menu__item has-submenu">
+                                <a href="academic mobility.html" class="submenu-toggle">Академическая мобильность</a>
+                                <ul class="submenu">
+                                    <li><button class="open-students-modal">Студенты</button></li>
+                                    <li><button class="open-teacher-modal">Преподаватели</button></li>
+                                </ul>
+                                </span>
+                                <span class="menu__item"><a href="Our-partners.html">Наши партнеры</a></span>
+                                <span class="menu__item"><a href="mschool.html">Международная школа бизнеса</a></span>
+                                <span class="menu__item has-submenu">
+                                <a href="eramus.html" class="submenu-toggle">Erasmus</a>
+                                <ul class="submenu">
+                                    <li class="credit-mobility"><button ><a href="eramus.html" >Кредитная мобильность</a></button></li>
+                                    <li class="Erasmus-CirculEC"><button ><a href="erasmus+circulen.html" >Erasmus + CirculEC</a></button></li>
+                                </ul>
+                                </span>
+                                <div class="language-switcher">
+                                    <button id="language-button" class="language-button" aria-label="Сменить язык">
+                                            <svg class="icon-earth" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 25 25" fill="none">
+                                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                            d="M24.8281 12.5C24.8281 19.1275 19.4556 24.5 12.8281 24.5C6.20071 24.5 0.828125 19.1275 0.828125 12.5C0.828125 5.87259 6.20071 0.5 12.8281 0.5C19.4556 0.5 24.8281 5.87259 24.8281 12.5ZM6.9519 14.5C6.87021 13.8448 6.82812 13.1773 6.82812 12.5C6.82812 11.8227 6.87022 11.1552 6.95193 10.5H3.02817C2.89699 11.1462 2.82812 11.8151 2.82812 12.5C2.82812 13.1849 2.89699 13.8537 3.02817 14.5H6.9519ZM7.33218 16.5H3.66022C4.83773 19.1951 7.16875 21.2707 10.0292 22.1031C8.78968 20.4536 7.86158 18.5568 7.33218 16.5ZM9.40789 16.5H16.2484C15.5904 18.7109 14.4009 20.6929 12.8281 22.298C11.2554 20.6929 10.0659 18.7109 9.40789 16.5ZM16.6864 14.5H8.96991C8.87648 13.8468 8.82812 13.179 8.82812 12.5C8.82812 11.821 8.87648 11.1532 8.96991 10.5H16.6864C16.7797 11.1532 16.8281 11.821 16.8281 12.5C16.8281 13.179 16.7797 13.8468 16.6864 14.5ZM18.7044 14.5C18.786 13.8448 18.8281 13.1773 18.8281 12.5C18.8281 11.8227 18.786 11.1552 18.7044 10.5H22.6281C22.7593 11.1462 22.8281 11.8151 22.8281 12.5C22.8281 13.1849 22.7593 13.8537 22.6281 14.5H18.7044ZM18.3241 16.5H21.996C20.8185 19.1951 18.4875 21.2707 15.6271 22.1031C16.8665 20.4536 17.7947 18.5568 18.3241 16.5ZM12.8281 2.70204C11.2554 4.30704 10.0659 6.28908 9.40789 8.5H16.2484C15.5904 6.28908 14.4009 4.30704 12.8281 2.70204ZM15.6271 2.89697C16.8665 4.54639 17.7947 6.44316 18.324 8.5H21.996C20.8185 5.80497 18.4875 3.72927 15.6271 2.89697ZM3.66022 8.5H7.3322C7.86161 6.44316 8.78972 4.54639 10.0292 2.89697C7.16877 3.72927 4.83773 5.80497 3.66022 8.5Z"
+                                            ill="white" />
+                                        </svg>
+                                        <span id="language-label" class="language-label">RU</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Модальное окно -->
+            <div id="studentsModal" class="modal">
+                <div class="modal-content Students">
+                    <span class="close">&times;</span>
+                    <div class="container">
+                        <div class="Students__row">
+                            <div class="Students__body">
+                            <img class="Students__woman" src="img/Students.jpg" alt="Student">
+
+                                <div class="Students__content">
+                                    <h2 class="Students__title">Студенты</h2>
+                                    <div class="Students__text">
+                                        <div class="accordion-content"></div>
+                                        Приглашаем студентов всех факультетов и специальностей нашего университета для участия в конкурсе для обучения в зарубежных вузах.<br><br>
+                                        К участию в конкурсе допускаются студенты 2 и 3 курсов всех специальностей, желающие пройти обучение по своей образовательной программе в вузах дальнего и ближнего зарубежья с обучением на английском, турецком и русском языках.<br><br>
+                                        Студенты могут принимать участие в конкурсе на обучение по программам академической мобильности в зарубежных вузах на общих основаниях — все расходы на участие в программе академической мобильности за счет средств обучающихся.
+                                        <button class="accordion-toggle Students__title2">Требования к претендентам</button>
+                                        <div class="accordion-content">
+                                            ·  	Высокий балл успеваемости; <br><br>
+                                            ·  	Наличие достижений в образовательной и научной деятельности (подтвержденное грамотами, сертификатами и т.д.); <br><br>
+                                            ·  	Знание английского языка не ниже «Intermediate», подтвержденное соответствующим сертификатом или результатами экзамена в отделе международного сотрудничества ABU (в случае, если соискатель планирует обучение в зарубежном вузе на английском языке).
+                                        </div>
+                                                        
+                                        <button class="accordion-toggle Students__title2">Перечень документов</button>
+                                        <div class="accordion-content">
+                                            В отдел международного сотрудничества Университета сдается следующий перечень документов: <br><br>
+                                            1) заявление обучающегося;<br>
+                                            2) копия паспорта гражданина Республики Казахстан;<br>
+                                            3) копия удостоверения личности;<br>
+                                            4) документы об образовании: транскрипт о текущей успеваемости заверенный печатью Университета;<br>
+                                            5) рекомендательные письма от декана факультета и от кафедры;<br>
+                                            6) копии грамот, сертификатов, дипломов, благодарственных писем, при их наличии;<br>
+                                            7) документ, подтверждающий знание иностранного языка (IELTS, TOEFL), при его наличии;<br>
+                                            8) транскрипт по установленной форме по результатам зимней сессии;<br>
+                                            9) фото 3х4 (2 шт);<br>
+                                            10) файловая папка (голубая). <br><br>
+                                            Отбор претендентов осуществляется Комиссией по отбору претендентов согласно «Правилам направления для обучения за рубежом, в том числе в рамках академической мобильности» утвержденным приказом Министра образования и науки РК от 19 ноября 2008 года №613.
+                                        </div>
+                                        <button class="accordion-toggle Students__title2">Подробная информация</button>
+                                        <div class="accordion-content">
+                                                Отдел международного сотрудничества ABU<br>
+                                                г. Семей, ул. Мәңгілік Ел, 11 и т.д.
+                                        </div>
+                                        <button class="accordion-toggle Teacher__title2"><a href="files/Положение об академ.моб 2023.pdf" target="_blank">Положения</a></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Модальное окно -->
+            <div id="Teacher" class="modal">
+                <div class="modal-content Teacher">
+                    <span class="close">&times;</span>
+                    <div class="container">
+                        <div class="Teacher__row">
+                            <div class="Teacher__body">
+                            <img class="Teacher__man" src="img/Teacher.jpg" alt="Teacher">
+
+                                <div class="Teacher__content">
+                                    <h2 class="Teacher__title">Преподаватели</h2>
+                                    <div class="Teacher__text">
+                                        Приглашаем иностранных преподавателей и учёных для чтения лекций в нашем университете.
+                                        Участие открыто для специалистов всех научных направлений из зарубежных вузов, владеющих английским, турецким или русским языками.
+                                        Лекции, семинары и мастер-классы проводятся в рамках академической мобильности для обмена опытом и укрепления международного сотрудничества.
+                                        Финансирование визита осуществляется за счёт зарубежного партнёра, спонсоров или других согласованных источников.              
+                                        <button class="accordion-toggle Teacher__title2">Входящая мобильность</button>
+                                        <div class="accordion-content">
+                                                <button class="accordion-toggle Teacher__title3">Документы</button>
+                                                1. Скан действующего паспорта<br>
+                                                2. Скан дипломов, подтверждающих ученую степень и ученое звание<br>
+                                                3. Резюме <br>
+                                                4. Список научных публикаций за последние 3 года <br>
+                                                5. Справка с места работы <br>
+                                                6. Полные банковские реквизиты <br>
+                                                7. Опросник для зарубежных ученых (форму запросить в МО) <br><br>
+                                                На основании приглашения со специалистом заключается договор об оказании услуг зарубежного специалиста с указанием сроков пребывания и вида оказываемых услуг. <br><br>
+                                                По приезду в ОМС предоставляются: <br>
+                                                1. Копия паспорта (лицевая сторона, виза и миграционная карточка); <br> <br>
+                                                2. Копия дипломов, подтверждающих ученую степень и ученое звание зарубежного специалиста; <br><br>
+                                                3. Авиабилет (с указанием стоимости перелета) и посадочные талоны, железнодорожный /автобусный билет, в случае если индивидуальный договор предусматривает оплата проезда. <br> <br>
+                                            <button class="accordion-toggle Teacher__title3">Порядок действий</button>
+                                                Кафедра направляет служебную записку с визой декана факультета в ОМС о готовности принять в рамках академической мобильности конкретного ученого (с указанием перечня дисциплин, объема часов и периода времени) и просьбой оформить приглашение на данного ученого. <br><br>
+                                                2. ОМС готовит текст приглашения на имя ректора вуза-партнера. Текст письма с визой проректора по МС передается в канцелярию на подпись Президента ABU. <br>
+                                                3. Канцелярия оформляет письмо на фирменном бланке ABU, подписывает и оригинал письма направляет в ОМС. <br>
+                                                4. Письмо приглашение передается на принимающую кафедру для отправки приглашаемому ученому. <br>
+                                                5. Принимающая Кафедра предоставляет в ОМС план технический мероприятий по встрече и сопровождению ученого на весь период его пребывания в университете за подписью зав. кафедрой, декана, а также служебную записку о подготовке пакета документов по академической мобильности. <br>
+                                                6. Принимающая кафедра предоставляет в ОМС распоряжение об оплате с указанием прочитанной дисциплины и объема часов по установленной форме ABU. <br>
+                                                7. Кафедра готовит распоряжение о почасовой оплате в бухгалтерию. <br>
+                                                8. Принимающая кафедра сопровождает приглашенного ученого в ОМС, для оформления и подписи пакета документов по академической мобильности, а также в бухгалтерию для получения заработной платы. <br>
+                                                9. Принимающая кафедра готовит информацию о визите ученого в рамках академической мобильности для размещения на сайте университета. Информация в распечатанном формате направляется ответственному за сайт ABU. <br>
+                                                10. ОМС формирует досье на зарубежного ученого, включающего копию паспорта, копию визы или миграционной карточки, анкету, копии дипломов о базовом образовании, ученых степенях и званиях, соглашение с ученым, акт выполненных работ. <br>
+                                            <button class="accordion-toggle Teacher__title4"><a href="files/Положение об академ.моб 2023.pdf" target="_blank">Положения о привлечении зарубежных специалистов</a></button>
+                                        </div>
+
+                                            
+
+                                        
+                                        <button class="accordion-toggle Teacher__title2">Исходящая мобильность</button>
+                                        <div class="accordion-content">
+                                            <button class="accordion-toggle Teacher__title3">Документы</button>
+                                            1. Заявление от претендента на имя президента ABU по установленной форме (за подписью зав. кафедры и декана) <br>
+                                            2. Копия действующего загран. паспорта <br>
+                                            3. Копия дипломов, подтверждающих ученую степень и ученое звание; <br>
+                                            4. Приглашение от зарубежного университета с указанием периода пребывания в зарубежном вузе, перечня читаемых курсов и объема часов<br> <br>
+
+                                            <button class="accordion-toggle Teacher__title3">Порядок действий</button>
+                                            1.	Преподаватель кафедры ABU пишет заявление на имя Президента ABU с просьбой командировать в конкретный вуз с указанием периода командировки с визой зав. кафедрой, декана и проректора по МС. К заявлению прилагается приглашение принимающего вуза. <br>
+                                            2.	В ОМС предоставляется копия приказа о командировании. <br>
+                                            3.	ОМС направляет электронный вариант типового пакета документов по академической мобильности командируемому преподавателю (соглашение с ученым, акт выполненных работ). <br>
+                                            4.	По возвращении в ABU преподаватель предоставляет в ОМС подписанный принимающим вузом пакет документов по академической мобильности, а также копию командировочного удостоверения. <br>
+                                            5.	Преподавателем готовится информация о поездке в рамках академической мобильности в зарубежный вуз для размещения на сайте университета. Информация в распечатанном формате направляется ответственному за сайт ABU с визой советника Президента ABU. <br> <br>
+                                            ППС и сотрудники университета, выезжающие за границу в рамках внешней
+                                            академической мобильности, несут ответственность за своевременное
+                                            оформление заграничного паспорта, визы, полиса медицинского страхования,
+                                            командировочного заявления.
+
+                                        </div>
+                                        <button class="accordion-toggle Teacher__title2">Подробная информация</button>
+                                        <div class="accordion-content">
+                                                Отдел международного сотрудничества ABU<br>
+                                                г. Семей, ул. Мәңгілік Ел, 11 и т.д.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+<div class="erasmus-container">
+    <div class="erasmus-header">
+        <h1 class="erasmus-title">Erasmus+ CircuIEC</h1>
+        <p class="project-description">"Разработка инновационных учебных программ и модулей в области циркулярной экономики и устойчивого развития"</p>
+    </div>
+</div> 
+    
+   <div class="project-container">
+    <div class="project-section">
+        <h2 class="section-title">О проекте</h2>
+        <div class="section-content">
+            <p>Проект направлен на <span class="highlight">развитие потенциала человеческого капитала</span> в вузах стран Центральной Азии в области циркулярной экономики с целью обеспечения сотрудников, студентов и широкой общественности навыками и компетенциями, соответствующими потребностям местных рынков труда и экологическим вызовам, с которыми сталкиваются страны Центральной Азии.</p>
+            <p>Проект предполагает <span class="highlight">обновление текущих дисциплин</span> по циркулярной экономике в вузах, адаптированных к потребностям каждой страны (Казахстан, Туркменистан, Таджикистан, Узбекистан).</p>
+        </div>
+    </div>
+    
+    <div class="project-section">
+        <h2 class="section-title">Цель</h2>
+        <div class="section-content">
+            <p><span class="highlight">Развитие образовательного потенциала</span> высших учебных заведений (ВУЗов) и формирование у студентов понимания принципов циркулярной экономики.</p>
+        </div>
+    </div>
+    
+    <div class="project-section">
+        <h2 class="section-title">Задачи</h2>
+        <div class="section-content">
+            <ul class="task-list">
+                <li><span class="highlight">Интеграция концепций циркулярной экономики</span> в учебные программы: Эти курсы могут быть обновлены, чтобы включать материал по циркулярной экономике, такой как кейс-стади и примеры практик циркулярной экономики.</li>
+                <li><span class="highlight">Партнерство с промышленностью</span> и общественными организациями: университеты будут сотрудничать с предприятиями и организациями, внедряющими практики циркулярной экономики, для создания возможностей для студентов в реальных условиях обучения.</li>
+                <li><span class="highlight">Проведение мероприятий и семинаров</span>: университеты будут организовывать мероприятия и семинары по циркулярной экономике, такие как лекции, панельные обсуждения или хакатоны.</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="project-section">
+        <h2 class="section-title">Состав</h2>
+        <div class="section-content">
+            <ul class="team-list">
+                <li><span class="highlight">Койчубаев Александр Сергеевич</span>, старший преподаватель кафедры бизнеса и управления, Координатор (научный руководитель) проекта.</li>
+                <li><span class="highlight">Орынбасарова Айжан Абеухановна</span>, заведующий кафедрой бизнеса и управления.</li>
+                <li><span class="highlight">Байгазинов Жанат Абылканович</span>, заведующий кафедрой прикладной биологии.</li>
+                <li><span class="highlight">Молдажанов Марат Бетимбаевич</span>, старший преподаватель кафедры бизнеса и управления.</li>
+                <li><span class="highlight">Наурызбаев Бауыржан Аманғазыұлы</span>, старший преподаватель кафедры информационно-технических наук.</li>
+                <li><span class="highlight">Касымханова Гульнар Мураткановна</span>, главный бухгалтер.</li>
+                <li><span class="highlight">Жук Анастасия Ивановна</span>, специалист отдела международного сотрудничества.</li>
+            </ul>
+            <p class="contact-info"><span class="highlight">Координатор</span>: Койчубаев Александр Сергеевич, <a href="mailto:koichubayev.a@abu.edu.kz" class="email-link">koichubayev.a@abu.edu.kz</a></p>
+        </div>
+    </div>
+</div>
+
+        <!-- Нижний блок с партнерами -->
+    <div class="partners-container">
+        <div class="partner-item">
+            <!-- Замените src на путь к вашему изображению -->
+            <img src="img/logoeuro.jpg" alt="European Union Logo">
+            <a href="https://european-union.europa.eu/index_en" target="_blank">Европейский Союз</a>
+            <p class="co-funded">Co-funded by the European Union</p>
+        </div>
+        
+        <div class="partner-item">
+            <!-- Замените src на путь к вашему изображению -->
+            <img src="img/LogoCirculEC.png" alt="CirculEC Logo">
+            <a href="http://circulec.tguk.ti/partners.php" target="_blank">CirculEC</a>
+        </div>
+    </div>
+
+     <div class="partners-section">
+        <h2>Партнеры</h2>
+        
+        <div class="partners-grid">
+            <!-- Партнер 1 -->
+            <div class="partner-card">
+                <img src="img/vuzicon/usc.png" alt="USC Logo" class="partner-logo">
+                <div class="partner-name">UNIVERSITY OF SANTIAGO DE COMPOSTELA (USC)</div>
+                <a href="https://www.usc.gal/en" target="_blank" class="partner-link">www.usc.gal/en</a>
+            </div>
+            
+            <!-- Партнер 2 -->
+            <div class="partner-card">
+                <img src="img/vuzicon/tmes.png" alt="TEG Logo" class="partner-logo">
+                <div class="partner-name">TAILOR-MADE ENGINEERING SOLUTIONS</div>
+                <a href="https://teg.com/about-us/" target="_blank" class="partner-link">teg.com/about-us</a>
+            </div>
+            
+            <!-- Партнер 3 -->
+            <div class="partner-card">
+                <img src="img/vuzicon/unina.png" alt="UNINA Logo" class="partner-logo">
+                <div class="partner-name">UNIVERSITA' DEGLI STUDI DI NAPOLI FEDERICO II</div>
+                <a href="https://www.unina.it" target="_blank" class="partner-link">www.unina.it</a>
+            </div>
+            
+            <!-- Партнер 4 -->
+            <div class="partner-card">
+                <img src="img/vuzicon/FHM.png" alt="FHM Logo" class="partner-logo">
+                <div class="partner-name">FHM BIELEFELD</div>
+                <a href="https://www.fh-mittelstand.de/standort/bielefeld/" target="_blank" class="partner-link">fh-mittelstand.de</a>
+            </div>
+            
+            <!-- Партнер 5 -->
+            <div class="partner-card">
+                <img src="img/vuzicon/ektu.png" alt="EKTU Logo" class="partner-logo">
+                <div class="partner-name">D.SERIKBAYEV EAST KAZAKHSTAN TECHNICAL UNIVERSITY</div>
+                <a href="https://www.ektu.kz/?lang=en" target="_blank" class="partner-link">www.ektu.kz</a>
+            </div>
+            
+            <!-- Партнер 6 -->
+            <div class="partner-card">
+                <img src="img/vuzicon/keu.jpeg" alt="KEU Logo" class="partner-logo">
+                <div class="partner-name">KARAGANDA UNIVERSITY OF KAZPOTREBSOYUZ</div>
+                <a href="https://www.keu.kz/en/" target="_blank" class="partner-link">www.keu.kz/en</a>
+            </div>
+            
+            <!-- Партнер 7 -->
+            <div class="partner-card">
+                <img src="img/vuzicon/UU.png" alt="Shokan Logo" class="partner-logo">
+                <div class="partner-name">SH.UALIKHANOV KOKSHETAU UNIVERSITY</div>
+                <a href="https://shokan.edu.kz/en/about/" target="_blank" class="partner-link">shokan.edu.kz</a>
+            </div>
+            
+            <!-- Партнер 8 -->
+            <div class="partner-card">
+                <img src="img/vuzicon/ast.png" alt="Turkmen Science Logo" class="partner-logo">
+                <div class="partner-name">ACADEMY OF SCIENCES OF TURKMENISTAN</div>
+                <a href="https://science.gov.tm/" target="_blank" class="partner-link">science.gov.tm</a>
+            </div>
+            
+            <!-- Партнер 9 -->
+            <div class="partner-card">
+                <img src="img/vuzicon/tsiem.png" alt="TSIEM Logo" class="partner-logo">
+                <div class="partner-name">TURKMEN STATE INSTITUTE OF ECONOMICS AND MANAGEMENT</div>
+                <a href="https://www.tsiem.edu.tm/en" target="_blank" class="partner-link">www.tsiem.edu.tm</a>
+            </div>
+            
+            <!-- Партнер 10 -->
+            <div class="partner-card">
+                <img src="img/vuzicon/tsif.png" alt="TSIF Logo" class="partner-logo">
+                <div class="partner-name">TURKMEN STATE INSTITUTE OF FINANCE</div>
+                <a href="https://www.tsiem.edu.tm/en" target="_blank" class="partner-link">www.tsiem.edu.tm</a>
+            </div>
+            
+            <!-- Партнер 11 -->
+            <div class="partner-card">
+                <img src="img/vuzicon/iut.png" alt="IUT Logo" class="partner-logo">
+                <div class="partner-name">TECHNOLOGICAL UNIVERSITY OF TAJIKISTAN</div>
+                <a href="https://iut.tj/?page_id=1751&lang=en" target="_blank" class="partner-link">iut.tj</a>
+            </div>
+            
+            <!-- Партнер 12 -->
+            <div class="partner-card">
+                <img src="img/vuzicon/tguk.png" alt="TGUK Logo" class="partner-logo">
+                <div class="partner-name">TAJIK STATE UNIVERSITY OF COMMERCE</div>
+                <a href="https://tguk.tj/index.php/en/" target="_blank" class="partner-link">tguk.tj</a>
+            </div>
+            
+            <!-- Партнер 13 -->
+            <div class="partner-card">
+                <img src="img/vuzicon/wiut.png" alt="WIUT Logo" class="partner-logo">
+                <div class="partner-name">WESTMINSTER INTERNATIONAL UNIVERSITY IN TASHKENT</div>
+                <a href="https://www.wiut.uz/" target="_blank" class="partner-link">www.wiut.uz</a>
+            </div>
+            
+            <!-- Партнер 14 -->
+            <div class="partner-card">
+                <img src="img/vuzicon/cau.png" alt="AKFA Logo" class="partner-logo">
+                <div class="partner-name">AKFA UNIVERSITY</div>
+                <a href="https://centralasian.uz/" target="_blank" class="partner-link">centralasian.uz</a>
+            </div>
+        </div>
+    </div>
+    
+ 
+  <div class="news-section">
+        <h2>Новости</h2>
+
+    <div class="news-container">
+        <!-- Новость 1 -->
+        <div class="news-card">
+            <a href="news-fhm-details.html" class="news-link">
+                <div class="single-image">
+                    <img src="img/FHM/FHM1.jpeg" alt="Встреча в Fachhochschule des Mittelstands">
+                </div>
+                <div class="news-content">
+                    <div class="news-title">Встреча в Fachhochschule des Mittelstands, 22.04.24</div>
+                    <span class="news-date">22 апреля 2024</span>
+                    <div class="news-text">
+                        <p>Первая оффлайн-встреча в рамках совместного Европейско-Центральноазиатского проекта ЕС «CirculEC»...</p>
+                        <span class="read-more">Читать подробнее →</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+        
+        <!-- Новость 2 -->
+        <div class="news-card">
+            <a href="news-usc-details.html" class="news-link">
+                <div class="single-image">
+                    <img src="img/USC/USC1.jpg" alt="Встреча в University of Santiago de Compostela">
+                </div>
+                <div class="news-content">
+                    <div class="news-title">Встреча в University of Santiago de Compostela, 25-26.04.24</div>
+                    <span class="news-date">25-26 апреля 2024</span>
+                    <div class="news-text">
+                        <p>Факультет экономики и делового администрирования Университета Сантьяго-де-Кампостела посетила делегация...</p>
+                        <span class="read-more">Читать подробнее →</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+        
+        <!-- Новость 3 -->
+        <div class="news-card">
+            <a href="news-unf-details.html" class="news-link">
+                <div class="single-image">
+                    <img src="img/UNF/UNF1.jpeg" alt="Встреча в University of Naples Federico II">
+                </div>
+                <div class="news-content">
+                    <div class="news-title">Встреча в University of Naples Federico II, 29.04</div>
+                    <span class="news-date">29 апреля 2024</span>
+                    <div class="news-text">
+                        <p>Университет Фридриха II с большим энтузиазмом приветствовал коллег из десяти университетов...</p>
+                        <span class="read-more">Читать подробнее →</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+      <footer class="footer__">
+                <div class="footer__row">
+                    <!-- Левая колонка: Логотип + Контакты -->
+                    <div class="footer__column">
+                        <div class="logo__footer">
+                            <img src="img/Logo-ABU.png" alt="Логотип">
+                        </div>
+                        <div class="address">Мангилик Ел, 11, 23 каб, Семей, 071400</div>
+                        <div class="footer__phone">+7 (7222) 36-03-63, внутр. номер 125</div>
+                        <div class="footer__email">internationaloffice@abu.edu.kz</div>
+                        <div class="schedule">понедельник – пятница, 9:00 – 18:00 <br>						
+                                              обеденный перерыв: 13:00 – 14:00
+                        </div>
+                    </div>
+
+                    <!-- Средняя колонка: Навигация (первая часть) -->
+                    <div class="footer__column">
+                        <h4>Навигация</h4>
+                        <a href="for_foreign_students.html"><p>Иностранным студентам</p></a>
+                        <a href="mschool.html"><p>Международная школа бизнеса</p></a>
+                        <a href="eramus.html"><p>Кредитная мобильность</p></a>
+                    </div>
+
+                    <div class="footer__column">
+                        <br>
+                        <br>
+                        <a href="academic mobility.html"><p>Для преподавателей</p></a>
+                        <a href="academic mobility.html"><p>Для студентов</p></a>
+                        <a href="erasmus+circulen.html"><p>Erasmus + CirculEC</p></a>
+                    </div>
+
+                    <!-- Правая колонка: Навигация (вторая часть) и сотрудники -->
+                    <div class="footer__column">
+                        <h4>Сотрудники</h4>
+                        <p>Шустова Елена Павловна, PhD, MBA – Проректор по международному сотрудничеству</p>
+                        <p>Жолдыханова Акбота Серикжановна, м.г.н. – Старший специалист ОМС</p>
+                        <p>Жук Анастасия Ивановна, м.г.н - Cпециалист</p>
+                    </div>
+                </div>
+            <hr class="stripe">
+            <div class="footer__bottom">
+                © 2025 Все права защищены
+            </div>
+            </footer>
+        </div>
+    </div>
+    <script src="js/erasmuscirculen.js"></script>
+</body>
+</html>
