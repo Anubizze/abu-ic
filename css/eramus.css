@@ -75,32 +75,6 @@ body{
   position: relative;
 }
 
-.submenu {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  z-index: 1000;
-  min-width: 180px;
-}
-
-.submenu li a {
-  display: block;
-  padding: 10px 15px;
-  color: black;
-  text-decoration: none;
-  white-space: nowrap;
-}
-
-
-.has-submenu:hover .submenu {
-  display: block;
-}
-
 
 
 a{
@@ -193,21 +167,6 @@ a{
   border-radius: 2px;
 }
 
-/* Подменю */
-.submenu {
-  display: none;
-  position: absolute;
-  background: white;
-  color: black;
-  top: 100%;
-  left: 0;
-  list-style: none;
-  padding: 0;
-}
-
-.has-submenu:hover .submenu {
-  display: block;
-}
 
 /* --- МЕДИА --- */
 @media (max-width: 768px) {
@@ -850,24 +809,6 @@ button.Teacher__title4 {
 }
 
 
-/* Erasmus кнопки дизайн */
-.submenu li a{
-    background-color: #000000;
-    color: #fff;
-    font-size: 20px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    width: 300px;
-    margin: 20px 20px 0px 20px;
-}
-.submenu .Erasmus-CirculEC a{
-  margin-bottom: 20px;
-}
-
-.submenu li a:hover {
-  color: #ffffff;             
-}
 
 
 
@@ -1624,38 +1565,7 @@ button.Teacher__title4 {
     transition: all 0.3s ease;
   }
 
-  .submenu {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.85);
-    padding: 10px 0;
-    border-radius: 8px;
-    min-width: 220px;
-    z-index: 1000;
-  }
 
-  .has-submenu:hover .submenu {
-    display: block;
-  }
-
-  .submenu li a,
-  .submenu li button {
-    all: unset;
-    display: block;
-    padding: 12px 20px;
-    color: #fff;
-    font-size: 16px;
-    width: 100%;
-    cursor: pointer;
-  }
-
-  .submenu li a:hover,
-  .submenu li button:hover {
-    color: #dddddd;
-  }
-}
 
 
 @media (max-width: 480px) {
@@ -1823,35 +1733,46 @@ button.Teacher__title4 {
         
 }
 
-
+/* === ВЫПАДАЮЩЕЕ МЕНЮ === */
 .submenu {
-  min-width: max-content;                /* ширина по содержимому */
-  padding: 10px 15px;                    /* внутренние отступы */
-  background: #111;                      /* тёмный фон */
-  border-radius: 8px;                    /* скруглённые углы */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* тень выпадающего блока */
-  z-index: 1000;                         /* поверх других элементов */
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.95);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  padding: 10px 0;
+  min-width: 250px;
+  z-index: 1000;
+  display: none;
+}
+
+.has-submenu:hover .submenu {
+  display: block;
 }
 
 .submenu li {
-  white-space: nowrap;                  /* запрет переноса текста */
+  white-space: nowrap;
 }
 
 .submenu li a {
-  display: block;                        /* занимает всю ширину li */
-  padding: 8px 12px;                     /* отступы внутри ссылок */
-  color: white;                          /* белый текст */
-  background: none;                      /* прозрачный фон */
-  border-radius: 6px;                    /* скругление при наведении */
-  transition: all 0.2s ease;             /* плавные эффекты */
-  text-decoration: none;                 /* убираем подчёркивание */
+  display: block;
+  width: 100%;
+  padding: 12px 20px;
+  background: none;
+  color: #fff;
+  font-size: 16px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  border-radius: 6px;
 }
 
-/* Наведение на ссылку — свечением и лёгким фоном */
 .submenu li a:hover {
-  background-color: rgba(255, 255, 255, 0.05); /* лёгкий полупрозрачный фон */
-  box-shadow: 0 2px 10px rgba(255, 255, 255, 0.15); /* свечение */
-  text-decoration: underline;             /* подчёркивание при наведении */
+  background-color: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 2px 10px rgba(255, 255, 255, 0.15);
+  text-decoration: underline;
 }
+
 
 
