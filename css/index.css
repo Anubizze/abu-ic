@@ -28,6 +28,12 @@ body{
 
 
 /* ================= МЕНЮ ================= */
+.menu{
+    background-color:#000000;
+    width: auto;
+    height: 99px;
+    gap: 200px;
+}
 
 .container{
     display: flex;
@@ -43,7 +49,6 @@ body{
     width: auto;
     height: 69px;
     padding: 10px;
-
 }
 
 .menu__body {
@@ -53,11 +58,13 @@ body{
 }
 
 
+
+
 .menu__pages {
   display: flex;
   align-items: center;
   color: #ffffff;
-  font-size: 17px;
+  font-size: 18px;
   line-height: 24px;
   gap: 20px; 
 
@@ -149,7 +156,38 @@ a{
 .icon-earth {
   fill: white;
 }
+/* Языковой переключатель (мобильный вид) */
+@media (max-width: 768px) {
+  .menu__row {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
 
+  .menu__body {
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    background: black;
+    padding: 15px 0;
+  }
+
+  .menu__body.active {
+    display: flex;
+  }
+
+  .menu__pages {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .language-switcher {
+    justify-content: flex-end;
+    width: 100%;
+    margin-top: 10px;
+  }
+}
 
 
 
@@ -425,22 +463,6 @@ button.Students__title2 {
   cursor: pointer;
 }
 
-/* Кнопка открытия */
-.open-students-modal {
-  background-color: #000000;
-  color: #fff;
-  font-size: 20px;
-  padding: 15px 30px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  margin: 20px 20px 0px 20px;
-  width: 300px;
-}
-
-.open-students-modal:hover {
-  background-color: #0059b3;
-}
 
 
 
@@ -710,21 +732,7 @@ button.Teacher__title4 {
   cursor: pointer;
 }
 
-.open-teacher-modal {
-  background-color: #000000;
-  color: #fff;
-  font-size: 20px;
-  padding: 15px 30px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  margin: 20px;
-  width: 300px;
-}
 
-.open-teacher-modal:hover {
-  background-color: #0059b3;
-}
 
 
 /* ================= БЛОК TEACHER ================= */
@@ -1789,13 +1797,10 @@ button.Teacher__title4 {
 
 /* Логотип */
 .logo__footer img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin-right: 20px;
+  width: 214px;
+  height: 49px;
+  margin-bottom: 20px;
 }
-
-
 
 /* Телефон */
 .footer__phone {
@@ -2151,6 +2156,56 @@ button.Teacher__title4 {
 }
 
 
+@media (max-width: 480px) {
+  /* Кнопка открытия */
+  .more-button {
+    padding: 14px 17px;
+    background: linear-gradient(135deg, #003366, #0055aa);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 17px;
+    font-weight: 600;
+    box-shadow: 0 5px 15px rgba(0, 51, 102, 0.4);
+    transition: all 0.3s ease;
+  }
+
+  .submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.85);
+    padding: 10px 0;
+    border-radius: 8px;
+    min-width: 220px;
+    z-index: 1000;
+  }
+
+  .has-submenu:hover .submenu {
+    display: block;
+  }
+
+  .submenu li a,
+  .submenu li button {
+    all: unset;
+    display: block;
+    padding: 10px 0;
+    color: #fff;
+    font-size: 16px;
+    width: 100%;
+    cursor: pointer;
+  }
+
+  .submenu li a:hover,
+  .submenu li button:hover {
+    color: #dddddd;
+  }
+}
+
+
+
 
 .menu{
     background-color:#000000;
@@ -2171,7 +2226,7 @@ button.Teacher__title4 {
 @media (min-width: 1025px) {
   .menu__logo,
   .logo__footer img {
-    max-width: 260px;
+    max-width: 250px;
     height: 85px;
   }
 }
@@ -2201,4 +2256,66 @@ button.Teacher__title4 {
     max-width: 220px;
     height: 65px;
   }
+}
+
+.menu__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  gap: 20px;
+}
+
+.menu__logo img {
+  max-height: 60px;
+  height: auto;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+
+
+
+/* Кнопка открытия */
+.open-students-modal {
+        all: unset;
+        display: block;
+        padding: 12px 20px;
+        color: #fff;
+        font-size: 16px;
+        width: 100%;
+        cursor: pointer;
+}
+
+.open-teacher-modal {
+        all: unset;
+        display: block;
+        padding: 12px 20px;
+        color: #fff;
+        font-size: 16px;
+        width: 100%;
+        cursor: pointer;
+}
+
+
+.credit-mobility{
+        all: unset;
+        display: block;
+        padding: 12px 20px;
+        color: #fff;
+        font-size: 16px;
+        width: 100%;
+        cursor: pointer;
+}
+
+
+.Erasmus-CirculEC{
+        all: unset;
+        display: block;
+        padding: 12px 20px;
+        color: #fff;
+        font-size: 16px;
+        width: 100%;
+        cursor: pointer;
 }
