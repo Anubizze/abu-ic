@@ -1702,16 +1702,21 @@ button.Teacher__title4 {
   position: absolute;
   top: 100%;
   left: 0;
-  background-color: #111;
+  background-color: rgba(17, 17, 17, 0.9); /* полупрозрачный фон */
   padding: 10px 0;
   border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4); /* мягкая глубокая тень */
   min-width: 220px;
   z-index: 1000;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .has-submenu:hover .submenu {
   display: block;
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .submenu li {
@@ -1728,13 +1733,14 @@ button.Teacher__title4 {
   width: 100%;
   text-align: left;
   border-radius: 6px;
-  transition: all 0.2s ease;
+  transition: background-color 0.3s ease, color 0.3s ease;
   text-decoration: none;
-  margin: 0; /* убираем отступы */
+  margin: 0;
 }
 
-.submenu a {
-  background-color: #111;
+.submenu li a:hover {
+  background-color: rgba(255, 255, 255, 0.15); /* красивый полупрозрачный hover */
+  color: #ffcc00; /* жёлтый цвет текста при наведении — можно изменить */
 }
 
 /* С 1200px до 1600px — сдвигаем влево */
@@ -1742,7 +1748,7 @@ button.Teacher__title4 {
     .submenu {
         left: auto;
         right: 0;
-        transform: translateX(-30px); /* подстрой размер смещения */
+        transform: translateX(-30px);
     }
 }
 
