@@ -1,4 +1,5 @@
-/*Обнуление*/
+/* Адиль css */
+/*Обнуление*/More actions
 *{padding:0;margin:0;border:0;}
 *,*:before,*:after{-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;}
 :focus,:active{outline:none;}
@@ -26,12 +27,9 @@ body{
 .menu{
     background-color:#000000;
     width: auto;
-    height: 99px;
+    height: 130px;
     gap: 200px;
-    padding-top: 15px;
-    padding-right: 40px;
-    padding-bottom: 15px;
-    padding-left: 40px;;
+    padding: 15px 15px 15px 15px;
 }
 
 .container{
@@ -40,55 +38,15 @@ body{
     align-items: center;
     flex-wrap: wrap;
 }
-.menu__row {
+.menu__row{
     display: flex;
     justify-content: flex-start;
     align-items: center;
     flex-wrap: wrap;    
-    width: 100%;
+    width: auto;
     height: 69px;
     padding: 10px;
-    margin-left: -140px; /* Сдвигаем шапку влево */
-}
 
-.menu__pages {
-    display: flex;
-    align-items: center;
-    white-space: nowrap; /* Запрещаем перенос текста */
-    gap: 20px; /* Расстояние между пунктами */
-    padding: 10px 0;
-    color: #ffffff;
-    font-size: 18px;
-    line-height: 24px;
-}
-
-.menu__item {
-    display: inline-flex;
-    position: relative;
-}
-
-.menu__item a {
-    color: inherit;
-    text-decoration: none;
-    white-space: nowrap;
-}
-
-.has-submenu .submenu {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background: #fff;
-    min-width: 200px;
-    z-index: 100;
-}
-
-.has-submenu:hover .submenu {
-    display: block;
-}
-
-.language-switcher {
-    margin-left: auto; /* Сдвигаем переключатель языка вправо */
 }
 
 .menu__body {
@@ -97,24 +55,16 @@ body{
   gap: 20px;
 }
 
-.menu__logo {
-    width: 214px;
-    height: 49px;
-    margin-right: 40px;
-}
-
 
 .menu__pages {
-    display: flex;
-    align-items: center;
-    color: #ffffff;
-    font-size: 18px;
-    line-height: 24px;
-    gap: 20px;
-    margin-left: 200px; 
-    margin-top: -40px; /* Увеличьте значение для большего расстояния */
-}
+  display: flex;
+  align-items: center;
+  color: #ffffff;
+  font-size: 18px;
+  line-height: 24px;
+  gap: 20px; 
 
+}
 
 
 .menu__item--gap-40 {
@@ -122,39 +72,7 @@ body{
 }
 
 
-.has-submenu {
-  position: relative;
-}
 
-.submenu {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background-color: white; /* Цвет фона подменю */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  z-index: 1000;
-  min-width: 180px;
-}
-
-.submenu li a {
-  display: block;
-  padding: 10px 15px;
-  color: black;
-  text-decoration: none;
-  white-space: nowrap;
-}
-
-.submenu li a:hover {
-  background-color: #f0f0f0;
-}
-
-.has-submenu:hover .submenu {
-  display: block;
-}
 
 
 
@@ -220,20 +138,10 @@ a{
   }
 }
 
-.menu {
-  background-color: #000;
-  padding: 15px 40px;
-}
-
-
-.menu__logo {
-  width: 150px;
-}
 
 .menu__pages {
   display: flex;
   gap: 20px;
-  margin-top: -55px;
 }
 
 .menu__item a {
@@ -258,21 +166,8 @@ a{
   border-radius: 2px;
 }
 
-/* Подменю */
-.submenu {
-  display: none;
-  position: absolute;
-  background: white;
-  color: black;
-  top: 100%;
-  left: 0;
-  list-style: none;
-  padding: 0;
-}
 
-.has-submenu:hover .submenu {
-  display: block;
-}
+
 
 /* --- МЕДИА --- */
 @media (max-width: 768px) {
@@ -296,14 +191,7 @@ a{
     display: flex;
   }
 
-  .submenu {
-    position: static;
-    background: #222;
-  }
 
-  .submenu li a {
-    color: white;
-  }
 }
 
 
@@ -351,20 +239,15 @@ a{
     display: flex;
   }
 
-  .submenu {
-    position: static;
-    background-color: #111;
-    width: 100%;
-  }
 
-  .has-submenu:hover .submenu {
-    display: block;
-  }
+
+
 }
 
 
 
-/* Students */
+
+/* ================= БЛОК STUDENTS ================= */
 .Students {
   display: flex;
   align-items: center;
@@ -458,7 +341,9 @@ button.Students__title2 {
   to { opacity: 1; }
 }
 
-/* Обёртка модалки */
+* Обёртка модалки */
+
+/* ================= ОБЩИЕ СТИЛИ МОДАЛКИ ================= */
 .modal {
   display: none;
   position: fixed;
@@ -491,22 +376,6 @@ button.Students__title2 {
   cursor: pointer;
 }
 
-/* Кнопка открытия */
-.open-students-modal {
-  background-color: #000000;
-  color: #fff;
-  font-size: 20px;
-  padding: 15px 30px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  margin: 20px 20px 0px 20px;
-  width: 300px;
-}
-
-.open-students-modal:hover {
-  background-color: #0059b3;
-}
 
 
 
@@ -618,6 +487,8 @@ button.Students__title2 {
 
 
 /* Teacher */
+
+/* ================= БЛОК TEACHER ================= */
 .Teacher {
   display: flex;
   align-items: center;
@@ -740,6 +611,8 @@ button.Teacher__title4 {
 }
 
 /* Модальное окно */
+
+/* ================= ОБЩИЕ СТИЛИ МОДАЛКИ ================= */
 .modal {
   display: none;
   position: fixed;
@@ -770,22 +643,10 @@ button.Teacher__title4 {
   cursor: pointer;
 }
 
-.open-teacher-modal {
-  background-color: #000000;
-  color: #fff;
-  font-size: 20px;
-  padding: 15px 30px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  margin: 20px;
-  width: 300px;
-}
 
-.open-teacher-modal:hover {
-  background-color: #0059b3;
-}
 
+
+/* ================= БЛОК TEACHER ================= */
 .Teacher__text{
   max-height: 60vh;  
   overflow-y: auto; 
@@ -851,7 +712,7 @@ button.Teacher__title4 {
     font-size: 17px;
     color: #222;
   }
-  
+
 }
 
 @media (max-width: 600px) {
@@ -882,6 +743,8 @@ button.Teacher__title4 {
 }
 
 @media (max-width: 400px) {
+
+/* ================= ОБЩИЕ СТИЛИ МОДАЛКИ ================= */
   .modal-content {
     padding: 15px;
     max-width: 100%;
@@ -889,6 +752,8 @@ button.Teacher__title4 {
     box-sizing: border-box;
   }
 
+
+/* ================= БЛОК TEACHER ================= */
   .Teacher {
     width: 100%;
     padding: 0;
@@ -933,219 +798,82 @@ button.Teacher__title4 {
 
 
 
-/* Erasmus кнопки дизайн */
-
-.submenu li a{
-    background-color: #000000;
-    color: #fff;
-    font-size: 20px;
-    padding: 15px 30px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    width: 300px;
-    margin: 20px 20px 0px 20px;
-    
-}
-.submenu .Erasmus-CirculEC a{
-  margin-bottom: 20px;
-}
-
-.submenu li a:hover {
-  background-color: #0059b3;  
-  color: #ffffff;             
-}
-
-/* Часть с картинкой международное сотруднечество */
-
-.section__top {
-  position: relative;
-  background: url('/img/first-photo.jpg') center/cover no-repeat;
-  height: 950px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  color: white;
-  font-size: 36px;
-  line-height: 56px;
-  overflow: hidden;
-}
-
-.section__top img{
-    filter: brightness(0.7);
-}
-.section__top::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.3); 
-  z-index: 1;
-}
-
-.section__top > * {
-  position: relative;
-  z-index: 2;
-}
-
-.section-first-row {
-  display: flex;
-  gap: 10px;
-  font-size: 20px;
-  margin: 0px 0px 0px 43px;
-
-}
-
-.section__top h2{
-  margin: 0px 0px 100px 43px;
-}
-
-.section-second{
-  margin-left: 43px;    
-}
 
 
 
 
-.section__bottom {
-  display: flex;
-  /* gap: 20px; */
-  flex-wrap: wrap;
-}
 
-.section__item {
-  flex: 1;
-  min-width: 300px;
-  background-color: #000;
-  color: white;
-  position: relative;
-  overflow: hidden;
-}
 
-.section__item img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
 
-.section__text {
-  position: absolute;
-  bottom: 30px;
-  right: 20px;
-  left: 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  color: white;
-  gap: 20px;
-}
 
-.section__info {
-  text-align: left; /* Выравниваем текст справа */
-}
 
-.section__info h3 {
-  font-size: 70px;
-  margin-bottom: 10px;
-}
 
-.section__info p {
-  font-size: 22px;
-  line-height: 1.5;
-}
-
-.section__text button {
-  margin-top: 60px;
-  font-size: 30px;
-  background: rgba(0, 0, 0, 0.5); 
-  border: 1px solid white;
-  border-radius: 35px;
-  color: white;
-  cursor: pointer;
-  align-self: flex-start;
-  height: 80px;
-  width: 190px;
-}
-
-/* Section адоптивность */
-@media (max-width: 768px) {
-  .section__top {
-    height: 500px;
-    font-size: 24px;
-    line-height: 36px;
-  }
-
-  .section-first-row {
-    flex-direction: column;
-    margin: 20px;
-    font-size: 16px;
-  }
-
-  .section__top h2 {
-    font-size: 24px;
-    margin: 20px;
-  }
-
-  .section__bottom {
-    flex-direction: column;
-  }
-
-  .section__item {
-    min-width: 100%;
-    height: auto;
-  }
-
-  .section__info h3 {
-    font-size: 36px;
-  }
-
-  .section__info p {
-    font-size: 16px;
-  }
-
-  .section__text {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-    bottom: 20px;
-  }
-
-  .section__text button {
-    font-size: 20px;
-    height: 60px;
-    width: 150px;
-    margin-top: 20px;
-  }
-}
-
-@media (max-width: 480px) {
-  .section__top {
-    height: 400px;
-  }
-
-  .section__top h2 {
-    font-size: 20px;
-    margin: 10px;
-  }
-
-  .section-first-row {
-    font-size: 14px;
-    margin: 10px;
-  }
-
-  .section__info h3 {
-    font-size: 28px;
-  }
-
-  .section__info p {
-    font-size: 14px;
-  }
-
-  .section__text button {
-    font-size: 18px;
-    width: 130px;
-    height: 50px;
-  }
-}
+    * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            color: #ffffff;
+            margin-bottom: 10px;
+            font-size: 24px;
+        }
+        
+        .menu-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .menu-item {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: calc(25% - 20px);
+            min-width: 200px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .menu-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .menu-item h2 {
+            color: #0066cc;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        
+        @media (max-width: 900px) {
+            .menu-item {
+                width: calc(50% - 20px);
+            }
+        }
+        
+        @media (max-width: 500px) {
+            .menu-item {
+                width: 100%;
+            }
+        }
 
 
         :root {
@@ -1828,401 +1556,6 @@ button.Teacher__title4 {
 
 
 
-/* Главный футер */
-.footer__ {
-  background-color: #000000;
-  color: #ffffff;
-  font-size: 16px;
-  padding-top: 40px;
-}
-
-/* Контейнер с колонками */
-.footer__row {
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  padding: 60px 40px;
-  gap: 24px;
-}
-
-/* Каждая колонка */
-.footer__column {
-  flex: 1 1 250px;
-  max-width: 400px;
-  color: white;
-}
-
-/* Логотип */
-.logo__footer img {
-  width: 214px;
-  height: 49px;
-  margin-bottom: 20px;
-}
-@media (max-width: 768px) {
-.logo__title{
-
-}
-
-}
-/* Телефон */
-.footer__phone {
-  margin-top: 20px;
-  line-height: 32px;
-  font-size: 18px;
-}
-
-/* Email */
-.footer__email {
-  margin-top: 20px;
-  margin-bottom: 40px;
-  line-height: 32px;
-  font-size: 18px;
-}
-
-/* Навигация и сотрудники заголовки */
-.footer__column h4 {
-  margin-bottom: 16px;
-  font-size: 18px;
-  font-weight: bold;
-}
-
-/* Текст внутри колонок */
-.footer__column p {
-  margin: 4px 0;
-  line-height: 28px;
-}
-
-/* Линия-разделитель */
-.stripe {
-  border: 1px solid white;
-  margin: 0 40px;
-}
-
-/* Нижний текст © */
-.footer__bottom {
-  padding: 20px 40px;
-  font-size: 14px;
-}
-
-/* Адаптив: на узких экранах колонки в столбик */
-@media (max-width: 768px) {
-  .footer__row {
-    flex-direction: column;
-    gap: 24px;
-  }
-
-  .footer__column {
-    max-width: 100%;
-  }
-
-  .stripe {
-    margin: 20px 0;
-  }
-
-  .footer__bottom {
-    text-align: center;
-  }
-}
-
-
-/* Адаптив: на узких экранах колонки в столбик */
-@media (max-width: 768px) {
-  .footer__row {
-    flex-direction: column;
-    gap: 24px;
-  }
-
-  .footer__column {
-    max-width: 100%;
-  }
-
-  .stripe {
-    margin: 20px 0;
-  }
-
-  .footer__bottom {
-    text-align: center;
-  }
-}
-
- * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        html, body {
-            width: 100%;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-        
-        /* Основные стили для footer */
-        .footer__ {
-            background-color: #000000;
-            color: #ffffff;
-            width: 100%;
-            margin: 0;
-            padding: 40px 0 0;
-        }
-        
-        .footer__row {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 60px 20px;
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            gap: 24px;
-        }
-        
-        .footer__column {
-            flex: 1 1 250px;
-            max-width: 400px;
-        }
-        
-        .stripe {
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
-            width: 100%;
-            margin: 0;
-        }
-        
-        .footer__bottom {
-            padding: 20px;
-            text-align: center;
-            font-size: 14px;
-        }
-        
-        /* Адаптивность */
-        @media (max-width: 768px) {
-            .footer__row {
-                flex-direction: column;
-                padding: 40px 20px;
-                gap: 30px;
-            }
-            
-            .footer__column {
-                max-width: 100%;
-            }
-        }
-
-        html, body {
-    margin: 0 !important;
-    padding: 0 !important;
-    width: 100% !important;
-}
-
-.footer__ {
-    width: 100vw !important;
-    margin-left: calc(-50vw + 50%) !important;
-    margin-right: calc(-50vw + 50%) !important;
-}
-
-/* Общие мобильные стили */
-@media (max-width: 768px) {
-  /* Меню */
-  .menu {
-    position: fixed; /* Делаем меню фиксированным */
-    top: 0;
-    left: 0;
-    right: 0;
-    height: auto;
-    padding: 10px 15px;
-    background-color: #000; /* Добавляем фон на случай прозрачности */
-    z-index: 1001; /* Убедимся, что меню выше других элементов */
-  }
-  
-  .menu__row {
-    flex-direction: row;
-    justify-content: space-between;
-    height: auto;
-    padding: 5px;
-    margin-left: 5px;
-  }
-  
-  .menu__logo {
-    width: 150px;
-    height: auto;
-    margin-right: 0;
-  }
-  
-  .menu__pages {
-    display: none;
-    position: fixed; /* Меняем absolute на fixed */
-    top: 60px; /* Высота меню */
-    left: 0;
-    right: 0;
-    background-color: #000;
-    flex-direction: column;
-    margin: 0;
-    padding: 15px;
-    z-index: 1000;
-    max-height: calc(100vh - 60px); /* Ограничиваем высоту */
-    overflow-y: auto; /* Добавляем скролл если контент не помещается */
-  }
-  
-  .menu__pages.active {
-    display: flex;
-  }
-  
-  /* Добавляем отступ для основного контента, чтобы он не скрывался под фиксированным меню */
-  body {
-    padding-top: 60px; /* Должно соответствовать высоте вашего меню */
-  }
-  
-  .language-switcher {
-    margin-left: 0;
-  }
-  
-  .burger-button {
-    display: flex;
-  }
-  
-  /* Секция с фоновым изображением */
-  .section__top {
-    height: 400px;
-    font-size: 24px;
-    line-height: 1.3;
-  }
-  
-  .section__top h2 {
-    font-size: 24px;
-    margin: 0 0 30px 20px;
-  }
-  
-  .section-first-row {
-    margin: 0 20px;
-    font-size: 16px;
-  }
-  
-  /* Блоки Students и Teacher */
-  .Students, .Teacher {
-    width: 100%;
-    padding: 20px;
-  }
-  
-  .Students__body, .Teacher__body {
-    flex-direction: column;
-  }
-  
-  .Students__woman, .Teacher__man {
-    width: 100%;
-    height: auto;
-  }
-  
-  .Students__content, .Teacher__content {
-    max-width: 100%;
-  }
-  
-  .Students__title, .Teacher__title {
-    font-size: 28px;
-  }
-  
-  /* Модальные окна */
-  .modal-content {
-    width: 95%;
-    padding: 20px;
-  }
-  
-  /* Футер */
-  .footer__row {
-    flex-direction: column;
-    padding: 30px 20px;
-    gap: 30px;
-  }
-  
-  .footer__column {
-    max-width: 100%;
-  }
-  
-  .stripe {
-    margin: 20px 0;
-  }
-  
-  /* Двухколоночный макет */
-  .columns-container {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-  
-  /* Галерея */
-  .gallery-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* Дополнительные стили для очень маленьких экранов */
-@media (max-width: 480px) {
-  .section__top {
-    height: 300px;
-    font-size: 18px;
-  }
-  
-  .section__top h2 {
-    font-size: 20px;
-    margin-bottom: 20px;
-  }
-  
-  .Students__title, .Teacher__title {
-    font-size: 24px;
-    height: 40px;
-  }
-  
-  button.Students__title2, 
-  button.Teacher__title2,
-  button.Teacher__title3,
-  button.Teacher__title4 {
-    font-size: 16px;
-    height: 40px;
-  }
-  
-  .open-students-modal, 
-  .open-teacher-modal {
-    width: 100%;
-    margin: 10px 0;
-  }
-  
-  /* Подменю */
-  .submenu li a {
-    width: 100%;
-    margin: 10px 0;
-  }
-  
-  /* Блоки с картинками внизу */
-  .section__item {
-    min-width: 100%;
-  }
-  
-  .section__info h3 {
-    font-size: 36px;
-  }
-  
-  .section__info p {
-    font-size: 16px;
-  }
-  
-  .section__text button {
-    font-size: 20px;
-    height: 50px;
-    width: 140px;
-  }
-}
-
-/* Горизонтальная ориентация на мобильных */
-@media (max-width: 768px) and (orientation: landscape) {
-  .section__top {
-    height: 250px;
-  }
-  
-  .Students__woman, .Teacher__man {
-    max-height: 250px;
-  }
-  
-  .Students__text, .Teacher__text {
-    max-height: 40vh;
-  }
-}
-
 /* Общие стили для блока участия */
 .participation-info {
   padding: 20px;
@@ -2390,6 +1723,384 @@ button.Teacher__title4 {
   body > div:first-child {
     margin-bottom: -5px;
   }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /* АДИЛЬ ФУТТЕР  */
+     /* ================= ФУТЕР ================= */
+.footer__ {
+  background-color: #000000;
+  color: #ffffff;
+  font-size: 16px;
+  padding-top: 40px;
+}
+
+/* Контейнер с колонками */
+.footer__row {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding: 60px 40px;
+  gap: 24px;
+}
+
+/* Каждая колонка */
+.footer__column {
+  flex: 1 1 250px;
+  max-width: 400px;
+  color: white;
+}
+
+/* Логотип */
+.logo__footer img {
+  width: 214px;
+  height: 49px;
+  margin-bottom: 20px;
+}
+
+/* Телефон */
+.footer__phone {
+  margin-top: 20px;
+  line-height: 32px;
+  font-size: 18px;
+}
+
+/* Email */
+.footer__email {
+  margin-top: 20px;
+  margin-bottom: 40px;
+  line-height: 32px;
+  font-size: 18px;
+}
+
+/* Навигация и сотрудники заголовки */
+.footer__column h4 {
+  margin-bottom: 16px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* Текст внутри колонок */
+.footer__column p {
+  margin: 4px 0;
+  line-height: 28px;
+}
+
+/* Линия-разделитель */
+.stripe {
+  border: 1px solid white;
+  margin: 0 40px;
+}
+
+/* Нижний текст © */
+.footer__bottom {
+  padding: 20px 40px;
+  font-size: 14px;
+}
+
+/* Адаптив: на узких экранах колонки в столбик */
+@media (max-width: 768px) {
+  .footer__row {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .footer__column {
+    max-width: 100%;
+  }
+
+  .stripe {
+    margin: 20px 0;
+  }
+
+  .footer__bottom {
+    text-align: center;
+  }
+}
+
+
+/* ==== ДЛЯ компов ширина 1280 ==== */
+@media (min-width: 1024px) {
+  .news__cards {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+    width: 1280px;
+  }
+
+  .first__block {
+    width: 1280px;
+    height: 400px;
+    min-width: calc((100% - 2 * 24px) / 4);
+    max-width: calc((100% - 2 * 24px) / 4);
+    flex: 0 0 auto;
+  }
+
+  .first__block img {
+    width: 250px;
+    height: 200px;
+    border-radius: 10px;
+    margin-left: 4px;
+    margin-top: 4px;
+  }
+
+  .partners__cards,
+  .footer__container,
+  .ABU__container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 5px 20px;
+    box-sizing: border-box;
+  }
+
+  .news__slider-wrapper {
+    overflow: hidden;
+    width: 100%;
+  }
+
+  .news__block_main {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 24px;
+    transition: transform 0.3s ease;
+  }
+
+  /* Кнопка открытия */
+  .more-button {
+    padding: 14px 17px;
+    background: linear-gradient(135deg, #003366, #0055aa);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 17px;
+    font-weight: 600;
+    box-shadow: 0 5px 15px rgba(0, 51, 102, 0.4);
+    transition: all 0.3s ease;
+  }
+
+
+}
+
+
+@media (max-width: 480px) {
+  /* Кнопка открытия */
+  .more-button {
+    padding: 14px 17px;
+    background: linear-gradient(135deg, #003366, #0055aa);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 17px;
+    font-weight: 600;
+    box-shadow: 0 5px 15px rgba(0, 51, 102, 0.4);
+    transition: all 0.3s ease;
+  }
+
+
+
+
+}
+
+
+
+
+.menu{
+    background-color:#000000;
+    width: auto;
+    height: 130px;
+    gap: 200px;
+    padding: 15px 15px 15px 15px;
+}
+
+.menu__logo {
+    max-width: 290px;
+    height: 90px;
+    display: block;
+    margin-right: 20px;
+}
+
+/* Большие экраны */
+@media (min-width: 1025px) {
+  .menu__logo,
+  .logo__footer img {
+    max-width: 250px;
+    height: 85px;
+  }
+}
+
+/* Планшеты и средние экраны */
+@media (max-width: 1024px) {
+  .menu__logo,
+  .logo__footer img {
+    max-width: 180px;
+    height: auto;
+  }
+}
+
+/* Маленькие экраны (телефоны) */
+@media (max-width: 768px) {
+  .menu__logo,
+  .logo__footer img {
+    max-width: 290px;
+    height: 65px;
+  }
+}
+
+/* Очень маленькие телефоны */
+@media (max-width: 480px) {
+  .menu__logo,
+  .logo__footer img {
+    max-width: 220px;
+    height: 65px;
+  }
+}
+
+.menu__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  gap: 20px;
+}
+
+.menu__logo img {
+  max-height: 60px;
+  height: auto;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+
+
+
+/* Кнопка открытия */
+.open-students-modal {
+        all: unset;
+        display: block;
+        padding: 12px 20px;
+        color: #fff;
+        font-size: 16px;
+        width: 100%;
+        cursor: pointer;
+}
+
+.open-teacher-modal {
+        all: unset;
+        display: block;
+        padding: 12px 20px;
+        color: #fff;
+        font-size: 16px;
+        width: 100%;
+        cursor: pointer;
+}
+
+
+.credit-mobility {
+  display: block;
+  padding: 12px 20px;
+  color: #fff;
+  font-size: 16px;
+  width: 100%;
+  cursor: pointer;
+}
+
+.Erasmus-CirculEC {
+  display: block;
+  padding: 12px 20px;
+  color: #fff;
+  font-size: 16px;
+  width: 100%;
+  cursor: pointer;
+}
+
+
+
+
+.has-submenu {
+  position: relative;
+}
+
+.submenu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: rgba(17, 17, 17, 0.9); /* полупрозрачный фон */
+  padding: 10px 0;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4); /* мягкая глубокая тень */
+  min-width: 220px;
+  z-index: 1000;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.has-submenu:hover .submenu {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.submenu li {
+  white-space: nowrap;
+}
+
+.submenu li a {
+  display: block;
+  padding: 12px 20px;
+  color: white;
+  font-size: 16px;
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  border-radius: 6px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  text-decoration: none;
+  margin: 0;
+}
+
+.submenu li a:hover {
+  background-color: rgba(255, 255, 255, 0.15); /* красивый полупрозрачный hover */
+}
+
+/* С 1200px до 1600px — сдвигаем влево */
+@media (min-width: 1200px) and (max-width: 1600px) {
+    .submenu {
+        left: auto;
+        right: 0;
+        transform: translateX(-30px);
+    }
+}
+
+/* Свыше 1600px — возвращаем стандартное поведение */
+@media (min-width: 1601px) {
+    .submenu {
+        left: 0;
+        right: auto;
+        transform: none;
+    }
 }
 
 
