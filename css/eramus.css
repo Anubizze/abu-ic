@@ -1737,3 +1737,12 @@ button.Teacher__title4 {
   background-color: #111;
 }
 
+@media (min-width: 1500px) {
+    .submenu {
+        position: absolute;
+        left: auto;
+        right: 0;
+        transform: translateX(-50px); /* подстрой величину сдвига */
+        z-index: 9999; /* чтобы меню точно было поверх */
+    }
+}
