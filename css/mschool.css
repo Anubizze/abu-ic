@@ -22,8 +22,8 @@ body{
     font-family:Helvetica;
 }
 
-/* no scroll vnizy */
-body {
+
+body{
     overflow-x: hidden;
     width: 100%;
 }
