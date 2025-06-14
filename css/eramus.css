@@ -1742,7 +1742,7 @@ button.Teacher__title4 {
     .submenu {
         left: auto;
         right: 0;
-        transform: translateX(-50px); /* подстрой размер смещения */
+        transform: translateX(-30px); /* подстрой размер смещения */
     }
 }
 
