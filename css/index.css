@@ -2316,6 +2316,21 @@ button.Teacher__title4 {
         cursor: pointer;
 }
 
-.submenu a:hover {
-  text-decoration: underline;
+
+/* С 1200px до 1600px — сдвигаем влево */
+@media (min-width: 1200px) and (max-width: 1600px) {
+    .submenu {
+        left: auto;
+        right: 0;
+        transform: translateX(-30px); /* подстрой размер смещения */
+    }
+}
+
+/* Свыше 1600px — возвращаем стандартное поведение */
+@media (min-width: 1601px) {
+    .submenu {
+        left: 0;
+        right: auto;
+        transform: none;
+    }
 }
