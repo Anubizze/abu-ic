@@ -1,4 +1,3 @@
-/* Адиль css */
 /*Обнуление*/More actions
 *{padding:0;margin:0;border:0;}
 *,*:before,*:after{-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;}
@@ -1181,7 +1180,7 @@ button.Teacher__title4 {
         }
 
           /* Стили для блока партнеров */
-        .partner-card {
+        .partners-section {
             max-width: 1200px;
             margin: 50px auto;
             padding: 0 20px;
@@ -1812,7 +1811,6 @@ body {
 
 
     
-    /* АДИЛЬ ФУТТЕР  */
      /* ================= ФУТЕР ================= */
 .footer__ {
   background-color: #000000;
