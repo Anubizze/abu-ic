@@ -22,6 +22,11 @@ body{
     font-family:Helvetica;
 }
 
+body {
+    overflow-x: hidden;
+    width: 100%;
+}
+
 
 .menu{
     background-color:#000000;
