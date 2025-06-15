@@ -890,8 +890,13 @@ button.Teacher__title4 {
             margin: 0;
             padding: 0;
         }
-        
-        
+
+  .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
         .section {
             margin: 60px 0;
         }
