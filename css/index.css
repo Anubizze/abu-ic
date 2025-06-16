@@ -422,8 +422,10 @@ a{
   color: #333;
   font-size: 18px;
   line-height: 1.7;
-
+  width: 100%;  
+  box-sizing: border-box;
 }
+
 
 .accordion-content{
   width: 1150px;
@@ -436,10 +438,13 @@ a{
 
 
 
-.accordion-block{
+.accordion-block {
+  width: 100%;
+  max-width: 1150px;
+  padding: 0 15px;
+  box-sizing: border-box;
   margin-bottom: 35px;
 }
-
 
 
 /* Стили для большого отдельного блока "Требования" */
@@ -486,115 +491,92 @@ a{
 .requirements-content li {
   margin-bottom: 12px;
 }
-.big-blue-button{
-    width: 1150px;
-}
 
+/* ===== АДАПТИВНОСТЬ ===== */
 @media (max-width: 1024px) {
-
-/* ================= БЛОК STUDENTS ================= */
-  .Students {
-    width: 90vw;
-    padding: 20px;
-    flex-direction: column;
-  }
-
-  .Students__row {
-    flex-direction: column;
+  .Students__woman {
+    width: 100%;
+    height: auto;
   }
 
   .Students__body {
     flex-direction: column;
-    gap: 30px;
     align-items: center;
-  }
-
-  .Students__woman {
-    width: 100%;
-    max-width: 500px;
-    height: auto;
-    border-radius: 12px;
-    object-fit: cover;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease;
-  }
-
-  .Students__woman:hover {
-    transform: scale(1.05);
   }
 
   .Students__content {
     max-width: 100%;
+    padding: 0 20px;
+  }
+
+  .accordion-content {
     width: 100%;
-    padding: 0 15px;
-  }
-
-  .Students__title {
-    font-size: 34px;
-    height: 50px;
-    margin-bottom: 25px;
-  }
-
-  button.Students__title2 {
-    font-size: 18px;
-    height: 48px;
-    margin-bottom: 25px;
-    border-radius: 8px;
-  }
-
-  .Students__text {
-    max-height: 55vh;
-    overflow-y: auto;
-    padding-right: 12px;
-    line-height: 1.5;
-    font-size: 17px;
-    color: #222;
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .Students {
-    width: 95vw;
+    padding: 30px 15px;
+  }
+
+  .Students__title {
+    font-size: 32px;
+    height: auto;
+    padding: 10px;
+  }
+
+  .Students__intro {
+    font-size: 18px;
+  }
+
+  .accordion-toggle {
+    font-size: 20px;
+    height: auto;
     padding: 15px 10px;
   }
 
+  .accordion-content {
+    font-size: 16px;
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .Students__title {
+    font-size: 26px;
+  }
+
+  .Students__intro {
+    font-size: 16px;
+  }
+
+  .accordion-content {
+    font-size: 15px;
+    padding: 15px 10px;
+  }
+
+  .accordion-toggle {
+    font-size: 16px;        /* Было 18px — стало меньше */
+    padding: 8px 10px;      /* Меньше вертикальных отступов */
+    height: 50px;           /* Явно уменьшаем высоту */
+    border-radius: 8px;     /* Можно чуть скруглить меньше */
+  }
+
   .Students__woman {
-    max-width: 100%;
-    max-height: 350px;
+    border-radius: 8px;
+  }  
+
+  .requirements-button {
+    width: 315px;          /* Занимает всю ширину родителя */
+    font-size: 16px;       /* Меньший шрифт для мобильных */
+    padding: 12px 16px;    /* Меньше отступы */
   }
 
-  .Students__title {
-    font-size: 28px;
-    height: 45px;
-  }
-
-  button.Students__title2 {
-    font-size: 16px;
-    height: 45px;
-  }
-
-  .Students__text {
-    max-height: 45vh;
-    font-size: 16px;
-  }
 }
 
-@media (max-width: 375px) {
-  .Students__title {
-    font-size: 24px;
-    height: 40px;
-  }
 
-  button.Students__title2 {
-    font-size: 14px;
-    height: 40px;
-  }
 
-  .Students__text {
-    max-height: 40vh;
-    font-size: 14px;
-  }
-}
+
 
 
 
@@ -714,153 +696,50 @@ a{
 
 
 
-
-/*Кратинкиа сверху вхожщяя инфа */
-
-
-/* ================= БЛОК TEACHER ================= */
-
-@media (max-width: 1024px) {
-  .Teacher {
-    width: 90vw;
-    padding: 20px;
-    flex-direction: column;
-  }
-
+@media (max-width: 480px) {
   .Teacher__row {
     flex-direction: column;
+    margin: 20px 10px;
   }
 
-  .Teacher__body {
-    flex-direction: column;
-    gap: 30px;
-    align-items: center;
+  .Teacher__text-overlay {
+    font-size: 16px;
+    padding: 10px 12px;
   }
 
-  .Teacher__man {
-    width: 100%;
-    max-width: 500px;
-    height: auto;
-    border-radius: 12px;
-    object-fit: cover;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease;
+  .Teacher__section-title {
+    font-size: 24px;
+    margin-bottom: 15px;
   }
 
-  .Teacher__man:hover {
-    transform: scale(1.05);
-  }
-
-  .Teacher__content {
-    max-width: 100%;
-    width: 100%;
-    padding: 0 15px;
-  }
-
-  .Teacher__title {
-    font-size: 34px;
-    height: 50px;
-    margin-bottom: 25px;
-  }
-
-  button.Teacher__title2 {
+  .DocToggleBtn {
     font-size: 18px;
-    height: 48px;
-    margin-bottom: 25px;
-    border-radius: 8px;
-  }
-
-  .Teacher__text {
-    max-height: 55vh;
-    overflow-y: auto;
-    padding-right: 12px;
-    line-height: 1.5;
-    font-size: 17px;
-    color: #222;
-  }
-  
-}
-
-@media (max-width: 600px) {
-  .Teacher {
-    width: 95vw;
-    padding: 15px 10px;
-  }
-
-  .Teacher__man {
+    padding: 10px 14px;
+    width: 100%;
     max-width: 100%;
-    max-height: 350px;
   }
 
-  .Teacher__title {
-    font-size: 28px;
-    height: 45px;
-  }
-
-  button.Teacher__title2 {
-    font-size: 16px;
-    height: 45px;
-  }
-
-  .Teacher__text {
-    max-height: 45vh;
-    font-size: 16px;
-  }
-}
-
-@media (max-width: 400px) {
-
-/* ================= ОБЩИЕ СТИЛИ МОДАЛКИ ================= */
-  .modal-content {
+  .documents-content {
+    font-size: 15px;
     padding: 15px;
-    max-width: 100%;
-    width: 100%;
-    box-sizing: border-box;
   }
 
-
-/* ================= БЛОК TEACHER ================= */
-  .Teacher {
-    width: 100%;
+  .Teacher__documents,
+  .Teacher__procedure {
+    margin: 20px 10px;
     padding: 0;
-    flex-direction: column;
   }
 
-  .Teacher__man {
-    width: 100%;
-    height: auto;
-    max-height: 250px;
-    object-fit: cover;
-  }
-
-  .Teacher__title {
-    font-size: 20px;
-    height: auto;
-    padding: 10px;
-    text-align: center;
-  }
-
-  .Teacher__text {
-    font-size: 14px;
-    max-height: 40vh;
-    overflow-y: auto;
-    padding-right: 5px;
-  }
-
-  .Teacher__content {
-    padding: 0 10px;
-    width: 100%;
-  }
-
-  button.Teacher__title2,
-  button.Teacher__title3,
-  button.Teacher__title4 {
-    font-size: 14px;
-    height: auto;
-    padding: 10px;
-    width: 100%;
+  .documents-content ol,
+  .documents-content ul {
+    margin-left: 15px;
   }
 }
+
+
+
+
+
 
 
 
@@ -2316,7 +2195,7 @@ a{
         cursor: pointer;
 }
 
-.Teachers-page {
+.Teachers-page{
         display: block;
         padding: 12px 20px;
         color: #fff;
@@ -2327,8 +2206,9 @@ a{
 
 
 .credit-mobility{
+        all: unset;
         display: block;
-        padding: 12px 20px;
+        padding-top: 3px;
         color: #fff;
         font-size: 16px;
         width: 100%;
@@ -2338,7 +2218,7 @@ a{
 
 .Erasmus-CirculEC{
         display: block;
-        padding: 12px 20px;
+
         color: #fff;
         font-size: 16px;
         width: 100%;
@@ -2365,7 +2245,11 @@ a{
 }
 
 
+
+.submenu li {
+  white-space: nowrap;
+}
 .submenu {
-  padding: 20px;
+  padding: 15px 20px;
   box-sizing: border-box;
 }
