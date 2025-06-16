@@ -19,36 +19,74 @@ document.addEventListener("DOMContentLoaded", () => {
   const nextBtn = document.getElementById("nextBtn");
 
   if (slider && prevBtn && nextBtn) {
-    const slideStep = 446 + 24; // ширина карточки + gap
+    const slideStep = 446 + 24;
+    nextBtn.addEventListener("click", () => slider.scrollBy({ left: slideStep, behavior: "smooth" }));
+    prevBtn.addEventListener("click", () => slider.scrollBy({ left: -slideStep, behavior: "smooth" }));
+  }
 
-    nextBtn.addEventListener("click", () => {
-      slider.scrollBy({ left: slideStep, behavior: "smooth" });
-    });
+  // === БУРГЕР-МЕНЮ ===
+  const burgerBtn = document.getElementById('burger-button');
+  const menuBody = document.getElementById('menu-body');
+  const menuPages = document.querySelector('.menu__pages');
+  const submenuToggles = document.querySelectorAll('.submenu-toggle');
 
-    prevBtn.addEventListener("click", () => {
-      slider.scrollBy({ left: -slideStep, behavior: "smooth" });
+  if (burgerBtn && menuBody && menuPages) {
+    burgerBtn.addEventListener('click', () => {
+      menuBody.classList.toggle('active');
+      menuPages.classList.toggle('active');
     });
   }
 
-  // === ОБЩАЯ ФУНКЦИЯ ДЛЯ МОДАЛОК ===
-  function setupModal(openBtnId, modalId, closeBtnId) {
-    const openBtn = document.getElementById(openBtnId);
+  submenuToggles.forEach(toggle => {
+    toggle.addEventListener('click', (e) => {
+      if (window.innerWidth <= 768) {
+        const submenu = toggle.nextElementSibling;
+        if (!submenu) return;
+
+        e.preventDefault();
+        document.querySelectorAll('.submenu').forEach(sub => sub.classList.remove('active'));
+        submenu.classList.add('active');
+      }
+    });
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 768) {
+      menuPages?.classList.remove('active');
+      document.querySelectorAll('.submenu.active').forEach(sub => sub.classList.remove('active'));
+    }
+  });
+
+  // === АККОРДЕОНЫ ===
+  document.querySelectorAll('.accordion-toggle').forEach(button => {
+    button.addEventListener('click', (e) => {
+      // Не обрабатывать клик по <a> внутри кнопки
+      if (e.target.tagName === 'A') return;
+
+      const content = button.nextElementSibling;
+      if (!content || !content.classList.contains('accordion-content')) return;
+
+      // Закрыть все
+      document.querySelectorAll('.accordion-content').forEach(el => {
+        if (el !== content) el.style.display = 'none';
+      });
+
+      // Переключить текущий
+      content.style.display = content.style.display === 'block' ? 'none' : 'block';
+    });
+  });
+
+  // === МОДАЛКИ ===
+  function setupModal(openId, modalId, closeId) {
+    const openBtn = document.getElementById(openId);
     const modal = document.getElementById(modalId);
-    const closeBtn = document.getElementById(closeBtnId);
+    const closeBtn = document.getElementById(closeId);
 
     if (openBtn && modal && closeBtn) {
-      openBtn.addEventListener("click", () => {
-        modal.style.display = "block";
-      });
-
-      closeBtn.addEventListener("click", () => {
-        modal.style.display = "none";
-      });
-
+      openBtn.addEventListener("click", () => modal.style.display = "block");
+      closeBtn.addEventListener("click", () => modal.style.display = "none");
       window.addEventListener("click", (e) => {
-        if (e.target === modal) {
-          modal.style.display = "none";
-        }
+        if (e.target === modal) modal.style.display = "none";
       });
     }
   }
@@ -56,113 +94,27 @@ document.addEventListener("DOMContentLoaded", () => {
   setupModal("openModalKazakhstan", "modalKazakhstan", "closeModalKazakhstan");
   setupModal("openModalSemey", "modalSemey", "closeModalSemey");
 
-
-  const burgerBtn = document.getElementById('burger-button');
-  const menuPages = document.querySelector('.menu__pages');
-  const submenuToggles = document.querySelectorAll('.submenu-toggle');
-
-  // Открытие/закрытие меню по клику на бургер
-  burgerBtn.addEventListener('click', () => {
-    menuPages.classList.toggle('active');
-  });
-
-  // Под меню
-submenuToggles.forEach(toggle => {
-  toggle.addEventListener('click', (e) => {
-    if (window.innerWidth <= 768) {
-      const submenu = toggle.nextElementSibling;
-
-      if (!submenu) return;
-
-      if (!submenu.classList.contains('active')) {
-        // Первый клик — просто открываем подменю
-        e.preventDefault();
-        document.querySelectorAll('.submenu').forEach(sub => sub.classList.remove('active'));
-        submenu.classList.add('active');
-      } else {
-        // Второй клик — даем перейти по ссылке (ничего не делаем)
-      }
-    }
-  });
-});
-
-
-  // При изменении ширины окна — сбросить меню и подменю, если ширина > 768px
-  window.addEventListener('resize', () => {
-    if (window.innerWidth > 768) {
-      menuPages.classList.remove('active');
-      document.querySelectorAll('.submenu.active').forEach(sub => sub.classList.remove('active'));
-    }
-  });
-
-
-  document.getElementById('burger-button').addEventListener('click', function() {
-  document.getElementById('menu-body').classList.toggle('active');
-});
-
-
-
-  const toggles = document.querySelectorAll('.accordion-toggle');
-
-  toggles.forEach((toggle) => {
-    toggle.addEventListener('click', () => {
-      document.querySelectorAll('.accordion-content').forEach(content => {
-        if (content !== toggle.nextElementSibling) {
-          content.style.display = 'none';
-        }
-      });
-
-      const content = toggle.nextElementSibling;
-      content.style.display = content.style.display === 'block' ? 'none' : 'block';
-    });
-  });
-
-    // Студенты
-    const studentButtons = document.querySelectorAll('.open-students-modal');
-    const studentModal = document.getElementById('studentsModal');
-
-    studentButtons.forEach(btn => {
-        btn.addEventListener('click', function () {
-            studentModal.style.display = 'block';
-        });
-    });
-
-    // Преподаватели
-    const teacherButtons = document.querySelectorAll('.open-teacher-modal');
-    const teacherModal = document.getElementById('Teacher');
-
-    teacherButtons.forEach(btn => {
-        btn.addEventListener('click', function () {
-            teacherModal.style.display = 'block';
-        });
-    });
-
-    // Закрытие по "X"
-    const closeButtons = document.querySelectorAll('.modal .close');
-    closeButtons.forEach(btn => {
-        btn.addEventListener('click', function () {
-            btn.closest('.modal').style.display = 'none';
-        });
-    });
-
-    // Закрытие по клику вне окна
-    window.addEventListener('click', function (event) {
-        if (event.target.classList.contains('modal')) {
-            event.target.style.display = 'none';
-        }
-    });
-
-
-    // === ОБРАБОТЧИКИ ДЛЯ МОДАЛОК СТРАН ===
-document.querySelectorAll('.btn-universities').forEach(button => {
+  // Университеты - динамические модалки
+  document.querySelectorAll('.btn-universities').forEach(button => {
     button.addEventListener('click', () => {
-        const country = button.getAttribute('data-country');
-        const modal = document.getElementById(`modal-${country}`);
-        if (modal) {
-            modal.style.display = "block";
-        }
+      const country = button.getAttribute('data-country');
+      const modal = document.getElementById(`modal-${country}`);
+      if (modal) modal.style.display = "block";
     });
-});
+  });
 
-});
+  // Закрытие модалок по X
+  document.querySelectorAll('.modal .close').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const modal = btn.closest('.modal');
+      if (modal) modal.style.display = 'none';
+    });
+  });
 
+  // Закрытие по фону
+  window.addEventListener('click', (e) => {
+    if (e.target.classList.contains('modal')) {
+      e.target.style.display = 'none';
+    }
+  });
+});
