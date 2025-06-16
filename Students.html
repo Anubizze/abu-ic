@@ -208,35 +208,6 @@
             </div>
             </footer>
             </div>
-            <script>
-                // Находим все кнопки-аккордеоны
-                document.querySelectorAll('.accordion-toggle').forEach(button => {
-                    button.addEventListener('click', function (e) {
-                    // Если внутри кнопки есть ссылка (например, "Положение") — не выполнять код
-                    if (e.target.tagName === 'A') return;
-
-                    // Найти следующий элемент после кнопки
-                    const content = this.nextElementSibling;
-
-                    // Проверка: если это аккордеон-контент
-                    if (content && content.classList.contains('accordion-content')) {
-                        // Переключаем отображение
-                        if (content.style.display === 'block') {
-                        content.style.display = 'none';
-                        } else {
-                        // Закрываем все остальные
-                        document.querySelectorAll('.accordion-content').forEach(el => {
-                            el.style.display = 'none';
-                        });
-
-                        // Открываем текущий
-                        content.style.display = 'block';
-                        }
-                    }
-                    });
-                });
-                </script>
-
         </div>
     </div>
 </body>
