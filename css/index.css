@@ -328,140 +328,167 @@ a{
 }
 
 
-
-/* Students */
-
-/* ================= БЛОК STUDENTS ================= */
+/* ============ БЛОК STUDENTS ============ */
 .Students {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
   background-color: #F5F5F5;
-  width: 1200px;
-  height: auto;
+  padding: 40px 20px;
 }
 
 .Students__row {
   display: flex;
-  align-items: center;
   justify-content: center;
+  max-width: 1200px;
+  width: 100%;
+  margin-bottom: 40px;
 }
 
 .Students__body {
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  gap: 40px; /* расстояние между изображением и текстом */
+  gap: 40px;
+  flex-wrap: wrap;
 }
 
 .Students__woman {
   width: 600px;
   height: 700px;
   border-radius: 10px;
+  object-fit: cover;
 }
 
 .Students__content {
+  max-width: 500px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  max-width: 500px;
+  align-items: center;
 }
 
 .Students__title {
   font-size: 40px;
   background-color: #004080;
-  height: 50px;
+  height: 60px;
   width: 100%;
-  border-radius: 5px;
+  border-radius: 8px;
   color: white;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 20px;
-  border: none;
-  cursor: pointer;
 }
-button.Students__title2 {
-  font-size: 20px;
-  background-color: #004080;
-  height: 50px;
-  width: 100%;
+
+.Students__intro {
+  font-size: 21px;
+  line-height: 1.8;
+  text-align: center;
+  color: #333;
+  background-color: #dbdbdb;
   border-radius: 5px;
+  margin-top: 15px;
+}
+
+/* ============ АККОРДЕОН ============ */
+
+
+.accordion-toggle {
+  background-color: #004080 !important; /* <-- ЗАДАЕМ СИНИЙ ФОН по умолчанию */
   color: white;
+  font-size: 24px;
+  font-weight: 600;
+  height: 70px;
+  width: 100%;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 20px;
-  border: none;
-  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-
-.Students__text {
-  max-height: 60vh;  
-  overflow-y: auto; 
-  padding-right: 10px
-
+.accordion-toggle:hover {
+  background-color: #0055aa;
 }
+
 
 .accordion-content {
   display: none;
-  margin-bottom: 20px;
-  animation: fadeIn 0.3s ease-in-out;
-}
-
-.accordion-toggle {
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  width: 100%;
-  text-align: left;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-/* Обёртка модалки */
-
-/* ================= ОБЩИЕ СТИЛИ МОДАЛКИ ================= */
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 999;
-  left: 0; top: 0;
-  width: 100%; height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
-  overflow: auto;
-  padding: 40px 20px;
-}
-
-/* Содержимое модалки */
-.modal-content {
-  background-color: #fff;
-  margin: auto;
-  padding: 30px;
+  background-color: #f0f0f0;
+  padding: 25px 30px;
   border-radius: 10px;
-  max-width: 1200px;
-  position: relative;
-}
-
-/* Кнопка закрытия */
-.close {
-  position: absolute;
-  right: 20px;
-  top: 15px;
-  font-size: 28px;
-  font-weight: bold;
   color: #333;
-  cursor: pointer;
+  font-size: 18px;
+  line-height: 1.7;
+
+}
+
+.accordion-content{
+  width: 1150px;
+  height: auto;
+}
+
+.accordion-content li {
+  padding:5px 0 ;
 }
 
 
 
+.accordion-block{
+  margin-bottom: 35px;
+}
+
+
+
+/* Стили для большого отдельного блока "Требования" */
+.requirements-block {
+  width: 100%;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.requirements-button {
+  background-color: #003366;
+  color: white;
+  font-size: 24px;
+  font-weight: 600;
+  padding: 18px 24px;
+  width: 1150px;
+  border: none;
+  border-radius: 12px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.requirements-button:hover {
+  background-color: #004080;
+}
+
+.requirements-content {
+  display: none;
+  background-color: #f4f4f4;
+  padding: 30px 35px;
+  margin-top: 20px;
+  border-radius: 12px;
+  font-size: 18px;
+  line-height: 1.8;
+  color: #333;
+}
+
+.requirements-content ul {
+  padding-left: 20px;
+  margin-top: 10px;
+}
+
+.requirements-content li {
+  margin-bottom: 12px;
+}
+.big-blue-button{
+    width: 1150px;
+}
 
 @media (max-width: 1024px) {
 
@@ -575,170 +602,123 @@ button.Students__title2 {
 /* Teacher */
 
 /* ================= БЛОК TEACHER ================= */
-.Teacher {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #F5F5F5;
-  width: 1200px;
-  height: auto;
-}
 
 .Teacher__row {
   display: flex;
-  align-items: center;
   justify-content: center;
+  margin: 40px;
 }
 
 .Teacher__body {
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  gap: 40px;
+  max-width: 960px;
+  width: 100%;
 }
 
-.Teacher__man {
-  width: 600px;
-  height: 700px;
+.Teacher__image-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.Teacher__woman {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+  height: auto;
   border-radius: 10px;
 }
 
-.Teacher__content {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  max-width: 500px;
-}
-
-.Teacher__title {
-  font-size: 40px;
-  background-color: #004080;
-  height: 50px;
+.Teacher__text-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
   width: 100%;
-  border-radius: 5px;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 20px;
-  border: none;
-  cursor: pointer;
-}
-
-button.Teacher__title2 {
+  background: rgba(0, 0, 0, 0.5); /* прозрачный черный фон */
+  color: #fff;
+  padding: 12px 16px;
   font-size: 20px;
+  box-sizing: border-box;
+  text-align: center;
+  border-radius: 0 0 10px 10px;
+}
+
+/* Общие отступы и ширина блоков */
+.Teacher__documents,
+.Teacher__procedure {
+  max-width: 960px;
+  margin: 40px auto;
+  padding: 0 15px;
+}
+
+/* Кнопки */
+.DocToggleBtn {
   background-color: #004080;
-  height: 50px;
-  width: 100%;
-  border-radius: 5px;
   color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 20px;
   border: none;
+  padding: 10px 20px;
+  font-size: 40px;
   cursor: pointer;
-}
-
-button.Teacher__title3 {
-  font-size: 15px;
-  background-color: #005011;
-  height: 50px;
-  width: 300px;
-  border-radius: 10px;
-  color: rgb(255, 255, 255);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 20px;
-  border: none;
-  cursor: pointer;
-}
-
-button.Teacher__title4 {
-  font-size: 15px;
-  background-color: #b9b9b9;
-  height: 50px;
+  border-radius: 6px;
+  margin-bottom: 15px;
+  transition: background-color 0.3s ease;
   width: 100%;
-  border-radius: 25px;
-  color: rgb(0, 0, 0);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 20px;
-  border: none;
-  cursor: pointer;
+  max-width: 960px;
 }
 
-.Teacher__text {
+.DocToggleBtn:hover {
+  background-color: #0059b3;
+}
+
+/* Контейнер с документами и порядком действий */
+.documents-content {
+  display: none;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-left: 4px solid #004080;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   font-size: 16px;
   line-height: 1.6;
 }
 
-.accordion-content {
-  display: none;
-  margin-bottom: 20px;
-  animation: fadeIn 0.3s ease-in-out;
+.documents-content.open {
+  display: block;
 }
 
-.accordion-toggle {
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  width: 100%;
-  text-align: left;
+.documents-content ol,
+.documents-content ul {
+  margin-left: 25px;
+  margin-bottom: 15px;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+.documents-content p {
+  margin: 10px 0 15px;
 }
 
-/* Модальное окно */
-
-/* ================= ОБЩИЕ СТИЛИ МОДАЛКИ ================= */
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 999;
-  left: 0; top: 0;
-  width: 100%; height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
-  overflow: auto;
-  padding: 40px 20px;
-}
-
-.modal-content {
-  background-color: #fff;
-  margin: auto;
-  padding: 30px;
-  border-radius: 10px;
-  max-width: 1200px;
-  position: relative;
-}
-
-.close {
-  position: absolute;
-  right: 20px;
-  top: 15px;
-  font-size: 28px;
+/* Ссылки */
+.documents-content a {
+  color: #004080;
   font-weight: bold;
-  color: #333;
-  cursor: pointer;
+  text-decoration: none;
+}
+
+.documents-content a:hover {
+  text-decoration: underline;
 }
 
 
+.Teacher__section-title {
+  font-size: 36px;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+
+
+
+/*Кратинкиа сверху вхожщяя инфа */
 
 
 /* ================= БЛОК TEACHER ================= */
-.Teacher__text{
-  max-height: 60vh;  
-  overflow-y: auto; 
-  padding-right: 10px
-}
-
 
 @media (max-width: 1024px) {
   .Teacher {
@@ -2327,8 +2307,7 @@ button.Teacher__title4 {
 
 
 /* Кнопка открытия */
-.open-students-modal {
-
+.Students-page {
         display: block;
         padding: 12px 20px;
         color: #fff;
@@ -2337,8 +2316,7 @@ button.Teacher__title4 {
         cursor: pointer;
 }
 
-.open-teacher-modal {
-
+.Teachers-page {
         display: block;
         padding: 12px 20px;
         color: #fff;
@@ -2349,7 +2327,6 @@ button.Teacher__title4 {
 
 
 .credit-mobility{
-        all: unset;
         display: block;
         padding: 12px 20px;
         color: #fff;
@@ -2360,7 +2337,6 @@ button.Teacher__title4 {
 
 
 .Erasmus-CirculEC{
-
         display: block;
         padding: 12px 20px;
         color: #fff;
@@ -2386,4 +2362,10 @@ button.Teacher__title4 {
         right: auto;
         transform: none;
     }
+}
+
+
+.submenu {
+  padding: 20px;
+  box-sizing: border-box;
 }
