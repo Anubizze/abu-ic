@@ -1,4 +1,4 @@
-/*Обнуление*/
+  /*Обнуление*/
 *{padding:0;margin:0;border:0;}
 *,*:before,*:after{-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;}
 :focus,:active{outline:none;}
@@ -888,17 +888,18 @@ button.Teacher__title4 {
 .submenu {
   padding: 0 10px 0 0;
 }
-.submenu li a{
-    background-color: #000000;
-    color: #fff;
-    font-size: 20px;
-
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    width: 300px;
-    margin: 20px 20px 0px 20px;
+.submenu li a {
+  background-color: #000000;
+  color: #fff;
+  font-size: 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 300px;
+  margin: 20px 20px 0px 20px;
+  padding-left: 20px; /* Добавляем отступ слева */
 }
+
 .submenu .Erasmus-CirculEC a{
   margin-bottom: 20px;
 }
@@ -1004,6 +1005,8 @@ button.Teacher__title4 {
 }
 
 .section__info p {
+  background-color: #000000a8;
+  border-radius: 10px ;
   font-size: 22px;
   line-height: 1.5;
 }
@@ -1190,7 +1193,7 @@ button.Teacher__title4 {
 }
 
 /* Кнопка открытия */
-.more-button {
+.more-button1 {
   padding: 14px 28px;
   background: linear-gradient(135deg, #003366, #0055aa);
   color: #fff;
@@ -1201,9 +1204,14 @@ button.Teacher__title4 {
   font-weight: 600;
   box-shadow: 0 5px 15px rgba(0, 51, 102, 0.4);
   transition: all 0.3s ease;
+  width: 190px;
 }
 
-.more-button:hover {
+.more-button1   {
+  color: #fff;
+}
+
+.more-button1:hover {
   background: linear-gradient(135deg, #004080, #007acc);
   transform: translateY(-2px);
 }
@@ -1455,7 +1463,7 @@ button.Teacher__title4 {
 
 .btn-universities {
   display: block;
-  margin: 10px auto 0 auto;
+  margin: 20px auto 0 auto;
   width: 250px;
   height: 45px;
   background-color: black;
@@ -1560,11 +1568,13 @@ button.Teacher__title4 {
   .first__block {
     flex: 0 0 260px;
     max-width: 90vw;
+    height: auto;
   }
 
   .btn-universities {
     font-size: 14px;
     height: 38px;
+    margin-top: 25px;
   }
 
   .country-name {
@@ -1765,6 +1775,23 @@ button.Teacher__title4 {
 .modal-content li{
   margin: 15px 0px;
 }
+.modal-content a {
+  color: black;
+  text-decoration: none; /* Убирает подчёркивание — по желанию */
+}
+
+
+
+.modal-content a:hover {
+  color: #333; /* Немного темнее при наведении — по желанию */
+  text-decoration: underline; /* При наведении можно добавить подчёркивание */
+}
+
+
+
+
+
+
 
 
 /* ================= ФУТЕР ================= */
@@ -1986,17 +2013,20 @@ button.Teacher__title4 {
 }
 
 .country-card {
-  flex: 1 1 300px;               /* растяжение карточки до 300px */
+  flex: 1 1 300px;
   max-width: 400px;
-  border: 1px solid #ddd;
+  border: 2px solid rgba(0, 0, 0, 0.1); 
   border-radius: 10px;
   padding: 16px;
-  margin-bottom: 20px;          /* отступ снизу */
+  margin-bottom: 20px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   background-color: white;
   text-align: center;
 }
 
+.country-card h3{
+  font-size: 25px;
+}
 
 .country-card a{
   color: #007acc;
@@ -2028,6 +2058,8 @@ button.Teacher__title4 {
   padding: 10px;
   margin-top: 10px;
   text-align: left;
+  max-height: 200px; /* фиксированная высота */
+  overflow-y: auto;  /* прокрутка по вертикали */
 }
 
 .hidden {
@@ -2069,7 +2101,7 @@ button.Teacher__title4 {
 
   .first__block {
     width: 1280px;
-    height: 400px;
+    height: auto;
     min-width: calc((100% - 2 * 24px) / 4);
     max-width: calc((100% - 2 * 24px) / 4);
     flex: 0 0 auto;
@@ -2145,6 +2177,15 @@ button.Teacher__title4 {
     cursor: pointer;
   }
 
+  .submenu li button{
+    all: unset;
+    display: block;
+    padding: 10px 23px;
+    color: #fff;
+    font-size: 16px;
+    width: 100%;
+    cursor: pointer;
+  }
   .submenu li a:hover,
   .submenu li button:hover {
     color: #dddddd;
@@ -2210,20 +2251,17 @@ button.Teacher__title4 {
     gap: 200px;
     padding: 15px 15px 15px 15px;
 }
-
 .menu__logo {
-    max-width: 290px;
-    height: 90px;
-    display: block;
-    margin-right: 20px;
+  width: 214px;
+  height: 49px;
+  object-fit: contain;
 }
 
-/* Большие экраны */
+/* Для больших экранов (десктопов) */
 @media (min-width: 1025px) {
-  .menu__logo,
-  .logo__footer img {
-    max-width: 250px;
-    height: 85px;
+  .menu__logo {
+    width: 257px;
+    height: 59px;
   }
 }
 
@@ -2261,21 +2299,36 @@ button.Teacher__title4 {
   flex-wrap: nowrap;
   gap: 20px;
 }
+@media (max-width: 1510px) {
+  .menu__pages a {
+    font-size: 16px; /* уменьшение размера */
 
-.menu__logo img {
-  max-height: 60px;
-  height: auto;
-  width: auto;
-  max-width: 100%;
-  object-fit: contain;
+  }
+}
+@media (max-width: 1400px) {
+  .menu__pages a {
+    font-size: 15px; /* уменьшение размера */
+
+  }
 }
 
+@media (max-width: 1345px) {
+  .menu__pages a {
+    font-size: 14px; /* уменьшение размера */
 
+  }
+}
+@media (max-width: 1290px) {
+  .menu__pages a {
+    font-size: 13px; /* уменьшение размера */
+
+  }
+}
 
 
 /* Кнопка открытия */
 .open-students-modal {
-        all: unset;
+
         display: block;
         padding: 12px 20px;
         color: #fff;
@@ -2285,7 +2338,7 @@ button.Teacher__title4 {
 }
 
 .open-teacher-modal {
-        all: unset;
+
         display: block;
         padding: 12px 20px;
         color: #fff;
@@ -2307,7 +2360,7 @@ button.Teacher__title4 {
 
 
 .Erasmus-CirculEC{
-        all: unset;
+
         display: block;
         padding: 12px 20px;
         color: #fff;
