@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/index.css">
+    <script src="js/index.js"></script>
+    <title>Alikhan Bokeikhan University</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <div class="wrapper">
+        <div class="content">
+            <div class="menu">
+                <div class="container">
+                    <div class="menu__row">
+                        <div class="logo__title">
+                        <img class="menu__logo" src="img/Logo-ABU.png" alt="ABU-logo">
+                        </div>
+
+                        <!-- БУРГЕР -->
+                        <button id="burger-button" class="burger-button" aria-label="Открыть меню">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </button>
+
+                        <div id="menu-body" class="menu__body">
+                            <div class="menu__pages">
+                                <span class="menu__item"><a href="index.html">Главная</a></span>
+                                <span class="menu__item"><a href="for_foreign_students.html">Иностранным студентам</a></span>
+                                <span class="menu__item has-submenu">
+                                <a href="Students.html" class="submenu-toggle">Академическая мобильность</a>
+                                    <ul class="submenu">
+                                        <li><a class="Students-page" href="Students.html">Студенты</a></li>
+                                        <li><a class="Teachers-page" href="Teachers.html">Преподаватели</a></li>
+                                    </ul>
+                                </span>
+                                </span>
+                                <span class="menu__item"><a href="Our-partners.html">Наши партнеры</a></span>
+                                <span class="menu__item"><a href="mschool.html">Международная школа бизнеса</a></span>
+                                <span class="menu__item has-submenu">
+                                <a href="eramus.html" class="submenu-toggle">Erasmus</a>
+                                <ul class="submenu">
+                                    <li class="credit-mobility"><a href="eramus.html" >Кредитная мобильность</a></li>
+                                    <li class="Erasmus-CirculEC"><a href="erasmus+circulen.html" >Erasmus + CirculEC</a></li>
+                                </ul>
+                                </span>
+                                <div class="language-switcher">
+                                    <button id="language-button" class="language-button" aria-label="Сменить язык">
+                                            <svg class="icon-earth" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 25 25" fill="none">
+                                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                            d="M24.8281 12.5C24.8281 19.1275 19.4556 24.5 12.8281 24.5C6.20071 24.5 0.828125 19.1275 0.828125 12.5C0.828125 5.87259 6.20071 0.5 12.8281 0.5C19.4556 0.5 24.8281 5.87259 24.8281 12.5ZM6.9519 14.5C6.87021 13.8448 6.82812 13.1773 6.82812 12.5C6.82812 11.8227 6.87022 11.1552 6.95193 10.5H3.02817C2.89699 11.1462 2.82812 11.8151 2.82812 12.5C2.82812 13.1849 2.89699 13.8537 3.02817 14.5H6.9519ZM7.33218 16.5H3.66022C4.83773 19.1951 7.16875 21.2707 10.0292 22.1031C8.78968 20.4536 7.86158 18.5568 7.33218 16.5ZM9.40789 16.5H16.2484C15.5904 18.7109 14.4009 20.6929 12.8281 22.298C11.2554 20.6929 10.0659 18.7109 9.40789 16.5ZM16.6864 14.5H8.96991C8.87648 13.8468 8.82812 13.179 8.82812 12.5C8.82812 11.821 8.87648 11.1532 8.96991 10.5H16.6864C16.7797 11.1532 16.8281 11.821 16.8281 12.5C16.8281 13.179 16.7797 13.8468 16.6864 14.5ZM18.7044 14.5C18.786 13.8448 18.8281 13.1773 18.8281 12.5C18.8281 11.8227 18.786 11.1552 18.7044 10.5H22.6281C22.7593 11.1462 22.8281 11.8151 22.8281 12.5C22.8281 13.1849 22.7593 13.8537 22.6281 14.5H18.7044ZM18.3241 16.5H21.996C20.8185 19.1951 18.4875 21.2707 15.6271 22.1031C16.8665 20.4536 17.7947 18.5568 18.3241 16.5ZM12.8281 2.70204C11.2554 4.30704 10.0659 6.28908 9.40789 8.5H16.2484C15.5904 6.28908 14.4009 4.30704 12.8281 2.70204ZM15.6271 2.89697C16.8665 4.54639 17.7947 6.44316 18.324 8.5H21.996C20.8185 5.80497 18.4875 3.72927 15.6271 2.89697ZM3.66022 8.5H7.3322C7.86161 6.44316 8.78972 4.54639 10.0292 2.89697C7.16877 3.72927 4.83773 5.80497 3.66022 8.5Z"
+                                            ill="white" />
+                                        </svg>
+                                        <span id="language-label" class="language-label">RU</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Основной обёрточный блок -->
+            <div class="Students">
+
+            <!-- 1. Блок: Картинка + заголовок + текст -->
+            <div class="Students__row">
+                <div class="Students__body">
+                    <img class="Students__woman" src="img/Students.jpg" alt="Student">
+
+                    <div class="Students__content">
+                        <h2 class="Students__title">Студенты</h2>
+                        <p class="Students__intro">
+                        Приглашаем студентов всех факультетов и специальностей нашего университета для участия в конкурсе для обучения в зарубежных вузах.<br><br>
+                        К участию в конкурсе допускаются студенты 2 и 3 курсов всех специальностей, желающие пройти обучение по своей образовательной программе в вузах дальнего и ближнего зарубежья с обучением на английском, турецком и русском языках.<br><br>
+                        Студенты могут принимать участие в конкурсе на обучение по программам академической мобильности в зарубежных вузах на общих основаниях — все расходы на участие в программе академической мобильности за счет средств обучающихся.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. Блок: Аккордеоны с требованиями и т.д. -->
+            <div class="Students__accordion">
+                <div class="requirements-block">
+                    <button class="accordion-toggle requirements-button">Требования к претендентам</button>
+                    <div class="accordion-content requirements-content">
+                        <p>
+                            Требования к претендентам:
+                        </p>
+                        <ul>
+                            <li>Максимальный балл успеваемости (GPA, средний балл выше 3,5);</li>
+                            <li>Наличие достижений в образовательной и научной деятельности (подтвержденное грамотами, сертификатами и т.д.);</li>
+                            <li>Знание английского языка не ниже «Intermediate», подтвержденное соответствующим сертификатом или результатами экзамена в отделе международного сотрудничества ABU;</li>
+                            <li>Знание турецкого языка (в случае обучения в вузах Турции);</li>
+                            <li>Знание русского языка (в случае обучения в вузах России).</li>
+                        </ul>
+                        <p>
+                            Отбор претендентов осуществляется Комиссией по отбору претендентов согласно 
+                            <strong>«Правилам направления для обучения за рубежом, в том числе в рамках академической мобильности»</strong>, 
+                            утвержденным приказом Министра образования и науки РК от 19 ноября 2008 года №613.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+
+                <!-- Перечень документов -->
+                <div class="accordion-block">
+                    <button class="accordion-toggle big-blue-button">Перечень документов</button>
+                    <div class="accordion-content styled-content">
+                        <ul>
+                            <li>Заявление обучающегося;</li>
+                            <li>Копия паспорта;</li>
+                            <li>Удостоверение личности;</li>
+                            <li>Транскрипт по итогам последней сессии;</li>
+                            <li>Рекомендательное письмо от кафедры и декана;</li>
+                            <li>Языковой сертификат (IELTS, TOEFL) или экзамен ABU;</li>
+                            <li>Копии грамот, сертификатов и публикаций (если есть);</li>
+                            <li>4 фото 3х4;</li>
+                            <li>Файловая папка (голубая, 20 страниц).</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Подробная информация -->
+                <div class="accordion-block">
+                <button class="accordion-toggle big-blue-button">Порядок действий</button>
+                    <div class="accordion-content styled-content">
+                        <ol>
+                        <li>Студент ABU пишет заявление на имя Президента ABU с просьбой направить на обучение / стажировку / практику в конкретный вуз с указанием периода обучения с визой зав. кафедрой, декана и проректора по МС. К заявлению прилагается приглашение принимающего вуза.</li>
+                        <li>ДМС направляет служебную записку на имя Президента ABU о направлении на обучение соответствующего студента в зарубежный вуз.</li>
+                        <li>Учебный отдел готовит приказ на данного студента, копия предоставляется в ДМС и деканат.</li>
+                        <li>ДМС оформляет пакет документов на данного студента по академической мобильности.</li>
+                        <li>Студент по окончании обучения/стажировки/практики в зарубежном вузе предоставляет в ДМС подписанный принимающим вузом пакет документов по академической мобильности (заявление, соглашение и транскрипт).</li>
+                        <li>Деканатом готовится информация об обучении студента в рамках академической мобильности в зарубежном вузе для размещения на сайте университета. Информация в распечатанном формате направляется ответственному за сайт ABU.</li>
+                        </ol>
+                    </div>
+                </div>
+
+                
+                <!-- Подробная информация -->
+                <div class="accordion-block">
+                    <button class="accordion-toggle big-blue-button">Подробная информация</button>
+                    <div class="accordion-content styled-content">
+                        <p>
+                            Отдел международного сотрудничества ABU<br>
+                            г. Семей, ул. Мәңгілік Ел, 11<br>
+                            Тел: +7 (777) 123-45-67<br>
+                            Email: international@abu.edu.kz
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Положение -->
+                <div class="accordion-block">
+                    <button class="accordion-toggle big-blue-button">
+                    <a href="files/Положение об академ.моб 2023.pdf" target="_blank" style="color:white; text-decoration:none;">Положение</a>
+                    </button>
+                </div>
+            </div>
+
+
+            <footer class="footer__">
+                <div class="footer__container">
+                    <div class="footer__row">
+                        <!-- Левая колонка: Логотип + Контакты -->
+                        <div class="footer__column">
+                            <div class="logo__footer">
+                                <img src="img/Logo-ABU.png" alt="Логотип">
+                            </div>
+                            <div class="address">Мангилик Ел, 11, 23 каб, Семей, 071400</div>
+                            <div class="footer__phone">+7 (7222) 36-03-63, внутр. номер 125</div>
+                            <div class="footer__email">internationaloffice@abu.edu.kz</div>
+                            <div class="schedule">понедельник – пятница, 9:00 – 18:00 <br>						
+                                                  обеденный перерыв: 13:00 – 14:00
+                            </div>
+                        </div>
+    
+                        <!-- Средняя колонка: Навигация (первая часть) -->
+                        <div class="footer__column">
+                            <h4>Навигация</h4>
+                            <a href="for_foreign_students.html"><p>Иностранным студентам</p></a>
+                            <a href="mschool.html"><p>Международная школа бизнеса</p></a>
+                            <a href="eramus.html"><p>Кредитная мобильность</p></a>
+                        </div>
+    
+                        <div class="footer__column">
+                            <br>
+                            <br>
+                            <a href="academic mobility.html"><p>Для преподавателей</p></a>
+                            <a href="academic mobility.html"><p>Для студентов</p></a>
+                            <a href="erasmus+circulen.html"><p>Erasmus + CirculEC</p></a>
+                        </div>
+    
+                        <!-- Правая колонка: Навигация (вторая часть) и сотрудники -->
+                        <div class="footer__column">
+                            <h4>Сотрудники</h4>
+                            <p>Шустова Елена Павловна, PhD, MBA – Проректор по международному сотрудничеству</p>
+                            <p>Жолдыханова Акбота Серикжановна, м.г.н. – Старший специалист ОМС</p>
+                            <p>Жук Анастасия Ивановна, м.г.н - Cпециалист</p>
+                        </div>
+                    </div>
+                <hr class="stripe">
+                <div class="footer__bottom">
+                    © 2025 Все права защищены
+                </div>
+            </div>
+            </footer>
+            </div>
+            <script>
+                // Находим все кнопки-аккордеоны
+                document.querySelectorAll('.accordion-toggle').forEach(button => {
+                    button.addEventListener('click', function (e) {
+                    // Если внутри кнопки есть ссылка (например, "Положение") — не выполнять код
+                    if (e.target.tagName === 'A') return;
+
+                    // Найти следующий элемент после кнопки
+                    const content = this.nextElementSibling;
+
+                    // Проверка: если это аккордеон-контент
+                    if (content && content.classList.contains('accordion-content')) {
+                        // Переключаем отображение
+                        if (content.style.display === 'block') {
+                        content.style.display = 'none';
+                        } else {
+                        // Закрываем все остальные
+                        document.querySelectorAll('.accordion-content').forEach(el => {
+                            el.style.display = 'none';
+                        });
+
+                        // Открываем текущий
+                        content.style.display = 'block';
+                        }
+                    }
+                    });
+                });
+                </script>
+
+        </div>
+    </div>
+</body>
+</html>
