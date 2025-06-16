@@ -1883,6 +1883,13 @@ button.Teacher__title4 {
   object-fit: contain;
 }
 
+/* Логотип */
+.logo__footer img {
+  width: 214px;
+  height: 49px;
+  margin-bottom: 20px;
+}
+
 /* Для больших экранов (десктопов) */
 @media (min-width: 1025px) {
   .menu__logo {
