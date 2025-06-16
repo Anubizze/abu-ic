@@ -1,4 +1,4 @@
-/*Обнуление*/More actions
+/*Обнуление*/More actionsMore actions
 *{padding:0;margin:0;border:0;}
 *,*:before,*:after{-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;}
 :focus,:active{outline:none;}
@@ -812,24 +812,24 @@ button.Teacher__title4 {
             box-sizing: border-box;
             font-family: Arial, sans-serif;
         }
-        
+
         body {
             background-color: #f5f5f5;
             color: #333;
             padding: 20px;
         }
-        
+
         .header {
             text-align: center;
             margin-bottom: 30px;
         }
-        
+
         .header h1 {
             color: #ffffff;
             margin-bottom: 10px;
             font-size: 24px;
         }
-        
+
         .menu-container {
             display: flex;
             justify-content: center;
@@ -838,7 +838,7 @@ button.Teacher__title4 {
             max-width: 1000px;
             margin: 0 auto;
         }
-        
+
         .menu-item {
             background-color: white;
             border-radius: 10px;
@@ -849,24 +849,24 @@ button.Teacher__title4 {
             text-align: center;
             transition: transform 0.3s ease;
         }
-        
+
         .menu-item:hover {
             transform: translateY(-5px);
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
-        
+
         .menu-item h2 {
             color: #0066cc;
             margin-bottom: 10px;
             font-size: 18px;
         }
-        
+
         @media (max-width: 900px) {
             .menu-item {
                 width: calc(50% - 20px);
             }
         }
-        
+
         @media (max-width: 500px) {
             .menu-item {
                 width: 100%;
@@ -881,7 +881,7 @@ button.Teacher__title4 {
             --light-bg: #f8f9fa;
             --card-bg: #ffffff;
         }
-        
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
@@ -890,6 +890,8 @@ button.Teacher__title4 {
             margin: 0;
             padding: 0;
         }
+        
+        
 
   .container {
             max-width: 1200px;
@@ -900,7 +902,7 @@ button.Teacher__title4 {
         .section {
             margin: 60px 0;
         }
-        
+
         .section-title {
             color: var(--primary-color);
             font-size: 2rem;
@@ -908,7 +910,7 @@ button.Teacher__title4 {
             position: relative;
             padding-bottom: 10px;
         }
-        
+
         .section-title::after {
             content: '';
             position: absolute;
@@ -918,7 +920,7 @@ button.Teacher__title4 {
             height: 4px;
             background: var(--secondary-color);
         }
-        
+
         /* Стили для блока направлений деятельности */
         .activities {
             background-color: var(--card-bg);
@@ -926,12 +928,12 @@ button.Teacher__title4 {
             padding: 30px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
         }
-        
+
         .activities-list {
             list-style-type: none;
             padding: 0;
         }
-        
+
         .activities-list li {
             position: relative;
             padding-left: 30px;
@@ -939,7 +941,7 @@ button.Teacher__title4 {
             font-size: 1.1rem;
             line-height: 1.6;
         }
-        
+
         .activities-list li::before {
             content: '•';
             color: var(--secondary-color);
@@ -948,7 +950,7 @@ button.Teacher__title4 {
             left: 0;
             top: -3px;
         }
-        
+
         /* Стили для блока сертификатов */
         .certificates {
             background-color: var(--card-bg);
@@ -956,24 +958,24 @@ button.Teacher__title4 {
             padding: 30px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
         }
-        
+
         .certificates-list {
             list-style-type: none;
             padding: 0;
         }
-        
+
         .certificates-list li {
             margin-bottom: 15px;
             padding-bottom: 15px;
             border-bottom: 1px solid #eee;
         }
-        
+
         .certificates-list li:last-child {
             margin-bottom: 0;
             padding-bottom: 0;
             border-bottom: none;
         }
-        
+
         .certificate-link {
             color: var(--primary-color);
             text-decoration: none;
@@ -982,36 +984,36 @@ button.Teacher__title4 {
             display: inline-block;
             padding: 8px 0;
         }
-        
+
         .certificate-link:hover {
             color: #003366;
             transform: translateX(5px);
         }
-        
+
         .certificate-link::after {
             content: '→';
             margin-left: 8px;
             transition: all 0.3s ease;
         }
-        
+
         .certificate-link:hover::after {
             transform: translateX(3px);
         }
-        
+
         /* Адаптивность */
         @media (max-width: 768px) {
             .section {
                 margin: 40px 0;
             }
-            
+
             .section-title {
                 font-size: 1.7rem;
             }
-            
+
             .activities, .certificates {
                 padding: 20px;
             }
-            
+
             .activities-list li {
                 font-size: 1rem;
                 padding-left: 25px;
@@ -1097,11 +1099,11 @@ button.Teacher__title4 {
         padding: 20px;
         border-left-width: 4px;
     }
-    
+
     .announcement-header {
         font-size: 1.2rem;
     }
-    
+
     .announcement-text {
         font-size: 1rem;
     }
@@ -1111,12 +1113,12 @@ button.Teacher__title4 {
     .announcement {
         border-radius: 0 8px 8px 0;
     }
-    
+
     .announcement-header {
         flex-direction: column;
         align-items: flex-start;
     }
-    
+
     .announcement-header::before {
         margin-bottom: 8px;
         margin-right: 0;
@@ -1130,14 +1132,14 @@ button.Teacher__title4 {
             gap: 30px;
             margin: 40px 0;
         }
-        
+
         .column {
             background-color: var(--card-bg);
             border-radius: 10px;
             padding: 30px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
         }
-        
+
         .section-title {
             color: var(--primary-color);
             font-size: 1.8rem;
@@ -1145,7 +1147,7 @@ button.Teacher__title4 {
             position: relative;
             padding-bottom: 10px;
         }
-        
+
         .section-title::after {
             content: '';
             position: absolute;
@@ -1155,13 +1157,13 @@ button.Teacher__title4 {
             height: 3px;
             background: var(--secondary-color);
         }
-        
+
         /* Стили для списка направлений */
         .activities-list {
             list-style-type: none;
             padding: 0;
         }
-        
+
         .activities-list li {
             position: relative;
             padding-left: 30px;
@@ -1169,7 +1171,7 @@ button.Teacher__title4 {
             font-size: 1rem;
             line-height: 1.5;
         }
-        
+
         .activities-list li::before {
             content: '•';
             color: var(--secondary-color);
@@ -1178,19 +1180,19 @@ button.Teacher__title4 {
             left: 0;
             top: -8px;
         }
-        
+
         /* Стили для списка сертификатов */
         .certificates-list {
             list-style-type: none;
             padding: 0;
         }
-        
+
         .certificates-list li {
             margin-bottom: 15px;
             padding-bottom: 15px;
             border-bottom: 1px solid #eee;
         }
-        
+
         .certificate-link {
             color: var(--primary-color);
             text-decoration: none;
@@ -1199,38 +1201,38 @@ button.Teacher__title4 {
             display: block;
             padding: 8px 0;
         }
-        
+
         .certificate-link:hover {
             color: #003366;
             padding-left: 10px;
         }
-        
+
         .certificate-link::after {
             content: '→';
             margin-left: 8px;
             transition: all 0.3s ease;
         }
-        
+
         .certificate-link:hover::after {
             margin-left: 12px;
         }
-        
+
         /* Адаптивность */
         @media (max-width: 768px) {
             .columns-container {
                 grid-template-columns: 1fr;
             }
-            
+
             .menu__pages {
                 gap: 15px;
                 flex-wrap: wrap;
                 justify-content: center;
             }
-            
+
             .section-title {
                 font-size: 1.5rem;
             }
-            
+
             .activities-list li {
                 font-size: 0.95rem;
                 padding-left: 25px;
@@ -1245,7 +1247,7 @@ button.Teacher__title4 {
             margin-top: 40px;
             justify-content: center;
         }
-        
+
         .mba-program {
             flex: 1;
             min-width: 300px;
@@ -1256,32 +1258,32 @@ button.Teacher__title4 {
             overflow: hidden;
             transition: transform 0.3s ease;
         }
-        
+
         .mba-program:hover {
             transform: translateY(-5px);
         }
-        
+
         .mba-program-image {
             width: 100%;
             height: 200px;
             object-fit: cover;
         }
-        
+
         .mba-program-content {
             padding: 20px;
         }
-        
+
         .mba-program-title {
             color: #005baa;
             font-size: 1.5rem;
             margin-bottom: 15px;
         }
-        
+
         .mba-program-description {
             color: #555;
             margin-bottom: 20px;
         }
-        
+
         .brochures {
             display: flex;
             justify-content: center;
@@ -1289,7 +1291,7 @@ button.Teacher__title4 {
             margin: 30px 0;
             flex-wrap: wrap;
         }
-        
+
         .brochure-link {
             display: block;
             width: 200px;
@@ -1297,18 +1299,18 @@ button.Teacher__title4 {
             text-decoration: none;
             transition: transform 0.3s ease;
         }
-        
+
         .brochure-link:hover {
             transform: scale(1.05);
         }
-        
+
         .brochure-image {
             width: 100%;
             height: auto;
             border-radius: 5px;
             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
         }
-        
+
         .brochure-caption {
             margin-top: 10px;
             color: #333;
@@ -1360,7 +1362,7 @@ button.Teacher__title4 {
         margin-top: 15px;
         border: 1px solid #005baa;
     }
-    
+
     .program-link:hover {
         background-color: transparent;
         color: #005baa;
@@ -1377,41 +1379,41 @@ button.Teacher__title4 {
             box-shadow: 0 3px 10px rgba(0,0,0,0.1);
             margin-left: 180px;
         }
-        
+
         .participation-title {
             color: #005baa;
             font-size: 1.5rem;
             margin-bottom: 20px;
             text-align: center;
         }
-        
+
         .participation-text {
             margin-bottom: 20px;
             line-height: 1.6;
         }
-        
+
         .contacts-list {
             list-style-type: none;
             padding-left: 0;
         }
-        
+
         .contact-item {
             margin-bottom: 15px;
             padding-left: 30px;
             position: relative;
         }
-        
+
         .contact-name {
             font-weight: 600;
             color: #333;
         }
-        
+
         .contact-position {
             font-style: italic;
             color: #666;
             font-size: 0.9em;
         }
-        
+
         .working-hours {
             margin-top: 25px;
             padding: 15px;
@@ -1540,7 +1542,7 @@ button.Teacher__title4 {
     .gallery-grid {
     grid-template-columns: 1fr;
     }
-    
+
     .competition-header h2 {
     font-size: 24px;
     }
@@ -1626,33 +1628,33 @@ button.Teacher__title4 {
   .participation-info {
     padding: 15px;
   }
-  
+
   .participation-title {
     font-size: 24px;
     margin-bottom: 15px;
   }
-  
+
   .participation-text {
     font-size: 16px;
     margin-bottom: 20px;
   }
-  
+
   .contact-item {
     padding: 15px;
   }
-  
+
   .whatsapp-link {
     font-size: 16px;
   }
-  
+
   .contact-name {
     font-size: 15px;
   }
-  
+
   .contact-position {
     font-size: 13px;
   }
-  
+
   .working-hours {
     font-size: 14px;
   }
@@ -1662,25 +1664,25 @@ button.Teacher__title4 {
   .participation-title {
     font-size: 20px;
   }
-  
+
   .participation-text {
     font-size: 15px;
   }
-  
+
   .whatsapp-link {
     font-size: 15px;
     word-break: break-all; /* Перенос длинных номеров */
   }
-  
+
   .contact-item {
     padding: 12px;
   }
-  
+
   .contact-name,
   .contact-position {
     font-size: 14px;
   }
-  
+
   .working-hours {
     font-size: 13px;
   }
@@ -1716,7 +1718,7 @@ button.Teacher__title4 {
   p, div {
     margin-bottom: -5px;
   }
-  
+
   /* Или для конкретного блока */
   body > div:first-child {
     margin-bottom: -5px;
@@ -1733,7 +1735,7 @@ button.Teacher__title4 {
             margin: 0;
             padding: 40px 0 0;
         }
-        
+
         .footer__row {
             max-width: 1200px;
             margin: 0 auto;
@@ -1743,24 +1745,24 @@ button.Teacher__title4 {
             flex-wrap: wrap;
             gap: 24px;
         }
-        
+
         .footer__column {
             flex: 1 1 250px;
             max-width: 400px;
         }
-        
+
         .stripe {
             border-top: 1px solid rgba(255, 255, 255, 0.2);
             width: 100%;
             margin: 0;
         }
-        
+
         .footer__bottom {
             padding: 20px;
             text-align: center;
             font-size: 14px;
         }
-        
+
         /* Адаптивность */
         @media (max-width: 768px) {
             .footer__row {
@@ -1768,7 +1770,7 @@ button.Teacher__title4 {
                 padding: 40px 20px;
                 gap: 30px;
             }
-            
+
             .footer__column {
                 max-width: 100%;
             }
@@ -1866,7 +1868,12 @@ button.Teacher__title4 {
     box-shadow: 0 5px 15px rgba(0, 51, 102, 0.4);
     transition: all 0.3s ease;
   }
+
+
+
+
 }
+
 
 
 
@@ -1877,24 +1884,20 @@ button.Teacher__title4 {
     gap: 200px;
     padding: 15px 15px 15px 15px;
 }
+
 .menu__logo {
-  width: 214px;
-  height: 49px;
-  object-fit: contain;
+    max-width: 290px;
+    height: 90px;
+    display: block;
+    margin-right: 20px;
 }
 
-/* Логотип */
-.logo__footer img {
-  width: 214px;
-  height: 49px;
-  margin-bottom: 20px;
-}
-
-/* Для больших экранов (десктопов) */
+/* Большие экраны */
 @media (min-width: 1025px) {
-  .menu__logo {
-    width: 257px;
-    height: 59px;
+  .menu__logo,
+  .logo__footer img {
+    max-width: 250px;
+    height: 85px;
   }
 }
 
@@ -1932,80 +1935,116 @@ button.Teacher__title4 {
   flex-wrap: nowrap;
   gap: 20px;
 }
-@media (max-width: 1510px) {
-  .menu__pages a {
-    font-size: 16px; /* уменьшение размера */
 
-  }
-}
-@media (max-width: 1400px) {
-  .menu__pages a {
-    font-size: 15px; /* уменьшение размера */
-
-  }
+.menu__logo img {
+  max-height: 60px;
+  height: auto;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
 }
 
-@media (max-width: 1345px) {
-  .menu__pages a {
-    font-size: 14px; /* уменьшение размера */
 
-  }
-}
-@media (max-width: 1290px) {
-  .menu__pages a {
-    font-size: 13px; /* уменьшение размера */
-
-  }
-}
 
 
 /* Кнопка открытия */
-.Students-page {
-        display: block;
-        padding: 12px 20px;
-        color: #fff;
-        font-size: 16px;
-        width: 100%;
-        cursor: pointer;
-}
-
-.Teachers-page{
-        display: block;
-        padding: 12px 20px;
-        color: #fff;
-        font-size: 16px;
-        width: 100%;
-        cursor: pointer;
-}
-
-
-.credit-mobility{
+.open-students-modal {
         all: unset;
         display: block;
-        padding-top: 3px;
+        padding: 12px 20px;
         color: #fff;
         font-size: 16px;
         width: 100%;
         cursor: pointer;
 }
 
-
-.Erasmus-CirculEC{
+.open-teacher-modal {
+        all: unset;
         display: block;
-
+        padding: 12px 20px;
         color: #fff;
         font-size: 16px;
         width: 100%;
         cursor: pointer;
 }
 
+
+.credit-mobility {
+  display: block;
+  padding: 12px 20px;
+  color: #fff;
+  font-size: 16px;
+  width: 100%;
+  cursor: pointer;
+}
+
+.Erasmus-CirculEC {
+  display: block;
+  padding: 12px 20px;
+  color: #fff;
+  font-size: 16px;
+  width: 100%;
+  cursor: pointer;
+}
+
+
+
+
+.has-submenu {
+  position: relative;
+}
+
+.submenu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: rgba(17, 17, 17, 0.9); /* полупрозрачный фон */
+  padding: 10px 0;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4); /* мягкая глубокая тень */
+  min-width: 220px;
+  z-index: 1000;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.has-submenu:hover .submenu {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.submenu li {
+  white-space: nowrap;
+}
+
+.submenu li a {
+  display: block;
+  padding: 12px 20px;
+  color: white;
+  font-size: 16px;
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  border-radius: 6px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  text-decoration: none;
+  margin: 0;
+}
+
+.submenu li a:hover {
+  background-color: rgba(255, 255, 255, 0.15); /* красивый полупрозрачный hover */
+}
 
 /* С 1200px до 1600px — сдвигаем влево */
 @media (min-width: 1200px) and (max-width: 1600px) {
     .submenu {
         left: auto;
         right: 0;
-        transform: translateX(-30px); /* подстрой размер смещения */
+        transform: translateX(-30px);
     }
 }
 
@@ -2014,17 +2053,6 @@ button.Teacher__title4 {
     .submenu {
         left: 0;
         right: auto;
-        transform: none;
+        transform: none;More actions
     }
 }
-
-
-
-.submenu li {
-  white-space: nowrap;
-}
-.submenu {
-  padding: 15px 20px;
-  box-sizing: border-box;
-}
-
