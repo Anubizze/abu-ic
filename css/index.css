@@ -717,6 +717,12 @@ a{
   overflow: hidden;
 }
 
+@media (max-width: 1500px) {
+  .section__top {
+    height: 715px; /* фиксируем если на 1500+ надо именно так */
+  }
+}
+
 .section__top img{
     filter: brightness(0.7);
 }
@@ -2276,9 +2282,16 @@ a{
   cursor: pointer;
   transition: color 0.3s ease;
 }
-@media (max-width: 1500px) {
-  .section__top {
-    height: 715px; /* фиксируем если на 1500+ надо именно так */
-  }
+.section__top {
+  position: relative;
+  height: 824px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  color: white;
+  font-size: 36px;
+  line-height: 56px;
+  overflow: hidden;
 }
+
 
