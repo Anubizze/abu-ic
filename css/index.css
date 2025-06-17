@@ -797,11 +797,14 @@ a{
 }
 
 .section__info p {
-  background-color: #000000a8;
-  border-radius: 10px ;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0)); 
+  border-radius: 10px;
   font-size: 22px;
   line-height: 1.5;
+  padding: 10px; 
+  color: white; 
 }
+
 
 .section__text button {
   margin-top: 60px;
@@ -857,7 +860,7 @@ a{
   }
 
   .section__text {
-    flex-direction: column;
+
     align-items: flex-start;
     gap: 10px;
     bottom: 20px;
@@ -867,7 +870,7 @@ a{
     font-size: 20px;
     height: 60px;
     width: 150px;
-    margin-top: 20px;
+    margin-top: 70px;
   }
 }
 
@@ -984,29 +987,6 @@ a{
   font-family: 'Rubik', sans-serif;
 }
 
-/* Кнопка открытия */
-.more-button1 {
-  padding: 14px 28px;
-  background: linear-gradient(135deg, #003366, #0055aa);
-  color: #fff;
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
-  font-size: 17px;
-  font-weight: 600;
-  box-shadow: 0 5px 15px rgba(0, 51, 102, 0.4);
-  transition: all 0.3s ease;
-  width: 190px;
-}
-
-.more-button1   {
-  color: #fff;
-}
-
-.more-button1:hover {
-  background: linear-gradient(135deg, #004080, #007acc);
-  transform: translateY(-2px);
-}
 
 /* Модалка */
 .modal {
@@ -1142,7 +1122,7 @@ a{
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  margin: 60px 40px;
+  margin: 31px 40px 0px 40px;
   gap: 24px;
 }
 
@@ -1163,7 +1143,7 @@ a{
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  margin: 0px 40px 31px 40px;
+  margin: 0px 40px;
   padding-top: 42px;
 }
 
@@ -1178,7 +1158,7 @@ a{
 
 .news-partners__block {
   max-width: 1860px;
-  height: 665px;
+  height: auto;
   margin: 0 auto;
 }
 
@@ -1387,8 +1367,6 @@ a{
 .ABU__brochure {
     background-color: #E9EAEF;
     width: auto;
-    height: 120px;
-    padding-top: 40px;
 }
 
 .ABU__brochure__body {
@@ -1493,6 +1471,28 @@ a{
 
 
 
+/* Страны модакли */
+.modal-content h3{
+  font-size:40px;
+}
+.modal-content ul{
+  font-size: 30px;
+
+}
+.modal-content li{
+  margin: 15px 0px;
+}
+.modal-content a {
+  color: black;
+  text-decoration: none; /* Убирает подчёркивание — по желанию */
+}
+
+
+
+.modal-content a:hover {
+  color: #333; /* Немного темнее при наведении — по желанию */
+  text-decoration: underline; /* При наведении можно добавить подчёркивание */
+}
 
 
 /* ================= ОБЩИЕ СТИЛИ МОДАЛКИ ================= */
@@ -1555,43 +1555,15 @@ a{
 }
 
 
-
-/* Страны модакли */
-.modal-content h3{
-  font-size:40px;
-}
-.modal-content ul{
-  font-size: 30px;
-
-}
-.modal-content li{
-  margin: 15px 0px;
-}
-.modal-content a {
-  color: black;
-  text-decoration: none; /* Убирает подчёркивание — по желанию */
-}
-
-
-
-.modal-content a:hover {
-  color: #333; /* Немного темнее при наведении — по желанию */
-  text-decoration: underline; /* При наведении можно добавить подчёркивание */
-}
-
-
-
-
-
-
-
-
 /* ================= ФУТЕР ================= */
 .footer__ {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
   background-color: #000000;
   color: #ffffff;
   font-size: 16px;
-  padding-top: 40px;
+  margin-top: 56px;
 }
 
 /* Контейнер с колонками */
@@ -1599,7 +1571,7 @@ a{
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
-  padding: 60px 40px;
+  padding: 56px 40px;
   gap: 24px;
 }
 
@@ -1907,12 +1879,23 @@ a{
     margin-top: 4px;
   }
 
-  .partners__cards,
-  .footer__container,
+  .partners__cards{
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0px 20px;
+    box-sizing: border-box;
+  }
+  .footer__container{
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0px 20px;
+    box-sizing: border-box;
+    margin: 40px;
+  }
   .ABU__container {
     max-width: 1280px;
     margin: 0 auto;
-    padding: 5px 20px;
+    padding: 40px 20px 0 20px;
     box-sizing: border-box;
   }
 
@@ -2226,4 +2209,46 @@ a{
         right: auto;
         transform: none;
     }
+}
+
+
+/* Кнопка открытия */
+.more-button1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  padding: 14px 28px;
+  background: linear-gradient(135deg, #003366, #0055aa);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 17px;
+  font-weight: 600;
+  box-shadow: 0 5px 15px rgba(0, 51, 102, 0.4);
+  transition: all 0.3s ease;
+  width: 190px;
+}
+
+
+.modal-content a.more-button1 {
+  color: rgb(255, 255, 255);
+}
+
+.modal-content a.more-button1:hover {
+  color: rgb(255, 255, 255);
+}
+
+
+/* Кнопка закрытия */
+.close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 32px;
+  color: #000000;
+  cursor: pointer;
+  transition: color 0.3s ease;
 }
