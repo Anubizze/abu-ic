@@ -1662,8 +1662,7 @@ button.Teacher__title4 {
 
 
 /* Кнопка открытия */
-.open-students-modal {
-        all: unset;
+.Students-page {
         display: block;
         padding: 12px 20px;
         color: #fff;
@@ -1672,8 +1671,7 @@ button.Teacher__title4 {
         cursor: pointer;
 }
 
-.open-teacher-modal {
-        all: unset;
+.Teachers-page{
         display: block;
         padding: 12px 20px;
         color: #fff;
@@ -1683,20 +1681,23 @@ button.Teacher__title4 {
 }
 
 
-.credit-mobility {
-  display: block;
-  color: #fff;
-  font-size: 16px;
-  width: 100%;
-  cursor: pointer;
+.credit-mobility{
+        all: unset;
+        display: block;
+        padding-top: 3px;
+        color: #fff;
+        font-size: 16px;
+        width: 100%;
+        cursor: pointer;
 }
 
-.Erasmus-CirculEC {
-  display: block;
-  color: #fff;
-  font-size: 16px;
-  width: 100%;
-  cursor: pointer;
+
+.Erasmus-CirculEC{
+        display: block;
+        color: #fff;
+        font-size: 16px;
+        width: 100%;
+        cursor: pointer;
 }
 
 
@@ -1769,3 +1770,10 @@ button.Teacher__title4 {
     }
 }
 
+.submenu li {
+  white-space: nowrap;
+}
+.submenu {
+  padding: 15px 20px;
+  box-sizing: border-box;
+}
