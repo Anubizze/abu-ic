@@ -1777,3 +1777,25 @@ button.Teacher__title4 {
   padding: 15px 20px;
   box-sizing: border-box;
 }
+
+.erasmus-content {
+    display: flex;
+    align-items: stretch;
+    /* Можно добавить фиксированную или минимальную высоту, если требуется */
+    /* min-height: 220px; */
+}
+
+.erasmus-logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* При необходимости задайте фиксированную ширину */
+    /* width: 150px; */
+}
+
+.erasmus-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+}
