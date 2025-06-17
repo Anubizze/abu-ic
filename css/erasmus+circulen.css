@@ -1991,80 +1991,6 @@ body {
 
 
 
-/* Кнопка открытия */
-.Students-page {
-        display: block;
-        padding: 12px 20px;
-        color: #fff;
-        font-size: 16px;
-        width: 100%;
-        cursor: pointer;
-}
-
-.Teachers-page{
-        display: block;
-        padding: 12px 20px;
-        color: #fff;
-        font-size: 16px;
-        width: 100%;
-        cursor: pointer;
-}
-
-
-.credit-mobility{
-        all: unset;
-        display: block;
-        padding-top: 3px;
-        color: #fff;
-        font-size: 16px;
-        width: 100%;
-        cursor: pointer;
-}
-
-
-.Erasmus-CirculEC{
-        display: block;
-
-        color: #fff;
-        font-size: 16px;
-        width: 100%;
-        cursor: pointer;
-}
-
-
-/* С 1200px до 1600px — сдвигаем влево */
-@media (min-width: 1200px) and (max-width: 1600px) {
-    .submenu {
-        left: auto;
-        right: 0;
-        transform: translateX(-30px); /* подстрой размер смещения */
-    }
-}
-
-/* Свыше 1600px — возвращаем стандартное поведение */
-@media (min-width: 1601px) {
-    .submenu {
-        left: 0;
-        right: auto;
-        transform: none;
-    }
-}
-
-
-
-.submenu li {
-  white-space: nowrap;
-}
-.submenu {
-  padding: 15px 20px;
-  box-sizing: border-box;
-}
-/* Логотип */
-.logo__footer img {
-  width: 214px;
-  height: 49px;
-  margin-bottom: 20px;
-}
 .menu{
     background-color:#000000;
     width: auto;
@@ -2072,23 +1998,27 @@ body {
     gap: 200px;
     padding: 15px 15px 15px 15px;
 }
+
 .menu__logo {
-  width: 214px;
-  height: 49px;
-  object-fit: contain;
+    max-width: 290px;
+    height: 90px;
+    display: block;
+    margin-right: 20px;
 }
 
-/* Для больших экранов (десктопов) */
+/* Большие экраны */
 @media (min-width: 1025px) {
-  .menu__logo {
-    width: 257px;
-    height: 59px;
+  .menu__logo,
+  .logo__footer img {
+    max-width: 250px;
+    height: 85px;
   }
 }
 
 /* Планшеты и средние экраны */
 @media (max-width: 1024px) {
-  .menu__logo{
+  .menu__logo,
+  .logo__footer img {
     max-width: 180px;
     height: auto;
   }
@@ -2119,50 +2049,124 @@ body {
   flex-wrap: nowrap;
   gap: 20px;
 }
-@media (max-width: 1510px) {
-  .menu__pages a {
-    font-size: 16px; /* уменьшение размера */
 
-  }
-}
-@media (max-width: 1400px) {
-  .menu__pages a {
-    font-size: 15px; /* уменьшение размера */
-
-  }
+.menu__logo img {
+  max-height: 60px;
+  height: auto;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
 }
 
-@media (max-width: 1345px) {
-  .menu__pages a {
-    font-size: 14px; /* уменьшение размера */
 
-  }
-}
-@media (max-width: 1290px) {
-  .menu__pages a {
-    font-size: 13px; /* уменьшение размера */
 
-  }
+
+/* Кнопка открытия */
+.open-students-modal {
+        all: unset;
+        display: block;
+        padding: 12px 20px;
+        color: #fff;
+        font-size: 16px;
+        width: 100%;
+        cursor: pointer;
 }
-.submenu {
-  padding: 0 10px 0 0;
+
+.open-teacher-modal {
+        all: unset;
+        display: block;
+        padding: 12px 20px;
+        color: #fff;
+        font-size: 16px;
+        width: 100%;
+        cursor: pointer;
 }
-.submenu li a {
-  background-color: #000000;
+
+
+.credit-mobility {
+  display: block;
+  padding: 12px 20px;
   color: #fff;
-  font-size: 20px;
-  border: none;
-  border-radius: 8px;
+  font-size: 16px;
+  width: 100%;
   cursor: pointer;
-  width: 300px;
-  margin: 20px 20px 0px 20px;
-  padding-left: 20px; /* Добавляем отступ слева */
 }
 
-.submenu .Erasmus-CirculEC a{
-  margin-bottom: 20px;
+.Erasmus-CirculEC {
+  display: block;
+  padding: 12px 20px;
+  color: #fff;
+  font-size: 16px;
+  width: 100%;
+  cursor: pointer;
+}
+
+
+
+
+.has-submenu {
+  position: relative;
+}
+
+.submenu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: rgba(17, 17, 17, 0.9); /* полупрозрачный фон */
+  padding: 10px 0;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4); /* мягкая глубокая тень */
+  min-width: 220px;
+  z-index: 1000;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.has-submenu:hover .submenu {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.submenu li {
+  white-space: nowrap;
+}
+
+.submenu li a {
+  display: block;
+  padding: 12px 20px;
+  color: white;
+  font-size: 16px;
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  border-radius: 6px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  text-decoration: none;
+  margin: 0;
 }
 
 .submenu li a:hover {
-  color: #ffffff;             
+  background-color: rgba(255, 255, 255, 0.15); /* красивый полупрозрачный hover */
+}
+
+/* С 1200px до 1600px — сдвигаем влево */
+@media (min-width: 1200px) and (max-width: 1600px) {
+    .submenu {
+        left: auto;
+        right: 0;
+        transform: translateX(-30px);
+    }
+}
+
+/* Свыше 1600px — возвращаем стандартное поведение */
+@media (min-width: 1601px) {
+    .submenu {
+        left: 0;
+        right: auto;
+        transform: none;
+    }
 }
