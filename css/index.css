@@ -2276,3 +2276,8 @@ a{
   cursor: pointer;
   transition: color 0.3s ease;
 }
+@media (min-width: 1500px) {
+  .section__top {
+    height: 800px; /* фиксируем если на 1500+ надо именно так */
+  }
+}
