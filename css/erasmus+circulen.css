@@ -1983,81 +1983,12 @@ body {
     box-shadow: 0 5px 15px rgba(0, 51, 102, 0.4);
     transition: all 0.3s ease;
   }
-
-
-
-
 }
 
 
 
 
-.menu{
-    background-color:#000000;
-    width: auto;
-    height: 130px;
-    gap: 200px;
-    padding: 15px 15px 15px 15px;
-}
 
-.menu__logo {
-    max-width: 290px;
-    height: 90px;
-    display: block;
-    margin-right: 20px;
-}
-
-/* Большие экраны */
-@media (min-width: 1025px) {
-  .menu__logo,
-  .logo__footer img {
-    max-width: 250px;
-    height: 85px;
-  }
-}
-
-/* Планшеты и средние экраны */
-@media (max-width: 1024px) {
-  .menu__logo,
-  .logo__footer img {
-    max-width: 180px;
-    height: auto;
-  }
-}
-
-/* Маленькие экраны (телефоны) */
-@media (max-width: 768px) {
-  .menu__logo,
-  .logo__footer img {
-    max-width: 290px;
-    height: 65px;
-  }
-}
-
-/* Очень маленькие телефоны */
-@media (max-width: 480px) {
-  .menu__logo,
-  .logo__footer img {
-    max-width: 220px;
-    height: 65px;
-  }
-}
-
-.menu__row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: nowrap;
-  gap: 20px;
-}
-
-.menu__logo img {
-  max-height: 60px;
-  height: auto;
-  width: auto;
-  max-width: 100%;
-  object-fit: contain;
-}
 
 
 
@@ -2174,3 +2105,81 @@ body {
 
 
 ~
+.menu{
+    background-color:#000000;
+    width: auto;
+    height: 130px;
+    gap: 200px;
+    padding: 15px 15px 15px 15px;
+}
+.menu__logo , .logo__footer img{
+  width: 214px;
+  height: 49px;
+  object-fit: contain;
+}
+
+/* Для больших экранов (десктопов) */
+@media (min-width: 1025px) {
+  .menu__logo {
+    width: 257px;
+    height: 59px;
+  }
+}
+
+/* Планшеты и средние экраны */
+@media (max-width: 1024px) {
+  .menu__logo{
+    max-width: 180px;
+    height: auto;
+  }
+}
+
+/* Маленькие экраны (телефоны) */
+@media (max-width: 768px) {
+  .menu__logo{
+    max-width: 290px;
+    height: 65px;
+  }
+}
+
+/* Очень маленькие телефоны */
+@media (max-width: 480px) {
+  .menu__logo,
+  .logo__footer img {
+    max-width: 220px;
+    height: 65px;
+  }
+}
+
+.menu__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  gap: 20px;
+}
+@media (max-width: 1510px) {
+  .menu__pages a {
+    font-size: 16px; /* уменьшение размера */
+
+  }
+}
+@media (max-width: 1400px) {
+  .menu__pages a {
+    font-size: 15px; /* уменьшение размера */
+
+  }
+}
+
+@media (max-width: 1345px) {
+  .menu__pages a {
+    font-size: 14px; /* уменьшение размера */
+
+  }
+}
+@media (max-width: 1290px) {
+  .menu__pages a {
+    font-size: 13px; /* уменьшение размера */
+
+  }
+}
