@@ -1,8 +1,9 @@
+
 /*Обнуление*/More actions
 *{padding:0;margin:0;border:0;}
 *,*:before,*:after{-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;}
 :focus,:active{outline:none;}
-a:focus,a:active{outline:none;}
+a:focus,a:active{outline:none;}More actions
 nav,footer,header,aside{display:block;}
 html,body{height:100%;width:100%;font-size:100%;line-height:1;font-size:14px;-ms-text-size-adjust:100%;-moz-text-size-adjust:100%;-webkit-text-size-adjust:100%;}
 input,button,textarea{font-family:inherit;}
@@ -813,24 +814,24 @@ button.Teacher__title4 {
             box-sizing: border-box;
             font-family: Arial, sans-serif;
         }
-        
+
         body {
             background-color: #f5f5f5;
             color: #333;
             padding: 20px;
         }
-        
+
         .header {
             text-align: center;
             margin-bottom: 30px;
         }
-        
+
         .header h1 {
             color: #ffffff;
             margin-bottom: 10px;
             font-size: 24px;
         }
-        
+
         .menu-container {
             display: flex;
             justify-content: center;
@@ -839,7 +840,7 @@ button.Teacher__title4 {
             max-width: 1000px;
             margin: 0 auto;
         }
-        
+
         .menu-item {
             background-color: white;
             border-radius: 10px;
@@ -850,24 +851,24 @@ button.Teacher__title4 {
             text-align: center;
             transition: transform 0.3s ease;
         }
-        
+
         .menu-item:hover {
             transform: translateY(-5px);
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
-        
+
         .menu-item h2 {
             color: #0066cc;
             margin-bottom: 10px;
             font-size: 18px;
         }
-        
+
         @media (max-width: 900px) {
             .menu-item {
                 width: calc(50% - 20px);
             }
         }
-        
+
         @media (max-width: 500px) {
             .menu-item {
                 width: 100%;
@@ -880,14 +881,14 @@ button.Teacher__title4 {
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
+
         body {
             background-color: #f8f9fa;
             color: #333;
             padding: 30px;
             line-height: 1.6;
         }
-        
+
         .header {
             text-align: center;
             margin-bottom: 40px;
@@ -897,13 +898,13 @@ button.Teacher__title4 {
             border-radius: 10px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
-        
+
         .header h1 {
             font-size: 28px;
             font-weight: 600;
             margin-bottom: 10px;
         }
-        
+
         .menu-container {
             display: flex;
             justify-content: center;
@@ -912,7 +913,7 @@ button.Teacher__title4 {
             max-width: 1200px;
             margin: 0 auto;
         }
-        
+
         .menu-item {
             background-color: white;
             border-radius: 12px;
@@ -923,12 +924,12 @@ button.Teacher__title4 {
             transition: all 0.3s ease;
             border-top: 5px solid #0066cc;
         }
-        
+
         .menu-item:hover {
             transform: translateY(-8px);
             box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
         }
-        
+
         .menu-item h2 {
             color: #0066cc;
             margin-bottom: 20px;
@@ -937,7 +938,7 @@ button.Teacher__title4 {
             position: relative;
             padding-bottom: 10px;
         }
-        
+
         .menu-item h2::after {
             content: '';
             position: absolute;
@@ -947,22 +948,22 @@ button.Teacher__title4 {
             height: 3px;
             background-color: #0066cc;
         }
-        
+
         .menu-item p, .menu-item ul {
             margin-bottom: 15px;
             font-size: 16px;
             color: #555;
         }
-        
+
         .menu-item ul {
             padding-left: 20px;
         }
-        
+
         .menu-item li {
             margin-bottom: 8px;
             position: relative;
         }
-        
+
         .menu-item li::before {
             content: '•';
             color: #0066cc;
@@ -971,27 +972,27 @@ button.Teacher__title4 {
             width: 1em;
             margin-left: -1em;
         }
-        
+
         .highlight {
             font-weight: 600;
             color: #0066cc;
         }
-        
+
         @media (max-width: 1100px) {
             .menu-item {
                 width: calc(50% - 30px);
             }
         }
-        
+
         @media (max-width: 600px) {
             .menu-item {
                 width: 100%;
             }
-            
+
             body {
                 padding: 15px;
             }
-            
+
             .header h1 {
                 font-size: 22px;
             }
@@ -1004,14 +1005,14 @@ button.Teacher__title4 {
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
+
         body {
             background-color: #f8f9fa;
             color: #333;
             padding: 30px;
             line-height: 1.6;
         }
-        
+
         .header {
             text-align: center;
             margin-bottom: 40px;
@@ -1021,13 +1022,13 @@ button.Teacher__title4 {
             border-radius: 10px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
-        
+
         .header h1 {
             font-size: 28px;
             font-weight: 600;
             margin-bottom: 10px;
         }
-        
+
         .menu-container {
             display: flex;
             justify-content: center;
@@ -1036,7 +1037,7 @@ button.Teacher__title4 {
             max-width: 1200px;
             margin: 0 auto 50px;
         }
-        
+
         .menu-item {
             background-color: white;
             border-radius: 12px;
@@ -1047,12 +1048,12 @@ button.Teacher__title4 {
             transition: all 0.3s ease;
             border-top: 5px solid #0066cc;
         }
-        
+
         .menu-item:hover {
             transform: translateY(-8px);
             box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
         }
-        
+
         .menu-item h2 {
             color: #0066cc;
             margin-bottom: 20px;
@@ -1061,7 +1062,7 @@ button.Teacher__title4 {
             position: relative;
             padding-bottom: 10px;
         }
-        
+
         .menu-item h2::after {
             content: '';
             position: absolute;
@@ -1071,22 +1072,22 @@ button.Teacher__title4 {
             height: 3px;
             background-color: #0066cc;
         }
-        
+
         .menu-item p, .menu-item ul {
             margin-bottom: 15px;
             font-size: 16px;
             color: #555;
         }
-        
+
         .menu-item ul {
             padding-left: 20px;
         }
-        
+
         .menu-item li {
             margin-bottom: 8px;
             position: relative;
         }
-        
+
         .menu-item li::before {
             content: '•';
             color: #0066cc;
@@ -1095,12 +1096,12 @@ button.Teacher__title4 {
             width: 1em;
             margin-left: -1em;
         }
-        
+
         .highlight {
             font-weight: 600;
             color: #0066cc;
         }
-        
+
         /* Стили для нижних колонок с партнерами */
         .partners-container {
             display: flex;
@@ -1114,24 +1115,24 @@ button.Teacher__title4 {
             border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
         }
-        
+
         .partner-item {
             text-align: center;
             width: calc(50% - 40px);
             min-width: 300px;
         }
-        
+
         .partner-item img {
             max-width: 200px;
             height: auto;
             margin-bottom: 15px;
             transition: transform 0.3s ease;
         }
-        
+
         .partner-item:hover img {
             transform: scale(1.05);
         }
-        
+
         .partner-item a {
             display: block;
             color: #0066cc;
@@ -1141,39 +1142,39 @@ button.Teacher__title4 {
             margin-top: 10px;
             transition: color 0.3s ease;
         }
-        
+
         .partner-item a:hover {
             color: #004d99;
             text-decoration: underline;
         }
-        
+
         .co-funded {
             font-style: italic;
             color: #666;
             margin-top: 5px;
             font-size: 14px;
         }
-        
+
         @media (max-width: 1100px) {
             .menu-item {
                 width: calc(50% - 30px);
             }
         }
-        
+
         @media (max-width: 600px) {
             .menu-item, .partner-item {
                 width: 100%;
                 min-width: auto;
             }
-            
+
             body {
                 padding: 15px;
             }
-            
+
             .header h1 {
                 font-size: 22px;
             }
-            
+
             .partners-container {
                 padding: 20px;
             }
@@ -1185,7 +1186,7 @@ button.Teacher__title4 {
             margin: 50px auto;
             padding: 0 20px;
         }
-        
+
         .partners-section h2 {
             text-align: center;
             font-size: 32px;
@@ -1193,7 +1194,7 @@ button.Teacher__title4 {
             margin-bottom: 40px;
             position: relative;
         }
-        
+
         .partners-section h2::after {
             content: '';
             position: absolute;
@@ -1204,14 +1205,14 @@ button.Teacher__title4 {
             height: 3px;
             background-color: #0066cc;
         }
-        
+
         .partners-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             gap: 30px;
             margin-bottom: 50px;
         }
-        
+
         .partner-card {
             background-color: white;
             border-radius: 8px;
@@ -1225,37 +1226,37 @@ button.Teacher__title4 {
             align-items: center;
             justify-content: space-between;
         }
-        
+
         .partner-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
         }
-        
+
         .partner-logo {
             max-width: 150px;
             max-height: 80px;
             margin-bottom: 15px;
             object-fit: contain;
         }
-        
+
         .partner-name {
             font-weight: 600;
             color: #333;
             margin-bottom: 10px;
             flex-grow: 1;
         }
-        
+
         .partner-link {
             color: #0066cc;
             text-decoration: none;
             font-size: 14px;
             word-break: break-all;
         }
-        
+
         .partner-link:hover {
             text-decoration: underline;
         }
-        
+
 
               /* Стили для секции новостей */
         .news-section {
@@ -1263,7 +1264,7 @@ button.Teacher__title4 {
             margin: 50px auto;
             padding: 0 20px;
         }
-        
+
         .news-section h2 {
             text-align: center;
             font-size: 32px;
@@ -1271,7 +1272,7 @@ button.Teacher__title4 {
             margin-bottom: 40px;
             position: relative;
         }
-        
+
         .news-section h2::after {
             content: '';
             position: absolute;
@@ -1282,14 +1283,14 @@ button.Teacher__title4 {
             height: 3px;
             background-color: #0066cc;
         }
-        
+
         .news-container {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
             gap: 30px;
             margin-bottom: 50px;
         }
-        
+
         .news-card {
             background-color: white;
             border-radius: 8px;
@@ -1297,59 +1298,59 @@ button.Teacher__title4 {
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        
+
         .news-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
         }
-        
+
         .news-image {
             width: 100%;
             height: 200px;
             object-fit: cover;
             border-bottom: 1px solid #eee;
         }
-        
+
         .news-content {
             padding: 20px;
         }
-        
+
         .news-title {
             font-size: 20px;
             font-weight: 600;
             color: #0066cc;
             margin-bottom: 15px;
         }
-        
+
         .news-date {
             color: #666;
             font-size: 14px;
             margin-bottom: 15px;
             display: block;
         }
-        
+
         .news-text {
             color: #555;
             line-height: 1.6;
             margin-bottom: 15px;
         }
-        
+
         .news-text ul {
             padding-left: 20px;
             margin: 10px 0;
         }
-        
+
         .news-text li {
             margin-bottom: 8px;
         }
-        
+
         .gallery {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 10px;
             margin-top: 20px;
         }
-        
+
         .gallery img {
             width: 100%;
             height: 80px;
@@ -1358,7 +1359,7 @@ button.Teacher__title4 {
             cursor: pointer;
             transition: transform 0.3s ease;
         }
-        
+
         .gallery img:hover {
             transform: scale(1.05);
         }
@@ -1372,24 +1373,24 @@ button.Teacher__title4 {
             overflow: hidden;
             border-radius: 8px;
         }
-        
+
         .carousel-inner {
             display: flex;
             transition: transform 0.5s ease;
             height: 100%;
         }
-        
+
         .carousel-item {
             min-width: 100%;
             height: 100%;
         }
-        
+
         .carousel-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-        
+
         .carousel-control {
             position: absolute;
             top: 50%;
@@ -1408,15 +1409,15 @@ button.Teacher__title4 {
             font-weight: bold;
             user-select: none;
         }
-        
+
         .carousel-control.prev {
             left: 10px;
         }
-        
+
         .carousel-control.next {
             right: 10px;
         }
-        
+
         .carousel-indicators {
             position: absolute;
             bottom: 10px;
@@ -1426,7 +1427,7 @@ button.Teacher__title4 {
             gap: 5px;
             z-index: 10;
         }
-        
+
         .carousel-indicator {
             width: 10px;
             height: 10px;
@@ -1434,11 +1435,11 @@ button.Teacher__title4 {
             background-color: rgba(255, 255, 255, 0.5);
             cursor: pointer;
         }
-        
+
         .carousel-indicator.active {
             background-color: #0066cc;
         }
-        
+
         /* Адаптивность карусели */
         @media (max-width: 768px) {
             .carousel {
@@ -1454,24 +1455,24 @@ button.Teacher__title4 {
             overflow: hidden;
             border-radius: 8px;
         }
-        
+
         .carousel-inner {
             display: flex;
             transition: transform 0.5s ease;
             height: 100%;
         }
-        
+
         .carousel-item {
             min-width: 100%;
             height: 100%;
         }
-        
+
         .carousel-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-        
+
         .carousel-control {
             position: absolute;
             top: 50%;
@@ -1491,19 +1492,19 @@ button.Teacher__title4 {
             user-select: none;
             transition: background-color 0.3s;
         }
-        
+
         .carousel-control:hover {
             background-color: rgba(0, 102, 204, 0.9);
         }
-        
+
         .carousel-control.prev {
             left: 10px;
         }
-        
+
         .carousel-control.next {
             right: 10px;
         }
-        
+
         .carousel-indicators {
             position: absolute;
             bottom: 10px;
@@ -1513,7 +1514,7 @@ button.Teacher__title4 {
             gap: 5px;
             z-index: 10;
         }
-        
+
         .carousel-indicator {
             width: 10px;
             height: 10px;
@@ -1522,11 +1523,11 @@ button.Teacher__title4 {
             cursor: pointer;
             transition: background-color 0.3s;
         }
-        
+
         .carousel-indicator:hover, .carousel-indicator.active {
             background-color: #0066cc;
         }
-        
+
         /* Адаптивность карусели */
         @media (max-width: 768px) {
             .carousel {
@@ -1541,7 +1542,7 @@ button.Teacher__title4 {
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
+
         /* Убираем отступы у body */
         body {
             margin: 0;
@@ -1550,12 +1551,12 @@ button.Teacher__title4 {
             color: #333;
             line-height: 1.6;
         }
-        
+
         /* Стили для контента (если нужно добавить внутренние отступы) */
         .content-wrapper {
             padding: 20px; /* Добавляем внутренние отступы вместо внешних */
         }
-        
+
         /* Остальные ваши стили */
         .header {
             text-align: center;
@@ -1563,11 +1564,11 @@ button.Teacher__title4 {
             background: linear-gradient(135deg, #0066cc, #004d99);
             color: white;
         }
-        
+
         h1, h2 {
             margin-bottom: 15px;
         }
-        
+
         p, ul {
             margin-bottom: 15px;
         }
@@ -1643,11 +1644,11 @@ body {
     .erasmus-header {
         padding: 20px;
     }
-    
+
     .erasmus-title {
         font-size: 1.8rem;
     }
-    
+
     .project-description {
         font-size: 1rem;
     }
@@ -1751,16 +1752,16 @@ body {
     .project-container {
         padding: 0 15px;
     }
-    
+
     .section-title {
         font-size: 1.2rem;
         padding: 12px 15px;
     }
-    
+
     .section-content {
         padding: 15px;
     }
-    
+
     .task-list li, .team-list li {
         padding-left: 20px;
     }
@@ -1783,14 +1784,14 @@ body {
         height: 250px; /* Уменьшаем высоту контейнера */
         overflow: hidden;
     }
-    
+
     .single-image img {
         width: 100%;
         height: 100%;
         object-fit: cover;
         transition: transform 0.5s;
     }
-    
+
     .news-card:hover .single-image img {
         transform: scale(1.05);
     }
@@ -1810,7 +1811,7 @@ body {
 
 
 
-    
+
      /* ================= ФУТЕР ================= */
 .footer__ {
   background-color: #000000;
@@ -2170,3 +2171,6 @@ body {
         transform: none;
     }
 }
+
+
+~
