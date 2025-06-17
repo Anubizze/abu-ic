@@ -200,9 +200,10 @@
         </div>
 
         <!-- Две колонки -->
-    <div class="columns-container">
-    <!-- Первая колонка - Основные направления -->
-    <div class="column">
+       <div class="vertical-sections">
+
+    <!-- Основные направления деятельности -->
+    <section class="vertical-section">
         <h2 class="section-title">Основные направления деятельности МШБ</h2>
         <ul class="activities-list">
             <li>Реализация дополнительных образовательных программ по направлениям подготовки бизнес-образования, а также подготовка и реализация совместных образовательных программ в области бизнес-образования с зарубежными вузами, бизнес-школами, имеющих лицензию и международную аккредитацию данных программ, в том числе в дистанционном формате;</li>
@@ -214,44 +215,52 @@
             <li>Осуществление представительских функций, участие от имени университета в международных мероприятиях, связанных с развитием бизнес-образования, вступления в международные Ассоциации бизнес-школ;</li>
             <li>Развитие материально-технической базы МШБ.</li>
         </ul>
-    </div>
+    </section>
 
-    <!-- Вторая колонка - Сертификаты -->
-    <div class="column">
+    <!-- Сертификаты -->
+    <section class="vertical-section">
         <h2 class="section-title">Сертификаты</h2>
         <ul class="certificates-list">
             <li>
-                <a href="pdf/Список участников программы повышения квалификации Развитие мировой экономики глобальные тенденции.pdf" class="certificate-link">Список участников программы повышения квалификации «Развитие мировой экономики: глобальные тенденции»</a>
+                <a href="pdf/Список участников программы повышения квалификации Развитие мировой экономики глобальные тенденции.pdf" class="certificate-link">
+                    Список участников программы повышения квалификации «Развитие мировой экономики: глобальные тенденции»
+                </a>
             </li>
             <li>
-                <a href="pdf/Результаты международного конкурса молодежных бизнес-проектов 2024.pdf" class="certificate-link">Результаты международного конкурса молодежных бизнес-проектов 2024</a>
+                <a href="pdf/Результаты международного конкурса молодежных бизнес-проектов 2024.pdf" class="certificate-link">
+                    Результаты международного конкурса молодежных бизнес-проектов 2024
+                </a>
             </li>
         </ul>
-    </div>
+    </section>
 
-    <!-- Третья колонка - MBA для иностранцев -->
-    <div class="column">
-    <div class="mba-program">
-        <img src="img/mbabukleten.jpg" alt="MBA для иностранцев" class="mba-program-image">
-        <div class="mba-program-content">
-            <h3 class="mba-program-title">MBA для иностранцев</h3>
-            <a href="pdf/EN Буклет MBA New.pdf" class="program-link">Подробнее о программе</a>
-        </div>
-    </div>
-</div>
-
-    <!-- Четвёртая колонка - MBA для резидентов Казахстана -->
-    <div class="column">
-        <div class="mba-program">
-            <img src="img/bukletrumba.jpg" alt="MBA для резидентов Казахстана" class="mba-program-image">
-            <div class="mba-program-content">
-                <h3 class="mba-program-title">MBA для резидентов Казахстана</h3>
-                <a href="pdf/ИЮЛЬ Буклет MBA.pdf" class="program-link">Подробнее о программе</a>
+    <!-- Программы MBA в две колонки (слева и справа) -->
+    <div class="mba-row">
+        <!-- MBA для иностранцев (слева) -->
+        <section class="vertical-section mba-program-section">
+            <div class="mba-program">
+                <img src="img/mbabukleten.jpg" alt="MBA для иностранцев" class="mba-program-image">
+                <div class="mba-program-content">
+                    <h3 class="mba-program-title">MBA для иностранцев</h3>
+                    <a href="pdf/EN Буклет MBA New.pdf" class="program-link">Подробнее о программе</a>
+                </div>
             </div>
-        </div>
-    </div>
-</div>
+        </section>
 
+        <!-- MBA для резидентов Казахстана (справа) -->
+        <section class="vertical-section mba-program-section">
+            <div class="mba-program">
+                <img src="img/bukletrumba.jpg" alt="MBA для резидентов Казахстана" class="mba-program-image">
+                <div class="mba-program-content">
+                    <h3 class="mba-program-title">MBA для резидентов Казахстана</h3>
+                    <a href="pdf/ИЮЛЬ Буклет MBA.pdf" class="program-link">Подробнее о программе</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+</div>
+        
 <div class="participation-info">
         <h3 class="participation-title">Условия участия в программе</h3>
         <p class="participation-text">
