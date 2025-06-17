@@ -2079,6 +2079,7 @@ a{
   justify-content: space-between;
   flex-wrap: nowrap;
   gap: 20px;
+  margin-top: 15px;
 }
 @media (max-width: 1510px) {
   .menu__pages a {
