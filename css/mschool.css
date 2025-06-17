@@ -1,4 +1,4 @@
-@@ -1,2056 +1,2023 @@
+
 /*Обнуление*/More actions
 *{padding:0;margin:0;border:0;}
 *,*:before,*:after{-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;}
@@ -30,13 +30,23 @@ body{
     gap: 200px;
     padding: 15px 15px 15px 15px;
 }
+/* Владос вот тут изменения  */
+.container__menu{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+}
 
+/*  */
 .container{
     display: flex;
     justify-content: flex-start;
     align-items: center;
     flex-wrap: wrap;
 }
+
+
 .menu__row{
     display: flex;
     justify-content: flex-start;
@@ -1933,7 +1943,7 @@ button.Teacher__title4 {
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-.has-submenu:hover .submenu {Добавить комментарийMore actions
+.has-submenu:hover .submenu {
   display: block;
   opacity: 1;
   transform: translateY(0);
@@ -1943,7 +1953,7 @@ button.Teacher__title4 {
   white-space: nowrap;
 }
 
-.submenu li a {Добавить комментарийMore actions
+.submenu li a {
   display: block;
   padding: 12px 20px;
   color: white;
@@ -1958,7 +1968,7 @@ button.Teacher__title4 {
   margin: 0;
 }
 
-Add commentMore actions
+
 .submenu li a:hover {
   background-color: rgba(255, 255, 255, 0.15); /* красивый полупрозрачный hover */
 }
@@ -1972,7 +1982,7 @@ Add commentMore actions
     }
 }
 
-/* Свыше 1600px — возвращаем стандартное поведение */More actions
+/* Свыше 1600px — возвращаем стандартное поведение */
 @media (min-width: 1601px) {
     .submenu {
         left: 0;
