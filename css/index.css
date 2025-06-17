@@ -707,8 +707,7 @@ a{
 /* ================= СЕКЦИЯ С КАРТИНКОЙ (TOP) ================= */
 .section__top {
   position: relative;
-  /* background: url('/img/first-photo.jpg') center/cover no-repeat; */
-  height: 950px;
+  height: 824px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
