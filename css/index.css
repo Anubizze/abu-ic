@@ -2218,7 +2218,6 @@ a{
 
 .Erasmus-CirculEC{
         display: block;
-
         color: #fff;
         font-size: 16px;
         width: 100%;
@@ -2226,12 +2225,63 @@ a{
 }
 
 
+
+
+.has-submenu {
+  position: relative;
+}
+
+.submenu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: rgba(17, 17, 17, 0.9); /* полупрозрачный фон */
+  padding: 10px 0;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4); /* мягкая глубокая тень */
+  min-width: 220px;
+  z-index: 1000;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.has-submenu:hover .submenu {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.submenu li {
+  white-space: nowrap;
+}
+
+.submenu li a {
+  display: block;
+  padding: 12px 20px;
+  color: white;
+  font-size: 16px;
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  border-radius: 6px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  text-decoration: none;
+  margin: 0;
+}
+
+.submenu li a:hover {
+  background-color: rgba(255, 255, 255, 0.15); /* красивый полупрозрачный hover */
+}
+
 /* С 1200px до 1600px — сдвигаем влево */
 @media (min-width: 1200px) and (max-width: 1600px) {
     .submenu {
         left: auto;
         right: 0;
-        transform: translateX(-30px); /* подстрой размер смещения */
+        transform: translateX(-30px);
     }
 }
 
@@ -2244,8 +2294,6 @@ a{
     }
 }
 
-
-
 .submenu li {
   white-space: nowrap;
 }
@@ -2253,3 +2301,4 @@ a{
   padding: 15px 20px;
   box-sizing: border-box;
 }
+
