@@ -76,36 +76,7 @@ body{
 }
 
 
-.has-submenu {
-  position: relative;
-}
 
-.submenu {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background-color: white; /* Цвет фона подменю */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  z-index: 1000;
-  min-width: 180px;
-}
-
-.submenu li a {
-  display: block;
-  padding: 10px 15px;
-  color: black;
-  text-decoration: none;
-  white-space: nowrap;
-}
-
-
-.has-submenu:hover .submenu {
-  display: block;
-}
 
 
 
@@ -217,21 +188,6 @@ a{
   border-radius: 2px;
 }
 
-/* Подменю */
-.submenu {
-  display: none;
-  position: absolute;
-  background: white;
-  color: black;
-  top: 100%;
-  left: 0;
-  list-style: none;
-  padding: 0;
-}
-
-.has-submenu:hover .submenu {
-  display: block;
-}
 
 /* --- МЕДИА --- */
 @media (max-width: 768px) {
@@ -743,29 +699,7 @@ a{
 
 
 
-/* Erasmus кнопки дизайн */
-.submenu {
-  padding: 0 10px 0 0;
-}
-.submenu li a {
-  background-color: #000000;
-  color: #fff;
-  font-size: 20px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  width: 300px;
-  margin: 20px 20px 0px 20px;
-  padding-left: 20px; /* Добавляем отступ слева */
-}
 
-.submenu .Erasmus-CirculEC a{
-  margin-bottom: 20px;
-}
-
-.submenu li a:hover {
-  color: #ffffff;             
-}
 
 /* Часть с картинкой международное сотруднечество */
 
@@ -2110,7 +2044,7 @@ a{
     gap: 200px;
     padding: 15px 15px 15px 15px;
 }
-.menu__logo {
+.menu__logo , .logo__footer img{
   width: 214px;
   height: 49px;
   object-fit: contain;
@@ -2126,8 +2060,7 @@ a{
 
 /* Планшеты и средние экраны */
 @media (max-width: 1024px) {
-  .menu__logo,
-  .logo__footer img {
+  .menu__logo{
     max-width: 180px;
     height: auto;
   }
@@ -2135,8 +2068,7 @@ a{
 
 /* Маленькие экраны (телефоны) */
 @media (max-width: 768px) {
-  .menu__logo,
-  .logo__footer img {
+  .menu__logo{
     max-width: 290px;
     height: 65px;
   }
@@ -2226,7 +2158,6 @@ a{
 
 
 
-
 .has-submenu {
   position: relative;
 }
@@ -2253,10 +2184,6 @@ a{
   transform: translateY(0);
 }
 
-.submenu li {
-  white-space: nowrap;
-}
-
 .submenu li a {
   display: block;
   padding: 12px 20px;
@@ -2273,7 +2200,15 @@ a{
 }
 
 .submenu li a:hover {
-  background-color: rgba(255, 255, 255, 0.15); /* красивый полупрозрачный hover */
+  background-color: rgba(255, 255, 255, 0.1); /* красивый полупрозрачный hover */
+}
+
+.submenu li {
+  white-space: nowrap;
+}
+.submenu {
+  padding: 15px 20px;
+  box-sizing: border-box;
 }
 
 /* С 1200px до 1600px — сдвигаем влево */
@@ -2281,7 +2216,7 @@ a{
     .submenu {
         left: auto;
         right: 0;
-        transform: translateX(-30px);
+        transform: translateX(-30px); /* подстрой размер смещения */
     }
 }
 
@@ -2293,12 +2228,3 @@ a{
         transform: none;
     }
 }
-
-.submenu li {
-  white-space: nowrap;
-}
-.submenu {
-  padding: 15px 20px;
-  box-sizing: border-box;
-}
-
