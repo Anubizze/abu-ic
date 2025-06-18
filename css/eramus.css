@@ -37,15 +37,14 @@ body{
     align-items: center;
     flex-wrap: wrap;
 }
-.menu__row{
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    flex-wrap: wrap;    
-    width: auto;
-    height: 69px;
-    padding: 10px;
 
+.menu__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  gap: 20px;
+  margin-top: 15px;
 }
 
 .menu__body {
@@ -1800,11 +1799,4 @@ button.Teacher__title4 {
     flex: 1;
 }
 
-.menu__row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: nowrap;
-  gap: 20px;
-  margin-top: 15px;
-}
+
