@@ -1799,3 +1799,12 @@ button.Teacher__title4 {
     justify-content: center;
     flex: 1;
 }
+
+.menu__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  gap: 20px;
+  margin-top: 15px;
+}
