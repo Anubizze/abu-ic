@@ -705,25 +705,6 @@ a{
 
 
 /* ================= СЕКЦИЯ С КАРТИНКОЙ (TOP) ================= */
-.section__top {
-  position: relative;
-  height: 824px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  color: white;
-  font-size: 36px;
-  line-height: 56px;
-  overflow: hidden;
-}
-/* если ширина от 1200px до 1500px */
-@media (min-width: 1200px) and (max-width: 1500px) {
-  .section__top {
-    height: 715px;
-  }
-}
-
-
 .section__top img{
     filter: brightness(0.7);
 }
@@ -2285,3 +2266,20 @@ a{
 }
 
 
+.section__top {
+  position: relative;
+  height: 824px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  color: white;
+  font-size: 36px;
+  line-height: 56px;
+  overflow: hidden;
+}
+/* если ширина от 1200px до 1500px */
+@media (min-width: 1200px) and (max-width: 1500px) {
+  .section__top {
+    height: 715px;
+  }
+}
