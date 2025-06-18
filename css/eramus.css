@@ -1771,18 +1771,18 @@ button.Teacher__title4 {
 
 .submenu li {
   white-space: nowrap;
-}
+ }
 .submenu {
   padding: 15px 20px;
   box-sizing: border-box;
-}
+ }
 
 .erasmus-content {
     display: flex;
     align-items: stretch;
     /* Можно добавить фиксированную или минимальную высоту, если требуется */
     /* min-height: 220px; */
-}
+ }
 
 .erasmus-logo-container {
     display: flex;
@@ -1790,13 +1790,13 @@ button.Teacher__title4 {
     justify-content: center;
     /* При необходимости задайте фиксированную ширину */
     /* width: 150px; */
-}
+ }
 
 .erasmus-info {
     display: flex;
     flex-direction: column;
     justify-content: center;
     flex: 1;
-}
+ }
 
 
