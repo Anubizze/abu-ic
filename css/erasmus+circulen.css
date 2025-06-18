@@ -2199,3 +2199,107 @@ body {
   padding: 15px 20px;
   box-sizing: border-box;
 }
+
+.erasmus-container,
+.project-container,
+.news-section,
+.partners-section,
+.partners-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.partner-item a {
+    display: inline-block;
+    text-decoration: none;
+}
+.partner-item img {
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+.partner-item img:hover {
+    transform: scale(1.05);
+}
+
+.partner-link {
+    transition: transform 0.2s;
+    cursor: pointer;
+}
+.partner-link:hover {
+    transform: scale(1.05);
+}
+
+.partners-container {
+    display: flex;
+    gap: 60px;
+    max-width: 1200px; 
+    margin: 40px auto;
+    padding: 60px 40px;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box; /* ← Обязательно! */
+}
+
+.partner-item {
+    flex: 1 1 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+}
+
+.partner-item img {
+    max-width: 400px;    /* Увеличена ширина */
+    max-height: 160px;   /* Увеличена высота */
+    width: auto;         /* Сохранять пропорции */
+    height: auto;        /* Сохранять пропорции */
+    display: block;
+    margin: 0 auto;
+    cursor: pointer;
+    transition: transform 0.22s;
+    object-fit: contain; /* Логотипы не теряют пропорции */
+}
+
+
+.partners-container {
+    display: flex;
+    gap: 60px;
+    max-width: 1200px; 
+    margin: 40px auto;
+    padding: 60px 40px;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box; /* ← Обязательно! */
+}
+
+.partner-item {
+    flex: 1 1 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+}
+
+.partner-item img {
+    max-width: 400px;    /* Увеличена ширина */
+    max-height: 160px;   /* Увеличена высота */
+    width: auto;         /* Сохранять пропорции */
+    height: auto;        /* Сохранять пропорции */
+    display: block;
+    margin: 0 auto;
+    cursor: pointer;
+    transition: transform 0.22s;
+    object-fit: contain; /* Логотипы не теряют пропорции */
+}
+
+
+
+
