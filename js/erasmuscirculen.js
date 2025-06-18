@@ -308,5 +308,13 @@ document.querySelectorAll('.btn-universities').forEach(button => {
 
 });
 
+document.querySelectorAll('.partner-link').forEach(img => {
+    img.style.cursor = 'pointer';
+    img.addEventListener('click', function() {
+        const url = this.getAttribute('data-href');
+        if (url) window.open(url, '_blank');
+    });
+});
+
 
 
