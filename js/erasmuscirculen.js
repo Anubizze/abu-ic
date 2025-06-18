@@ -316,5 +316,3 @@ document.querySelectorAll('.partner-link').forEach(img => {
     });
 });
 
-
-
