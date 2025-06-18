@@ -2258,3 +2258,238 @@ button.Teacher__title4 {
   gap: 20px;
   margin-top: 15px;
 }
+
+.vertical-sections {
+    max-width: 900px;
+    margin: 2.5rem auto;
+    padding: 0 1rem;
+    display: block; /* возвращаем обычный поток */
+}
+
+.vertical-section {
+    background: #f8fafc;
+    border-radius: 16px;
+    box-shadow: 0 2px 16px 0 #2563eb18;
+    padding: 2rem 1.4rem 1.5rem 1.4rem;
+    margin-bottom: 2.2rem;
+}
+.section-title {
+    font-size: 1.3rem;
+    color: #2563eb;
+    font-weight: 800;
+    margin-bottom: 1.1rem;
+    text-align: center;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.mba-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: stretch;
+    gap: 21rem; /* не больше! уменьшай, если карточки не влезают */
+    max-width: 900px;
+    margin: 2.5rem auto;
+    padding: 0 1rem;
+}
+
+.vertical-section.mba-program-section {
+    background: none;
+    border-radius: 16px;
+    box-shadow: none;
+    padding: 2rem 1.4rem 1.5rem 1.4rem;
+    margin: 0;
+    flex: 1 1 0;
+    min-width: 0;
+    max-width: 430px;  /* Подбери под ширину сертификата, обычно 430-440px */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.mba-program {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.1rem;
+    width: 100%;
+    padding: 0;
+}
+
+.mba-program-image {
+    width: 100%;
+    max-width: 320px; /* если надо чуть меньше, поставь 320px */
+    border-radius: 12px;
+    box-shadow: 0 2px 10px #2563eb19;
+    object-fit: cover;
+    margin-bottom: 0.8rem;
+    background: #fff;
+}
+
+.mba-program-content {
+    text-align: center;
+    width: 100%;
+}
+
+.mba-program-title {
+    font-size: 1.12rem;
+    font-weight: 700;
+    color: #2563eb;
+    margin: 0.3rem 0 0.7rem 0;
+}
+
+@media (max-width: 900px) {
+    .mba-row {
+        flex-direction: column;
+        gap: 1.2rem;
+        max-width: 100%;
+        padding: 0 0.5rem;
+    }
+    .vertical-section.mba-program-section {
+        max-width: 100%;
+    }
+    .mba-program-image {
+        max-width: 100%;
+    }
+}
+
+body {
+    background: #f4f7fb;
+    font-family: 'Segoe UI', 'Arial', sans-serif;
+    margin: 0;
+}
+
+.participation-info {
+    max-width: 900px;
+    margin: 2.5rem auto;
+    padding: 2rem 1.4rem 1.5rem 1.4rem;
+    background: #f8fafc;
+    border-radius: 16px;
+    box-shadow: 0 2px 16px 0 #2563eb18;
+}
+
+.participation-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 1.4rem;
+    text-align: center;
+    letter-spacing: 0.2px;
+}
+
+.participation-text {
+    font-size: 1.12rem;
+    color: #222f3e;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.participation-phones-title {
+    font-size: 1.1rem;
+    color: #222f3e;
+    font-weight: 500;
+    margin-bottom: 0.6rem;
+}
+
+.contacts-list {
+    list-style: none;
+    padding: 0;
+    margin: 1.6rem 0 1.3rem 0;
+}
+
+.contact-item {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 1px 8px #2563eb10;
+    padding: 1rem 1.2rem 0.6rem 1.2rem;
+    margin-bottom: 1.1rem;
+    transition: box-shadow 0.2s;
+}
+
+.contact-item:hover {
+    box-shadow: 0 4px 18px #2563eb15;
+}
+
+.whatsapp-link {
+    color: #16a34a;
+    font-weight: 700;
+    font-size: 1.15rem;
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 0.3rem;
+    letter-spacing: 0.2px;
+}
+
+.whatsapp-link:hover {
+    text-decoration: underline;
+    color: #15803d;
+}
+
+.whatsapp-icon {
+    font-size: 1.1em;
+    vertical-align: -1px;
+    margin-right: 3px;
+}
+
+.contact-name {
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+    color: #222f3e;
+}
+
+.contact-position {
+    font-size: 0.96rem;
+    color: #374151;
+    font-style: italic;
+}
+
+.working-hours {
+    font-size: 0.97rem;
+    color: #64748b;
+    margin-top: 1.3rem;
+    text-align: center;
+}
+
+/* Responsive */
+@media (max-width: 950px) {
+    .participation-info {
+        max-width: 99vw;
+        padding: 1.2rem 0.5rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .participation-info {
+        padding: 1rem 0.1rem;
+    }
+    .participation-title {
+        font-size: 1.3rem;
+    }
+    .participation-text {
+        font-size: 1rem;
+    }
+}
+
+.competition-section {
+    max-width: 865px;      /* Ставим такую же ширину, как у других секций */
+    margin: 2.5rem auto;    /* Центрируем */
+    padding: 2.5rem 2rem 2rem 2rem; /* Внутренние отступы */
+    background: #f8fafc;
+    border-radius: 16px;
+    box-shadow: 0 2px 16px 0 #2563eb18;
+    box-sizing: border-box; /* Важно для корректной ширины! */
+}
+
+.announcement {
+    max-width: 900px;         /* Сделать такую же ширину, как у других секций */
+    margin: 2.5rem auto;       /* Центрирование по странице */
+    padding: 2rem 1.4rem 1.5rem 1.4rem;
+    background: #f8fafc;
+    border-radius: 16px;
+    box-shadow: 0 2px 16px 0 #2563eb18;
+    font-size: 1.13rem;
+    color: #1e293b;
+    box-sizing: border-box;
+}
+
