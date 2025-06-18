@@ -473,10 +473,19 @@
             </div>
             </footer>
             <script>
-            function toggleUniversities(button) {
-              const list = button.nextElementSibling;
-              list.classList.toggle('hidden');
-            }
+                function toggleUniversities(button) {
+                  // Сначала скрыть все списки
+                  const allLists = document.querySelectorAll('.university-list');
+                  allLists.forEach(list => {
+                    if (list !== button.nextElementSibling) {
+                      list.classList.add('hidden');
+                    }
+                  });
+                
+                  // Переключить текущий список
+                  const list = button.nextElementSibling;
+                  list.classList.toggle('hidden');
+                }
             </script>
         </div>
     </div>
