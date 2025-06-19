@@ -2101,13 +2101,6 @@ button.Teacher__title4 {
     }
 }
 
-.submenu li {
-  white-space: nowrap;
-}
-.submenu {
-  padding: 15px 20px;
-  box-sizing: border-box;
-}
 
 .vertical-sections {
     display: flex;
