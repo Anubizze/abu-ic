@@ -54,7 +54,7 @@ body{
     flex-wrap: wrap;    
     width: auto;
     height: 69px;
-
+    padding: 10px;
 
 }
 
@@ -72,7 +72,7 @@ body{
   font-size: 18px;
   line-height: 24px;
   gap: 20px; 
-
+ 
 }
 
 
