@@ -1769,17 +1769,17 @@ a{
 /* ================= НАШИ ПАРТНЕРЫ (ТАБЛИЦА) ================= */
 .cards-wrapper {
   display: flex;
-  flex-wrap: wrap;             
-  justify-content: center;    
-  gap: 20px;                    
-  max-width: 1280px;         
-  margin: 0 auto;                
+  flex-wrap: wrap;               /* позволяет переносить карточки */
+  justify-content: center;       /* центрирует карточки по горизонтали */
+  gap: 20px;                     /* отступы между карточками */
+  max-width: 1280px;             /* ограничение по ширине */
+  margin: 0 auto;                /* центрирование всей обёртки */
   padding: 20px;
   position: relative;
 }
 
 .country-card {
-  position: relative; 
+  position: relative; /* для абсолютного позиционирования списка */
   flex: 1 1 300px;
   max-width: 400px;
   border: 2px solid rgba(0, 0, 0, 0.1);
@@ -1793,12 +1793,12 @@ a{
 
 .university-list {
   position: absolute;
-  top: calc(100% + 12px); 
+  top: calc(100% + 12px); /* немного ниже кнопки */
   left: 50%;
   transform: translateX(-50%);
   min-width: 340px;
   max-height: 260px;
-  padding: 20px;
+  padding: 20px 0  20px 0;
   background: linear-gradient(145deg, #ffffff, #f0f4ff);
   border-radius: 16px;
   box-shadow:
@@ -1847,7 +1847,7 @@ a{
   background-color: #1976d2;
   color: white;
   border: none;
-  padding: 10px 20px;
+  padding: 10px 0px;
   margin-top: 10px;
   border-radius: 6px;
   cursor: pointer;
@@ -1870,29 +1870,32 @@ a{
 
 /* Внутренний список */
 .university-list ul {
-  padding: 5px 20px;
+  padding: 0;
   margin: 0;
 }
 
 .university-list a {
-  display: block; /* превращаем в блочный элемент */
-  padding: 10px 16px;
+  display: block;
+  width: 100%;
+  padding: 12px 20px;
   font-size: 16px;
   font-weight: 500;
   color: #1a73e8;
-  background-color: rgba(26, 115, 232, 0.05); /* лёгкий синий фон */
-  border-radius: 10px;
+  background-color: rgba(26, 115, 232, 0.05);
+  border-radius: 0px;
   text-decoration: none;
   transition: all 0.3s ease;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
 .university-list a:hover {
-  background-color: #e3f2fd; /* чуть ярче фон */
+  background-color: #e3f2fd;
   color: #0f5dc0;
+  border-bottom: 1px dashed #0f5dc0;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transform: translateX(4px); /* лёгкое движение вправо */
+  transform: translateX(0); /* Убрал сдвиг, чтобы не выходило за границы */
 }
+
 
 .university-list a:hover {
   color: #0f5dc0;
