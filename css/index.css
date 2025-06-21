@@ -2219,7 +2219,6 @@ a{
 .credit-mobility{
         all: unset;
         display: block;
-        padding-top: 3px;
         color: #fff;
         font-size: 16px;
         width: 100%;
@@ -2251,7 +2250,7 @@ a{
   padding: 0; /* сбрасываем отступы, переносим в <a> */
   border-radius: 8px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-  min-width: 250px;
+
   z-index: 1000;
   opacity: 0;
   transform: translateY(10px);
@@ -2305,27 +2304,38 @@ a{
 
   .has-submenu .submenu {
     display: none;
-    position: static; /* важно: убираем absolute */
+    position: static;
     background-color: #1a1a1a;
-    width: 100%;
-    margin-top: 6px;
+    width: fit-content;
+    max-width: 90%;
+    padding: 6px;
+    margin: 6px 0 0 0;
+    border-radius: 6px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     flex-direction: column;
-    gap: 0;
   }
 
   .has-submenu.active .submenu {
-    display: flex; /* теперь подменю будет толкать контент вниз */
+    display: flex;
+  }
+
+  .submenu li {
+    width: auto; /* <--- добавь это */
   }
 
   .submenu li a {
-    display: block;
-    width: 100%;
-    padding: 12px 20px;
+    display: inline-block; /* не block, чтобы не растягивалось */
+    width: fit-content; /* ширина только по контенту */
+    max-width: 100%;
+    padding: 8px 0 0 0 ;
+    font-size: 15px;
     color: white;
-    text-align: left;
+    white-space: nowrap;
     box-sizing: border-box;
+    background-color: transparent;
   }
 }
+
 
 
 
