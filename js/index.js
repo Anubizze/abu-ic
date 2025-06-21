@@ -40,15 +40,19 @@ document.addEventListener("DOMContentLoaded", () => {
   submenuToggles.forEach(toggle => {
     toggle.addEventListener('click', (e) => {
       if (window.innerWidth <= 768) {
-        const submenu = toggle.nextElementSibling;
-        if (!submenu) return;
-
         e.preventDefault();
-        document.querySelectorAll('.submenu').forEach(sub => sub.classList.remove('active'));
-        submenu.classList.add('active');
+        const parent = toggle.closest('.has-submenu');
+
+        document.querySelectorAll('.has-submenu').forEach(item => {
+          if (item !== parent) item.classList.remove('active');
+        });
+
+        parent.classList.toggle('active');
       }
     });
   });
+
+
 
   window.addEventListener('resize', () => {
     if (window.innerWidth > 768) {
