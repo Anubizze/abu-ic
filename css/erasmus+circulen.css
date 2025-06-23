@@ -2677,6 +2677,38 @@ html, body {
     display: block;
 }
 
+@media (max-width: 900px) {
+  .menu__row {
+    justify-content: flex-start;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+  }
+  .logo__title {
+    margin-right: auto;
+  }
+  .burger-button {
+    margin-left: auto;
+    margin-right: 0;
+    display: flex;
+    position: relative;
+    z-index: 1100; /* поверх меню */
+  }
+}
+
+@media (max-width: 900px) {
+  .menu__row {
+    justify-content: flex-end; /* Все вправо */
+    gap: 12px;
+  }
+  .logo__title {
+    margin-right: auto; /* Лого слева, бургер справа */
+  }
+  .burger-button {
+    margin-left: 200px; /* Толкаем бургер вправо */
+  }
+}
+
 
 
 
