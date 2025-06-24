@@ -778,11 +778,11 @@ a{
   align-items: flex-end;
   color: white;
   gap: 20px;
-  z-index: 2; 
 }
 
 .section__info {
   text-align: left;
+  z-index: 2;
 }
 
 .section__info h3 {
@@ -809,6 +809,7 @@ a{
   align-self: flex-start;
   height: 80px;
   width: 190px;
+  z-index: 2;
 }
 
 /* Section адоптивность */
@@ -933,19 +934,7 @@ a{
 /* Фон затемнения */
 
 /* ================= ОБЩИЕ СТИЛИ МОДАЛКИ ================= */
-.modal-window {
-    display: none; /* скрыто по умолчанию */
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(5px);
-    z-index: 1000;
-    justify-content: center;
-    align-items: center;
-}
+
 
 /* Контейнер самого окна */
 .modal-container {
@@ -1017,41 +1006,23 @@ a{
   inset: 0;
   background-color: rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(6px);
-  animation: fadeIn 0.4s ease-in-out forwards;
-}
-
-/* Анимация */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-.modal-content {
-  background: #ffffff;
-  margin: 60px auto;
-  padding: 40px;
-  width: 90%;
-  max-width: 1100px;
-  border-radius: 20px;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.4s ease-in-out forwards; 
   display: flex;
-  flex-direction: column;
-  gap: 24px;
-  position: relative;
-  overflow: hidden;
-  animation: slideUp 0.4s ease-in-out;
+  justify-content: center;
+  align-items: center;
 }
 
-/* Анимация появления модалки */
-@keyframes slideUp {
-  from {
-    transform: translateY(30px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0px);
-    opacity: 1;
-  }
+
+.modal-window {
+    display: none; /* скрыто по умолчанию */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+    z-index: 1000;
 }
 
 /* Кнопка закрытия */
@@ -1071,11 +1042,17 @@ a{
 
 /* Изображение */
 .back__sity img {
-  width: 100%;
+  width: 1020px;
   max-height: 350px;
   object-fit: cover;
   border-radius: 14px;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+.back__sity img {
+  width: 100%;
+}
 }
 
 /* Текст внутри */
@@ -1093,13 +1070,16 @@ a{
 }
 
 
+
+
+
 /* Кнопка-ссылка */
 .Semey__btn_moredetails {
   align-self: flex-start;
   margin-top: 10px;
   padding: 12px 22px;
   background: linear-gradient(135deg, #007acc, #005fa3);
-  color: #fff;
+  color: #fff !important;
   border-radius: 10px;
   font-weight: 600;
   text-decoration: none;
@@ -1130,7 +1110,91 @@ a{
 }
 
 
+/* Страны модакли */
+.modal-content h3{
+  font-size:40px;
+}
+.modal-content ul{
+  font-size: 30px;
 
+}
+.modal-content li{
+  margin: 15px 0px;
+}
+.modal-content a {
+  color: black;
+  text-decoration: none; /* Убирает подчёркивание — по желанию */
+}
+
+
+
+.modal-content a:hover {
+  color: #333; /* Немного темнее при наведении — по желанию */
+  text-decoration: underline; /* При наведении можно добавить подчёркивание */
+}
+
+
+/* ================= ОБЩИЕ СТИЛИ МОДАЛКИ ================= */
+.modal-content {
+  background: #ffffff;
+  margin: 60px auto;
+  padding: 40px;
+  width: 90%;
+  max-width: 1100px;
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 24px;
+  position: relative;
+  overflow: hidden;
+  animation: slideUp 0.4s ease-in-out;
+  max-height: 90vh;
+}
+
+/* Добавим скролл к тексту */
+.modal-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 14px;
+  font-size: 18px;
+  color: #2c2c2c;
+  overflow-y: auto;
+  max-height: 45vh;
+  padding-right: 10px;
+}
+
+/* Стилизация заголовка */
+.modal-text h2 {
+  font-size: 28px;
+  margin-bottom: 16px;
+  color: #003366;
+}
+
+/* Стилизация текста */
+.modal-text p {
+  margin: 0;
+  line-height: 1.7;
+}
+
+
+.modal__text1{
+  color: #003366;
+  background-color: #e7e7e7;
+  width: auto;
+  height: 7px;
+  font-size: 23px;
+  border-radius: 5px;
+}
+.modal__text2{
+  color: #003366;
+}
+.modal__text{
+  color: #2980b9;
+}
 
 
 /* ================= БЛОК NEWS-ПАРТНЕРЫ ================= */
@@ -1320,6 +1384,24 @@ a{
   }
 }
 
+
+
+/* Адаптивность  для наши пратнеры модальные окна для мобилок глваный экран */
+@media (max-width: 768px) {
+  .modal-partners__text {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-partners__text {
+    font-size: 15px;
+  }
+}
+
+
+
+
 @media (max-width: 768px) {
   .news__slider-wrapper {
     overflow-x: auto;
@@ -1498,88 +1580,7 @@ a{
 
 
 
-/* Страны модакли */
-.modal-content h3{
-  font-size:40px;
-}
-.modal-content ul{
-  font-size: 30px;
 
-}
-.modal-content li{
-  margin: 15px 0px;
-}
-.modal-content a {
-  color: black;
-  text-decoration: none; /* Убирает подчёркивание — по желанию */
-}
-
-
-
-.modal-content a:hover {
-  color: #333; /* Немного темнее при наведении — по желанию */
-  text-decoration: underline; /* При наведении можно добавить подчёркивание */
-}
-
-
-/* ================= ОБЩИЕ СТИЛИ МОДАЛКИ ================= */
-.modal-content {
-  background: #ffffff;
-  margin: 60px auto;
-  padding: 40px;
-  width: 90%;
-  max-width: 1100px;
-  border-radius: 20px;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  position: relative;
-  overflow: hidden;
-  animation: slideUp 0.4s ease-in-out;
-  max-height: 90vh;
-}
-
-/* Добавим скролл к тексту */
-.modal-text {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  font-size: 18px;
-  color: #2c2c2c;
-  overflow-y: auto;
-  max-height: 45vh;
-  padding-right: 10px;
-}
-
-/* Стилизация заголовка */
-.modal-text h2 {
-  font-size: 28px;
-  margin-bottom: 16px;
-  color: #003366;
-}
-
-/* Стилизация текста */
-.modal-text p {
-  margin: 0;
-  line-height: 1.7;
-}
-
-
-.modal__text1{
-  color: #003366;
-  background-color: #e7e7e7;
-  width: auto;
-  height: 7px;
-  font-size: 23px;
-  border-radius: 5px;
-}
-.modal__text2{
-  color: #003366;
-}
-.modal__text{
-  color: #2980b9;
-}
 
 
 /* ================= ФУТЕР ================= */
@@ -1838,15 +1839,13 @@ a{
   animation: fadeIn 0.3s ease forwards;
 }
 
-/* Анимация появления */
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateX(-50%) translateY(-10px);
+    transform: scale(0.98); /* мягкое приближение без смещения */
   }
   to {
     opacity: 1;
-    transform: translateX(-50%) translateY(0);
   }
 }
 
@@ -2399,5 +2398,4 @@ a{
   cursor: pointer;
   transition: color 0.3s ease;
 }
-
 
