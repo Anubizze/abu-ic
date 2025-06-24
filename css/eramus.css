@@ -1792,7 +1792,7 @@ button.Teacher__title4 {
   .submenu li a {
     display: inline-block; 
     width: fit-content; 
-    max-width: 100%;
+    width: 180px;
     padding: 8px 0 0 0 ;
     font-size: 15px;
     color: white;
