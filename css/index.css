@@ -2208,13 +2208,6 @@ a{
 
   }
 }
-@media (max-width: 1290px) {
-  .menu__pages a {
-    font-size: 13px; /* уменьшение размера */
-
-  }
-}
-
 
 /* Кнопка открытия */
 .Students-page {
