@@ -1149,23 +1149,11 @@ a{
   flex-direction: column;
   gap: 24px;
   position: relative;
-  overflow: hidden;
+  overflow: auto;
   animation: slideUp 0.4s ease-in-out;
   max-height: 90vh;
 }
 
-/* Добавим скролл к тексту */
-.modal-text {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 14px;
-  font-size: 18px;
-  color: #2c2c2c;
-  overflow-y: auto;
-  max-height: 45vh;
-  padding-right: 10px;
-}
 
 /* Стилизация заголовка */
 .modal-text h2 {
@@ -1195,6 +1183,39 @@ a{
 .modal__text{
   color: #2980b9;
 }
+
+
+.modal-text {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  font-size: 18px;
+  color: #2c2c2c;
+  overflow-y: auto;
+  max-height: 60vh; /* было 45vh — увеличиваем для мобильных */
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+/* Адаптив */
+@media (max-width: 768px) {
+  .modal-text {
+    font-size: 15px;
+    max-height: 65vh;
+    padding-right: 6px;
+    padding-left: 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-text {
+    font-size: 14px;
+    max-height: 70vh;
+    padding-right: 4px;
+    padding-left: 4px;
+  }
+}
+
 
 
 /* ================= БЛОК NEWS-ПАРТНЕРЫ ================= */
