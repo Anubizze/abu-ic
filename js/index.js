@@ -52,8 +52,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-
-
   window.addEventListener('resize', () => {
     if (window.innerWidth > 768) {
       menuPages?.classList.remove('active');
@@ -64,50 +62,66 @@ document.addEventListener("DOMContentLoaded", () => {
   // === АККОРДЕОНЫ ===
   document.querySelectorAll('.accordion-toggle').forEach(button => {
     button.addEventListener('click', (e) => {
-      // Не обрабатывать клик по <a> внутри кнопки
       if (e.target.tagName === 'A') return;
-
       const content = button.nextElementSibling;
       if (!content || !content.classList.contains('accordion-content')) return;
 
-      // Закрыть все
       document.querySelectorAll('.accordion-content').forEach(el => {
         if (el !== content) el.style.display = 'none';
       });
 
-      // Переключить текущий
       content.style.display = content.style.display === 'block' ? 'none' : 'block';
     });
   });
 
-  // === МОДАЛКИ ===
+  // === УТИЛИТА ДЛЯ ЗАКРЫТИЯ ВСЕХ МОДАЛОК ===
+  function closeAllModals() {
+    document.querySelectorAll('.modal').forEach(modal => {
+      modal.style.display = 'none';
+    });
+  }
+
+  // === УНИВЕРСАЛЬНАЯ НАСТРОЙКА МОДАЛКИ ===
   function setupModal(openId, modalId, closeId) {
     const openBtn = document.getElementById(openId);
     const modal = document.getElementById(modalId);
     const closeBtn = document.getElementById(closeId);
 
     if (openBtn && modal && closeBtn) {
-      openBtn.addEventListener("click", () => modal.style.display = "block");
-      closeBtn.addEventListener("click", () => modal.style.display = "none");
+      openBtn.addEventListener("click", () => {
+        closeAllModals();
+        modal.style.display = "flex";
+      });
+
+      closeBtn.addEventListener("click", () => {
+        modal.style.display = "none";
+      });
+
       window.addEventListener("click", (e) => {
-        if (e.target === modal) modal.style.display = "none";
+        if (e.target === modal) {
+          modal.style.display = "none";
+        }
       });
     }
   }
 
+  // === 🇰🇿 МОДАЛКИ СТРАН ===
   setupModal("openModalKazakhstan", "modalKazakhstan", "closeModalKazakhstan");
   setupModal("openModalSemey", "modalSemey", "closeModalSemey");
 
-  // Университеты - динамические модалки
+  // ===  МОДАЛКИ УНИВЕРСИТЕТОВ ===
   document.querySelectorAll('.btn-universities').forEach(button => {
     button.addEventListener('click', () => {
       const country = button.getAttribute('data-country');
       const modal = document.getElementById(`modal-${country}`);
-      if (modal) modal.style.display = "block";
+      if (modal) {
+        closeAllModals();
+        modal.style.display = "flex";
+      }
     });
   });
 
-  // Закрытие модалок по X
+  // === ЗАКРЫТИЕ ПО X ===
   document.querySelectorAll('.modal .close').forEach(btn => {
     btn.addEventListener('click', () => {
       const modal = btn.closest('.modal');
@@ -115,10 +129,15 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Закрытие по фону
+  // === ЗАКРЫТИЕ ПО ФОНУ ===
   window.addEventListener('click', (e) => {
     if (e.target.classList.contains('modal')) {
       e.target.style.display = 'none';
     }
   });
+
+  // === НА СТАРТЕ — ВСЕ МОДАЛКИ СКРЫТЫ ===
+  closeAllModals();
 });
+
+
