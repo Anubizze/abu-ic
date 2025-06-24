@@ -1,9 +1,9 @@
 
-/*Обнуление*/More actions
+/*Обнуление*/
 *{padding:0;margin:0;border:0;}
 *,*:before,*:after{-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;}
 :focus,:active{outline:none;}
-a:focus,a:active{outline:none;}More actions
+a:focus,a:active{outline:none;}
 nav,footer,header,aside{display:block;}
 html,body{height:100%;width:100%;font-size:100%;line-height:1;font-size:14px;-ms-text-size-adjust:100%;-moz-text-size-adjust:100%;-webkit-text-size-adjust:100%;}
 input,button,textarea{font-family:inherit;}
@@ -224,13 +224,12 @@ a{
 
   .menu__pages {
     position: absolute;
-    top: 99px;
     left: 0;
     right: 0;
     background-color: black;
     flex-direction: column;
     align-items: flex-start;
-    padding:  20px 20px 30px 20px;
+    padding:  0px 20px 30px 20px;
     gap: 10px;
     display: none;
   }
@@ -2123,87 +2122,6 @@ body {
 }
 
 
-
-
-.has-submenu {
-  position: relative;
-}
-
-.submenu {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background-color: rgba(17, 17, 17, 0.9);
-  padding: 0; 
-  border-radius: 8px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-  min-width: 250px;
-  z-index: 1000;
-  opacity: 0;
-  transform: translateY(10px);
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.has-submenu:hover .submenu {
-  display: block;
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.submenu li {
-  white-space: nowrap;
-  width: 100%; 
-}
-
-.submenu li a {
-  display: block;
-  width: 100%;
-  padding: 12px 20px;
-  color: white;
-  font-size: 16px;
-  background-color: transparent;
-  border-radius: 0; 
-  text-decoration: none;
-  text-align: left;
-  transition: background-color 0.3s ease;
-  box-sizing: border-box;
-}
-
-.submenu li a:hover {
-  background-color: rgba(255, 255, 255, 0.1); 
-}
-
-.submenu li {
-  white-space: nowrap;
-}
-
-.submenu li a {
-  background-repeat: no-repeat;
-  background-position: left center;
-  background-color: transparent;
-  transition: background-color 0.3s ease;
-}
-
-/* С 1200px до 1600px — сдвигаем влево */
-@media (min-width: 1200px) and (max-width: 1600px) {
-    .submenu {
-        left: auto;
-        right: 0;
-        transform: translateX(-30px);
-    }
-}
-
-/* Свыше 1600px — возвращаем стандартное поведение */
-@media (min-width: 1601px) {
-    .submenu {
-        left: 0;
-        right: auto;
-        transform: none;
-    }
-}
-
-
 .erasmus-container,
 .project-container,
 .news-section,
@@ -2712,4 +2630,123 @@ html, body {
 
 
 
+.has-submenu {
+  position: relative;
+}
 
+.submenu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: rgba(17, 17, 17, 0.9);
+  padding: 0; /* сбрасываем отступы, переносим в <a> */
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+
+  z-index: 1000;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.has-submenu:hover .submenu {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.submenu li {
+  white-space: nowrap;
+  width: 100%; /* ключевой момент */
+}
+
+.submenu li a {
+  display: block;
+  width: 100%;
+  padding: 12px 20px;
+  color: white;
+  font-size: 16px;
+  background-color: transparent;
+  border-radius: 0; /* можно убрать округления */
+  text-decoration: none;
+  text-align: left;
+  transition: background-color 0.3s ease;
+  box-sizing: border-box;
+}
+
+.submenu li a:hover {
+  background-color: rgba(255, 255, 255, 0.1); /* белое полупрозрачное выделение на всю ширину */
+}
+
+.submenu li {
+  white-space: nowrap;
+}
+
+.submenu li a {
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-color: transparent;
+  transition: background-color 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .has-submenu {
+    width: 100%;
+  }
+
+  .has-submenu .submenu {
+    display: none;
+    position: static;
+    background-color: #1a1a1a;
+    width: fit-content;
+    max-width: 90%;
+    padding: 6px;
+    margin: 6px 0 0 0;
+    border-radius: 6px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    flex-direction: column;
+  }
+
+  .has-submenu.active .submenu {
+    display: flex;
+  }
+
+  .submenu li {
+    width: auto; /* <--- добавь это */
+  }
+
+  .submenu li a {
+    display: inline-block; /* не block, чтобы не растягивалось */
+    width: fit-content; /* ширина только по контенту */
+    width: 180px;
+    padding: 8px 0 0 0 ;
+    font-size: 15px;
+    color: white;
+    white-space: nowrap;
+    box-sizing: border-box;
+    background-color: transparent;
+  }
+}
+
+
+
+
+
+/* С 1200px до 1600px — сдвигаем влево */
+@media (min-width: 1200px) and (max-width: 1600px) {
+    .submenu {
+        left: auto;
+        right: 0;
+        transform: translateX(-30px); /* подстрой размер смещения */
+    }
+}
+
+/* Свыше 1600px — возвращаем стандартное поведение */
+@media (min-width: 1601px) {
+    .submenu {
+        left: 0;
+        right: auto;
+        transform: none;
+    }
+}
