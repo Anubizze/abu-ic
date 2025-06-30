@@ -2413,3 +2413,22 @@ a{
   transition: color 0.3s ease;
 }
 
+.submenu-arrow {
+  margin-left: 8px;
+  width: 18px;
+  height: 18px;
+  transition: transform 0.3s ease;
+  vertical-align: middle;
+}
+
+/* Поворот на мобильных (по клику) */
+.has-submenu.active .submenu-arrow {
+  transform: rotate(180deg);
+}
+
+/* Поворот на десктопах (при наведении) */
+@media (min-width: 769px) {
+  .has-submenu:hover > .submenu-toggle .submenu-arrow {
+    transform: rotate(180deg);
+  }
+}
