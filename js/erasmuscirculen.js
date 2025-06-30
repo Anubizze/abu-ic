@@ -281,3 +281,15 @@
   // === НА СТАРТЕ — ВСЕ МОДАЛКИ СКРЫТЫ ===
   closeAllModals();
 });
+
+// === ЗАКРЫТИЕ ВЫПАДАЮЩИХ МЕНЮ ПРИ КЛИКЕ ВНЕ ===
+document.addEventListener('click', (e) => {
+  const isInsideMenu = e.target.closest('.has-submenu');
+  const isToggleButton = e.target.classList.contains('submenu-toggle');
+
+  if (!isInsideMenu && !isToggleButton) {
+    document.querySelectorAll('.has-submenu.active').forEach(item => {
+      item.classList.remove('active');
+    });
+  }
+});
