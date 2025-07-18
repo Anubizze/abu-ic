@@ -2773,7 +2773,12 @@ body {
   justify-content: flex-start;
   align-items: center;
 }
-
+@media (max-width: 768px) {
+  .menu {
+    padding: 5px 10px 50px 10px !important; /* сверху, справа, снизу, слева */
+    height: auto !important; /* чтобы высота подстраивалась под контент */
+  }
+}
 .container__mschool_eramus_erasmus_circulen{
     display: flex;
     justify-content: flex-start;
