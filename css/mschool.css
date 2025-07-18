@@ -2775,7 +2775,7 @@ body {
 }
 @media (max-width: 768px) {
   .menu {
-    padding: 5px 10px 50px 10px !important; /* сверху, справа, снизу, слева */
+    padding: 30px 10px 30px 10px !important; /* сверху, справа, снизу, слева */
     height: auto !important; /* чтобы высота подстраивалась под контент */
   }
 }
