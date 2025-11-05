@@ -78,24 +78,9 @@
                 <form id="newsForm" class="news-form">
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="newsTitle">Заголовок новости *</label>
-                            <input type="text" id="newsTitle" name="title" required placeholder="Введите заголовок новости">
-                        </div>
-                        
-                        <div class="form-group">
                             <label for="newsDate">Дата публикации *</label>
                             <input type="date" id="newsDate" name="date" required>
                         </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="newsDescription">Краткое описание *</label>
-                        <textarea id="newsDescription" name="description" required placeholder="Введите краткое описание новости" rows="3"></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="newsContent">Полный текст новости *</label>
-                        <textarea id="newsContent" name="content" required placeholder="Введите полный текст новости" rows="8"></textarea>
                     </div>
 
                     <!-- Загрузка изображения -->
@@ -129,34 +114,46 @@
                         <div class="lang-content">
                             <div class="lang-panel active" data-lang="ru">
                                 <div class="form-group">
-                                    <label>Заголовок (RU)</label>
-                                    <input type="text" name="title_ru" placeholder="Заголовок на русском">
+                                    <label>Заголовок (RU) *</label>
+                                    <input type="text" name="title_ru" required placeholder="Заголовок на русском">
                                 </div>
                                 <div class="form-group">
-                                    <label>Описание (RU)</label>
-                                    <textarea name="description_ru" placeholder="Описание на русском" rows="3"></textarea>
+                                    <label>Краткое описание (RU) *</label>
+                                    <textarea name="description_ru" required placeholder="Краткое описание на русском" rows="3"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Полный текст новости (RU) *</label>
+                                    <textarea name="content_ru" required placeholder="Полный текст новости на русском" rows="8"></textarea>
                                 </div>
                             </div>
 
                             <div class="lang-panel" data-lang="en">
                                 <div class="form-group">
-                                    <label>Title (EN)</label>
-                                    <input type="text" name="title_en" placeholder="Title in English">
+                                    <label>Title (EN) *</label>
+                                    <input type="text" name="title_en" required placeholder="Title in English">
                                 </div>
                                 <div class="form-group">
-                                    <label>Description (EN)</label>
-                                    <textarea name="description_en" placeholder="Description in English" rows="3"></textarea>
+                                    <label>Description (EN) *</label>
+                                    <textarea name="description_en" required placeholder="Description in English" rows="3"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Full text (EN) *</label>
+                                    <textarea name="content_en" required placeholder="Full text in English" rows="8"></textarea>
                                 </div>
                             </div>
 
                             <div class="lang-panel" data-lang="kz">
                                 <div class="form-group">
-                                    <label>Тақырып (KZ)</label>
-                                    <input type="text" name="title_kz" placeholder="Тақырып қазақша">
+                                    <label>Тақырып (KZ) *</label>
+                                    <input type="text" name="title_kz" required placeholder="Тақырып қазақша">
                                 </div>
                                 <div class="form-group">
-                                    <label>Сипаттама (KZ)</label>
-                                    <textarea name="description_kz" placeholder="Сипаттама қазақша" rows="3"></textarea>
+                                    <label>Сипаттама (KZ) *</label>
+                                    <textarea name="description_kz" required placeholder="Сипаттама қазақша" rows="3"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Толық мәтін (KZ) *</label>
+                                    <textarea name="content_kz" required placeholder="Толық мәтін қазақша" rows="8"></textarea>
                                 </div>
                             </div>
                         </div>

@@ -173,9 +173,10 @@ class NewsAdmin {
         }
     }
 
-    setupLanguageTabs() {
-        const tabs = document.querySelectorAll('.lang-tab');
-        const panels = document.querySelectorAll('.lang-panel');
+    setupLanguageTabs(selector = '') {
+        const baseSelector = selector || '';
+        const tabs = document.querySelectorAll(`${baseSelector} .lang-tab`);
+        const panels = document.querySelectorAll(`${baseSelector} .lang-panel`);
 
         tabs.forEach(tab => {
             tab.addEventListener('click', () => {
@@ -372,30 +373,46 @@ class NewsAdmin {
             throw new Error('Необходимо добавить изображение или URL изображения');
         }
         
+        // Получаем многоязычные данные
+        const title_ru = formData.get('title_ru');
+        const title_en = formData.get('title_en');
+        const title_kz = formData.get('title_kz');
+        const description_ru = formData.get('description_ru');
+        const description_en = formData.get('description_en');
+        const description_kz = formData.get('description_kz');
+        const content_ru = formData.get('content_ru');
+        const content_en = formData.get('content_en');
+        const content_kz = formData.get('content_kz');
+        
+        // Используем русский заголовок как основной (fallback)
+        const mainTitle = title_ru || title_en || title_kz || 'Новость';
+        
         // Формируем данные для Supabase
         const newsData = {
-            title: formData.get('title'),
-            content: formData.get('content'), // Используем content как основной текст
+            title: mainTitle,
             image_url: finalImageUrl,
             author: 'Admin'
         };
         
         // Сохраняем многоязычные данные в JSON формате в поле content
-        // Или можно расширить таблицу в будущем
         const multilangData = {
-            description: formData.get('description'),
-            title_ru: formData.get('title_ru') || formData.get('title'),
-            title_en: formData.get('title_en') || formData.get('title'),
-            title_kz: formData.get('title_kz') || formData.get('title'),
-            description_ru: formData.get('description_ru') || formData.get('description'),
-            description_en: formData.get('description_en') || formData.get('description'),
-            description_kz: formData.get('description_kz') || formData.get('description'),
+            title_ru: title_ru || '',
+            title_en: title_en || '',
+            title_kz: title_kz || '',
+            description_ru: description_ru || '',
+            description_en: description_en || '',
+            description_kz: description_kz || '',
+            content_ru: content_ru || '',
+            content_en: content_en || '',
+            content_kz: content_kz || '',
             date: formData.get('date')
         };
         
         // Сохраняем многоязычные данные в поле content как JSON
+        // Используем content_ru как основной контент для обратной совместимости
         newsData.content = JSON.stringify({
-            main: formData.get('content'),
+            main: content_ru || '', // Для обратной совместимости
+            description: description_ru || '', // Для обратной совместимости
             ...multilangData
         });
         
@@ -452,26 +469,45 @@ class NewsAdmin {
             throw new Error('Необходимо добавить изображение или URL изображения');
         }
         
+        // Получаем многоязычные данные
+        const title_ru = formData.get('title_ru');
+        const title_en = formData.get('title_en');
+        const title_kz = formData.get('title_kz');
+        const description_ru = formData.get('description_ru');
+        const description_en = formData.get('description_en');
+        const description_kz = formData.get('description_kz');
+        const content_ru = formData.get('content_ru');
+        const content_en = formData.get('content_en');
+        const content_kz = formData.get('content_kz');
+        
+        // Используем русский заголовок как основной (fallback)
+        const mainTitle = title_ru || title_en || title_kz || existingNews?.title || 'Новость';
+        
         // Формируем данные для обновления
         const newsData = {
-            title: formData.get('title'),
+            title: mainTitle,
             image_url: finalImageUrl,
         };
         
         // Сохраняем многоязычные данные
         const multilangData = {
-            description: formData.get('description'),
-            title_ru: formData.get('title_ru') || formData.get('title'),
-            title_en: formData.get('title_en') || formData.get('title'),
-            title_kz: formData.get('title_kz') || formData.get('title'),
-            description_ru: formData.get('description_ru') || formData.get('description'),
-            description_en: formData.get('description_en') || formData.get('description'),
-            description_kz: formData.get('description_kz') || formData.get('description'),
+            title_ru: title_ru || '',
+            title_en: title_en || '',
+            title_kz: title_kz || '',
+            description_ru: description_ru || '',
+            description_en: description_en || '',
+            description_kz: description_kz || '',
+            content_ru: content_ru || '',
+            content_en: content_en || '',
+            content_kz: content_kz || '',
             date: formData.get('date')
         };
         
+        // Сохраняем многоязычные данные в поле content как JSON
+        // Используем content_ru как основной контент для обратной совместимости
         newsData.content = JSON.stringify({
-            main: formData.get('content'),
+            main: content_ru || '', // Для обратной совместимости
+            description: description_ru || '', // Для обратной совместимости
             ...multilangData
         });
         
@@ -516,23 +552,118 @@ class NewsAdmin {
         }
     }
 
+    createEditFormHTML() {
+        const editForm = document.getElementById('editForm');
+        if (!editForm || editForm.innerHTML.trim() !== '') {
+            return; // Форма уже создана
+        }
+        
+        editForm.innerHTML = `
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="editDate">Дата публикации *</label>
+                    <input type="date" id="editDate" name="date" required>
+                </div>
+            </div>
+
+            <!-- Загрузка изображения -->
+            <div class="form-group">
+                <label for="editImage">Изображение новости</label>
+                <div class="image-upload-container">
+                    <input type="file" id="editImage" name="image" accept="image/*">
+                    <div class="image-preview" id="editImagePreview">
+                        <i class="fas fa-image"></i>
+                        <span>Выберите изображение</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- URL изображения (альтернатива загрузке) -->
+            <div class="form-group">
+                <label for="editImageUrl">Или введите URL изображения</label>
+                <input type="url" id="editImageUrl" name="imageUrl" placeholder="https://example.com/image.jpg">
+            </div>
+
+            <!-- Многоязычность -->
+            <div class="multilang-section">
+                <h3><i class="fas fa-globe"></i> Многоязычные версии</h3>
+                
+                <div class="lang-tabs">
+                    <button type="button" class="lang-tab active" data-lang="ru">Русский</button>
+                    <button type="button" class="lang-tab" data-lang="en">English</button>
+                    <button type="button" class="lang-tab" data-lang="kz">Қазақша</button>
+                </div>
+
+                <div class="lang-content">
+                    <div class="lang-panel active" data-lang="ru">
+                        <div class="form-group">
+                            <label>Заголовок (RU) *</label>
+                            <input type="text" name="title_ru" required placeholder="Заголовок на русском">
+                        </div>
+                        <div class="form-group">
+                            <label>Краткое описание (RU) *</label>
+                            <textarea name="description_ru" required placeholder="Краткое описание на русском" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Полный текст новости (RU) *</label>
+                            <textarea name="content_ru" required placeholder="Полный текст новости на русском" rows="8"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="lang-panel" data-lang="en">
+                        <div class="form-group">
+                            <label>Title (EN) *</label>
+                            <input type="text" name="title_en" required placeholder="Title in English">
+                        </div>
+                        <div class="form-group">
+                            <label>Description (EN) *</label>
+                            <textarea name="description_en" required placeholder="Description in English" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Full text (EN) *</label>
+                            <textarea name="content_en" required placeholder="Full text in English" rows="8"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="lang-panel" data-lang="kz">
+                        <div class="form-group">
+                            <label>Тақырып (KZ) *</label>
+                            <input type="text" name="title_kz" required placeholder="Тақырып қазақша">
+                        </div>
+                        <div class="form-group">
+                            <label>Сипаттама (KZ) *</label>
+                            <textarea name="description_kz" required placeholder="Сипаттама қазақша" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Толық мәтін (KZ) *</label>
+                            <textarea name="content_kz" required placeholder="Толық мәтін қазақша" rows="8"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save"></i>
+                    Сохранить изменения
+                </button>
+                <button type="button" class="btn btn-secondary" id="cancelEdit">
+                    <i class="fas fa-times"></i>
+                    Отмена
+                </button>
+            </div>
+        `;
+        
+        // Инициализируем табы языков для формы редактирования
+        this.setupLanguageTabs('#editForm');
+    }
+
     editNews(id) {
         const news = this.news.find(n => n.id === id);
         if (news) {
             this.currentEditId = id;
+            this.createEditFormHTML(); // Создаем форму если её еще нет
             this.populateEditForm(news);
-            // Инициализируем табы языков для формы редактирования
-            const editMultilangSection = document.querySelector('#editForm .multilang-section');
-            if (editMultilangSection) {
-                const editTabs = editMultilangSection.querySelectorAll('.lang-tab');
-                const editPanels = editMultilangSection.querySelectorAll('.lang-panel');
-                editTabs.forEach(t => t.classList.remove('active'));
-                editPanels.forEach(p => p.classList.remove('active'));
-                const firstTab = editTabs[0];
-                const firstPanel = editMultilangSection.querySelector('.lang-panel[data-lang="ru"]');
-                if (firstTab) firstTab.classList.add('active');
-                if (firstPanel) firstPanel.classList.add('active');
-            }
             document.getElementById('editModal').style.display = 'block';
         }
     }
@@ -549,19 +680,19 @@ class NewsAdmin {
         }
         
         // Заполняем основную форму
-        editForm.querySelector('[name="title"]').value = news.title || '';
         editForm.querySelector('[name="date"]').value = contentData.date || '';
-        editForm.querySelector('[name="description"]').value = contentData.description || '';
-        editForm.querySelector('[name="content"]').value = contentData.main || '';
         editForm.querySelector('[name="imageUrl"]').value = news.image_url || '';
         
         // Заполняем многоязычные поля
-        editForm.querySelector('[name="title_ru"]').value = contentData.title_ru || '';
+        editForm.querySelector('[name="title_ru"]').value = contentData.title_ru || contentData.title || news.title || '';
         editForm.querySelector('[name="title_en"]').value = contentData.title_en || '';
         editForm.querySelector('[name="title_kz"]').value = contentData.title_kz || '';
-        editForm.querySelector('[name="description_ru"]').value = contentData.description_ru || '';
+        editForm.querySelector('[name="description_ru"]').value = contentData.description_ru || contentData.description || '';
         editForm.querySelector('[name="description_en"]').value = contentData.description_en || '';
         editForm.querySelector('[name="description_kz"]').value = contentData.description_kz || '';
+        editForm.querySelector('[name="content_ru"]').value = contentData.content_ru || contentData.main || '';
+        editForm.querySelector('[name="content_en"]').value = contentData.content_en || '';
+        editForm.querySelector('[name="content_kz"]').value = contentData.content_kz || '';
         
         // Показываем изображение если есть
         if (news.image_url) {
@@ -755,25 +886,25 @@ class NewsAdmin {
 
     validateFormData(formData) {
         console.log('=== Валидация формы ===');
-        const title = formData.get('title');
         const date = formData.get('date');
-        const description = formData.get('description');
-        const content = formData.get('content');
+        const title_ru = formData.get('title_ru');
+        const description_ru = formData.get('description_ru');
+        const content_ru = formData.get('content_ru');
         const imageFile = formData.get('image');
         const imageUrl = formData.get('imageUrl');
         
         console.log('Данные формы:', {
-            title: title?.substring(0, 50),
+            title_ru: title_ru?.substring(0, 50),
             date,
-            hasDescription: !!description,
-            hasContent: !!content,
+            hasDescription_ru: !!description_ru,
+            hasContent_ru: !!content_ru,
             hasImageFile: imageFile && imageFile.size > 0,
             hasImageUrl: !!imageUrl
         });
         
-        if (!title || !title.trim()) {
-            console.log('✗ Ошибка: Заголовок пустой');
-            this.showNotification('Заголовок новости обязателен!', 'error');
+        if (!title_ru || !title_ru.trim()) {
+            console.log('✗ Ошибка: Заголовок (RU) пустой');
+            this.showNotification('Заголовок новости на русском языке обязателен!', 'error');
             return false;
         }
         if (!date) {
@@ -781,14 +912,14 @@ class NewsAdmin {
             this.showNotification('Дата публикации обязательна!', 'error');
             return false;
         }
-        if (!description || !description.trim()) {
-            console.log('✗ Ошибка: Описание пустое');
-            this.showNotification('Описание новости обязательно!', 'error');
+        if (!description_ru || !description_ru.trim()) {
+            console.log('✗ Ошибка: Описание (RU) пустое');
+            this.showNotification('Описание новости на русском языке обязательно!', 'error');
             return false;
         }
-        if (!content || !content.trim()) {
-            console.log('✗ Ошибка: Содержание пустое');
-            this.showNotification('Содержание новости обязательно!', 'error');
+        if (!content_ru || !content_ru.trim()) {
+            console.log('✗ Ошибка: Содержание (RU) пустое');
+            this.showNotification('Содержание новости на русском языке обязательно!', 'error');
             return false;
         }
         if ((!imageFile || imageFile.size === 0) && !imageUrl) {

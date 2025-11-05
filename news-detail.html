@@ -88,6 +88,41 @@
             font-size: 3rem;
             margin-bottom: 1rem;
         }
+        .translation-buttons {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            align-items: center;
+        }
+        .translation-btn {
+            padding: 8px 16px;
+            background: #f8f9fa;
+            border: 2px solid #dee2e6;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #495057;
+            transition: all 0.3s ease;
+            min-width: 50px;
+            text-align: center;
+        }
+        .translation-btn:hover {
+            background: #e9ecef;
+            border-color: #3498db;
+            color: #3498db;
+        }
+        .translation-btn.active {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            border-color: #3498db;
+            color: white;
+        }
+        .translation-label {
+            margin-right: 0.5rem;
+            color: #6c757d;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
     </style>
 </head>
 <body>
@@ -129,6 +164,145 @@
     <script src="js/language-switcher.js"></script>
     
     <script>
+        // Глобальная переменная для хранения данных новости
+        let currentNewsData = null;
+        let currentLanguage = 'RU'; // По умолчанию русский
+
+        // Функция загрузки языка из localStorage
+        function loadLanguage() {
+            const savedLanguage = localStorage.getItem('newsLanguage');
+            return savedLanguage && ['RU', 'KZ', 'EN'].includes(savedLanguage) ? savedLanguage : 'RU';
+        }
+
+        // Функция сохранения языка в localStorage
+        function saveLanguage(lang) {
+            localStorage.setItem('newsLanguage', lang);
+        }
+
+        // Функция форматирования даты
+        function formatDate(dateString, lang = 'RU') {
+            const date = new Date(dateString);
+            const locales = {
+                'RU': 'ru-RU',
+                'EN': 'en-US',
+                'KZ': 'kk-KZ'
+            };
+            return date.toLocaleDateString(locales[lang] || 'ru-RU', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+        }
+
+        // Функция отображения новости с учетом языка
+        function renderNews(newsData, contentData, lang) {
+            const title = contentData[`title_${lang.toLowerCase()}`] || contentData.title_ru || newsData.title;
+            const description = contentData[`description_${lang.toLowerCase()}`] || contentData.description || '';
+            // Используем content_ru/content_en/content_kz, если есть, иначе fallback на main
+            const mainContent = contentData[`content_${lang.toLowerCase()}`] || contentData.main || '';
+
+            // Тексты для кнопок и метаданных
+            const texts = {
+                RU: {
+                    back: 'Назад к новостям',
+                    calendar: 'Календарь',
+                    user: 'Пользователь',
+                    loading: 'Загрузка новости...',
+                    error: 'Ошибка загрузки новости',
+                    notFound: 'Новость не найдена'
+                },
+                EN: {
+                    back: 'Back to news',
+                    calendar: 'Calendar',
+                    user: 'User',
+                    loading: 'Loading news...',
+                    error: 'Error loading news',
+                    notFound: 'News not found'
+                },
+                KZ: {
+                    back: 'Жаңалықтарға оралу',
+                    calendar: 'Күнтізбе',
+                    user: 'Пайдаланушы',
+                    loading: 'Жаңалық жүктелуде...',
+                    error: 'Жаңалықты жүктеу қатесі',
+                    notFound: 'Жаңалық табылмады'
+                }
+            };
+
+            const t = texts[lang] || texts.RU;
+
+            return `
+                <div class="translation-buttons">
+                    <span class="translation-label">Язык:</span>
+                    <button class="translation-btn ${lang === 'RU' ? 'active' : ''}" data-lang="RU" onclick="switchNewsLanguage('RU')">RU</button>
+                    <button class="translation-btn ${lang === 'KZ' ? 'active' : ''}" data-lang="KZ" onclick="switchNewsLanguage('KZ')">KZ</button>
+                    <button class="translation-btn ${lang === 'EN' ? 'active' : ''}" data-lang="EN" onclick="switchNewsLanguage('EN')">EN</button>
+                </div>
+                <article class="news-detail">
+                    <header class="news-detail-header">
+                        <h1 class="news-detail-title">${escapeHtml(title)}</h1>
+                        <div class="news-detail-meta">
+                            <span><i class="fas fa-calendar"></i> ${formatDate(contentData.date || newsData.created_at, lang)}</span>
+                            <span><i class="fas fa-user"></i> ${newsData.author || 'Admin'}</span>
+                        </div>
+                    </header>
+                    
+                    ${newsData.image_url ? `
+                    <div class="news-detail-image">
+                        <img src="${newsData.image_url}" alt="${escapeHtml(title)}">
+                    </div>
+                    ` : ''}
+                    
+                    <div class="news-detail-content">
+                        ${description ? `
+                        <div class="news-detail-description">
+                            ${escapeHtml(description).replace(/\n/g, '<br>')}
+                        </div>
+                        ` : ''}
+                        
+                        <div class="news-detail-text">
+                            ${escapeHtml(mainContent).replace(/\n/g, '<br>')}
+                        </div>
+                    </div>
+                </article>
+            `;
+        }
+
+        // Функция экранирования HTML
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Функция переключения языка
+        function switchNewsLanguage(lang) {
+            if (!currentNewsData) return;
+            
+            currentLanguage = lang;
+            saveLanguage(lang);
+            
+            // Парсим contentData
+            let contentData = {};
+            try {
+                contentData = typeof currentNewsData.content === 'string' 
+                    ? JSON.parse(currentNewsData.content) 
+                    : currentNewsData.content;
+            } catch (e) {
+                contentData = { main: currentNewsData.content || '', description: '' };
+            }
+
+            // Обновляем отображение
+            const content = document.getElementById('newsDetailContent');
+            if (content) {
+                content.innerHTML = renderNews(currentNewsData, contentData, lang);
+            }
+
+            // Обновляем title страницы
+            const title = contentData[`title_${lang.toLowerCase()}`] || contentData.title_ru || currentNewsData.title;
+            document.title = `${title} - ABU`;
+        }
+
         // Загружаем новость по ID из URL параметров
         async function loadNewsDetail() {
             const urlParams = new URLSearchParams(window.location.search);
@@ -170,6 +344,12 @@
 
                 console.log('Новость загружена:', data);
 
+                // Сохраняем данные новости глобально
+                currentNewsData = data;
+
+                // Загружаем сохраненный язык
+                currentLanguage = loadLanguage();
+
                 // Парсим JSON из content
                 let contentData = {};
                 try {
@@ -178,51 +358,15 @@
                     contentData = { main: data.content || '', description: '' };
                 }
 
-                // Форматируем дату
-                const formatDate = (dateString) => {
-                    const date = new Date(dateString);
-                    return date.toLocaleDateString('ru-RU', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric'
-                    });
-                };
-
-                const newsDate = contentData.date || data.created_at;
-
                 // Отображаем новость
-                document.getElementById('newsDetailContent').innerHTML = `
-                    <article class="news-detail">
-                        <header class="news-detail-header">
-                            <h1 class="news-detail-title">${data.title}</h1>
-                            <div class="news-detail-meta">
-                                <span><i class="fas fa-calendar"></i> ${formatDate(newsDate)}</span>
-                                <span><i class="fas fa-user"></i> ${data.author || 'Admin'}</span>
-                            </div>
-                        </header>
-                        
-                        ${data.image_url ? `
-                        <div class="news-detail-image">
-                            <img src="${data.image_url}" alt="${data.title}">
-                        </div>
-                        ` : ''}
-                        
-                        <div class="news-detail-content">
-                            ${contentData.description ? `
-                            <div class="news-detail-description">
-                                ${contentData.description}
-                            </div>
-                            ` : ''}
-                            
-                            <div class="news-detail-text">
-                                ${(contentData.main || '').replace(/\n/g, '<br>')}
-                            </div>
-                        </div>
-                    </article>
-                `;
+                const content = document.getElementById('newsDetailContent');
+                if (content) {
+                    content.innerHTML = renderNews(data, contentData, currentLanguage);
+                }
 
                 // Обновляем title страницы
-                document.title = `${data.title} - ABU`;
+                const title = contentData[`title_${currentLanguage.toLowerCase()}`] || contentData.title_ru || data.title;
+                document.title = `${title} - ABU`;
 
             } catch (error) {
                 console.error('Ошибка загрузки новости:', error);
