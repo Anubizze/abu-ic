@@ -1322,7 +1322,23 @@ button.Teacher__title4 {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
             gap: 30px;
-            margin-bottom: 50px;
+            margin-bottom: 30px;
+        }
+        
+        .pagination-container {
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .pagination-info {
+            margin: 0;
+        }
+        
+        .pagination-btn {
+            min-width: 36px;
+            height: 36px;
+            padding: 0 10px;
+            font-size: 0.85rem;
         }
 
         .news-card {
@@ -2424,6 +2440,82 @@ html, body {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 30px;
+  margin-bottom: 30px;
+}
+
+/* Пагинация */
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin: 40px 0;
+  padding: 20px 0;
+  flex-wrap: wrap;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.pagination-btn {
+  min-width: 40px;
+  height: 40px;
+  padding: 0 12px;
+  border: 1px solid #dee2e6;
+  background: #fff;
+  color: #495057;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pagination-btn:hover:not(:disabled):not(.active) {
+  background: #f8f9fa;
+  border-color: #3498db;
+  color: #3498db;
+  transform: translateY(-2px);
+}
+
+.pagination-btn.active {
+  background: linear-gradient(135deg, #3498db, #2980b9);
+  border-color: #3498db;
+  color: white;
+  box-shadow: 0 2px 8px rgba(52, 152, 219, 0.3);
+}
+
+.pagination-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pagination-btn.prev,
+.pagination-btn.next {
+  font-weight: 600;
+}
+
+.pagination-info {
+  color: #6c757d;
+  font-size: 0.9rem;
+  margin: 0 15px;
+  white-space: nowrap;
+}
+
+.pagination-ellipsis {
+  padding: 0 8px;
+  color: #6c757d;
+  display: flex;
+  align-items: center;
+  font-weight: 500;
 }
 @media (max-width: 750px) {
   .news-container {

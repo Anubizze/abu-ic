@@ -2,18 +2,22 @@
 class NewsIntegration {
     constructor() {
         this.news = [];
+        this.currentPage = 1;
+        this.itemsPerPage = 6; // Количество новостей на странице
         this.init();
     }
 
     async init() {
         // Загружаем новости из Supabase при загрузке страницы
         await this.loadNewsFromSupabase();
-        this.loadNewsToPage();
+        this.loadNewsToPage(1);
         
         // Обновляем новости каждые 30 секунд
         setInterval(async () => {
+            const currentPage = this.currentPage;
             await this.loadNewsFromSupabase();
-            this.loadNewsToPage();
+            // Сохраняем текущую страницу при обновлении
+            this.loadNewsToPage(currentPage);
         }, 30000);
     }
 
@@ -53,6 +57,14 @@ class NewsIntegration {
                         contentData = { main: item.content || '', description: '' };
                     }
 
+                    // Получаем массив изображений
+                    let images = [];
+                    if (contentData.image_urls && Array.isArray(contentData.image_urls) && contentData.image_urls.length > 0) {
+                        images = contentData.image_urls;
+                    } else if (item.image_url) {
+                        images = [item.image_url];
+                    }
+                    
                     return {
                         id: item.id,
                         title: item.title,
@@ -64,11 +76,14 @@ class NewsIntegration {
                         description_en: contentData.description_en || contentData.description || '',
                         description_kz: contentData.description_kz || contentData.description || '',
                         content: contentData.main || '',
-                        image: item.image_url || null,
-                        imageUrl: item.image_url || null,
+                        image: images.length > 0 ? images[0] : null,
+                        imageUrl: images.length > 0 ? images[0] : null,
+                        images: images, // Массив всех изображений
                         date: contentData.date || item.created_at,
                         createdAt: item.created_at,
-                        updatedAt: item.updated_at
+                        updatedAt: item.updated_at,
+                        // Сохраняем contentData для доступа к image_urls в news-detail.html
+                        contentData: contentData
                     };
                 });
                 return; // Успешно загрузили из Supabase
@@ -118,7 +133,7 @@ class NewsIntegration {
         }
     }
 
-    loadNewsToPage() {
+    loadNewsToPage(page = 1) {
         const newsContainer = document.querySelector('.news-container');
         if (!newsContainer) return;
 
@@ -130,16 +145,24 @@ class NewsIntegration {
                     <p>Новости загружаются...</p>
                 </div>
             `;
+            document.getElementById('paginationContainer').innerHTML = '';
             return;
         }
 
         // Сортируем новости по дате (новые сверху)
         const sortedNews = [...this.news].sort((a, b) => new Date(b.date) - new Date(a.date));
 
-        // Отображаем только последние 6 новостей
-        const recentNews = sortedNews.slice(0, 6);
+        // Вычисляем пагинацию
+        const totalPages = Math.ceil(sortedNews.length / this.itemsPerPage);
+        this.currentPage = Math.max(1, Math.min(page, totalPages));
+        
+        // Получаем новости для текущей страницы
+        const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+        const endIndex = startIndex + this.itemsPerPage;
+        const paginatedNews = sortedNews.slice(startIndex, endIndex);
 
-        newsContainer.innerHTML = recentNews.map(news => `
+        // Отображаем новости текущей страницы
+        newsContainer.innerHTML = paginatedNews.map(news => `
             <div class="news-card">
                 <a href="${this.getNewsDetailUrl(news)}" class="news-link">
                     <div class="single-image">
@@ -164,6 +187,105 @@ class NewsIntegration {
                 </a>
             </div>
         `).join('');
+        
+        // Отображаем пагинацию
+        this.renderPagination(totalPages);
+    }
+    
+    renderPagination(totalPages) {
+        const paginationContainer = document.getElementById('paginationContainer');
+        if (!paginationContainer) return;
+        
+        if (totalPages <= 1) {
+            paginationContainer.innerHTML = '';
+            return;
+        }
+        
+        const currentPage = this.currentPage;
+        let paginationHTML = '<div class="pagination">';
+        
+        // Кнопка "Предыдущая"
+        paginationHTML += `
+            <button class="pagination-btn prev" onclick="newsIntegration.goToPage(${currentPage - 1})" 
+                    ${currentPage === 1 ? 'disabled' : ''}>
+                <i class="fas fa-chevron-left"></i> Предыдущая
+            </button>
+        `;
+        
+        // Номера страниц
+        const maxVisiblePages = 5;
+        let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+        let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+        
+        if (endPage - startPage < maxVisiblePages - 1) {
+            startPage = Math.max(1, endPage - maxVisiblePages + 1);
+        }
+        
+        // Первая страница
+        if (startPage > 1) {
+            paginationHTML += `
+                <button class="pagination-btn" onclick="newsIntegration.goToPage(1)">1</button>
+            `;
+            if (startPage > 2) {
+                paginationHTML += `<span class="pagination-ellipsis">...</span>`;
+            }
+        }
+        
+        // Страницы в диапазоне
+        for (let i = startPage; i <= endPage; i++) {
+            paginationHTML += `
+                <button class="pagination-btn ${i === currentPage ? 'active' : ''}" 
+                        onclick="newsIntegration.goToPage(${i})">
+                    ${i}
+                </button>
+            `;
+        }
+        
+        // Последняя страница
+        if (endPage < totalPages) {
+            if (endPage < totalPages - 1) {
+                paginationHTML += `<span class="pagination-ellipsis">...</span>`;
+            }
+            paginationHTML += `
+                <button class="pagination-btn" onclick="newsIntegration.goToPage(${totalPages})">
+                    ${totalPages}
+                </button>
+            `;
+        }
+        
+        // Кнопка "Следующая"
+        paginationHTML += `
+            <button class="pagination-btn next" onclick="newsIntegration.goToPage(${currentPage + 1})" 
+                    ${currentPage === totalPages ? 'disabled' : ''}>
+                Следующая <i class="fas fa-chevron-right"></i>
+            </button>
+        `;
+        
+        paginationHTML += '</div>';
+        
+        // Информация о странице
+        const startItem = (currentPage - 1) * this.itemsPerPage + 1;
+        const endItem = Math.min(currentPage * this.itemsPerPage, this.news.length);
+        paginationHTML += `
+            <div class="pagination-info">
+                Показано ${startItem}-${endItem} из ${this.news.length} новостей
+            </div>
+        `;
+        
+        paginationContainer.innerHTML = paginationHTML;
+    }
+    
+    goToPage(page) {
+        const totalPages = Math.ceil(this.news.length / this.itemsPerPage);
+        if (page < 1 || page > totalPages) {
+            return;
+        }
+        this.loadNewsToPage(page);
+        // Прокручиваем к началу новостей
+        const newsSection = document.querySelector('.news-container');
+        if (newsSection) {
+            newsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
     }
 
     getNewsImage(news) {

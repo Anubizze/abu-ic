@@ -76,10 +76,67 @@
                 </div>
                 
                 <form id="newsForm" class="news-form">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="newsDate">Дата публикации *</label>
-                            <input type="date" id="newsDate" name="date" required>
+                    <!-- Дата публикации -->
+                    <div class="form-group">
+                        <label for="newsDate">Дата публикации *</label>
+                        <input type="date" id="newsDate" name="date" required>
+                    </div>
+
+                    <!-- Многоязычность -->
+                    <div class="multilang-section">
+                        <h3><i class="fas fa-globe"></i> Многоязычные версии</h3>
+                        
+                        <div class="lang-tabs">
+                            <button type="button" class="lang-tab active" data-lang="ru">Русский</button>
+                            <button type="button" class="lang-tab" data-lang="en">English</button>
+                            <button type="button" class="lang-tab" data-lang="kz">Қазақша</button>
+                        </div>
+
+                        <div class="lang-content">
+                            <div class="lang-panel active" data-lang="ru">
+                                <div class="form-group">
+                                    <label>Заголовок (RU) *</label>
+                                    <input type="text" name="title_ru" placeholder="Заголовок на русском">
+                                </div>
+                                <div class="form-group">
+                                    <label>Краткое описание (RU) *</label>
+                                    <textarea name="description_ru" placeholder="Описание на русском" rows="3"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Полный текст новости (RU) *</label>
+                                    <textarea name="content_ru" placeholder="Полный текст новости на русском" rows="8"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="lang-panel" data-lang="en">
+                                <div class="form-group">
+                                    <label>Title (EN) *</label>
+                                    <input type="text" name="title_en" placeholder="Title in English">
+                                </div>
+                                <div class="form-group">
+                                    <label>Description (EN) *</label>
+                                    <textarea name="description_en" placeholder="Description in English" rows="3"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Full News Text (EN) *</label>
+                                    <textarea name="content_en" placeholder="Full news text in English" rows="8"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="lang-panel" data-lang="kz">
+                                <div class="form-group">
+                                    <label>Тақырып (KZ) *</label>
+                                    <input type="text" name="title_kz" placeholder="Тақырып қазақша">
+                                </div>
+                                <div class="form-group">
+                                    <label>Сипаттама (KZ) *</label>
+                                    <textarea name="description_kz" placeholder="Сипаттама қазақша" rows="3"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Толық мәтін (KZ) *</label>
+                                    <textarea name="content_kz" placeholder="Жаңалықтың толық мәтіні қазақша" rows="8"></textarea>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -99,64 +156,6 @@
                     <div class="form-group">
                         <label for="newsImageUrl">Или введите URL изображения</label>
                         <input type="url" id="newsImageUrl" name="imageUrl" placeholder="https://example.com/image.jpg">
-                    </div>
-
-                    <!-- Многоязычность -->
-                    <div class="multilang-section">
-                        <h3><i class="fas fa-globe"></i> Многоязычные версии</h3>
-                        
-                        <div class="lang-tabs">
-                            <button type="button" class="lang-tab active" data-lang="ru">Русский</button>
-                            <button type="button" class="lang-tab" data-lang="en">English</button>
-                            <button type="button" class="lang-tab" data-lang="kz">Қазақша</button>
-                        </div>
-
-                        <div class="lang-content">
-                            <div class="lang-panel active" data-lang="ru">
-                                <div class="form-group">
-                                    <label>Заголовок (RU) *</label>
-                                    <input type="text" name="title_ru" required placeholder="Заголовок на русском">
-                                </div>
-                                <div class="form-group">
-                                    <label>Краткое описание (RU) *</label>
-                                    <textarea name="description_ru" required placeholder="Краткое описание на русском" rows="3"></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label>Полный текст новости (RU) *</label>
-                                    <textarea name="content_ru" required placeholder="Полный текст новости на русском" rows="8"></textarea>
-                                </div>
-                            </div>
-
-                            <div class="lang-panel" data-lang="en">
-                                <div class="form-group">
-                                    <label>Title (EN) *</label>
-                                    <input type="text" name="title_en" required placeholder="Title in English">
-                                </div>
-                                <div class="form-group">
-                                    <label>Description (EN) *</label>
-                                    <textarea name="description_en" required placeholder="Description in English" rows="3"></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label>Full text (EN) *</label>
-                                    <textarea name="content_en" required placeholder="Full text in English" rows="8"></textarea>
-                                </div>
-                            </div>
-
-                            <div class="lang-panel" data-lang="kz">
-                                <div class="form-group">
-                                    <label>Тақырып (KZ) *</label>
-                                    <input type="text" name="title_kz" required placeholder="Тақырып қазақша">
-                                </div>
-                                <div class="form-group">
-                                    <label>Сипаттама (KZ) *</label>
-                                    <textarea name="description_kz" required placeholder="Сипаттама қазақша" rows="3"></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label>Толық мәтін (KZ) *</label>
-                                    <textarea name="content_kz" required placeholder="Толық мәтін қазақша" rows="8"></textarea>
-                                </div>
-                            </div>
-                        </div>
                     </div>
 
                     <div class="form-actions">
@@ -485,6 +484,11 @@
 
     <div class="news-container">
         <!-- Новости будут загружены динамически через news-integration.js -->
+    </div>
+    
+    <!-- Пагинация -->
+    <div class="pagination-container" id="paginationContainer">
+        <!-- Пагинация будет добавлена динамически -->
     </div>
 </div>
 
