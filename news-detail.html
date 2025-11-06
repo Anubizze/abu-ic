@@ -123,6 +123,323 @@
             font-weight: 500;
             font-size: 0.9rem;
         }
+        
+        /* Слайдер изображений */
+        .news-image-slider {
+            position: relative;
+            width: 100%;
+            margin-bottom: 2rem;
+        }
+        
+        .slider-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .slider-wrapper {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        
+        .slider-slide {
+            min-width: 100%;
+            width: 100%;
+            flex-shrink: 0;
+        }
+        
+        .slider-slide img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 12px;
+        }
+        
+        .slider-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: #2c3e50;
+            transition: all 0.3s ease;
+            z-index: 10;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        
+        .slider-nav:hover {
+            background: rgba(255, 255, 255, 1);
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        .slider-nav.prev {
+            left: 15px;
+        }
+        
+        .slider-nav.next {
+            right: 15px;
+        }
+        
+        .slider-nav:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .slider-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 15px;
+        }
+        
+        .slider-indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #ccc;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 0;
+        }
+        
+        .slider-indicator.active {
+            background: #3498db;
+            transform: scale(1.2);
+        }
+        
+        .slider-counter {
+            text-align: center;
+            margin-top: 10px;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+        
+        .news-detail-description {
+            font-size: 1.2rem;
+            color: #34495e;
+            font-weight: 500;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+            text-align: left;
+        }
+        .news-detail-text {
+            margin-top: 0;
+            padding-top: 0;
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #2c3e50;
+            text-align: left;
+        }
+        .news-detail-text p {
+            margin: 0 0 1rem 0;
+            padding: 0;
+            text-align: left;
+        }
+        .news-detail-text p:last-child {
+            margin-bottom: 0;
+        }
+        .news-section-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #0066cc;
+            margin: 1.5rem 0 1rem 0;
+            padding: 0;
+            text-align: left;
+            line-height: 1.4;
+        }
+        .news-section-title:first-child {
+            margin-top: 0;
+        }
+        .news-detail-content {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #2c3e50;
+            text-align: left;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+        
+        /* Секция других новостей */
+        .other-news-section {
+            margin-top: 4rem;
+            padding-top: 3rem;
+            border-top: 2px solid #e0e0e0;
+        }
+        
+        .other-news-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .other-news-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .other-news-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .other-news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+        
+        .other-news-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .other-news-card-content {
+            padding: 20px;
+        }
+        
+        .other-news-card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .other-news-card-date {
+            color: #7f8c8d;
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+        }
+        
+        .other-news-card-description {
+            color: #555;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        /* Пагинация для других новостей */
+        .pagination-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin: 40px 0;
+            padding: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .pagination-btn {
+            min-width: 40px;
+            height: 40px;
+            padding: 0 12px;
+            border: 1px solid #dee2e6;
+            background: #fff;
+            color: #495057;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .pagination-btn:hover:not(:disabled):not(.active) {
+            background: #f8f9fa;
+            border-color: #3498db;
+            color: #3498db;
+            transform: translateY(-2px);
+        }
+        
+        .pagination-btn.active {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            border-color: #3498db;
+            color: white;
+            box-shadow: 0 2px 8px rgba(52, 152, 219, 0.3);
+        }
+        
+        .pagination-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .pagination-btn.prev,
+        .pagination-btn.next {
+            font-weight: 600;
+        }
+        
+        .pagination-info {
+            color: #6c757d;
+            font-size: 0.9rem;
+            margin: 0 15px;
+            white-space: nowrap;
+        }
+        
+        .pagination-ellipsis {
+            padding: 0 8px;
+            color: #6c757d;
+            display: flex;
+            align-items: center;
+            font-weight: 500;
+        }
+        
+        @media (max-width: 768px) {
+            .other-news-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .pagination-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .pagination-info {
+                margin: 0;
+            }
+            
+            .pagination-btn {
+                min-width: 36px;
+                height: 36px;
+                padding: 0 10px;
+                font-size: 0.85rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -136,6 +453,58 @@
                             <a href="index.html">
                                 <img class="menu__logo" src="img/Logo-ABU.png" alt="ABU-logo">
                             </a>
+                        </div>
+
+                        <!-- БУРГЕР -->
+                        <button id="burger-button" class="burger-button" aria-label="Открыть меню">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </button>
+
+                        <div id="menu-body" class="menu__body">
+                            <div class="menu__pages">
+                                <span class="menu__item"><a href="index.html" data-ru="Главная" data-en="Home" data-kz="Басты">Главная</a></span>
+                                <span class="menu__item"><a href="for_foreign_students.html" data-ru="Иностранным студентам" data-en="For Foreign Students" data-kz="Шетелдік студенттерге">Иностранным студентам</a></span>
+                                <span class="menu__item has-submenu">
+                                    <a href="#" class="submenu-toggle" data-ru="Академическая мобильность" data-en="Academic Mobility" data-kz="Академиялық мобильділік">
+                                        Академическая мобильность
+                                        <svg class="submenu-arrow" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 320 512" fill="white">
+                                            <path d="M143 352.3l-136.5-136c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0L160 302.1l119.6-119.6c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9L177 352.3c-9.4 9.4-24.6 9.4-34 0z"/>
+                                        </svg>
+                                    </a>
+                                    <ul class="submenu">
+                                        <li><a class="Students-page" href="Students.html" data-ru="Студенты" data-en="Students" data-kz="Студенттер">Студенты</a></li>
+                                        <li><a class="Teachers-page" href="Teachers.html" data-ru="Преподаватели" data-en="Teachers" data-kz="Оқытушылар">Преподаватели</a></li>
+                                    </ul>
+                                </span>
+                                <span class="menu__item"><a href="Our-partners.html" data-ru="Наши партнеры" data-en="Our Partners" data-kz="Біздің серіктестер">Наши партнеры</a></span>
+                                <span class="menu__item"><a href="international_office.html" data-ru="Международный офис" data-kz="Халықаралық офис" data-en="International Office">Международный офис</a></span>
+                                <span class="menu__item has-submenu">
+                                    <a href="#" class="submenu-toggle" data-ru="Международная школа бизнеса" data-kz="Халықаралық бизнес-мектебі" data-en="International Business School">
+                                        Международная школа бизнеса
+                                        <svg class="submenu-arrow" xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 320 512" fill="white">
+                                            <path d="M143 352.3l-136.5-136c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0L160 302.1l119.6-119.6c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9L177 352.3c-9.4 9.4-24.6 9.4-34 0z" />
+                                        </svg>
+                                    </a>
+                                    <ul class="submenu">
+                                        <li><a href="mschool.html" data-ru="О школе" data-kz="Мектеп туралы" data-en="About the school">О школе</a></li>
+                                        <li><a href="director.html" data-ru="Директор Международной Школы бизнеса ABU" data-kz="ABU Халықаралық Бизнес Мектебінің директоры" data-en="Director of the International Business School at ABU">Директор Международной Школы бизнеса ABU</a></li>
+                                    </ul>
+                                </span>
+                                <span class="menu__item has-submenu">
+                                    <a href="#" class="submenu-toggle" data-ru="Erasmus" data-en="Erasmus" data-kz="Erasmus">
+                                        Erasmus
+                                        <svg class="submenu-arrow" xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 320 512" fill="white">
+                                            <path d="M143 352.3l-136.5-136c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0L160 302.1l119.6-119.6c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9L177 352.3c-9.4 9.4-24.6 9.4-34 0z"/>
+                                        </svg>
+                                    </a>
+                                    <ul class="submenu">
+                                        <li class="credit-mobility"><a href="eramus.html" data-ru="Кредитная мобильность" data-en="Credit Mobility" data-kz="Кредиттік мобильділік">Кредитная мобильность</a></li>
+                                        <li class="Erasmus-CirculEC"><a href="erasmus+circulen.html" data-ru="Erasmus + CirculEC" data-en="Erasmus + CirculEC" data-kz="Erasmus + CirculEC">Erasmus + CirculEC</a></li>
+                                    </ul>
+                                </span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -154,13 +523,71 @@
                         <p>Загрузка новости...</p>
                     </div>
                 </div>
+                
+                <!-- Другие новости -->
+                <div class="other-news-section" id="otherNewsSection" style="display: none;">
+                    <h2 class="other-news-title" data-ru="Другие новости" data-en="Other News" data-kz="Басқа жаңалықтар">
+                        Другие новости
+                    </h2>
+                    <div class="other-news-container" id="otherNewsContainer">
+                        <!-- Новости будут загружены динамически -->
+                    </div>
+                    <div class="pagination-container" id="otherNewsPagination">
+                        <!-- Пагинация будет добавлена динамически -->
+                    </div>
+                </div>
             </div>
         </div>
+    </div>
+
+    <!-- Футер -->
+    <footer class="footer__">
+        <div class="footer__row">
+            <!-- Левая колонка: Логотип + Контакты -->
+            <div class="footer__column">
+                <div class="logo__footer">
+                    <img src="img/Logo-ABU.png" alt="Логотип">
+                </div>
+                <div class="address">Ильяшева 94, 101 каб, Семей, 071400</div>
+                <div class="footer__phone">+7 (7222) 42-32-24</div>
+                <div class="footer__email">internationaloffice@abu.edu.kz</div>
+                <div class="schedule">понедельник – пятница, 9:00 – 18:00 <br>						
+                    обеденный перерыв: 13:00 – 14:00
+                </div>
+            </div>
+
+            <!-- Средняя колонка: Навигация (первая часть) -->
+            <div class="footer__column">
+                <h4 data-ru="Навигация" data-en="Navigation" data-kz="Навигация">Навигация</h4>
+                <a href="for_foreign_students.html"><p data-ru="Иностранным студентам" data-en="For Foreign Students" data-kz="Шетелдік студенттерге">Иностранным студентам</p></a>
+                <a href="mschool.html"><p data-ru="Международная школа бизнеса" data-en="International Business School" data-kz="Халықаралық бизнес мектебі">Международная школа бизнеса</p></a>
+                <a href="eramus.html"><p data-ru="Кредитная мобильность" data-en="Credit Mobility" data-kz="Кредиттік мобильділік">Кредитная мобильность</p></a>
+            </div>
+
+            <div class="footer__column">
+                <br>
+                <br>
+                <a href="academic mobility.html"><p data-ru="Для преподавателей" data-en="For Teachers" data-kz="Оқытушылар үшін">Для преподавателей</p></a>
+                <a href="academic mobility.html"><p data-ru="Для студентов" data-en="For Students" data-kz="Студенттер үшін">Для студентов</p></a>
+                <a href="erasmus+circulen.html"><p data-ru="Erasmus + CirculEC" data-en="Erasmus + CirculEC" data-kz="Erasmus + CirculEC">Erasmus + CirculEC</p></a>
+            </div>
+
+        </div>
+        <div class="eu-disclaimer-full">
+            <em data-ru="Данный проект финансируется при поддержке Европейской комиссии. Содержание данной публикации/материала является предметом ответственности автора и не отражает точку зрения Европейской комиссии или Европейского Исполнительного Агентства по Образованию и Культуре. Комиссия и Исполнительное Агентство не могут нести ответственность за использование информации, которая в ней содержится" data-en="This project is funded with support from the European Commission. The content of this publication/material is the sole responsibility of the author and does not reflect the views of the European Commission or the European Education and Culture Executive Agency. The Commission and Executive Agency cannot be held responsible for any use which may be made of the information contained therein" data-kz="Бұл жоба Еуропалық комиссияның қолдауымен қаржыландырылады. Бұл басылымның/материалдың мазмұны автордың жауапкершілігі болып табылады және Еуропалық комиссияның немесе Еуропалық білім беру және мәдениет атқарушы агенттігінің көзқарасын көрсетпейді. Комиссия мен атқарушы агенттік ондағы ақпаратты пайдаланудан туындаған кез келген салдарға жауапты болмайды">Данный проект финансируется при поддержке Европейской комиссии. Содержание данной публикации/материала является предметом ответственности автора и не отражает точку зрения Европейской комиссии или Европейского Исполнительного Агентства по Образованию и Культуре. Комиссия и Исполнительное Агентство не могут нести ответственность за использование информации, которая в ней содержится</em>
+        </div>
+        <hr class="stripe">
+        <div class="footer__bottom">
+            <span data-ru="© 2025 Все права защищены" data-en="© 2025 All rights reserved" data-kz="© 2025 Барлық құқықтар қорғалған">© 2025 Все права защищены</span>
+        </div>
+    </footer>
+    </div>
     </div>
 
     <!-- Supabase JS Client -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="js/supabase-config.js"></script>
+    <script src="js/erasmuscirculen.js"></script>
     <script src="js/language-switcher.js"></script>
     
     <script>
@@ -247,21 +674,71 @@
                         </div>
                     </header>
                     
-                    ${newsData.image_url ? `
-                    <div class="news-detail-image">
-                        <img src="${newsData.image_url}" alt="${escapeHtml(title)}">
-                    </div>
-                    ` : ''}
+                    ${(() => {
+                        // Получаем массив изображений
+                        let images = [];
+                        if (contentData.image_urls && Array.isArray(contentData.image_urls) && contentData.image_urls.length > 0) {
+                            images = contentData.image_urls;
+                        } else if (newsData.image_url) {
+                            images = [newsData.image_url];
+                        }
+                        
+                        if (images.length === 0) {
+                            return '';
+                        }
+                        
+                        // Если одно изображение - показываем просто
+                        if (images.length === 1) {
+                            return `
+                                <div class="news-detail-image">
+                                    <img src="${images[0]}" alt="${escapeHtml(title)}">
+                                </div>
+                            `;
+                        }
+                        
+                        // Если несколько - создаем слайдер
+                        const slidesHtml = images.map((img, index) => `
+                            <div class="slider-slide">
+                                <img src="${img}" alt="${escapeHtml(title)} - ${index + 1}">
+                            </div>
+                        `).join('');
+                        
+                        const indicatorsHtml = images.map((_, index) => `
+                            <button class="slider-indicator ${index === 0 ? 'active' : ''}" data-slide="${index}" onclick="goToSlide(${index})"></button>
+                        `).join('');
+                        
+                        return `
+                            <div class="news-image-slider" id="newsImageSlider">
+                                <div class="slider-container">
+                                    <div class="slider-wrapper" id="sliderWrapper">
+                                        ${slidesHtml}
+                                    </div>
+                                    <button class="slider-nav prev" onclick="changeSlide(-1)" aria-label="Предыдущее изображение">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </button>
+                                    <button class="slider-nav next" onclick="changeSlide(1)" aria-label="Следующее изображение">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </button>
+                                </div>
+                                <div class="slider-indicators">
+                                    ${indicatorsHtml}
+                                </div>
+                                <div class="slider-counter">
+                                    <span id="currentSlide">1</span> / ${images.length}
+                                </div>
+                            </div>
+                        `;
+                    })()}
                     
                     <div class="news-detail-content">
                         ${description ? `
                         <div class="news-detail-description">
-                            ${escapeHtml(description).replace(/\n/g, '<br>')}
+                            ${formatTextContent(description)}
                         </div>
                         ` : ''}
                         
                         <div class="news-detail-text">
-                            ${escapeHtml(mainContent).replace(/\n/g, '<br>')}
+                            ${formatTextContent(mainContent)}
                         </div>
                     </div>
                 </article>
@@ -273,6 +750,280 @@
             const div = document.createElement('div');
             div.textContent = text;
             return div.innerHTML;
+        }
+
+        // Функция форматирования текста
+        function formatTextContent(text) {
+            if (!text) return '';
+            
+            // Экранируем HTML
+            const escaped = escapeHtml(text);
+            
+            // Разбиваем на абзацы по двойным переносам строк
+            const paragraphs = escaped.split(/\n\s*\n/).filter(p => p.trim());
+            
+            // Обрабатываем каждый абзац
+            const formatted = paragraphs.map(para => {
+                // Убираем лишние пробелы и переносы в начале/конце
+                const trimmed = para.trim();
+                
+                // Если абзац короткий и в верхнем регистре - это заголовок
+                if (trimmed.length < 100 && trimmed === trimmed.toUpperCase() && trimmed.length > 10) {
+                    return `<h3 class="news-section-title">${trimmed}</h3>`;
+                }
+                
+                // Обычный абзац - заменяем одиночные переносы на пробелы, сохраняем структуру
+                const cleaned = trimmed.replace(/\n+/g, ' ').replace(/\s+/g, ' ');
+                return `<p>${cleaned}</p>`;
+            }).join('');
+            
+            return formatted || `<p>${escaped.replace(/\n+/g, ' ').replace(/\s+/g, ' ')}</p>`;
+        }
+
+        // Функции для слайдера изображений
+        let currentSlideIndex = 0;
+        let totalSlides = 0;
+        
+        function changeSlide(direction) {
+            const slider = document.getElementById('newsImageSlider');
+            if (!slider) return;
+            const wrapper = document.getElementById('sliderWrapper');
+            const indicators = slider.querySelectorAll('.slider-indicator');
+            const counter = document.getElementById('currentSlide');
+            if (!wrapper || !indicators.length) return;
+            
+            totalSlides = indicators.length;
+            currentSlideIndex += direction;
+            
+            if (currentSlideIndex < 0) {
+                currentSlideIndex = totalSlides - 1;
+            } else if (currentSlideIndex >= totalSlides) {
+                currentSlideIndex = 0;
+            }
+            
+            wrapper.style.transform = `translateX(-${currentSlideIndex * 100}%)`;
+            indicators.forEach((ind, index) => {
+                ind.classList.toggle('active', index === currentSlideIndex);
+            });
+            if (counter) {
+                counter.textContent = currentSlideIndex + 1;
+            }
+            updateSliderButtons();
+        }
+        
+        function goToSlide(index) {
+            const slider = document.getElementById('newsImageSlider');
+            if (!slider) return;
+            const wrapper = document.getElementById('sliderWrapper');
+            const indicators = slider.querySelectorAll('.slider-indicator');
+            const counter = document.getElementById('currentSlide');
+            if (!wrapper || !indicators.length || index < 0 || index >= indicators.length) return;
+            
+            currentSlideIndex = index;
+            totalSlides = indicators.length;
+            
+            wrapper.style.transform = `translateX(-${currentSlideIndex * 100}%)`;
+            indicators.forEach((ind, i) => {
+                ind.classList.toggle('active', i === currentSlideIndex);
+            });
+            if (counter) {
+                counter.textContent = currentSlideIndex + 1;
+            }
+            updateSliderButtons();
+        }
+        
+        function updateSliderButtons() {
+            const slider = document.getElementById('newsImageSlider');
+            if (!slider) return;
+            const prevBtn = slider.querySelector('.slider-nav.prev');
+            const nextBtn = slider.querySelector('.slider-nav.next');
+            if (prevBtn) prevBtn.disabled = false;
+            if (nextBtn) nextBtn.disabled = false;
+        }
+        
+        function initSlider() {
+            const slider = document.getElementById('newsImageSlider');
+            if (!slider) return;
+            const indicators = slider.querySelectorAll('.slider-indicator');
+            totalSlides = indicators.length;
+            currentSlideIndex = 0;
+            const wrapper = document.getElementById('sliderWrapper');
+            if (wrapper) {
+                wrapper.style.transform = 'translateX(0%)';
+            }
+            updateSliderButtons();
+        }
+
+        // Функции для других новостей с пагинацией
+        let otherNewsCurrentPage = 1;
+        const otherNewsItemsPerPage = 4; // 4 новости на страницу
+        let allOtherNews = [];
+        
+        async function loadOtherNews(currentNewsId) {
+            try {
+                if (typeof supabase === 'undefined' || !supabase) {
+                    return;
+                }
+                
+                const { data, error } = await supabase
+                    .from('news')
+                    .select('*')
+                    .neq('id', currentNewsId)
+                    .order('created_at', { ascending: false });
+                
+                if (error) {
+                    console.error('Ошибка загрузки других новостей:', error);
+                    return;
+                }
+                
+                if (data && data.length > 0) {
+                    // Сортируем по дате (новые сначала)
+                    data.sort((a, b) => {
+                        let dateA, dateB;
+                        try {
+                            const contentA = typeof a.content === 'string' ? JSON.parse(a.content) : a.content;
+                            const contentB = typeof b.content === 'string' ? JSON.parse(b.content) : b.content;
+                            dateA = contentA.date ? new Date(contentA.date) : new Date(a.created_at);
+                            dateB = contentB.date ? new Date(contentB.date) : new Date(b.created_at);
+                        } catch (e) {
+                            dateA = new Date(a.created_at);
+                            dateB = new Date(b.created_at);
+                        }
+                        return dateB - dateA;
+                    });
+                }
+                
+                if (!data || data.length === 0) {
+                    document.getElementById('otherNewsSection').style.display = 'none';
+                    return;
+                }
+                
+                allOtherNews = data;
+                otherNewsCurrentPage = 1;
+                renderOtherNews(1);
+                document.getElementById('otherNewsSection').style.display = 'block';
+            } catch (error) {
+                console.error('Ошибка загрузки других новостей:', error);
+            }
+        }
+        
+        function renderOtherNews(page = 1) {
+            const container = document.getElementById('otherNewsContainer');
+            const paginationContainer = document.getElementById('otherNewsPagination');
+            if (!container || allOtherNews.length === 0) return;
+            
+            const totalPages = Math.ceil(allOtherNews.length / otherNewsItemsPerPage);
+            otherNewsCurrentPage = Math.max(1, Math.min(page, totalPages));
+            
+            const startIndex = (otherNewsCurrentPage - 1) * otherNewsItemsPerPage;
+            const endIndex = startIndex + otherNewsItemsPerPage;
+            const paginatedNews = allOtherNews.slice(startIndex, endIndex);
+            
+            container.innerHTML = paginatedNews.map(news => {
+                let contentData = {};
+                try {
+                    contentData = typeof news.content === 'string' ? JSON.parse(news.content) : news.content;
+                } catch (e) {
+                    contentData = { main: news.content || '', description: '' };
+                }
+                
+                const title = contentData[`title_${currentLanguage.toLowerCase()}`] || contentData.title_ru || news.title;
+                const description = contentData[`description_${currentLanguage.toLowerCase()}`] || contentData.description_ru || contentData.description || '';
+                
+                // Получаем первое изображение
+                let imageUrl = 'img/news_first_card.jpg';
+                if (contentData.image_urls && Array.isArray(contentData.image_urls) && contentData.image_urls.length > 0) {
+                    imageUrl = contentData.image_urls[0];
+                } else if (news.image_url) {
+                    imageUrl = news.image_url;
+                }
+                
+                const date = contentData.date || news.created_at;
+                
+                return `
+                    <div class="other-news-card" onclick="window.location.href='news-detail.html?id=${news.id}'">
+                        <img src="${imageUrl}" alt="${escapeHtml(title)}" onerror="this.src='img/news_first_card.jpg'">
+                        <div class="other-news-card-content">
+                            <div class="other-news-card-title">${escapeHtml(title)}</div>
+                            <div class="other-news-card-date">${formatDate(date, currentLanguage)}</div>
+                            <div class="other-news-card-description">${escapeHtml(description)}</div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            renderOtherNewsPagination(totalPages);
+        }
+        
+        function renderOtherNewsPagination(totalPages) {
+            const paginationContainer = document.getElementById('otherNewsPagination');
+            if (!paginationContainer) return;
+            
+            if (totalPages <= 1) {
+                paginationContainer.innerHTML = '';
+                return;
+            }
+            
+            const currentPage = otherNewsCurrentPage;
+            let paginationHTML = '<div class="pagination">';
+            
+            // Кнопка "Предыдущая"
+            paginationHTML += `<button class="pagination-btn prev" onclick="goToOtherNewsPage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}><i class="fas fa-chevron-left"></i> Предыдущая</button>`;
+            
+            const maxVisiblePages = 5;
+            let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+            let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+            
+            if (endPage - startPage < maxVisiblePages - 1) {
+                startPage = Math.max(1, endPage - maxVisiblePages + 1);
+            }
+            
+            // Первая страница
+            if (startPage > 1) {
+                paginationHTML += `<button class="pagination-btn" onclick="goToOtherNewsPage(1)">1</button>`;
+                if (startPage > 2) {
+                    paginationHTML += `<span class="pagination-ellipsis">...</span>`;
+                }
+            }
+            
+            // Страницы в диапазоне
+            for (let i = startPage; i <= endPage; i++) {
+                paginationHTML += `<button class="pagination-btn ${i === currentPage ? 'active' : ''}" onclick="goToOtherNewsPage(${i})">${i}</button>`;
+            }
+            
+            // Последняя страница
+            if (endPage < totalPages) {
+                if (endPage < totalPages - 1) {
+                    paginationHTML += `<span class="pagination-ellipsis">...</span>`;
+                }
+                paginationHTML += `<button class="pagination-btn" onclick="goToOtherNewsPage(${totalPages})">${totalPages}</button>`;
+            }
+            
+            // Кнопка "Следующая"
+            paginationHTML += `<button class="pagination-btn next" onclick="goToOtherNewsPage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}>Следующая <i class="fas fa-chevron-right"></i></button>`;
+            paginationHTML += '</div>';
+            
+            // Информация о странице
+            const startItem = (currentPage - 1) * otherNewsItemsPerPage + 1;
+            const endItem = Math.min(currentPage * otherNewsItemsPerPage, allOtherNews.length);
+            paginationHTML += `<div class="pagination-info">Показано ${startItem}-${endItem} из ${allOtherNews.length} новостей</div>`;
+            
+            paginationContainer.innerHTML = paginationHTML;
+        }
+        
+        function goToOtherNewsPage(page) {
+            const totalPages = Math.ceil(allOtherNews.length / otherNewsItemsPerPage);
+            if (page < 1 || page > totalPages) {
+                return;
+            }
+            
+            renderOtherNews(page);
+            
+            // Прокручиваем к секции других новостей
+            const otherNewsSection = document.getElementById('otherNewsSection');
+            if (otherNewsSection) {
+                otherNewsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
         }
 
         // Функция переключения языка
@@ -296,11 +1047,18 @@
             const content = document.getElementById('newsDetailContent');
             if (content) {
                 content.innerHTML = renderNews(currentNewsData, contentData, lang);
+                // Инициализируем слайдер после обновления контента
+                setTimeout(() => initSlider(), 100);
             }
 
             // Обновляем title страницы
             const title = contentData[`title_${lang.toLowerCase()}`] || contentData.title_ru || currentNewsData.title;
             document.title = `${title} - ABU`;
+            
+            // Обновляем другие новости
+            if (allOtherNews.length > 0) {
+                renderOtherNews(otherNewsCurrentPage);
+            }
         }
 
         // Загружаем новость по ID из URL параметров
@@ -362,11 +1120,16 @@
                 const content = document.getElementById('newsDetailContent');
                 if (content) {
                     content.innerHTML = renderNews(data, contentData, currentLanguage);
+                    // Инициализируем слайдер после загрузки контента
+                    setTimeout(() => initSlider(), 100);
                 }
 
                 // Обновляем title страницы
                 const title = contentData[`title_${currentLanguage.toLowerCase()}`] || contentData.title_ru || data.title;
                 document.title = `${title} - ABU`;
+                
+                // Загружаем другие новости
+                loadOtherNews(data.id);
 
             } catch (error) {
                 console.error('Ошибка загрузки новости:', error);
