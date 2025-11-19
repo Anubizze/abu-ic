@@ -8,7 +8,8 @@ const SUPABASE_ANON_KEY = (typeof process !== 'undefined' && process.env && proc
     ? process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
     : 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFlZXdwdWx3bmFtd2F2dGVqbHpxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjIxNjIxMDcsImV4cCI6MjA3NzczODEwN30.f1eYj60USjd9qtY-USo81LO2BrO-Zl5P4Xs2zboJvzs';
     
-const STORAGE_BUCKET = 'news-images';
+const STORAGE_BUCKET = 'news-images'; // Bucket для изображений новостей
+const DOCUMENTS_BUCKET = 'documents'; // Bucket для документов
 
 // Инициализация Supabase клиента
 // Библиотека @supabase/supabase-js через CDN jsdelivr экспортирует через supabaseLib

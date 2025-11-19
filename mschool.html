@@ -123,17 +123,8 @@
 
 <section class="vertical-section">
     <h2 class="section-title" data-ru="Сертификаты" data-kz="Сертификаттар" data-en="Certificates">Сертификаты</h2>
-    <ul class="certificates-list">
-        <li>
-            <a href="pdf/Список участников программы повышения квалификации Развитие мировой экономики глобальные тенденции.pdf" class="certificate-link" data-ru="Список участников программы повышения квалификации «Развитие мировой экономики: глобальные тенденции»" data-kz="«Әлемдік экономиканың дамуы: жаһандық тенденциялар» біліктілікті арттыру бағдарламасының қатысушыларының тізімі" data-en="List of participants of the professional development program «Development of the world economy: global trends»">
-                <span data-ru="Список участников программы повышения квалификации «Развитие мировой экономики: глобальные тенденции»" data-kz="«Әлемдік экономиканың дамуы: жаһандық тенденциялар» біліктілікті арттыру бағдарламасының қатысушыларының тізімі" data-en="List of participants of the professional development program «Development of the world economy: global trends»">Список участников программы повышения квалификации «Развитие мировой экономики: глобальные тенденции»</span>
-            </a>
-        </li>
-        <li>
-            <a href="pdf/Результаты международного конкурса молодежных бизнес-проектов 2024.pdf" class="certificate-link" data-ru="Результаты международного конкурса молодежных бизнес-проектов 2024" data-kz="Жастардың бизнес-жобалары бойынша халықаралық байқауының 2024 жылғы нәтижелері" data-en="Results of the international competition of youth business projects 2024">
-                <span data-ru="Результаты международного конкурса молодежных бизнес-проектов 2024" data-kz="Жастардың бизнес-жобалары бойынша халықаралық байқауының 2024 жылғы нәтижелері" data-en="Results of the international competition of youth business projects 2024">Результаты международного конкурса молодежных бизнес-проектов 2024</span>
-            </a>
-        </li>
+    <ul class="certificates-list" data-documents data-page="mschool.html" data-section="certificates" data-link-class="certificate-link">
+        <li class="doc-placeholder">Загружаем документы...</li>
     </ul>
 </section>
 
@@ -318,6 +309,9 @@
 
     <script src="js/mschool.js"></script>
     <script src="js/language-switcher.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase-config.js"></script>
+    <script src="js/document-renderer.js?v=20251112"></script>
     <script>
         // Бургер-меню функциональность
         document.addEventListener('DOMContentLoaded', function() {

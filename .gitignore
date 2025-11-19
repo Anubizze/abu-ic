@@ -1,0 +1,38 @@
+# Локальные конфигурационные файлы
+js/r2-config.local.js
+*.local.js
+*.local.json
+
+# Переменные окружения
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Логи
+*.log
+npm-debug.log*
+
+# Временные файлы
+tmp/
+temp/
+*.tmp
+
+# Node modules (если будет использоваться)
+node_modules/
+
+# Build артефакты
+dist/
+build/
+.cache/
+

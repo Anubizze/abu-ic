@@ -1173,38 +1173,48 @@ let newsAdmin;
 
 // Проверяем, нужно ли инициализировать админку
 document.addEventListener('DOMContentLoaded', () => {
-    // Проверяем различные условия для инициализации админки
-    const hash = window.location.hash;
-    const isAdminPath = hash === '#admin' || hash === '#/admin';
-    const isAdminPage = window.location.pathname.includes('admin.html');
-    const adminPanel = document.getElementById('adminPanel');
-    const newsForm = document.getElementById('newsForm'); // Если есть форма новостей, значит это админка
-    
-    // Инициализируем если:
-    // 1. URL содержит #admin
-    // 2. Это страница admin.html
-    // 3. Есть элемент adminPanel который виден
-    // 4. Есть форма newsForm (прямой признак админки)
-    const shouldInit = isAdminPath || isAdminPage || 
-                      (adminPanel && adminPanel.style.display !== 'none') ||
-                      (newsForm !== null);
-    
-    console.log('Проверка инициализации админки:', {
-        isAdminPath,
-        isAdminPage,
-        hasAdminPanel: !!adminPanel,
-        hasNewsForm: !!newsForm,
-        shouldInit
-    });
-    
-    if (shouldInit) {
-        console.log('Инициализируем NewsAdmin...');
-        newsAdmin = new NewsAdmin();
-        window.newsAdmin = newsAdmin;
-        console.log('✓ NewsAdmin инициализирован');
-    } else {
-        console.log('Админка не инициализирована - условия не выполнены');
+    const attemptInit = () => {
+        if (newsAdmin) return;
+
+        const hash = window.location.hash;
+        const isAdminPath = hash === '#admin' || hash === '#/admin';
+        const isAdminPage = window.location.pathname.includes('admin.html');
+        const adminPanel = document.getElementById('adminPanel');
+        const newsForm = document.getElementById('newsForm'); // Если есть форма новостей, значит это админка
+
+        const shouldInit =
+            isAdminPath ||
+            isAdminPage ||
+            (adminPanel && adminPanel.style.display !== 'none') ||
+            (newsForm !== null);
+
+        console.log('Проверка инициализации админки:', {
+            isAdminPath,
+            isAdminPage,
+            hasAdminPanel: !!adminPanel,
+            hasNewsForm: !!newsForm,
+            shouldInit
+        });
+
+        if (shouldInit) {
+            console.log('Инициализируем NewsAdmin...');
+            newsAdmin = new NewsAdmin();
+            window.newsAdmin = newsAdmin;
+            console.log('✓ NewsAdmin инициализирован');
+        } else {
+            console.log('Админка не инициализирована - условия не выполнены');
+        }
+    };
+
+    const authInstance = window.ABU_ADMIN_AUTH;
+    if (authInstance && authInstance.isAuthenticated) {
+        attemptInit();
     }
+
+    window.addEventListener('abu-admin-authenticated', attemptInit);
+    window.addEventListener('abu-admin-logout', () => {
+        newsAdmin = null;
+    });
 });
 
 // Экспортируем функцию для ручной инициализации

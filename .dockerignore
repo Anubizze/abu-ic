@@ -1,0 +1,23 @@
+# Игнорируем ненужные файлы при сборке Docker образа
+.git
+.gitignore
+README.md
+*.md
+.vscode
+.idea
+*.swp
+*.swo
+.env
+.env.local
+*.local.js
+*.local.json
+node_modules
+dist
+build
+.cache
+*.log
+tmp
+temp
+.DS_Store
+Thumbs.db
+

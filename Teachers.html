@@ -125,8 +125,22 @@
             </div>
             <div class="Teacher__procedure">
                 <button class="DocToggleBtn" onclick="toggleProcedure()" data-ru="Порядок действий" data-kz="Әрекеттер тәртібі" data-en="Procedure">Порядок действий</button>
-                <div id="procedureContent" class="documents-content open">
-                    <p><a href="files/Положение о привлечении зарубежных ученых.pdf" target="_blank" data-ru="📄 Положение о привлечении зарубежных специалистов" data-kz="📄 Шетелдік мамандарды тарту туралы ереже" data-en="📄 Regulations on attracting foreign specialists">📄 Положение о привлечении зарубежных специалистов</a></p>
+                <div id="procedureContent" class="documents-content open"
+                     data-documents
+                     data-page="Teachers.html"
+                     data-section="regulations"
+                     data-mode="hydrate">
+                    <p>
+                        <a href="#"
+                           data-document-key="files/Положение о привлечении зарубежных ученых.pdf"
+                           data-update-text="link"
+                           data-ru="📄 Положение о привлечении зарубежных специалистов"
+                           data-kz="📄 Шетелдік мамандарды тарту туралы ереже"
+                           data-en="📄 Regulations on attracting foreign specialists">
+                            📄 Положение о привлечении зарубежных специалистов
+                        </a>
+                    </p>
+                    <span class="teacher-documents-empty" data-empty-state hidden>Документ появится позже.</span>
                     <ol>
                     <li data-ru="Кафедра направляет служебную записку с визой декана факультета в ОМС о готовности принять в рамках академической мобильности конкретного ученого (с указанием перечня дисциплин, объема часов и периода времени) и просьбой оформить приглашение на данного ученого." data-kz="Кафедра факультет деканының қолымен ХҚБ-ға академиялық мобильділік шеңберінде нақты ғалымды қабылдауға дайындығы туралы қызметтік жазба жібереді (пәндер тізімі, сағат көлемі және уақыт кезеңі көрсетілген) және осы ғалымға шақыру ресімдеу туралы өтінішпен." data-en="The department sends an official note with the signature of the faculty dean to the Department of International Cooperation about readiness to accept a specific scientist within the framework of academic mobility (indicating the list of disciplines, volume of hours and time period) and with a request to issue an invitation to this scientist.">Кафедра направляет служебную записку с визой декана факультета в ОМС о готовности принять в рамках академической мобильности конкретного ученого (с указанием перечня дисциплин, объема часов и периода времени) и просьбой оформить приглашение на данного ученого.</li>
                     <li data-ru="ОМС готовит текст приглашения на имя ректора вуза-партнера. Текст письма с визой проректора по МС передается в канцелярию на подпись Президента ABU." data-kz="ХҚБ серіктес университет ректорының атына шақыру мәтінін дайындайды. ХҚБ проректорының қолымен хат мәтіні канцелярияға ABU Президентінің қолымен растау үшін жіберіледі." data-en="The Department of International Cooperation prepares the text of the invitation addressed to the rector of the partner university. The text of the letter with the signature of the vice-rector for international cooperation is sent to the office for signature by the ABU President.">ОМС готовит текст приглашения на имя ректора вуза-партнера. Текст письма с визой проректора по МС передается в канцелярию на подпись Президента ABU.</li>
@@ -245,6 +259,9 @@
             </script>
 
             <script src="js/language-switcher.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+            <script src="js/supabase-config.js"></script>
+            <script src="js/document-renderer.js?v=20251112"></script>
 
         </div>
     </div>

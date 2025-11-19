@@ -300,16 +300,33 @@
             <div class="ABU__brochure">
                 <div class="ABU__brochure__row">
                     <div class="ABU__brochure__body">
-                        <div class="ABU__brochure__text">
+                        <div class="ABU__brochure__text"
+                            data-documents
+                            data-page="index.html"
+                            data-section="brochures"
+                            data-mode="hydrate">
                             <div class="ABU__text__left">
-                                <a href="files/Международная брошюра.pdf" data-ru="Брошюра ABU" data-en="ABU Brochure" data-kz="ABU брошюрасы"><i
-                                        class="fa-regular fa-file-lines"></i>&nbsp;Брошюра ABU</a>
+                                <a href="#"
+                                   data-document-key="files/Международная брошюра.pdf"
+                                   data-update-text="link"
+                                   data-ru="Брошюра ABU"
+                                   data-en="ABU Brochure"
+                                   data-kz="ABU брошюрасы">
+                                    <i class="fa-regular fa-file-lines"></i>&nbsp;Брошюра ABU
+                                </a>
                             </div>
                             <div class="ABU__divider">|</div>
                             <div class="ABU__text__right">
-                                <a href="files/Документы для иностранных студентов.pdf" data-ru="Документы для поступления" data-en="Documents for admission" data-kz="Қабылдау үшін құжаттар">Документы для
-                                    поступления&nbsp;<i class="fa-regular fa-file-lines"></i></a>
+                                <a href="#"
+                                   data-document-key="files/Документы для иностранных студентов.pdf"
+                                   data-update-text="link"
+                                   data-ru="Документы для поступления"
+                                   data-en="Documents for admission"
+                                   data-kz="Қабылдау үшін құжаттар">
+                                    Документы для поступления&nbsp;<i class="fa-regular fa-file-lines"></i>
+                                </a>
                             </div>
+                            <span class="abu-documents-empty" data-empty-state hidden>Документы появятся позже.</span>
                         </div>
                     </div>
                 </div>
@@ -474,6 +491,8 @@
     </div>
 
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase-config.js"></script>
+<script src="js/document-renderer.js?v=20251112"></script>
 </body>
-
 </html>

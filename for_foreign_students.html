@@ -92,23 +92,43 @@
                     <div class="foreign_students__row">
                         <div class="foreign_students__body">
                             <h2 class="foreign_students__title" data-ru="Иностранным студентам" data-kz="Шетелдік студенттерге" data-en="For foreign students">Иностранным студентам</h2>
-                            <div class="foreign_students__cards">
+                            <div class="foreign_students__cards"
+                                 data-documents
+                                 data-page="for_foreign_students.html"
+                                 data-mode="cards">
                                 <!-- Карточка 1 -->
-                                <div class="foreign_students__card">
+                                <div class="foreign_students__card" data-document-card="brochure_main">
                                     <div class="foreign_students__image-wrapper">
-                                    <img src="img/Students.jpg" alt="Брошюра ABU" class="foreign_students__image">
-                                    <div class="foreign_students__card-title" data-ru="Брошюра ABU" data-kz="ABU брошюрасы" data-en="ABU Brochure">Брошюра ABU</div>
+                                        <img data-document-image src="img/Students.jpg" alt="Брошюра ABU" class="foreign_students__image">
+                                        <div class="foreign_students__card-title" data-document-title>Брошюра ABU</div>
                                     </div>
-                                    <button class="foreign_students__btn" onclick="window.open('files/Международная брошюра.pdf')" data-ru="Посмотреть" data-kz="Көру" data-en="View">Посмотреть</button>
+                                    <p class="foreign_students__description" data-document-description hidden>
+                                        Ознакомьтесь с программами обучения, процессом поступления и преимуществами обучения в ABU.
+                                    </p>
+                                    <a class="foreign_students__btn"
+                                       data-document-action
+                                       href="#"
+                                       target="_blank"
+                                       rel="noopener"
+                                       hidden>Посмотреть</a>
                                 </div>
                                 <!-- Карточка 2 -->
-                                <div class="foreign_students__card">
+                                <div class="foreign_students__card" data-document-card="brochure_docs">
                                     <div class="foreign_students__image-wrapper">
-                                    <img src="img/student-man.jpg" alt="Документы для поступления" class="foreign_students__image">
-                                    <div class="foreign_students__card-title" data-ru="Документы для поступления" data-kz="Қабылдау үшін құжаттар" data-en="Documents for admission">Документы для поступления</div>
+                                        <img data-document-image src="img/student-man.jpg" alt="Документы для поступления" class="foreign_students__image">
+                                        <div class="foreign_students__card-title" data-document-title>Документы для поступления</div>
                                     </div>
-                                    <button class="foreign_students__btn" onclick="window.open('files/Документы для иностранных студентов.pdf')" data-ru="Посмотреть" data-kz="Көру" data-en="View">Посмотреть</button>
+                                    <p class="foreign_students__description" data-document-description hidden>
+                                        Практическая информация о поступлении и списке необходимых документов.
+                                    </p>
+                                    <a class="foreign_students__btn"
+                                       data-document-action
+                                       href="#"
+                                       target="_blank"
+                                       rel="noopener"
+                                       hidden>Посмотреть</a>
                                 </div>
+                                <span class="foreign-documents-empty" data-empty-state hidden>Документы появятся позже.</span>
                             </div>
                         </div>
                     </div>
@@ -157,5 +177,8 @@
     </div>
     
     <script src="js/language-switcher.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase-config.js"></script>
+    <script src="js/document-renderer.js?v=20251112"></script>
 </body>
 </html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход в админ-панель - ABU</title>
+    <link rel="stylesheet" href="css/admin-news.css">
+    <link rel="icon" type="img/abuicon" href="img/favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body class="auth-page">
+    <div class="admin-auth-overlay">
+        <div class="auth-card">
+            <div class="auth-header">
+                <img src="img/Logo-ABU.png" alt="ABU Logo" class="auth-logo">
+                <h2>Вход в админ-панель</h2>
+                <p>Войдите с помощью учетных данных Supabase, чтобы получить доступ.</p>
+            </div>
+            <form id="adminLoginForm" class="auth-form">
+                <div class="form-group">
+                    <label for="adminEmail">Email</label>
+                    <input type="email" id="adminEmail" name="email" placeholder="user@example.com" autocomplete="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="adminPassword">Пароль</label>
+                    <div class="password-input">
+                        <input type="password" id="adminPassword" name="password" placeholder="Введите пароль" autocomplete="current-password" required>
+                        <button type="button" id="togglePasswordVisibility" class="password-toggle" aria-label="Показать пароль">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="auth-actions">
+                    <button type="submit" class="btn btn-primary auth-submit">
+                        <i class="fas fa-sign-in-alt"></i>
+                        Войти
+                    </button>
+                </div>
+                <p class="auth-message" id="authInfoMessage" role="status"></p>
+                <p class="auth-error" id="authErrorMessage" role="alert"></p>
+            </form>
+            <div class="login-footer">
+                <a href="erasmus+circulen.html" class="cancel-link">
+                    <i class="fas fa-arrow-left"></i> Вернуться на сайт
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase-config.js"></script>
+    <script src="js/admin-auth.js"></script>
+    <script>
+        (function () {
+            const params = new URLSearchParams(window.location.search);
+            const redirectTarget = params.get('redirect') || 'admin.html';
+            const loginForm = document.getElementById('adminLoginForm');
+            const emailInput = document.getElementById('adminEmail');
+            const passwordInput = document.getElementById('adminPassword');
+            const togglePasswordBtn = document.getElementById('togglePasswordVisibility');
+            const errorMessage = document.getElementById('authErrorMessage');
+            const infoMessage = document.getElementById('authInfoMessage');
+
+            const showError = (message) => {
+                if (!errorMessage) return;
+                errorMessage.textContent = message;
+                errorMessage.style.display = 'block';
+            };
+
+            const clearError = () => {
+                if (!errorMessage) return;
+                errorMessage.textContent = '';
+                errorMessage.style.display = 'none';
+            };
+
+            const showInfo = (message) => {
+                if (!infoMessage) return;
+                infoMessage.textContent = message;
+                infoMessage.style.display = 'block';
+            };
+
+            const clearInfo = () => {
+                if (!infoMessage) return;
+                infoMessage.textContent = '';
+                infoMessage.style.display = 'none';
+            };
+
+            if (params.get('message') === 'logged_out') {
+                showInfo('Вы успешно вышли из аккаунта.');
+            }
+
+            window.addEventListener('DOMContentLoaded', async () => {
+                const auth = window.ABU_ADMIN_AUTH;
+                if (!auth) {
+                    showError('Не удалось инициализировать авторизацию.');
+                    return;
+                }
+
+                await auth.redirectIfAuthenticated({ redirectTo: redirectTarget });
+
+                if (togglePasswordBtn && passwordInput) {
+                    togglePasswordBtn.addEventListener('click', () => {
+                        const isPassword = passwordInput.type === 'password';
+                        passwordInput.type = isPassword ? 'text' : 'password';
+                        togglePasswordBtn.setAttribute(
+                            'aria-label',
+                            isPassword ? 'Скрыть пароль' : 'Показать пароль'
+                        );
+                        const icon = togglePasswordBtn.querySelector('i');
+                        if (icon) {
+                            icon.classList.toggle('fa-eye');
+                            icon.classList.toggle('fa-eye-slash');
+                        }
+                    });
+                }
+
+                loginForm.addEventListener('submit', async (event) => {
+                    event.preventDefault();
+                    clearError();
+                    clearInfo();
+
+                    const email = emailInput.value.trim();
+                    const password = passwordInput.value;
+
+                    if (!email || !password) {
+                        showError('Введите email и пароль.');
+                        return;
+                    }
+
+                    const submitButton = loginForm.querySelector('button[type="submit"]');
+                    if (submitButton) {
+                        submitButton.disabled = true;
+                        submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Входим...';
+                    }
+
+                    try {
+                        await auth.login(email, password);
+                        window.location.replace(redirectTarget);
+                    } catch (error) {
+                        console.error('Ошибка входа:', error);
+                        const message = error?.message || 'Не удалось выполнить вход. Проверьте данные и попробуйте снова.';
+                        showError(message);
+                    } finally {
+                        if (submitButton) {
+                            submitButton.disabled = false;
+                            submitButton.innerHTML = '<i class="fas fa-sign-in-alt"></i> Войти';
+                        }
+                    }
+                });
+            });
+        })();
+    </script>
+</body>
+</html>
+
