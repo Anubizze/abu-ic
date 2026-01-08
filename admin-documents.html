@@ -15,7 +15,7 @@
             <div class="header-content">
                 <div class="logo-section">
                     <img src="img/Logo-ABU.png" alt="ABU Logo" class="admin-logo">
-                    <h1>Управление документами</h1>
+                    <h1>Управление документами</h1>ё
                 </div>
                 <div class="header-actions">
                     <button type="button" id="adminLogoutBtn" class="btn btn-outline logout-btn" style="display: none;">
@@ -128,6 +128,17 @@
                             <i class="fas fa-sync-alt"></i>
                             Обновить
                         </button>
+                        <button class="btn btn-secondary" id="autoCreateUsagesBtn" title="Автоматически создать вхождения для всех документов на странице Our-partners.html">
+                            <i class="fas fa-magic"></i>
+                            Автосоздание вхождений
+                        </button>
+                        <button class="btn btn-info" id="organizeFilesBtn" title="Организовать файлы в R2 по структуре Our-partners/Страна/Университет.pdf">
+                            <i class="fas fa-folder-tree"></i>
+                            Организовать файлы в R2
+                        </button>
+                            <i class="fas fa-magic"></i>
+                            Авто-создание для партнеров
+                        </button>
                         <button class="btn btn-primary" id="addUsageBtn">
                             <i class="fas fa-plus-circle"></i>
                             Добавить документ
@@ -215,6 +226,16 @@
                             <datalist id="usageCountrySuggestions"></datalist>
                             <small class="hint">Используется для страницы «Наши партнёры».</small>
                         </div>
+                        <div class="form-group hidden" id="usageUrlGroup">
+                            <label for="usageUrl">Ссылка на сайт университета (URL)</label>
+                            <input type="url" id="usageUrl" name="university_url" placeholder="https://university.edu">
+                            <small class="hint">Прямая ссылка на сайт университета. Используется для страницы «Наши партнёры».</small>
+                        </div>
+                        <div class="form-group hidden" id="usageFlagImageGroup">
+                            <label for="usageFlagImage">Изображение флага страны (URL)</label>
+                            <input type="url" id="usageFlagImage" name="flag_image_url" placeholder="https://pub-xxxxx.r2.dev/img/our-partners-html/flag_azerbaidzan_enl.jpg">
+                            <small class="hint">Прямой URL к изображению флага из Cloudflare R2 (bucket abu-ic). Например: https://pub-xxxxx.r2.dev/img/our-partners-html/flag_azerbaidzan_enl.jpg</small>
+                        </div>
                     </fieldset>
 
                     <fieldset class="form-grid form-grid-document">
@@ -229,8 +250,34 @@
                             Загруженный файл появится в этом списке и будет доступен для повторного использования.
                         </div>
                         <div class="form-group">
-                            <label for="usageLinkText">Текст ссылки</label>
-                            <input type="text" id="usageLinkText" name="link_text" placeholder="Отображаемый текст ссылки">
+                            <label for="usageLinkText">Название PDF файла (русский)</label>
+                            <input type="text" id="usageLinkText" name="link_text" placeholder="Название PDF файла">
+                            <small class="hint">Название PDF файла на русском языке (отображается как ссылка на PDF)</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="usageLinkTextKz">Название PDF файла (казахский)</label>
+                            <input type="text" id="usageLinkTextKz" name="link_text_kz" placeholder="PDF файл атауы (қазақша)">
+                            <small class="hint">Название PDF файла на казахском языке (опционально)</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="usageLinkTextEn">Название PDF файла (английский)</label>
+                            <input type="text" id="usageLinkTextEn" name="link_text_en" placeholder="PDF file name (English)">
+                            <small class="hint">Название PDF файла на английском языке (опционально)</small>
+                        </div>
+                        <div class="form-group hidden" id="visitButtonTextGroup">
+                            <label for="visitButtonText">Текст кнопки "Посетить сайт" (русский)</label>
+                            <input type="text" id="visitButtonText" name="visit_button_text" placeholder="Посетить сайт">
+                            <small class="hint">Текст кнопки "Посетить сайт" на русском языке</small>
+                        </div>
+                        <div class="form-group hidden" id="visitButtonTextKzGroup">
+                            <label for="visitButtonTextKz">Текст кнопки "Посетить сайт" (казахский)</label>
+                            <input type="text" id="visitButtonTextKz" name="visit_button_text_kz" placeholder="Сайтқа бару">
+                            <small class="hint">Текст кнопки на казахском языке (опционально)</small>
+                        </div>
+                        <div class="form-group hidden" id="visitButtonTextEnGroup">
+                            <label for="visitButtonTextEn">Текст кнопки "Посетить сайт" (английский)</label>
+                            <input type="text" id="visitButtonTextEn" name="visit_button_text_en" placeholder="Visit website">
+                            <small class="hint">Текст кнопки на английском языке (опционально)</small>
                         </div>
                         <div class="card-fields hidden" id="usageCardFields">
                             <div class="form-group">
@@ -245,13 +292,28 @@
                                 <small class="hint">Поддерживаются изображения до 5 МБ. Файл будет сохранён в Cloudflare R2, а ссылка подставится автоматически.</small>
                             </div>
                             <div class="form-group">
-                                <label for="usageCardDescription">Описание карточки</label>
+                                <label for="usageCardDescription">Описание карточки (русский)</label>
                                 <textarea id="usageCardDescription" rows="3" placeholder="Краткое описание карточки"></textarea>
                                 <small class="hint">Текст появится под заголовком карточки.</small>
                             </div>
+                            <div class="form-group">
+                                <label for="usageCardDescriptionKz">Описание карточки (казахский)</label>
+                                <textarea id="usageCardDescriptionKz" rows="3" placeholder="Карточканың қысқаша сипаттамасы"></textarea>
+                                <small class="hint">Описание на казахском языке (опционально)</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="usageCardDescriptionEn">Описание карточки (английский)</label>
+                                <textarea id="usageCardDescriptionEn" rows="3" placeholder="Brief card description"></textarea>
+                                <small class="hint">Описание на английском языке (опционально)</small>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="usageFileUrl">URL файла (альтернатива загрузке)</label>
+                            <input type="url" id="usageFileUrl" name="file_url" placeholder="https://example.com/file.pdf">
+                            <small class="hint">Если файл уже загружен и у вас есть прямая ссылка на него, вставьте URL здесь. Это альтернатива загрузке файла.</small>
                         </div>
                         <div class="form-group form-group-file">
-                            <label for="usageFileUpload">Выберите файл</label>
+                            <label for="usageFileUpload">Или выберите файл для загрузки</label>
                             <div class="file-upload-container">
                                 <input type="file" id="usageFileUpload" accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx">
                                 <div class="file-upload-preview" id="usageFilePreview">
@@ -262,8 +324,6 @@
                             </div>
                         </div>
                     </fieldset>
-
-                    <input type="hidden" id="usageText" name="usage_text">
 
                     <div class="form-actions form-actions-single">
                         <button type="submit" class="btn btn-primary" id="saveUsageBtn">
@@ -311,9 +371,9 @@
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="js/r2-config.js"></script>
-    <script src="js/supabase-config.js"></script>
+    <script src="js/supabase.min.js?v=20251209-3"></script>
+    <script src="js/r2-config.js?v=20251212"></script>
+    <script src="js/supabase-config.js?v=20250108120000"></script>
     <script src="js/admin-auth.js"></script>
     <script>
         window.addEventListener('DOMContentLoaded', function () {

@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return savedLanguage && ['RU', 'KZ', 'EN'].includes(savedLanguage) ? savedLanguage : 'RU';
   }
 
-  // Функция переключения языка
+    // Функция переключения языка
   function switchLanguage() {
     // Простое переключение по кругу
     if (currentLanguage === 'RU') {
@@ -36,6 +36,9 @@ document.addEventListener("DOMContentLoaded", () => {
     
     // Обновляем контент
     updatePageContent(currentLanguage);
+    
+    // Отправляем событие для перезагрузки документов
+    window.dispatchEvent(new Event('languageChanged'));
   }
 
   // Функция обновления контента страницы

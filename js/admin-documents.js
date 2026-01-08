@@ -47,6 +47,30 @@ const PAGE_SECTION_DEFAULTS = {
     'eramus.html': 'resources'
 };
 
+// Технические файлы, которые не являются университетами и не должны попадать на страницу Our-partners
+const TECHNICAL_FILES = new Set([
+    'Results of international cooperation.pdf',
+    'Results of international cooperation',
+    'Документы для иностранных студентов.pdf',
+    'Документы для иностранных студентов',
+    'Международная брошюра.pdf',
+    'Международная брошюра',
+    'Положение о привлечении зарубежных ученых.pdf',
+    'Положение о привлечении зарубежных ученых',
+    'Положение об академ.моб 2023.pdf',
+    'Положение об академ.моб 2023',
+    'Положение об академической мобильности',
+    'Международный университет Финал.pdf',
+    'Международный университет Финал'
+]);
+
+// Функция для проверки, является ли файл техническим
+function isTechnicalFile(fileName) {
+    if (!fileName) return false;
+    const nameWithoutExt = fileName.replace(/\.(pdf|docx?|xlsx?|pptx?)$/i, '').trim();
+    return TECHNICAL_FILES.has(fileName) || TECHNICAL_FILES.has(nameWithoutExt);
+}
+
 const CARD_PAGE_SLUGS = new Set(['eramus.html', 'for_foreign_students.html', 'our-partners.html']);
 const SUPPORTED_IMAGE_EXTENSIONS = ['jpg', 'jpeg', 'png', 'webp'];
 const CARD_IMAGE_SIZE_LIMIT = 5 * 1024 * 1024;
@@ -110,6 +134,61 @@ function truncateText(text = '', limit = 160) {
 }
 
 class DocumentUsageAdmin {
+    // Маппинг названий файлов на правильные названия университетов
+    static UNIVERSITY_NAME_MAPPING = {
+        'University of Pannonia.pdf': 'University of Pannonia',
+        'University of Pannonia': 'University of Pannonia',
+        'Автономная некоммерческая организация высшего образования Российский новый университет (РосНОУ).pdf': 'Российский новый университет (РосНОУ)',
+        'Аграрный университет г.Пловдив.pdf': 'Аграрный университет Пловдив',
+        'Алтайский государственный университет (АГУ).pdf': 'Алтайский государственный университет',
+        'Белостокский государственный университет.pdf': 'Белостокский государственный университет',
+        'Бельско-Бяльская техническо-гуманитарная Академия.pdf': 'Бельско-Бяльская техническо-гуманитарная академия',
+        'Варненский Свободный университет.pdf': 'Варненский свободный университет',
+        'Гос.автономное об уч высшего образования города Москвы «МГПУ».pdf': 'Московский городской педагогический университет (МГПУ)',
+        'Естественно-гуманитарный университет города Седльце.pdf': 'Естественно-гуманитарный университет Седльце',
+        'Индийский технологический институт Бомбей.pdf': 'Индийский технологический институт Бомбей',
+        'Каракалпакский государственный университет имени Бердаха.pdf': 'Каракалпакский государственный университет имени Бердаха',
+        'Кемеровский государственный университет (КемГУ).pdf': 'Кемеровский государственный университет',
+        'Колледж по маркетингу, менеджменту и торговле.pdf': 'Колледж по маркетингу, менеджменту и торговле',
+        'Кузбасский государственный технический университет имени Т. Ф. Горбачёва (КузГТУ).pdf': 'Кузбасский государственный технический университет',
+        'Лесотехнический университет - София.pdf': 'Лесотехнический университет София',
+        'Лесотехнический университет.pdf': 'Лесотехнический университет',
+        'Международный университет Финал.pdf': 'Международный университет Финал',
+        'Национальный исследовательский университет «МЭИ».pdf': 'МЭИ',
+        'Новосибирский государственный архитектурно-строительный университет (Сибстрин).pdf': 'Новосибирский ГАСУ (Сибстрин)',
+        'Новый Болгарский университет.pdf': 'Новый Болгарский университет',
+        'Омский государственный аграрный университет имени П. А. Столыпина (Омский ГАУ).pdf': 'Омский ГАУ',
+        'Резекненская академия технологий (RTA).pdf': 'Резекненская академия технологий',
+        'Софийский университет имени святого Климента Охридского.pdf': 'Софийский университет',
+        'Стамбульский университет Айдын.pdf': 'Университет Айдын, Стамбул',
+        'Технический университет София.pdf': 'Технический университет София',
+        'Университет Анкары Хачи Байрам Вели.pdf': 'Университет Анкары Хачи Байрам Вели',
+        'Университет Европейского центра мира и развития.pdf': 'Университет Европейского центра мира и развития',
+        'Университет Кассино.pdf': 'Университет Кассино',
+        'Университет Памуккале 2.pdf': 'Университет Памуккале',
+        'Университет Пантеон.pdf': 'Университет Пантеон',
+        'Университет английского и иностранных языков.pdf': 'Университет английского и иностранных языков',
+        'Университет менеджмента Варна (УМВ).pdf': 'Университет менеджмента Варна',
+        'ФГАОУ ВО Северо-Кавказский федеральный университет, СКФУ.pdf': 'Северо-Кавказский федеральный университет',
+        'ФГБОУ ВО «Российская академия народного хозяйства и государственной службы при Президенте Российской Федерации» (РАНХиГС).pdf': 'РАНХиГС',
+        'ФГБОУ ВО Российский государственный университет туризма и сервиса (РГУТИС).pdf': 'РГУТИС',
+        'ФГБОУ ВО «Красноярский государственный педагогический университет им. В.П.Астафьева».pdf': 'Красноярский ГПУ им. Астафьева',
+        'ФГБОУ ВО «Новосибирский государственный университет» (НГУ).pdf': 'Новосибирский государственный университет (НГУ)',
+        'ФГБОУ ВО «Югорский государственный университет» (ЮГУ).pdf': 'Югорский государственный университет',
+        'ФГБОУ ВО Алтайский государственный педагогический университет.pdf': 'Алтайский ГПУ',
+        'ФГБОУ ВО Кубанский государственный университет (КубГУ).pdf': 'Кубанский государственный университет',
+        'ФГБОУ ВО МГТУ Московский государственный технологический университет СТАНКИН.pdf': 'МГТУ СТАНКИН',
+        'ФГБОУ ВО Новосибирский государственный педагогический университет (НГПУ).pdf': 'Новосибирский ГПУ',
+        'ФГБОУ ВО Новосибирский государственный университет экономики и управления НИНХ.pdf': 'Новосибирский государственный университет экономики и управления НИНХ',
+        'ФГБОУ ВО Псковский государственный университет.pdf': 'Псковский государственный университет',
+        'ФГБОУ ВО Санкт-Петербургский государственный лесотехнический университет имени С.М. Кирова.pdf': 'СПбГЛТУ',
+        'ФГБОУ ВО Томский государственный архитектурно-строительный университет.pdf': 'Томский ГАСУ',
+        'Филиал МГУ им. М.В. Ломоносова в г. Ташкенте.pdf': 'Филиал МГУ в Ташкенте',
+        'Частное учреждение образовательная организация высшего образования Омская гуманитарная академия.pdf': 'Омская гуманитарная академия',
+        'Швейцарская школа прикладных наук, Swiss SASEM, Факультет экономики и менеджмента.pdf': 'Swiss SASEM',
+        '№42-23_Pamukkale_Uni_MOU.pdf': 'Университет Памуккале (MOU)'
+    };
+
     constructor() {
         this.state = {
             documents: [],
@@ -177,12 +256,8 @@ class DocumentUsageAdmin {
             const existing = await window.ABU_ADMIN_AUTH.getSession();
             if (existing) return existing;
         }
-        const { data, error } = await supabase.auth.getSession();
-        if (error) {
-            console.warn('Не удалось получить сессию Supabase', error);
-            return null;
-        }
-        return data?.session || null;
+        // Старый способ через Supabase Auth больше не используется
+        return null;
     }
 
     cacheDom() {
@@ -193,6 +268,8 @@ class DocumentUsageAdmin {
         this.dom.resetFiltersBtn = document.getElementById('resetFiltersBtn');
         this.dom.refreshUsagesBtn = document.getElementById('refreshUsagesBtn');
         this.dom.addUsageBtn = document.getElementById('addUsageBtn');
+        this.dom.autoCreateUsagesBtn = document.getElementById('autoCreateUsagesBtn');
+        this.dom.organizeFilesBtn = document.getElementById('organizeFilesBtn');
         this.dom.pagesList = document.getElementById('pagesList');
         this.dom.pageSearch = document.getElementById('pageSearch');
         this.dom.pagesCount = document.getElementById('pagesCount');
@@ -219,18 +296,32 @@ class DocumentUsageAdmin {
         this.dom.usageCountry = document.getElementById('usageCountry');
         this.dom.usageCountryGroup = document.getElementById('usageCountryGroup');
         this.dom.usageCountrySuggestions = document.getElementById('usageCountrySuggestions');
+        this.dom.usageUrl = document.getElementById('usageUrl');
+        this.dom.usageUrlGroup = document.getElementById('usageUrlGroup');
+        this.dom.usageFlagImage = document.getElementById('usageFlagImage');
+        this.dom.usageFlagImageGroup = document.getElementById('usageFlagImageGroup');
         this.dom.usageDocument = document.getElementById('usageDocument');
         this.dom.usageDocumentMeta = document.getElementById('usageDocumentMeta');
         this.dom.usageDocumentGroup = document.getElementById('usageDocumentGroup');
         this.dom.usageDocumentHint = document.getElementById('usageDocumentHint');
         this.dom.usageLinkText = document.getElementById('usageLinkText');
-        this.dom.usageText = document.getElementById('usageText');
+        this.dom.usageLinkTextKz = document.getElementById('usageLinkTextKz');
+        this.dom.usageLinkTextEn = document.getElementById('usageLinkTextEn');
+        this.dom.visitButtonText = document.getElementById('visitButtonText');
+        this.dom.visitButtonTextKz = document.getElementById('visitButtonTextKz');
+        this.dom.visitButtonTextEn = document.getElementById('visitButtonTextEn');
+        this.dom.visitButtonTextGroup = document.getElementById('visitButtonTextGroup');
+        this.dom.visitButtonTextKzGroup = document.getElementById('visitButtonTextKzGroup');
+        this.dom.visitButtonTextEnGroup = document.getElementById('visitButtonTextEnGroup');
         this.dom.usageCardFields = document.getElementById('usageCardFields');
         this.dom.usageCardImage = document.getElementById('usageCardImage');
         this.dom.usageCardImageKey = document.getElementById('usageCardImageKey');
         this.dom.usageCardImageUpload = document.getElementById('usageCardImageUpload');
         this.dom.usageCardDescription = document.getElementById('usageCardDescription');
+        this.dom.usageCardDescriptionKz = document.getElementById('usageCardDescriptionKz');
+        this.dom.usageCardDescriptionEn = document.getElementById('usageCardDescriptionEn');
         this.dom.usageFileUpload = document.getElementById('usageFileUpload');
+        this.dom.usageFileUrl = document.getElementById('usageFileUrl');
         this.dom.usageFilePreview = document.getElementById('usageFilePreview');
         this.dom.saveUsageBtn = document.getElementById('saveUsageBtn');
 
@@ -280,15 +371,123 @@ class DocumentUsageAdmin {
 
         this.dom.resetFiltersBtn?.addEventListener('click', () => this.resetFilters());
         this.dom.refreshUsagesBtn?.addEventListener('click', () => this.fetchAllData());
+        this.dom.autoCreateUsagesBtn?.addEventListener('click', () => this.autoCreateUsagesForPartners());
+        this.dom.organizeFilesBtn?.addEventListener('click', () => {
+            // Показываем меню выбора действия
+            const action = confirm(
+                'Выберите действие:\n\n' +
+                'OK - Миграция из files/ в OurPartners/\n' +
+                'Отмена - Организация существующих файлов OurPartners/'
+            );
+            
+            if (action) {
+                this.migrateFilesFromFilesToOurPartners();
+            } else {
+                this.organizeFilesInR2();
+            }
+        });
 
         this.dom.addUsageBtn?.addEventListener('click', () => this.openUsageModal());
 
-        this.dom.usagesTableBody?.addEventListener('click', (event) => this.handleTableClick(event));
+        this.dom.usagesTableBody?.addEventListener('click', (event) => {
+            const toggleBtn = event.target.closest('.btn-text-toggle');
+            if (toggleBtn) {
+                const usageId = toggleBtn.getAttribute('data-usage-id');
+                const row = toggleBtn.closest('tr');
+                if (row) {
+                    const content = row.querySelector('.usage-text-content');
+                    const full = row.querySelector('.usage-text-full');
+                    if (content && full) {
+                        if (full.style.display === 'none') {
+                            content.style.display = 'none';
+                            full.style.display = 'inline';
+                            toggleBtn.textContent = 'Свернуть';
+                        } else {
+                            content.style.display = 'inline';
+                            full.style.display = 'none';
+                            toggleBtn.textContent = 'Читать еще';
+                        }
+                    }
+                }
+                event.stopPropagation();
+                return;
+            }
+            this.handleTableClick(event);
+        });
 
         this.dom.usageForm?.addEventListener('submit', (event) => this.handleUsageSubmit(event));
 
         this.dom.usageFilePreview?.addEventListener('click', () => this.dom.usageFileUpload?.click());
-        this.dom.usageFileUpload?.addEventListener('change', (event) => this.handleFileSelection(event));
+        this.dom.usageFileUpload?.addEventListener('change', (event) => {
+            this.handleFileSelection(event);
+            // Очищаем URL при выборе файла
+            if (this.dom.usageFileUrl) this.dom.usageFileUrl.value = '';
+        });
+        // Debounce для проверки URL документа
+        let urlCheckTimeout = null;
+        this.dom.usageFileUrl?.addEventListener('input', async (event) => {
+            const url = event.target.value.trim();
+            // Очищаем файл при вводе URL
+            if (this.dom.usageFileUpload) this.dom.usageFileUpload.value = '';
+            this.pendingFile = null;
+            this.updateFilePreview();
+            
+            // Очищаем предыдущий таймер
+            if (urlCheckTimeout) {
+                clearTimeout(urlCheckTimeout);
+            }
+            
+            // Проверяем, существует ли документ с таким URL (с задержкой 500ms после окончания ввода)
+            if (url && url.startsWith('http')) {
+                urlCheckTimeout = setTimeout(async () => {
+                    try {
+                        // Сначала проверяем в уже загруженных документах
+                        const existingInState = this.state.documents.find(doc => doc.file_url === url);
+                        
+                        if (existingInState) {
+                            // Документ найден в состоянии - выбираем его
+                            if (this.dom.usageDocument) {
+                                this.dom.usageDocument.value = existingInState.id;
+                                this.handleUsageDocumentChange();
+                                this.showToast('success', `Документ "${existingInState.file_name}" найден и выбран`);
+                            }
+                        } else {
+                            // Если не найден в состоянии, проверяем в базе (только если URL валидный и полный)
+                            if (url.length > 20 && url.includes('://')) {
+                                const { data: existingDoc, error } = await supabase
+                                    .from('documents')
+                                    .select('*')
+                                    .eq('file_url', url)
+                                    .maybeSingle();
+                                
+                                if (!error && existingDoc) {
+                                    // Добавляем документ в состояние, если его там нет
+                                    if (!this.state.documents.find(d => d.id === existingDoc.id)) {
+                                        this.state.documents.push(normalizeDocumentRecord(existingDoc));
+                                        this.populateDocumentOptions();
+                                    }
+                                    
+                                    // Выбираем документ в списке
+                                    if (this.dom.usageDocument) {
+                                        this.dom.usageDocument.value = existingDoc.id;
+                                        this.handleUsageDocumentChange();
+                                        this.showToast('success', `Документ "${existingDoc.file_name}" найден и выбран`);
+                                    }
+                                }
+                            }
+                        }
+                    } catch (error) {
+                        // Игнорируем ошибки при проверке
+                        console.debug('Проверка существования документа:', error);
+                    }
+                }, 500); // Задержка 500ms после окончания ввода
+            } else {
+                // Если URL очищен, сбрасываем выбор документа
+                if (this.dom.usageDocument && !this.dom.usageFileUpload?.files?.length) {
+                    this.dom.usageDocument.value = '';
+                }
+            }
+        });
 
         this.dom.usagePage?.addEventListener('change', () => {
             const slug = this.dom.usagePage.value;
@@ -297,12 +496,6 @@ class DocumentUsageAdmin {
         });
 
         this.dom.usageDocument?.addEventListener('change', () => this.handleUsageDocumentChange());
-
-        this.dom.usageCardDescription?.addEventListener('input', () => {
-            if (this.dom.usageText) {
-                this.dom.usageText.value = this.dom.usageCardDescription.value;
-            }
-        });
 
         this.dom.usageCardImage?.addEventListener('input', () => {
             if (!this.dom.usageCardImage.value.trim() && this.dom.usageCardImageKey) {
@@ -882,15 +1075,65 @@ class DocumentUsageAdmin {
             if (this.dom.usageCountrySuggestions) {
                 this.dom.usageCountrySuggestions.innerHTML = '';
             }
+            // Скрываем поля для непартнерских страниц
+            if (this.dom.usageUrlGroup) {
+                this.dom.usageUrlGroup.classList.add('hidden');
+                if (this.dom.usageUrl) {
+                    this.dom.usageUrl.value = '';
+                }
+            }
+            if (this.dom.usageFlagImageGroup) {
+                this.dom.usageFlagImageGroup.classList.add('hidden');
+                if (this.dom.usageFlagImage) {
+                    this.dom.usageFlagImage.value = '';
+                }
+            }
+            if (this.dom.visitButtonTextGroup) {
+                this.dom.visitButtonTextGroup.classList.add('hidden');
+                if (this.dom.visitButtonText) this.dom.visitButtonText.value = '';
+            }
+            if (this.dom.visitButtonTextKzGroup) {
+                this.dom.visitButtonTextKzGroup.classList.add('hidden');
+                if (this.dom.visitButtonTextKz) this.dom.visitButtonTextKz.value = '';
+            }
+            if (this.dom.visitButtonTextEnGroup) {
+                this.dom.visitButtonTextEnGroup.classList.add('hidden');
+                if (this.dom.visitButtonTextEn) this.dom.visitButtonTextEn.value = '';
+            }
             return;
         }
 
+        // Показываем поля для партнерской страницы
         this.dom.usageCountryGroup.classList.remove('hidden');
+        if (this.dom.usageUrlGroup) {
+            this.dom.usageUrlGroup.classList.remove('hidden');
+        }
+        if (this.dom.usageFlagImageGroup) {
+            this.dom.usageFlagImageGroup.classList.remove('hidden');
+        }
+        if (this.dom.visitButtonTextGroup) {
+            this.dom.visitButtonTextGroup.classList.remove('hidden');
+        }
+        if (this.dom.visitButtonTextKzGroup) {
+            this.dom.visitButtonTextKzGroup.classList.remove('hidden');
+        }
+        if (this.dom.visitButtonTextEnGroup) {
+            this.dom.visitButtonTextEnGroup.classList.remove('hidden');
+        }
 
         if (!this.dom.usageCountry.value) {
             const preset = (usage?.country || prefill?.country || '').trim();
             if (preset) {
                 this.dom.usageCountry.value = preset;
+            }
+        }
+
+        // Заполняем URL из metadata документа
+        if (this.dom.usageUrl && !this.dom.usageUrl.value) {
+            const metadata = usage?.document?.metadata || usage?.metadata || {};
+            const urlPreset = metadata.university_url || prefill?.university_url || '';
+            if (urlPreset) {
+                this.dom.usageUrl.value = urlPreset;
             }
         }
 
@@ -956,10 +1199,16 @@ class DocumentUsageAdmin {
         const rows = this.state.filteredUsages.map((usage) => {
             const doc = usage.document || {};
             const iconClass = ICON_BY_TYPE[(doc.file_type || '').toLowerCase()] || 'fas fa-file';
-            const usageText = usage.usage_text ? truncateText(usage.usage_text) : '<span class="usage-text muted">Текст не указан</span>';
+            const usageText = usage.usage_text || '';
+            const hasLongText = usageText.length > 80;
+            const truncatedText = hasLongText ? usageText.slice(0, 80) + '…' : usageText;
+            const usageTextDisplay = usageText ? `<span class="usage-text-content">${escapeHtml(truncatedText)}</span>${hasLongText ? `<span class="usage-text-full" style="display:none;">${escapeHtml(usageText)}</span><button class="btn-text-toggle" data-usage-id="${usage.id}" type="button">Читать еще</button>` : ''}` : '<span class="usage-text muted">Текст не указан</span>';
             const countryText = usage.country || '—';
             const sectionText = usage.section || '—';
-            const documentLink = doc.file_url ? `<a href="${doc.file_url}" target="_blank" rel="noopener">${escapeHtml(doc.file_name || 'Открыть')}</a>` : '<span class="usage-text muted">Нет ссылки</span>';
+            const docFileName = doc.file_name || 'Документ';
+            const hasLongFileName = docFileName.length > 30;
+            const truncatedFileName = hasLongFileName ? docFileName.slice(0, 30) + '…' : docFileName;
+            const documentLink = doc.file_url ? `<a href="${doc.file_url}" target="_blank" rel="noopener" class="document-link" title="${escapeHtml(docFileName)}">${escapeHtml(truncatedFileName)}</a>` : '<span class="usage-text muted">Нет ссылки</span>';
             const updatedAt = usage.updated_at || usage.created_at;
             
             return `
@@ -971,13 +1220,13 @@ class DocumentUsageAdmin {
                     <td>
                         <div class="document-cell">
                             <i class="${iconClass}"></i>
-                            <div>
-                                <strong>${escapeHtml(doc.file_name || 'Документ')}</strong><br>
-                                <small>${documentLink}</small>
-                    </div>
-                    </div>
+                            <div class="document-info">
+                                <strong class="document-name" title="${escapeHtml(docFileName)}">${escapeHtml(truncatedFileName)}</strong>
+                                <div class="document-link-wrapper">${documentLink}</div>
+                            </div>
+                        </div>
                     </td>
-                    <td>${usageText}</td>
+                    <td class="usage-text-cell">${usageTextDisplay}</td>
                     <td>${formatDate(updatedAt)}</td>
                     <td>
                         <div class="usage-actions">
@@ -1159,9 +1408,8 @@ class DocumentUsageAdmin {
             if (this.dom.usageCardImage) this.dom.usageCardImage.value = '';
             if (this.dom.usageCardImageKey) this.dom.usageCardImageKey.value = '';
             if (this.dom.usageCardDescription) this.dom.usageCardDescription.value = '';
-            if (this.dom.usageText && usage?.usage_text) {
-                this.dom.usageText.value = usage.usage_text;
-            }
+            if (this.dom.usageCardDescriptionKz) this.dom.usageCardDescriptionKz.value = '';
+            if (this.dom.usageCardDescriptionEn) this.dom.usageCardDescriptionEn.value = '';
             this.cardFieldsTouched = false;
             this.originalCardImage = '';
             return;
@@ -1169,9 +1417,8 @@ class DocumentUsageAdmin {
 
         this.dom.usageCardFields.classList.remove('hidden');
 
-        const description = usage?.usage_text || this.dom.usageText?.value || '';
+        const description = usage?.usage_text || '';
         if (this.dom.usageCardDescription) this.dom.usageCardDescription.value = description;
-        if (this.dom.usageText) this.dom.usageText.value = description;
 
         let documentId = usage?.document_id || '';
         if (!documentId && this.dom.usageDocument) {
@@ -1207,7 +1454,6 @@ class DocumentUsageAdmin {
         this.pendingFile = null;
         this.pendingReplaceScope = 'local';
         this.pendingConfirmAction = null;
-        this.currentUsageId = null;
         this.loadingCount = 0;
         this.hasPageTitleColumn = false;
         this.countriesByPage = new Map();
@@ -1216,6 +1462,9 @@ class DocumentUsageAdmin {
         this.staticScanCompleted = false;
         this.staticScanInProgress = false;
         this.fileProtocolWarningShown = false;
+
+        // Очищаем поле URL файла
+        if (this.dom.usageFileUrl) this.dom.usageFileUrl.value = '';
 
         this.recomputeCountryIndex();
         this.updateFilePreview();
@@ -1234,8 +1483,10 @@ class DocumentUsageAdmin {
             }
         } else {
             const docName = usage.document?.file_name || 'Документ';
+            const truncatedDocName = docName.length > 60 ? docName.slice(0, 60) + '…' : docName;
             this.dom.usageModalTitle.innerHTML = `<i class="fas fa-pen-to-square"></i> Вхождение ${usage.id.slice(0, 8)}…`;
-            this.dom.usageModalSubtitle.textContent = `Документ: ${docName}`;
+            this.dom.usageModalSubtitle.textContent = `Документ: ${truncatedDocName}`;
+            this.dom.usageModalSubtitle.title = docName.length > 60 ? docName : ''; // Показываем полное имя при наведении
         }
 
         this.dom.usageId.value = usage?.id || '';
@@ -1250,11 +1501,49 @@ class DocumentUsageAdmin {
         if (this.dom.usageCountry) {
             this.dom.usageCountry.value = usage?.country || prefill?.country || '';
         }
+        // Заполняем основные поля
         this.dom.usageLinkText.value = (usage?.link_text || prefill?.linkText || '');
-        this.dom.usageText.value = usage?.usage_text || prefill?.context || '';
+        
+        // Заполняем многоязычные поля из metadata
+        const metadata = usage?.document?.metadata || usage?.metadata || {};
+        if (this.dom.usageLinkTextKz) {
+            this.dom.usageLinkTextKz.value = metadata.link_text_kz || '';
+        }
+        if (this.dom.usageLinkTextEn) {
+            this.dom.usageLinkTextEn.value = metadata.link_text_en || '';
+        }
+        
         if (this.dom.usageCardDescription) {
             this.dom.usageCardDescription.value = usage?.usage_text || prefill?.context || '';
+            if (this.dom.usageCardDescriptionKz) {
+                this.dom.usageCardDescriptionKz.value = metadata.card_description_kz || '';
+            }
+            if (this.dom.usageCardDescriptionEn) {
+                this.dom.usageCardDescriptionEn.value = metadata.card_description_en || '';
+            }
         }
+        
+        // Заполняем URL из metadata
+        if (this.dom.usageUrl) {
+            this.dom.usageUrl.value = metadata.university_url || prefill?.university_url || '';
+        }
+        
+        // Заполняем URL изображения флага из metadata
+        if (this.dom.usageFlagImage) {
+            this.dom.usageFlagImage.value = metadata.flag_image_url || metadata.card_image_url || prefill?.flag_image_url || '';
+        }
+        
+        // Заполняем тексты кнопки "Посетить сайт" из metadata
+        if (this.dom.visitButtonText) {
+            this.dom.visitButtonText.value = metadata.visit_button_text || 'Посетить сайт';
+        }
+        if (this.dom.visitButtonTextKz) {
+            this.dom.visitButtonTextKz.value = metadata.visit_button_text_kz || 'Сайтқа бару';
+        }
+        if (this.dom.visitButtonTextEn) {
+            this.dom.visitButtonTextEn.value = metadata.visit_button_text_en || 'Visit website';
+        }
+        
         if (this.dom.usageCardImage) {
             const docMeta = usage?.document?.metadata || {};
             this.dom.usageCardImage.value = docMeta.card_image_url || '';
@@ -1367,21 +1656,23 @@ class DocumentUsageAdmin {
         const isCardPage = this.isCardPage(pageValue);
         const cardImageUrl = this.dom.usageCardImage ? this.dom.usageCardImage.value.trim() : '';
         const cardImageKey = this.dom.usageCardImageKey ? this.dom.usageCardImageKey.value.trim() : '';
-        const descriptionValue = isCardPage
+            const descriptionValue = isCardPage
             ? (this.dom.usageCardDescription ? this.dom.usageCardDescription.value.trim() : '')
-            : (this.dom.usageText?.value?.trim() || '');
+            : '';
 
         if (!pageValue) {
             this.showToast('error', 'Укажите страницу, на которой размещается документ');
             return;
         }
 
-        if (!selectedDocumentId && !this.pendingFile) {
-            this.showToast('error', 'Выберите документ или загрузите новый файл');
+        const fileUrl = this.dom.usageFileUrl ? this.dom.usageFileUrl.value.trim() : '';
+        
+        if (!selectedDocumentId && !this.pendingFile && !fileUrl) {
+            this.showToast('error', 'Выберите документ, загрузите новый файл или укажите URL файла');
             return;
         }
 
-        if (!this.pendingFile && !selectedDocumentId) {
+        if (!this.pendingFile && !selectedDocumentId && !fileUrl) {
             this.showToast('error', 'Документ не выбран');
             return;
         }
@@ -1395,23 +1686,57 @@ class DocumentUsageAdmin {
             if (this.pendingFile) {
                 replacementSummary = await this.performReplacement({ usageId, cardImageUrl, cardImageKey });
                 documentId = replacementSummary?.documentId || documentId;
+            } else if (fileUrl) {
+                // Создаем документ из URL
+                replacementSummary = await this.createDocumentFromUrl({ fileUrl, usageId, cardImageUrl, cardImageKey });
+                documentId = replacementSummary?.documentId || documentId;
             }
 
+            // Собираем многоязычные тексты и URL
+            const multilingualMetadata = {};
+            if (this.dom.usageLinkTextKz?.value.trim()) {
+                multilingualMetadata.link_text_kz = this.dom.usageLinkTextKz.value.trim();
+            }
+            if (this.dom.usageLinkTextEn?.value.trim()) {
+                multilingualMetadata.link_text_en = this.dom.usageLinkTextEn.value.trim();
+            }
+            // Сохраняем URL ссылку на университет
+            if (this.dom.usageUrl?.value.trim()) {
+                multilingualMetadata.university_url = this.dom.usageUrl.value.trim();
+            }
+            // Сохраняем URL изображения флага
+            if (this.dom.usageFlagImage?.value.trim()) {
+                multilingualMetadata.flag_image_url = this.dom.usageFlagImage.value.trim();
+            }
+            // Сохраняем тексты кнопки "Посетить сайт"
+            if (this.dom.visitButtonText?.value.trim()) {
+                multilingualMetadata.visit_button_text = this.dom.visitButtonText.value.trim();
+            }
+            if (this.dom.visitButtonTextKz?.value.trim()) {
+                multilingualMetadata.visit_button_text_kz = this.dom.visitButtonTextKz.value.trim();
+            }
+            if (this.dom.visitButtonTextEn?.value.trim()) {
+                multilingualMetadata.visit_button_text_en = this.dom.visitButtonTextEn.value.trim();
+            }
+            if (isCardPage) {
+                if (this.dom.usageCardDescriptionKz?.value.trim()) {
+                    multilingualMetadata.card_description_kz = this.dom.usageCardDescriptionKz.value.trim();
+                }
+                if (this.dom.usageCardDescriptionEn?.value.trim()) {
+                    multilingualMetadata.card_description_en = this.dom.usageCardDescriptionEn.value.trim();
+                }
+            }
+            
             const payload = {
                 page_slug: normalizedPage,
                 section: this.dom.usageSection.value && this.dom.usageSection.value.trim()
                     ? this.dom.usageSection.value.trim()
                     : (normalizedPage ? PAGE_SECTION_DEFAULTS[normalizedPage] || null : null),
                 country: this.dom.usageCountry.value.trim() || null,
-                usage_text: this.dom.usageText.value.trim() || null,
+                usage_text: descriptionValue ? descriptionValue : null,
                 link_text: this.dom.usageLinkText.value.trim() || null,
                 document_id: documentId
             };
-
-            if (this.dom.usageText) {
-                this.dom.usageText.value = descriptionValue;
-            }
-            payload.usage_text = descriptionValue ? descriptionValue : null;
 
             if (this.hasPageTitleColumn) {
                 payload.page_title = normalizedPage ? getPageDisplayName(normalizedPage) : null;
@@ -1419,6 +1744,11 @@ class DocumentUsageAdmin {
 
             let updatedUsage = null;
 
+            // === СОХРАНЕНИЕ В SUPABASE ===
+            // Данные сохраняются в таблицу 'document_usages'
+            // Основные поля: page_slug, section, country, link_text, usage_text, document_id
+            // Многоязычные тексты и URL сохраняются в metadata документа (таблица 'documents')
+            
             if (isNew) {
                 const { data, error } = await supabase
                     .from('document_usages')
@@ -1460,20 +1790,45 @@ class DocumentUsageAdmin {
                 this.showToast('info', replacementSummary.message);
             }
 
-            if (documentId && isCardPage) {
+            // === СОХРАНЕНИЕ МНОГОЯЗЫЧНЫХ ДАННЫХ И URL В METADATA ДОКУМЕНТА ===
+            // Многоязычные тексты и URL сохраняются в metadata документа (таблица 'documents')
+            // Структура metadata:
+            //   - link_text_kz, link_text_en - тексты ссылок на разных языках
+            //   - university_url - ссылка на сайт университета
+            //   - card_description_kz, card_description_en - описания карточек
+            //   - card_image_url, card_image_key - изображения карточек
+            if (documentId) {
                 const metadataPatch = {
-                    card_image_url: cardImageUrl || null,
-                    card_image_key: cardImageKey || null
+                    ...multilingualMetadata
                 };
-                const refreshedDocument = await this.updateDocumentMetadata(documentId, metadataPatch);
-                if (refreshedDocument) {
-                    updatedUsage.document = normalizeDocumentRecord(refreshedDocument);
-                    if (this.dom.usageCardImageKey) {
-                        this.dom.usageCardImageKey.value = refreshedDocument.metadata?.card_image_key || '';
+                
+                if (isCardPage) {
+                    metadataPatch.card_image_url = cardImageUrl || null;
+                    metadataPatch.card_image_key = cardImageKey || null;
+                }
+                
+                // Удаляем пустые значения
+                Object.keys(metadataPatch).forEach(key => {
+                    if (metadataPatch[key] === null || metadataPatch[key] === '') {
+                        delete metadataPatch[key];
+                    }
+                });
+                
+                if (Object.keys(metadataPatch).length > 0) {
+                    // Обновление происходит в таблице 'documents', поле 'metadata' (JSONB)
+                    const refreshedDocument = await this.updateDocumentMetadata(documentId, metadataPatch);
+                    if (refreshedDocument) {
+                        updatedUsage.document = normalizeDocumentRecord(refreshedDocument);
+                        if (this.dom.usageCardImageKey) {
+                            this.dom.usageCardImageKey.value = refreshedDocument.metadata?.card_image_key || '';
+                        }
                     }
                 }
-                this.originalCardImage = cardImageUrl || '';
-                this.cardFieldsTouched = false;
+                
+                if (isCardPage) {
+                    this.originalCardImage = cardImageUrl || '';
+                    this.cardFieldsTouched = false;
+                }
             }
 
             this.state.usages = this.state.usages.map((usage) => usage.id === updatedUsage.id ? updatedUsage : usage);
@@ -1481,6 +1836,7 @@ class DocumentUsageAdmin {
             this.pendingFile = null;
             this.pendingReplaceScope = 'local';
             this.dom.usageFileUpload.value = '';
+            if (this.dom.usageFileUrl) this.dom.usageFileUrl.value = '';
             this.updateFilePreview();
             this.dom.usagePage.value = '';
 
@@ -1511,8 +1867,39 @@ class DocumentUsageAdmin {
 
         const existingUsage = usageId ? this.state.usages.find((item) => item.id === usageId) : null;
         const oldDocument = existingUsage?.document || null;
+        
+        // Определяем путь в R2 на основе страницы и страны
+        let folderPath = '';
+        const pageSlug = this.dom.usagePage?.value || '';
+        const country = this.dom.usageCountry?.value?.trim() || '';
+        
+        if (PARTNER_PAGE_SLUGS.has(pageSlug) && country) {
+            // Для Our-partners используем структуру OurPartners/Страна/
+            const countryFolderMapping = {
+                'Азербайджан': 'Azerbaijan',
+                'Болгария': 'Bulgaria',
+                'Венгрия': 'Hungary',
+                'Германия': 'Germany',
+                'Индия': 'India',
+                'Испания': 'Spain',
+                'Италия': 'Italy',
+                'Китай': 'China',
+                'Латвия': 'Latvia',
+                'Польша': 'Poland',
+                'Россия': 'Russia',
+                'Словакия': 'Slovakia',
+                'Таджикистан': 'Tajikistan',
+                'Туркменистан': 'Turkmenistan',
+                'Турция': 'Turkey',
+                'Узбекистан': 'Uzbekistan',
+                'Черногория': 'Montenegro',
+                'Швейцария': 'Switzerland'
+            };
+            const countryFolder = countryFolderMapping[country] || country.replace(/[^a-zA-Zа-яА-Я0-9]/g, '_');
+            folderPath = `OurPartners/${countryFolder}`;
+        }
 
-        const uploadMeta = await this.uploadFileToR2(file, oldDocument);
+        const uploadMeta = await this.uploadFileToR2(file, oldDocument, folderPath);
         const newDocument = await this.createDocumentRecord(uploadMeta, oldDocument, {
             card_image_url: cardImageUrl || null,
             card_image_key: cardImageKey || null
@@ -1561,9 +1948,99 @@ class DocumentUsageAdmin {
         };
     }
 
-    async uploadFileToR2(file, previousDocument = null) {
+    async createDocumentFromUrl({ fileUrl, usageId, cardImageUrl = '', cardImageKey = '' }) {
+        if (!fileUrl || !fileUrl.trim()) return null;
+
+        // Валидация URL
+        try {
+            new URL(fileUrl);
+        } catch (error) {
+            throw new Error('Некорректный URL файла');
+        }
+
+        const existingUsage = usageId ? this.state.usages.find((item) => item.id === usageId) : null;
+        const oldDocument = existingUsage?.document || null;
+
+        // Извлекаем имя файла из URL
+        let fileName = '';
+        try {
+            const url = new URL(fileUrl);
+            const pathParts = url.pathname.split('/').filter(p => p);
+            fileName = pathParts[pathParts.length - 1] || 'document.pdf';
+        } catch (error) {
+            fileName = 'document.pdf';
+        }
+
+        // Определяем расширение файла
+        const extension = (fileName.split('.').pop() || 'pdf').toLowerCase();
+        if (!SUPPORTED_EXTENSIONS.includes(extension)) {
+            throw new Error('Поддерживаются только PDF, DOC(X), XLS(X), PPT(X)');
+        }
+
+        // Извлекаем file_key из URL (путь без домена)
+        let fileKey = '';
+        try {
+            const url = new URL(fileUrl);
+            fileKey = decodeURIComponent(url.pathname.replace(/^\//, ''));
+        } catch (error) {
+            fileKey = fileName;
+        }
+
+        // Создаем метаданные для документа
+        const uploadMeta = {
+            file_key: fileKey,
+            file_url: fileUrl.trim(),
+            file_name: fileName,
+            file_type: extension,
+            file_size: null, // Размер неизвестен для внешних URL
+            version: oldDocument ? (oldDocument.version || 1) + 1 : 1
+        };
+
+        const newDocument = await this.createDocumentRecord(uploadMeta, oldDocument, {
+            card_image_url: cardImageUrl || null,
+            card_image_key: cardImageKey || null,
+            source: 'external_url'
+        });
+
+        if (!this.state.documents.some((doc) => doc.id === newDocument.id)) {
+            this.state.documents = [newDocument, ...this.state.documents];
+        }
+
+        if (usageId) {
+            const { data, error } = await supabase
+                .from('document_usages')
+                .update({ document_id: newDocument.id })
+                .eq('id', usageId)
+                .select('*, document:documents(*)')
+                .single();
+
+            if (error) {
+                this.handleSupabaseError(error, 'замена документа');
+                throw error;
+            }
+
+            const normalizedUsage = {
+                ...data,
+                document: normalizeDocumentRecord(data.document)
+            };
+
+            this.state.usages = this.state.usages.map((usage) => usage.id === usageId ? normalizedUsage : usage);
+        }
+
+        return {
+            documentId: newDocument.id,
+            message: 'Документ добавлен по URL'
+        };
+    }
+
+    async uploadFileToR2(file, previousDocument = null, folderPath = '') {
         const fileName = file.name;
-        const response = await fetch(`${R2_WORKER_URL}/upload?name=${encodeURIComponent(fileName)}`, {
+        // Если указан путь к папке, добавляем его к имени файла
+        const filePath = folderPath 
+            ? `${folderPath.replace(/\/$/, '')}/${fileName}` 
+            : fileName;
+        
+        const response = await fetch(`${R2_WORKER_URL}/upload?name=${encodeURIComponent(filePath)}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': file.type || 'application/octet-stream'
@@ -1583,7 +2060,7 @@ class DocumentUsageAdmin {
             console.warn('Ответ Cloudflare Worker не в формате JSON. Будет использован публичный URL по умолчанию.', error);
         }
 
-        const fileUrl = payload?.url || `${(R2_PUBLIC_URL || '').replace(/\/$/, '')}/${encodeURIComponent(fileName)}`;
+        const fileUrl = payload?.url || `${(R2_PUBLIC_URL || '').replace(/\/$/, '')}/${encodeURIComponent(filePath)}`;
         const extension = (file.name.split('.').pop() || '').toLowerCase();
 
         let fileKey = payload?.key || payload?.file_key || '';
@@ -1596,7 +2073,7 @@ class DocumentUsageAdmin {
             }
         }
         if (!fileKey) {
-            fileKey = previousDocument?.file_key || fileName;
+            fileKey = previousDocument?.file_key || filePath;
         }
 
         return {
@@ -1626,6 +2103,59 @@ class DocumentUsageAdmin {
         });
 
         const fileKeyFallback = previousDocument?.file_key || meta.file_key || meta.file_name;
+        
+        // Сначала проверяем, существует ли документ с таким URL или file_key
+        let existing = null;
+        
+        // Проверяем по file_url (приоритет)
+        if (meta.file_url) {
+            const { data: urlData, error: urlError } = await supabase
+                .from('documents')
+                .select('*')
+                .eq('file_url', meta.file_url)
+                .maybeSingle();
+            if (!urlError && urlData) {
+                existing = urlData;
+            }
+        }
+        
+        // Если не нашли по URL, проверяем по file_key
+        if (!existing && fileKeyFallback) {
+            const { data: keyData, error: keyError } = await supabase
+                .from('documents')
+                .select('*')
+                .eq('file_key', fileKeyFallback)
+                .maybeSingle();
+            if (!keyError && keyData) {
+                existing = keyData;
+            }
+        }
+
+        // Если документ существует, обновляем его
+        if (existing) {
+            const updatePayload = {
+                file_url: meta.file_url,
+                file_name: meta.file_name,
+                file_type: meta.file_type,
+                file_size: meta.file_size ?? null,
+                version: (existing.version || 1) + 1,
+                metadata: mergedMetadata,
+                is_active: true,
+                title: existing.title || previousDocument?.title || meta.file_name
+            };
+
+            const { data: updated, error: updateError } = await supabase
+                .from('documents')
+                .update(updatePayload)
+                .eq('id', existing.id)
+                .select('*')
+                .single();
+
+            if (updateError) throw updateError;
+            return normalizeDocumentRecord(updated);
+        }
+
+        // Если документа нет, создаем новый
         const payload = {
             file_key: meta.file_key || fileKeyFallback,
             file_url: meta.file_url,
@@ -1638,78 +2168,35 @@ class DocumentUsageAdmin {
             title: previousDocument?.title || meta.file_name
         };
 
-        const upsert = await supabase
+        const { data: inserted, error: insertError } = await supabase
             .from('documents')
             .insert([payload])
             .select('*')
             .single();
 
-        if (upsert.error) {
-            const duplicateErrorCodes = new Set(['23505', 'PGRST302', 'PGRST303', '409', 409]);
-            const isDuplicate =
-                duplicateErrorCodes.has(upsert.error.code) ||
-                (typeof upsert.error.hint === 'string' && upsert.error.hint.toLowerCase().includes('duplicate')) ||
-                (typeof upsert.error.message === 'string' && upsert.error.message.toLowerCase().includes('duplicate'));
-
-            if (isDuplicate) {
-                const messageText = (upsert.error.message || '').toLowerCase();
-                const isFileUrlConflict = messageText.includes('file_url');
-
-                const resolveExistingByKey = async () => {
-                    const { data, error } = await supabase
-                    .from('documents')
-                    .select('*')
-                    .eq('file_key', fileKeyFallback)
-                    .maybeSingle();
-                    if (error) throw error;
-                    return data;
-                };
-
-                const resolveExistingByUrl = async () => {
-                    const { data, error } = await supabase
+        if (insertError) {
+            // Если все же произошла ошибка (например, другой процесс создал документ),
+            // пытаемся найти существующий
+            if (insertError.code === '23505' || insertError.code === 'PGRST302' || insertError.code === 'PGRST303' || 
+                insertError.code === '409' || insertError.code === 409 || 
+                (insertError.message && insertError.message.toLowerCase().includes('duplicate'))) {
+                
+                // Повторная попытка найти существующий документ
+                if (meta.file_url) {
+                    const { data: retryData } = await supabase
                         .from('documents')
                         .select('*')
                         .eq('file_url', meta.file_url)
                         .maybeSingle();
-                    if (error) throw error;
-                    return data;
-                };
-
-                let existing = null;
-                if (!isFileUrlConflict) {
-                    existing = await resolveExistingByKey();
-                }
-                if (!existing) {
-                    existing = await resolveExistingByUrl();
-                }
-
-                if (existing) {
-                    const updatePayload = {
-                        file_url: meta.file_url,
-                        file_name: meta.file_name,
-                        file_type: meta.file_type,
-                        file_size: meta.file_size ?? null,
-                        version: (existing.version || 1) + 1,
-                        metadata: mergedMetadata,
-                        is_active: true,
-                        title: existing.title || previousDocument?.title || meta.file_name
-                    };
-
-                    const { data: updated, error: updateError } = await supabase
-                        .from('documents')
-                        .update(updatePayload)
-                        .eq('id', existing.id)
-                        .select('*')
-                        .single();
-
-                    if (updateError) throw updateError;
-                    return normalizeDocumentRecord(updated);
+                    if (retryData) {
+                        return normalizeDocumentRecord(retryData);
+                    }
                 }
             }
-            throw upsert.error;
+            throw insertError;
         }
 
-        return normalizeDocumentRecord(upsert.data);
+        return normalizeDocumentRecord(inserted);
     }
 
     async updateDocumentMetadata(documentId, patch = {}) {
@@ -1933,14 +2420,23 @@ class DocumentUsageAdmin {
 
     openModal(modal) {
         if (!modal) return;
+        // Устанавливаем aria-hidden="false" для показа модального окна (CSS требует этот атрибут)
         modal.setAttribute('aria-hidden', 'false');
         modal.classList.add('visible');
+        // Устанавливаем фокус после того, как aria-hidden убран
+        requestAnimationFrame(() => {
+            const firstFocusable = modal.querySelector('button:not([data-close-modal]), [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+            if (firstFocusable && !firstFocusable.disabled) {
+                firstFocusable.focus();
+            }
+        });
     }
 
     closeModal(modal) {
         if (!modal) return;
-        modal.setAttribute('aria-hidden', 'true');
         modal.classList.remove('visible');
+        // Устанавливаем aria-hidden="true" для скрытия модального окна
+        modal.setAttribute('aria-hidden', 'true');
     }
 
     toggleLoading(isLoading) {
@@ -1988,6 +2484,825 @@ class DocumentUsageAdmin {
         toast.querySelector('button').addEventListener('click', remove);
         this.dom.toastContainer.appendChild(toast);
         setTimeout(remove, 4000);
+    }
+
+    async autoCreateUsagesForPartners() {
+        const pageSlug = 'Our-partners.html';
+        
+        // Подтверждение действия с опцией очистки
+        const clearExisting = confirm(
+            '⚠️ ВНИМАНИЕ: Это пересоздаст ВСЕ вхождения для страницы "Our-partners.html".\n\n' +
+            'Существующие вхождения будут УДАЛЕНЫ и созданы заново с правильными данными.\n\n' +
+            'Нажмите OK для пересоздания, Отмена - для добавления только новых документов.'
+        );
+        
+        if (clearExisting === null) return; // Пользователь отменил
+        
+        // Если пользователь хочет пересоздать, спрашиваем еще раз
+        if (clearExisting) {
+            const finalConfirm = confirm(
+                'Вы уверены? Все существующие вхождения для "Our-partners.html" будут удалены!\n\n' +
+                'Это действие нельзя отменить.'
+            );
+            if (!finalConfirm) return;
+        }
+        
+        try {
+            this.toggleLoading(true);
+            this.showToast('info', 'Начинаю автоматическое создание вхождений...');
+            
+            // Получаем все документы
+            const { data: documents, error: docsError } = await supabase
+                .from('documents')
+                .select('id, file_name, metadata, file_key')
+                .eq('is_active', true)
+                .order('file_name', { ascending: true });
+            
+            if (docsError) {
+                throw new Error(`Ошибка загрузки документов: ${docsError.message}`);
+            }
+            
+            if (!documents || documents.length === 0) {
+                this.showToast('warning', 'Документы не найдены');
+                return;
+            }
+            
+            // Фильтруем технические файлы
+            const universityDocuments = documents.filter(doc => !isTechnicalFile(doc.file_name));
+            
+            if (universityDocuments.length === 0) {
+                this.showToast('warning', 'Не найдено документов университетов (все файлы являются техническими)');
+                return;
+            }
+            
+            const technicalCount = documents.length - universityDocuments.length;
+            if (technicalCount > 0) {
+                this.showToast('info', `Пропущено технических файлов: ${technicalCount}`);
+            }
+            
+            // Если нужно пересоздать - удаляем все существующие вхождения
+            if (clearExisting) {
+                this.showToast('info', 'Удаляю существующие вхождения...');
+                const { error: deleteError } = await supabase
+                    .from('document_usages')
+                    .delete()
+                    .eq('page_slug', pageSlug);
+                
+                if (deleteError) {
+                    throw new Error(`Ошибка удаления существующих вхождений: ${deleteError.message}`);
+                }
+                
+                this.showToast('info', 'Существующие вхождения удалены. Создаю новые...');
+            } else {
+                // Получаем существующие вхождения для этой страницы
+                const { data: existingUsages, error: usagesError } = await supabase
+                    .from('document_usages')
+                    .select('document_id')
+                    .eq('page_slug', pageSlug);
+                
+                if (usagesError) {
+                    throw new Error(`Ошибка проверки существующих вхождений: ${usagesError.message}`);
+                }
+                
+                const existingDocIds = new Set((existingUsages || []).map(u => u.document_id));
+                
+                // Фильтруем документы - только те, для которых еще нет вхождений
+                documents = documents.filter(doc => !existingDocIds.has(doc.id));
+                
+                if (documents.length === 0) {
+                    this.showToast('info', 'Все документы уже имеют вхождения для этой страницы');
+                    return;
+                }
+            }
+            
+            const documentsToProcess = universityDocuments;
+            
+            // Точный маппинг университет -> страна (на основе данных из document-renderer.js)
+            const universityToCountry = {
+                // Азербайджан
+                'Azerbaijan University of Languages': 'Азербайджан',
+                'Baku State University': 'Азербайджан',
+                // Болгария
+                'Sofia University "St. Kliment Ohridski"': 'Болгария',
+                'Софийский университет имени святого Климента Охридского': 'Болгария',
+                'Technical University of Sofia': 'Болгария',
+                'Технический университет София': 'Болгария',
+                'University of Forestry': 'Болгария',
+                'Varna University of Management': 'Болгария',
+                'Agricultural University of Plovdiv': 'Болгария',
+                'Varna Free University': 'Болгария',
+                'New Bulgarian University': 'Болгария',
+                'University of European Centre for Peace and Development': 'Болгария',
+                // Венгрия
+                'University of Pannonia': 'Венгрия',
+                // Германия
+                'Fachhochschule des Mittelstands (FHM)': 'Германия',
+                'University of Konstanz': 'Германия',
+                // Индия
+                'Indian Institute of Technology Bombay': 'Индия',
+                'Индийский технологический институт Бомбей': 'Индия',
+                'English and Foreign Languages University': 'Индия',
+                // Испания
+                'University of Santiago de Compostela': 'Испания',
+                // Италия
+                'Eurac Research': 'Италия',
+                'University NiccolГІ Cusano': 'Италия',
+                'University Niccolò Cusano': 'Италия',
+                // Китай
+                'Jilin Normal University': 'Китай',
+                // Польша
+                'Poznan University of Technology': 'Польша',
+                'University of Bialystok': 'Польша',
+                'Eastern European University of Applied Sciences in Bialystok': 'Польша',
+                'University of Natural Sciences and Humanities in Siedlce': 'Польша',
+                // Россия
+                'Saint Petersburg State Forest Technical University': 'Россия',
+                'Saint Petersburg State University': 'Россия',
+                'Kazan Federal University': 'Россия',
+                'Innopolis University': 'Россия',
+                'Nizhnevartovsk State University': 'Россия',
+                'Kuban State University': 'Россия',
+                'Kuzbass State Technical University': 'Россия',
+                'Altai State University': 'Россия',
+                'Altai State Pedagogical University': 'Россия',
+                'Omsk State Pedagogical University': 'Россия',
+                'Russian New University (RosNOU)': 'Россия',
+                'Moscow City Pedagogical University (MSPU)': 'Россия',
+                'Kemerovo State University (KemSU)': 'Россия',
+                'College of Marketing, Management and Trade': 'Россия',
+                'National Research University "MEI"': 'Россия',
+                'Novosibirsk State University of Architecture and Civil Engineering (Sibstrin)': 'Россия',
+                'North Caucasus Federal University (SKFU)': 'Россия',
+                'Russian Presidential Academy of National Economy and Public Administration (RANEPA)': 'Россия',
+                'Russian State University of Tourism and Service (RSUTS)': 'Россия',
+                'Krasnoyarsk State Pedagogical University named after V.P. Astafyev': 'Россия',
+                'Novosibirsk State University (NSU)': 'Россия',
+                'Yugra State University (YSU)': 'Россия',
+                'Moscow State Technological University STANKIN': 'Россия',
+                'Novosibirsk State Pedagogical University (NSPU)': 'Россия',
+                'Novosibirsk State University of Economics and Management (NINH)': 'Россия',
+                'Pskov State University': 'Россия',
+                // Словакия
+                'Constantine the Philosopher University in Nitra': 'Словакия',
+                // Таджикистан
+                'Tajik State University of Commerce': 'Таджикистан',
+                'Technological University of Tajikistan': 'Таджикистан',
+                // Туркменистан
+                'Turkmen State Institute of Economics and Management': 'Туркменистан',
+                // Турция
+                'Duzce University': 'Турция',
+                'Ege University': 'Турция',
+                'Istanbul Aydin University': 'Турция',
+                'Pamukkale University': 'Турция',
+                'Yeditepe University': 'Турция',
+                'Ankara Haci Bayram Veli University': 'Турция',
+                'Pantheon University': 'Турция',
+                // Узбекистан
+                'Management Development Institute of Tashkent (MDIS)': 'Узбекистан',
+                'Westminster International University in Tashkent (WIUT)': 'Узбекистан',
+                'Central Asian University (CAU)': 'Узбекистан',
+                'Branch of Moscow State University Named for M.V. Lomonosov in Tashkent': 'Узбекистан',
+                'Karakalpak State University named after Berdakh': 'Узбекистан',
+                // Черногория
+                'Adriatic University Bar': 'Черногория',
+                // Швейцария
+                'Swiss School of Applied Sciences for Economics and Management': 'Швейцария',
+                'Swiss International Business School': 'Швейцария',
+                // Латвия
+                'Rezekne Academy of Technologies (RTA)': 'Латвия',
+                // Русские названия (из списка пользователя)
+                'Аграрный университет г.Пловдив': 'Болгария',
+                'Варненский Свободный университет': 'Болгария',
+                'Лесотехнический университет - София': 'Болгария',
+                'Лесотехнический университет': 'Болгария',
+                'Новый Болгарский университет': 'Болгария',
+                'Софийский университет имени святого Климента Охридского': 'Болгария',
+                'Технический университет София': 'Болгария',
+                'Университет Европейского центра мира и развития': 'Болгария',
+                'Университет менеджмента Варна (УМВ)': 'Болгария',
+                'Индийский технологический институт Бомбей': 'Индия',
+                'Университет английского и иностранных языков': 'Индия',
+                'Университет Кассино': 'Италия',
+                'Университет Пантеон': 'Турция',
+                'Резекненская академия технологий (RTA)': 'Латвия',
+                'Белостокский государственный университет': 'Польша',
+                'Бельско-Бяльская техническо-гуманитарная Академия': 'Польша',
+                'Естественно-гуманитарный университет города Седльце': 'Польша',
+                'Автономная некоммерческая организация высшего образования Российский новый университет (РосНОУ)': 'Россия',
+                'Алтайский государственный университет (АГУ)': 'Россия',
+                'Гос.автономное об уч высшего образования города Москвы «МГПУ»': 'Россия',
+                'Кемеровский государственный университет (КемГУ)': 'Россия',
+                'Колледж по маркетингу, менеджменту и торговле': 'Россия',
+                'Кузбасский государственный технический университет имени Т. Ф. Горбачёва (КузГТУ)': 'Россия',
+                'Национальный исследовательский университет «МЭИ»': 'Россия',
+                'Новосибирский государственный архитектурно- строительный университет (Сибстрин)': 'Россия',
+                'Омский государственный аграрный университет имени П. А. Столыпина (Омский ГАУ)': 'Россия',
+                'ФГАОУ ВО Северо-Кавказский федеральный университет, СКФУ': 'Россия',
+                'ФГБОУ ВО «Российская академия народного хозяйства и государственной службы при Президенте Российской Федерации» (РАНХиГС)': 'Россия',
+                'ФГБОУ ВО Российский государственный университет туризма и сервиса (РГУТИС)': 'Россия',
+                'ФГБОУ ВО «Красноярский государственный педагогический университет им. В.П.Астафьева»': 'Россия',
+                'ФГБОУ ВО «Новосибирский государственный университет» (НГУ)': 'Россия',
+                'ФГБОУ ВО «Российский Государственный университет туризма и сервиса» (РГУТИС)': 'Россия',
+                'ФГБОУ ВО «Югорский государственный университет» (ЮГУ)': 'Россия',
+                'ФГБОУ ВО Алтайский государственный педагогический университет': 'Россия',
+                'ФГБОУ ВО Кубанский государственный университет (КубГУ)': 'Россия',
+                'ФГБОУ ВО МГТУ Московский государственный технологический университет СТАНКИН': 'Россия',
+                'ФГБОУ ВО Новосибирский государственный педагогический университет (НГПУ)': 'Россия',
+                'ФГБОУ ВО Новосибирский государственный университет экономики и управления НИНХ': 'Россия',
+                'ФГБОУ ВО Псковский государственный университет': 'Россия',
+                'ФГБОУ ВО Санкт-Петербургский государственный лесотехнический университет имени С.М. Кирова': 'Россия',
+                'ФГБОУ ВО Томский государственный архитектурно-строительный университет': 'Россия',
+                'Частное учреждение образовательная организация высшего образования Омская гуманитарная академия': 'Россия',
+                'Стамбульский университет Айдын': 'Турция',
+                'Университет Анкары Хачи Байрам Вели': 'Турция',
+                'Университет Памуккале 2': 'Турция',
+                'Каракалпакский государственный университет имени Бердаха': 'Узбекистан',
+                'Филиал МГУ им. М.В. Ломоносова в г. Ташкенте': 'Узбекистан',
+                'Швейцарская школа прикладных наук, Swiss SASEM, Факультет экономики и менеджмента': 'Швейцария'
+            };
+            
+            // Функция для определения страны и названия университета
+            const detectUniversityAndCountry = (fileName, metadata = {}) => {
+                // Сначала проверяем metadata
+                if (metadata.country) {
+                    return {
+                        country: metadata.country,
+                        universityName: metadata.link_text_ru || metadata.link_text_en || fileName
+                    };
+                }
+                
+                // Убираем расширение файла
+                const nameWithoutExt = fileName.replace(/\.(pdf|docx?|xlsx?|pptx?)$/i, '').trim();
+                
+                // Ищем точное совпадение в маппинге
+                if (universityToCountry[nameWithoutExt]) {
+                    return {
+                        country: universityToCountry[nameWithoutExt],
+                        universityName: nameWithoutExt
+                    };
+                }
+                
+                // Ищем частичное совпадение (для русских названий)
+                for (const [university, country] of Object.entries(universityToCountry)) {
+                    if (nameWithoutExt.includes(university) || university.includes(nameWithoutExt)) {
+                        return {
+                            country: country,
+                            universityName: nameWithoutExt
+                        };
+                    }
+                }
+                
+                // Пытаемся определить по ключевым словам
+                const nameLower = nameWithoutExt.toLowerCase();
+                const keywordMapping = {
+                    'баку': 'Азербайджан',
+                    'азербайджан': 'Азербайджан',
+                    'софия': 'Болгария',
+                    'софийский': 'Болгария',
+                    'болгария': 'Болгария',
+                    'варна': 'Болгария',
+                    'венгрия': 'Венгрия',
+                    'pannonia': 'Венгрия',
+                    'германия': 'Германия',
+                    'konstanz': 'Германия',
+                    'fhm': 'Германия',
+                    'индия': 'Индия',
+                    'bombay': 'Индия',
+                    'испания': 'Испания',
+                    'santiago': 'Испания',
+                    'италия': 'Италия',
+                    'cusano': 'Италия',
+                    'eurac': 'Италия',
+                    'китай': 'Китай',
+                    'jilin': 'Китай',
+                    'польша': 'Польша',
+                    'poznan': 'Польша',
+                    'bialystok': 'Польша',
+                    'россия': 'Россия',
+                    'russia': 'Россия',
+                    'петербург': 'Россия',
+                    'казань': 'Россия',
+                    'innopolis': 'Россия',
+                    'новосибирск': 'Россия',
+                    'омск': 'Россия',
+                    'алтай': 'Россия',
+                    'кубан': 'Россия',
+                    'словакия': 'Словакия',
+                    'nitra': 'Словакия',
+                    'таджикистан': 'Таджикистан',
+                    'tajikistan': 'Таджикистан',
+                    'туркменистан': 'Туркменистан',
+                    'turkmenistan': 'Туркменистан',
+                    'турция': 'Турция',
+                    'turkey': 'Турция',
+                    'istanbul': 'Турция',
+                    'ankara': 'Турция',
+                    'узбекистан': 'Узбекистан',
+                    'uzbekistan': 'Узбекистан',
+                    'tashkent': 'Узбекистан',
+                    'ташкент': 'Узбекистан',
+                    'черногория': 'Черногория',
+                    'montenegro': 'Черногория',
+                    'швейцария': 'Швейцария',
+                    'switzerland': 'Швейцария',
+                    'swiss': 'Швейцария',
+                    'латвия': 'Латвия',
+                    'latvia': 'Латвия',
+                    'rezekne': 'Латвия'
+                };
+                
+                for (const [keyword, country] of Object.entries(keywordMapping)) {
+                    if (nameLower.includes(keyword)) {
+                        return {
+                            country: country,
+                            universityName: nameWithoutExt
+                        };
+                    }
+                }
+                
+                return {
+                    country: null,
+                    universityName: nameWithoutExt
+                };
+            };
+            
+            // Группируем документы по странам для правильной сортировки
+            const documentsByCountry = {};
+            const documentsWithoutCountry = [];
+            
+            documentsToProcess.forEach(doc => {
+                const fileName = doc.file_name || '';
+                const metadata = doc.metadata || {};
+                const { country } = detectUniversityAndCountry(fileName, metadata);
+                
+                if (country) {
+                    if (!documentsByCountry[country]) {
+                        documentsByCountry[country] = [];
+                    }
+                    documentsByCountry[country].push(doc);
+                } else {
+                    documentsWithoutCountry.push(doc);
+                }
+            });
+            
+            // Сортируем страны по алфавиту
+            const sortedCountries = Object.keys(documentsByCountry).sort();
+            
+            // Собираем все документы в правильном порядке: сначала по странам, потом без страны
+            const sortedDocuments = [];
+            let sortOrder = 10;
+            
+            sortedCountries.forEach(country => {
+                documentsByCountry[country].forEach(doc => {
+                    sortedDocuments.push({ ...doc, _sortOrder: sortOrder });
+                    sortOrder += 10;
+                });
+            });
+            
+            documentsWithoutCountry.forEach(doc => {
+                sortedDocuments.push({ ...doc, _sortOrder: sortOrder });
+                sortOrder += 10;
+            });
+            
+            // Создаем вхождения пакетами по 50
+            const batchSize = 50;
+            let created = 0;
+            let skipped = 0;
+            
+            for (let i = 0; i < sortedDocuments.length; i += batchSize) {
+                const batch = sortedDocuments.slice(i, i + batchSize);
+                
+                const usagesToCreate = batch.map((doc) => {
+                    const fileName = doc.file_name || '';
+                    const metadata = doc.metadata || {};
+                    
+                    // Определяем страну и название университета
+                    const { country, universityName } = detectUniversityAndCountry(fileName, metadata);
+                    
+                    // Используем название из metadata, если есть, иначе из file_name
+                    const linkText = metadata.link_text_ru || metadata.link_text_en || universityName;
+                    
+                    return {
+                        page_slug: pageSlug,
+                        document_id: doc.id,
+                        link_text: linkText,
+                        country: country,
+                        section: null,
+                        sort_order: doc._sortOrder,
+                        usage_text: null
+                    };
+                });
+                
+                const { data: createdUsages, error: createError } = await supabase
+                    .from('document_usages')
+                    .insert(usagesToCreate)
+                    .select('id');
+                
+                if (createError) {
+                    console.error('Ошибка создания вхождений:', createError);
+                    // Продолжаем с другими документами
+                    skipped += batch.length;
+                } else {
+                    created += createdUsages?.length || 0;
+                }
+                
+                // Обновляем прогресс
+                const progress = Math.round(((i + batch.length) / sortedDocuments.length) * 100);
+                this.showToast('info', `Обработано: ${i + batch.length} из ${sortedDocuments.length} (${progress}%)`);
+            }
+            
+            // Обновляем данные
+            await this.fetchAllData();
+            
+            this.showToast('success', 
+                `Готово! Создано вхождений: ${created}, пропущено: ${skipped}`
+            );
+            
+        } catch (error) {
+            console.error('Ошибка автоматического создания вхождений:', error);
+            this.showToast('error', `Ошибка: ${error.message}`);
+        } finally {
+            this.toggleLoading(false);
+        }
+    }
+
+    // Функция для получения правильного названия университета
+    getUniversityDisplayName(fileName) {
+        // Убираем расширение для поиска
+        const nameWithoutExt = fileName.replace(/\.(pdf|docx?|xlsx?|pptx?)$/i, '').trim();
+        
+        // Ищем точное совпадение
+        if (DocumentUsageAdmin.UNIVERSITY_NAME_MAPPING[fileName]) {
+            return DocumentUsageAdmin.UNIVERSITY_NAME_MAPPING[fileName];
+        }
+        if (DocumentUsageAdmin.UNIVERSITY_NAME_MAPPING[nameWithoutExt]) {
+            return DocumentUsageAdmin.UNIVERSITY_NAME_MAPPING[nameWithoutExt];
+        }
+        
+        // Если не найдено, возвращаем оригинальное название без расширения
+        return nameWithoutExt;
+    }
+
+    // Функция для получения правильного пути в R2 для документа Our-partners
+    getR2PathForPartnerDocument(fileName, country, displayName = null) {
+        if (!country) {
+            return fileName; // Если страна не определена, оставляем в корне
+        }
+        
+        // Получаем правильное название университета из маппинга, если не передано
+        if (!displayName) {
+            displayName = this.getUniversityDisplayName(fileName);
+        }
+        
+        // Определяем расширение файла
+        const extension = fileName.match(/\.([^.]+)$/)?.[1] || 'pdf';
+        
+        // Создаем безопасное имя файла (убираем специальные символы, но оставляем кириллицу)
+        const safeFileName = `${displayName}.${extension}`.replace(/[<>:"|?*]/g, '_');
+        
+        // Маппинг стран на английские названия для папок (как в R2 Dashboard)
+        const countryFolderMapping = {
+            'Азербайджан': 'Azerbaijan',
+            'Болгария': 'Bulgaria',
+            'Венгрия': 'Hungary',
+            'Германия': 'Germany',
+            'Индия': 'India',
+            'Испания': 'Spain',
+            'Италия': 'Italy',
+            'Китай': 'China',
+            'Латвия': 'Latvia',
+            'Польша': 'Poland',
+            'Россия': 'Russia',
+            'Словакия': 'Slovakia',
+            'Таджикистан': 'Tajikistan',
+            'Туркменистан': 'Turkmenistan',
+            'Турция': 'Turkey',
+            'Узбекистан': 'Uzbekistan',
+            'Черногория': 'Montenegro',
+            'Швейцария': 'Switzerland'
+        };
+        
+        const countryFolder = countryFolderMapping[country] || country.replace(/[^a-zA-Zа-яА-Я0-9]/g, '_');
+        
+        // Создаем путь: OurPartners/Страна/Университет.pdf
+        return `OurPartners/${countryFolder}/${safeFileName}`;
+    }
+
+    // Функция для миграции файлов из files/ в OurPartners/Страна/
+    async migrateFilesFromFilesToOurPartners() {
+        const confirmed = confirm(
+            '⚠️ ВНИМАНИЕ: Это переместит файлы из abu-ic/files/ в abu-ic/OurPartners/Страна/\n\n' +
+            'Файлы будут перемещены в правильные папки стран с правильными названиями.\n\n' +
+            'Продолжить?'
+        );
+        
+        if (!confirmed) return;
+        
+        try {
+            this.toggleLoading(true);
+            this.showToast('info', 'Начинаю миграцию файлов из files/ в OurPartners/...');
+            
+            // Получаем все документы из базы данных
+            const { data: documents, error: docsError } = await supabase
+                .from('documents')
+                .select('id, file_name, file_key, file_url, metadata')
+                .eq('is_active', true);
+            
+            if (docsError) {
+                throw new Error(`Ошибка загрузки документов: ${docsError.message}`);
+            }
+            
+            if (!documents || documents.length === 0) {
+                this.showToast('warning', 'Документы не найдены');
+                return;
+            }
+            
+            // Фильтруем только файлы из папки files/ и исключаем технические
+            const filesToMigrate = documents.filter(doc => {
+                const fileKey = doc.file_key || '';
+                const fileName = doc.file_name || '';
+                
+                // Только файлы из папки files/
+                if (!fileKey.startsWith('files/') && !fileKey.startsWith('OurPartners/')) {
+                    return false;
+                }
+                
+                // Уже в правильной папке - пропускаем
+                if (fileKey.startsWith('OurPartners/')) {
+                    return false;
+                }
+                
+                // Исключаем технические файлы
+                if (isTechnicalFile(fileName)) {
+                    return false;
+                }
+                
+                return true;
+            });
+            
+            if (filesToMigrate.length === 0) {
+                this.showToast('info', 'Нет файлов для миграции');
+                return;
+            }
+            
+            this.showToast('info', `Найдено файлов для миграции: ${filesToMigrate.length}`);
+            
+            let migrated = 0;
+            let skipped = 0;
+            let errors = 0;
+            
+            // Обрабатываем файлы по одному
+            for (let i = 0; i < filesToMigrate.length; i++) {
+                const doc = filesToMigrate[i];
+                const fileName = doc.file_name || '';
+                const oldFileKey = doc.file_key || '';
+                const metadata = doc.metadata || {};
+                
+                try {
+                    // Определяем страну
+                    const { country } = this.detectUniversityAndCountry(fileName, metadata);
+                    
+                    if (!country) {
+                        console.warn(`Не удалось определить страну для ${fileName}`);
+                        skipped++;
+                        continue;
+                    }
+                    
+                    // Получаем правильное название университета из маппинга
+                    const displayName = this.getUniversityDisplayName(fileName);
+                    
+                    // Получаем новый путь с правильным названием
+                    const newFileKey = this.getR2PathForPartnerDocument(fileName, country, displayName);
+                    
+                    // Если путь уже правильный, пропускаем
+                    if (oldFileKey === newFileKey) {
+                        skipped++;
+                        continue;
+                    }
+                    
+                    // Копируем файл через R2 Worker (если поддерживается)
+                    // Или просто обновляем путь в базе данных
+                    // Примечание: для реального перемещения нужен доступ к R2 API
+                    // Здесь мы обновляем только пути в базе данных
+                    
+                    const newFileUrl = `${(R2_PUBLIC_URL || '').replace(/\/$/, '')}/${encodeURIComponent(newFileKey)}`;
+                    
+                    // Обновляем file_key и file_url в базе данных
+                    const { error: updateError } = await supabase
+                        .from('documents')
+                        .update({ 
+                            file_key: newFileKey,
+                            file_url: newFileUrl
+                        })
+                        .eq('id', doc.id);
+                    
+                    if (updateError) {
+                        console.error(`Ошибка обновления документа ${doc.id}:`, updateError);
+                        errors++;
+                    } else {
+                        migrated++;
+                        console.log(`Мигрирован: ${oldFileKey} → ${newFileKey}`);
+                    }
+                    
+                    // Обновляем прогресс каждые 10 файлов
+                    if ((i + 1) % 10 === 0) {
+                        const progress = Math.round(((i + 1) / filesToMigrate.length) * 100);
+                        this.showToast('info', `Обработано: ${i + 1} из ${filesToMigrate.length} (${progress}%)`);
+                    }
+                    
+                } catch (error) {
+                    console.error(`Ошибка миграции файла ${fileName}:`, error);
+                    errors++;
+                }
+            }
+            
+            // Обновляем данные
+            await this.fetchAllData();
+            
+            this.showToast('success', 
+                `Готово! Мигрировано: ${migrated}, пропущено: ${skipped}, ошибок: ${errors}\n\n` +
+                `⚠️ ВАЖНО: Файлы нужно переместить вручную в Cloudflare R2 Dashboard!\n` +
+                `Обновлены только пути в базе данных.`
+            );
+            
+        } catch (error) {
+            console.error('Ошибка миграции файлов:', error);
+            this.showToast('error', `Ошибка: ${error.message}`);
+        } finally {
+            this.toggleLoading(false);
+        }
+    }
+
+    // Функция для определения страны и названия университета (используется в миграции)
+    detectUniversityAndCountry(fileName, metadata = {}) {
+        // Используем ту же логику, что и в autoCreateUsagesForPartners
+        if (metadata.country) {
+            return {
+                country: metadata.country,
+                universityName: metadata.link_text_ru || metadata.link_text_en || fileName
+            };
+        }
+        
+        // Убираем расширение файла
+        const nameWithoutExt = fileName.replace(/\.(pdf|docx?|xlsx?|pptx?)$/i, '').trim();
+        
+        // Используем маппинг университетов из autoCreateUsagesForPartners
+        // (полный маппинг находится в функции autoCreateUsagesForPartners)
+        // Здесь используем упрощенную версию с ключевыми словами
+        
+        const keywordMapping = {
+            'баку': 'Азербайджан', 'азербайджан': 'Азербайджан',
+            'софия': 'Болгария', 'софийский': 'Болгария', 'болгария': 'Болгария', 'варна': 'Болгария', 'пловдив': 'Болгария',
+            'венгрия': 'Венгрия', 'pannonia': 'Венгрия',
+            'германия': 'Германия', 'konstanz': 'Германия', 'fhm': 'Германия',
+            'индия': 'Индия', 'bombay': 'Индия', 'бомбей': 'Индия',
+            'испания': 'Испания', 'santiago': 'Испания',
+            'италия': 'Италия', 'cusano': 'Италия', 'eurac': 'Италия', 'кассино': 'Италия',
+            'китай': 'Китай', 'jilin': 'Китай',
+            'польша': 'Польша', 'poznan': 'Польша', 'bialystok': 'Польша', 'белосток': 'Польша', 'седльце': 'Польша',
+            'россия': 'Россия', 'russia': 'Россия', 'петербург': 'Россия', 'казань': 'Россия', 'innopolis': 'Россия',
+            'новосибирск': 'Россия', 'омск': 'Россия', 'алтай': 'Россия', 'кубан': 'Россия', 'кемерово': 'Россия',
+            'словакия': 'Словакия', 'nitra': 'Словакия',
+            'таджикистан': 'Таджикистан', 'tajikistan': 'Таджикистан',
+            'туркменистан': 'Туркменистан', 'turkmenistan': 'Туркменистан',
+            'турция': 'Турция', 'turkey': 'Турция', 'istanbul': 'Турция', 'ankara': 'Турция', 'памуккале': 'Турция', 'айдын': 'Турция',
+            'узбекистан': 'Узбекистан', 'uzbekistan': 'Узбекистан', 'tashkent': 'Узбекистан', 'ташкент': 'Узбекистан', 'каракалпак': 'Узбекистан',
+            'черногория': 'Черногория', 'montenegro': 'Черногория',
+            'швейцария': 'Швейцария', 'switzerland': 'Швейцария', 'swiss': 'Швейцария',
+            'латвия': 'Латвия', 'latvia': 'Латвия', 'rezekne': 'Латвия', 'резекне': 'Латвия'
+        };
+        
+        const nameLower = nameWithoutExt.toLowerCase();
+        for (const [keyword, country] of Object.entries(keywordMapping)) {
+            if (nameLower.includes(keyword)) {
+                return {
+                    country: country,
+                    universityName: nameWithoutExt
+                };
+            }
+        }
+        
+        return {
+            country: null,
+            universityName: nameWithoutExt
+        };
+    }
+
+    // Функция для организации существующих файлов в структуру R2
+    async organizeFilesInR2() {
+        const pageSlug = 'Our-partners.html';
+        
+        const confirmed = confirm(
+            '⚠️ ВНИМАНИЕ: Это переместит файлы в R2 в структуру OurPartners/Страна/Университет.pdf\n\n' +
+            'Для каждого документа будет создан новый путь на основе страны.\n\n' +
+            'Продолжить?'
+        );
+        
+        if (!confirmed) return;
+        
+        try {
+            this.toggleLoading(true);
+            this.showToast('info', 'Начинаю организацию файлов в R2...');
+            
+            // Получаем все вхождения для Our-partners
+            const { data: usages, error: usagesError } = await supabase
+                .from('document_usages')
+                .select(`
+                    id,
+                    document_id,
+                    country,
+                    documents (
+                        id,
+                        file_name,
+                        file_key,
+                        file_url
+                    )
+                `)
+                .eq('page_slug', pageSlug);
+            
+            if (usagesError) {
+                throw new Error(`Ошибка загрузки вхождений: ${usagesError.message}`);
+            }
+            
+            if (!usages || usages.length === 0) {
+                this.showToast('warning', 'Не найдено вхождений для организации');
+                return;
+            }
+            
+            let organized = 0;
+            let skipped = 0;
+            let errors = 0;
+            
+            for (const usage of usages) {
+                const doc = usage.documents;
+                if (!doc || !doc.file_key) {
+                    skipped++;
+                    continue;
+                }
+                
+                const country = usage.country;
+                if (!country) {
+                    skipped++;
+                    continue;
+                }
+                
+                // Получаем новый путь
+                const newPath = this.getR2PathForPartnerDocument(doc.file_name, country);
+                
+                // Если путь уже правильный, пропускаем
+                if (doc.file_key === newPath || doc.file_key.startsWith(`Our-partners/${country.replace(/[^a-zA-Zа-яА-Я0-9]/g, '_')}/`)) {
+                    skipped++;
+                    continue;
+                }
+                
+                try {
+                    // Копируем файл на новый путь через R2 Worker
+                    // Примечание: это требует поддержки копирования в R2 Worker
+                    // Если копирование не поддерживается, нужно будет загрузить файл заново
+                    const response = await fetch(`${R2_WORKER_URL}/copy?from=${encodeURIComponent(doc.file_key)}&to=${encodeURIComponent(newPath)}`, {
+                        method: 'POST'
+                    });
+                    
+                    if (response.ok) {
+                        // Обновляем file_key в базе данных
+                        const { error: updateError } = await supabase
+                            .from('documents')
+                            .update({ 
+                                file_key: newPath,
+                                file_url: `${(R2_PUBLIC_URL || '').replace(/\/$/, '')}/${encodeURIComponent(newPath)}`
+                            })
+                            .eq('id', doc.id);
+                        
+                        if (updateError) {
+                            console.error(`Ошибка обновления документа ${doc.id}:`, updateError);
+                            errors++;
+                        } else {
+                            organized++;
+                        }
+                    } else {
+                        // Если копирование не поддерживается, пропускаем
+                        console.warn(`Копирование не поддерживается для ${doc.file_key}`);
+                        skipped++;
+                    }
+                } catch (error) {
+                    console.error(`Ошибка организации файла ${doc.file_name}:`, error);
+                    errors++;
+                }
+            }
+            
+            // Обновляем данные
+            await this.fetchAllData();
+            
+            this.showToast('success', 
+                `Готово! Организовано: ${organized}, пропущено: ${skipped}, ошибок: ${errors}`
+            );
+            
+        } catch (error) {
+            console.error('Ошибка организации файлов:', error);
+            this.showToast('error', `Ошибка: ${error.message}`);
+        } finally {
+            this.toggleLoading(false);
+        }
     }
 
     toggleDocumentSelector(show, hintText = '') {

@@ -36,10 +36,23 @@
                 <i class="fas fa-newspaper"></i>
                 Админка новостей
             </a>
-            <a href="admin-documents.html" class="admin-nav-link">
+            <a href="admin-main-news.html" class="admin-nav-link">
+                <i class="fas fa-home"></i>
+                Новости главной страницы
+            </a>
+            <a href="admin-footer.html" class="admin-nav-link">
+                <i class="fas fa-address-card"></i>
+                Данные футера
+            </a>
+            <a href="admin-unified.html" class="admin-nav-link">
+                <i class="fas fa-th"></i>
+                Unified Admin
+            </a>
+            <!-- Legacy (может быть отключено, если вы заморозили documents/document_usages через RLS) -->
+            <!-- <a href="admin-documents.html" class="admin-nav-link">
                 <i class="fas fa-file-alt"></i>
                 Админка документов
-            </a>
+            </a> -->
         </nav>
 
         <!-- Основной контент -->
@@ -294,7 +307,9 @@
     <!-- Supabase JS Client -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <!-- Конфигурация Supabase (загружается синхронно после библиотеки) -->
-    <script src="js/supabase-config.js"></script>
+    <script src="js/supabase-config.js?v=20250108120000"></script>
+    <!-- Конфигурация Cloudflare R2 (для загрузки изображений новостей) -->
+    <script src="js/r2-config.js?v=20251218"></script>
     <!-- Общая авторизация для админок -->
     <script src="js/admin-auth.js"></script>
     <script>
@@ -307,10 +322,6 @@
             }
         });
     </script>
-    <!-- Скрипт миграции (можно удалить после миграции) -->
-    <script src="js/migrate-news.js"></script>
-    <!-- Скрипт массовой миграции всех новостей -->
-    <script src="js/migrate-all-news.js"></script>
     <!-- Основной скрипт админки (загружается после инициализации Supabase) -->
     <script src="js/admin-news.js"></script>
 </body>

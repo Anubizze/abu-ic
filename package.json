@@ -1,0 +1,30 @@
+{
+  "name": "abu-ic-r2-migration",
+  "version": "1.0.0",
+  "description": "Скрипт для миграции файлов в Cloudflare R2",
+  "main": "scripts/migrate-r2-files.js",
+  "scripts": {
+    "migrate": "node scripts/migrate-r2-files.js",
+    "migrate-partners": "node scripts/migrate-to-partners-table.js",
+    "clean-partners": "node scripts/clean-and-fix-partners.js",
+    "check-names": "node scripts/check-university-names.js",
+    "sync-r2": "node scripts/sync-partners-from-r2.js",
+    "update-flags": "node scripts/update-flag-urls.js",
+    "export-universities": "node scripts/export-universities.js",
+    "generate-sql": "node scripts/generate-sql-from-translations.js",
+    "update-all": "node scripts/generate-update-sql.js",
+    "update-flags-new": "node scripts/update-flags-for-new-universities.js",
+    "sync-flags-r2": "node scripts/sync-flag-urls-from-r2.js",
+    "move-rgutis": "node scripts/move-rgutis-file.js",
+    "check": "node scripts/check-migration.js"
+  },
+  "keywords": ["r2", "cloudflare", "migration"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.490.0",
+    "@supabase/supabase-js": "^2.39.0",
+    "dotenv": "^16.3.1"
+  }
+}
+

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/index.css?v=20251212">
     <script src="js/index.js"></script>
     <title>Alikhan Bokeikhan University</title>
     <link rel="icon" type="img/abuicon" href="img/favicon.ico">
@@ -114,10 +114,10 @@
                         <div class="logo__footer">
                             <img src="img/Logo-ABU.png" alt="Логотип">
                         </div>
-                        <div class="address">Ильяшева 94, 101 каб, Семей, 071400</div>
-                        <div class="footer__phone">+7 (7222) 42-32-24</div>
-                        <div class="footer__email">internationaloffice@abu.edu.kz</div>
-                        <div class="schedule">понедельник – пятница, 9:00 – 18:00 <br>
+                        <div class="address" data-footer="address">Ильяшева 94, 101 каб, Семей, 071400</div>
+                        <div class="footer__phone" data-footer="phone">+7 (7222) 42-32-24</div>
+                        <div class="footer__email" data-footer="email">internationaloffice@abu.edu.kz</div>
+                        <div class="schedule" data-footer="schedule">понедельник – пятница, 9:00 – 18:00 <br>
                             обеденный перерыв: 13:00 – 14:00
                         </div>
                     </div>
@@ -168,15 +168,17 @@
                 });
 
                 // Переключить текущий список
-                const list = button.nextElementSibling;
+                const list = button.nextElementSibling; 
                 if (list) list.classList.toggle('hidden');
             }
         </script>
         
         <script src="js/language-switcher.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-        <script src="js/supabase-config.js"></script>
-        <script src="js/document-renderer.js?v=20251112"></script>
+        <script src="js/supabase.min.js?v=20251209-3"></script>
+        <script src="js/supabase-config.js?v=20250108120000"></script>
+        <script src="js/r2-config.js?v=20251212"></script>
+        <script src="js/document-renderer.js?v=20251215143000"></script>
+        <script src="js/footer-loader.js?v=20250106"></script>
     </div>
     </div>
 </body>

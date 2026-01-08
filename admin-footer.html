@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Админ-панель данных футера - ABU</title>
+    <link rel="stylesheet" href="css/admin-news.css">
+    <link rel="icon" type="img/abuicon" href="img/favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <div class="admin-container auth-hidden" data-auth-protected>
+        <!-- Заголовок -->
+        <header class="admin-header">
+            <div class="header-content">
+                <div class="logo-section">
+                    <img src="img/Logo-ABU.png" alt="ABU Logo" class="admin-logo">
+                    <h1>Админ-панель данных футера</h1>
+                </div>
+                <div class="header-actions">
+                    <button type="button" id="adminLogoutBtn" class="btn btn-outline logout-btn" style="display: none;">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Выйти
+                    </button>
+                    <a href="index.html" class="back-btn">
+                        <i class="fas fa-arrow-left"></i>
+                        Вернуться к сайту
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <!-- Навигация между админками -->
+        <nav class="admin-nav">
+            <a href="admin.html" class="admin-nav-link">
+                <i class="fas fa-newspaper"></i>
+                Админка новостей
+            </a>
+            <a href="admin-main-news.html" class="admin-nav-link">
+                <i class="fas fa-home"></i>
+                Новости главной страницы
+            </a>
+            <a href="admin-footer.html" class="admin-nav-link active">
+                <i class="fas fa-address-card"></i>
+                Данные футера
+            </a>
+            <a href="admin-unified.html" class="admin-nav-link">
+                <i class="fas fa-th"></i>
+                Unified Admin
+            </a>
+        </nav>
+
+        <!-- Основной контент -->
+        <main class="admin-main">
+            <!-- Форма редактирования данных футера -->
+            <section class="add-news-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-edit"></i> Редактировать данные футера</h2>
+                    <p style="color: #666; margin-top: 10px;">
+                        Изменения применяются на всех страницах сайта автоматически
+                    </p>
+                </div>
+                
+                <form id="footerForm" class="news-form" method="post" action="javascript:void(0);">
+                    <input type="hidden" id="footerDataId" name="id">
+                    
+                    <!-- Многоязычность -->
+                    <div class="multilang-section">
+                        <h3><i class="fas fa-globe"></i> Многоязычные версии</h3>
+                        
+                        <div class="lang-tabs">
+                            <button type="button" class="lang-tab active" data-lang="ru">Русский</button>
+                            <button type="button" class="lang-tab" data-lang="en">English</button>
+                            <button type="button" class="lang-tab" data-lang="kz">Қазақша</button>
+                        </div>
+
+                        <div class="lang-content">
+                            <div class="lang-panel active" data-lang="ru">
+                                <div class="form-group">
+                                    <label>Адрес (RU) *</label>
+                                    <input type="text" id="address_ru" name="address_ru" placeholder="Ильяшева 94, 101 каб, Семей, 071400" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Рабочие часы (RU) *</label>
+                                    <input type="text" id="working_hours_ru" name="working_hours_ru" placeholder="понедельник – пятница, 9:00 – 18:00" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Обеденный перерыв (RU) *</label>
+                                    <input type="text" id="lunch_break_ru" name="lunch_break_ru" placeholder="обеденный перерыв: 13:00 – 14:00" required>
+                                </div>
+                            </div>
+
+                            <div class="lang-panel" data-lang="en">
+                                <div class="form-group">
+                                    <label>Address (EN)</label>
+                                    <input type="text" id="address_en" name="address_en" placeholder="Ilyasheva 94, room 101, Semey, 071400">
+                                </div>
+                                <div class="form-group">
+                                    <label>Working Hours (EN)</label>
+                                    <input type="text" id="working_hours_en" name="working_hours_en" placeholder="Monday – Friday, 9:00 – 18:00">
+                                </div>
+                                <div class="form-group">
+                                    <label>Lunch Break (EN)</label>
+                                    <input type="text" id="lunch_break_en" name="lunch_break_en" placeholder="lunch break: 13:00 – 14:00">
+                                </div>
+                            </div>
+
+                            <div class="lang-panel" data-lang="kz">
+                                <div class="form-group">
+                                    <label>Мекенжай (KZ)</label>
+                                    <input type="text" id="address_kz" name="address_kz" placeholder="Ильяшева 94, 101 каб, Семей, 071400">
+                                </div>
+                                <div class="form-group">
+                                    <label>Жұмыс уақыты (KZ)</label>
+                                    <input type="text" id="working_hours_kz" name="working_hours_kz" placeholder="дүйсенбі – жұма, 9:00 – 18:00">
+                                </div>
+                                <div class="form-group">
+                                    <label>Түскі үзіліс (KZ)</label>
+                                    <input type="text" id="lunch_break_kz" name="lunch_break_kz" placeholder="түскі үзіліс: 13:00 – 14:00">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Контакты (одинаковые для всех языков) -->
+                    <div class="form-group">
+                        <label for="phone">Телефон *</label>
+                        <input type="tel" id="phone" name="phone" placeholder="+7 (7222) 42-32-24" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" name="email" placeholder="internationaloffice@abu.edu.kz" required>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i>
+                            Сохранить изменения
+                        </button>
+                        <button type="button" id="resetBtn" class="btn btn-outline">
+                            <i class="fas fa-undo"></i>
+                            Сбросить
+                        </button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Информация о применении -->
+            <section class="news-list-section" style="margin-top: 30px;">
+                <div class="section-header">
+                    <h2><i class="fas fa-info-circle"></i> Информация</h2>
+                </div>
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 12px; border-left: 4px solid #3498db;">
+                    <p><strong>Как это работает:</strong></p>
+                    <ul style="margin: 10px 0; padding-left: 20px; color: #666;">
+                        <li>Данные футера хранятся в Supabase</li>
+                        <li>При изменении данных они автоматически обновляются на всех страницах</li>
+                        <li>Все страницы загружают данные футера при загрузке страницы</li>
+                        <li>Поддерживается многоязычность (RU, EN, KZ)</li>
+                    </ul>
+                    <p style="margin-top: 15px; color: #666;">
+                        <strong>Страницы, где применяются изменения:</strong><br>
+                        index.html, international_cooperation.html, news-detail.html, Teachers.html, 
+                        erasmus+circulen.html, mschool.html, for_foreign_students.html, eramus.html, 
+                        Students.html, Our-partners.html, international_office.html, director.html, 
+                        academic mobility.html
+                    </p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase-config.js?v=20250108120000"></script>
+    <script src="js/r2-config.js"></script>
+    <script src="js/admin-auth.js"></script>
+    <script src="js/admin-footer.js"></script>
+</body>
+</html>
+

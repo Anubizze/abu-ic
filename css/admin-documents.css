@@ -428,12 +428,14 @@
 
 .usages-table th:nth-child(5),
 .usages-table td:nth-child(5) {
-    min-width: 360px;
+    min-width: 200px;
+    max-width: 200px;
 }
 
 .usages-table th:nth-child(6),
 .usages-table td:nth-child(6) {
-    min-width: 280px;
+    min-width: 200px;
+    max-width: 300px;
 }
 
 .usages-table th:nth-child(7),
@@ -497,6 +499,20 @@
     line-height: 1.3;
 }
 
+.usage-text-cell {
+    max-width: 300px;
+}
+
+.usage-text-content,
+.usage-text-full {
+    color: var(--doc-text);
+    font-size: 0.95rem;
+    line-height: 1.4;
+    display: inline;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
 .usage-text {
     color: var(--doc-text);
     font-size: 0.95rem;
@@ -506,6 +522,22 @@
 .usage-text.muted {
     color: var(--doc-muted);
     font-style: italic;
+}
+
+.btn-text-toggle {
+    background: none;
+    border: none;
+    color: var(--doc-primary);
+    font-size: 0.85rem;
+    cursor: pointer;
+    padding: 4px 0;
+    margin-top: 4px;
+    text-decoration: underline;
+    font-weight: 500;
+}
+
+.btn-text-toggle:hover {
+    color: var(--doc-primary-dark, #1e40af);
 }
 
 .usage-actions {
@@ -594,14 +626,16 @@
     box-shadow: var(--doc-shadow);
     width: 100%;
     max-width: 620px;
-    max-height: calc(100vh - 64px);
+    max-height: calc(100vh - 48px);
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    min-height: 0; /* Важно для flex-контейнера с overflow */
 }
 
 .modal-dialog.modal-wide {
     max-width: 1080px;
+    max-height: calc(100vh - 48px);
 }
 
 .modal-dialog.modal-medium {
@@ -619,6 +653,13 @@
     justify-content: space-between;
     align-items: flex-start;
     gap: 16px;
+    min-width: 0; /* Позволяет header сжиматься */
+}
+
+.modal-header > div {
+    min-width: 0;
+    flex: 1;
+    overflow: hidden;
 }
 
 .modal-header h3 {
@@ -627,19 +668,36 @@
     display: flex;
     align-items: center;
     gap: 10px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    min-width: 0;
+    flex: 1;
 }
 
 .modal-header p {
     margin: 4px 0 0;
     color: var(--doc-muted);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
 }
 
 .modal-body {
     padding: 28px;
     overflow-y: auto;
+    overflow-x: hidden;
     display: flex;
     flex-direction: column;
     gap: 28px;
+    flex: 1 1 auto;
+    min-height: 0; /* Важно для правильной работы overflow в flex-контейнере */
+    max-height: calc(100vh - 200px); /* Ограничиваем высоту для прокрутки */
 }
 
 .modal-footer {
@@ -679,7 +737,7 @@
 
 .form-grid.form-grid-document {
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    align-items: end;
+    align-items: start; /* Изменено с end на start для лучшего выравнивания */
 }
 
 .form-grid .form-hint {
@@ -693,6 +751,8 @@
     display: flex;
     flex-direction: column;
     gap: 6px;
+    min-width: 0; /* Позволяет form-group сжиматься */
+    overflow: hidden; /* Предотвращает выход содержимого */
 }
 
 .form-group input,
@@ -704,6 +764,17 @@
     background: var(--doc-surface);
     color: var(--doc-text);
     font: inherit;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+.form-group input[type="url"],
+.form-group input[type="text"] {
+    min-width: 0; /* Позволяет input сжиматься меньше минимальной ширины */
 }
 
 .form-group textarea {

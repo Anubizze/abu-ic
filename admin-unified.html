@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unified Admin Panel - ABU</title>
+    <link rel="stylesheet" href="css/admin-news.css">
+    <link rel="icon" type="img/abuicon" href="img/favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        .entity-type-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            background: #e0e7ff;
+            color: #4338ca;
+        }
+        .entity-type-badge.news { background: #dbeafe; color: #1e40af; }
+        .entity-type-badge.our_partners { background: #fef3c7; color: #92400e; }
+        .entity-type-badge.students_appendices { background: #d1fae5; color: #065f46; }
+        .entity-type-badge.teachers_documents { background: #fce7f3; color: #9f1239; }
+        .entity-type-badge.mschool_documents { background: #e0e7ff; color: #4338ca; }
+        .entity-type-badge.brochure_documents { background: #f3e8ff; color: #6b21a8; }
+        .entity-type-badge.eramus_documents { background: #fed7aa; color: #9a3412; }
+        .entity-type-badge.for_foreign_students_documents { background: #cffafe; color: #164e63; }
+        
+        .entity-card {
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+            background: #fff;
+            transition: all 0.2s;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .entity-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border-color: #2a5298;
+        }
+        .entity-card.inactive {
+            opacity: 0.6;
+            background: #f9fafb;
+        }
+        .entity-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+        .entity-card-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #1f2937;
+            margin-bottom: 4px;
+        }
+        .entity-card-meta {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            font-size: 0.875rem;
+            color: #6b7280;
+            margin-top: 8px;
+        }
+        .entity-card-actions {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .pdf-link {
+            color: #2a5298;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 0.875rem;
+            padding: 4px 8px;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+        
+        .pdf-link:hover {
+            background: #f0f4ff;
+            text-decoration: underline;
+        }
+        .filters-section {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 24px;
+        }
+        .filters-row {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .filter-group label {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #374151;
+        }
+        .filter-group select,
+        .filter-group input {
+            padding: 8px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 0.875rem;
+        }
+        .search-input {
+            flex: 1;
+            min-width: 200px;
+        }
+        .stats-bar {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .stat-item {
+            padding: 12px 16px;
+            background: #fff;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            font-size: 0.875rem;
+        }
+        .stat-item strong {
+            display: block;
+            font-size: 1.25rem;
+            color: #2a5298;
+        }
+        
+        /* Исправление для unified админки - одна колонка на всю ширину */
+        body:has(.admin-unified-page) .admin-container {
+            max-width: 100%;
+            padding: 20px 40px;
+        }
+        
+        body:has(.admin-unified-page) .admin-main {
+            display: block;
+            grid-template-columns: none;
+            max-width: 100%;
+        }
+        
+        body:has(.admin-unified-page) .news-list-section {
+            width: 100%;
+            max-width: 100%;
+        }
+        
+        /* Альтернативный способ через класс на body */
+        .admin-unified-page .admin-container {
+            max-width: 100%;
+            padding: 20px 40px;
+        }
+        
+        .admin-unified-page .admin-main {
+            display: block;
+            grid-template-columns: none;
+            max-width: 100%;
+        }
+        
+        .admin-unified-page .news-list-section {
+            width: 100%;
+            max-width: 100%;
+        }
+        
+        /* Список сущностей - одна на строку */
+        .admin-unified-page .news-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        
+        .admin-unified-page .entity-card {
+            width: 100%;
+            margin-bottom: 0;
+        }
+        
+        /* Улучшение для фильтров на больших экранах */
+        .admin-unified-page .filters-row {
+            align-items: flex-end;
+        }
+        
+        .admin-unified-page .filter-group {
+            min-width: 150px;
+        }
+        
+        .admin-unified-page .search-input {
+            min-width: 300px;
+        }
+        
+        /* Исправление позиционирования dropdown для стран */
+        .admin-unified-page #countryFilterGroup {
+            position: relative;
+        }
+        
+        .admin-unified-page #countryFilter {
+            position: relative;
+        }
+        
+        /* Исправление кнопки "Добавить" при открытии F12 */
+        .admin-unified-page .filters-row {
+            flex-wrap: wrap;
+        }
+        
+        .admin-unified-page .filter-group:has(#addEntityBtn) {
+            flex-shrink: 0;
+            min-width: 120px;
+        }
+        
+        .admin-unified-page #addEntityBtn {
+            white-space: nowrap;
+            min-width: 120px;
+        }
+        
+        /* Мобильная адаптивность */
+        @media (max-width: 1024px) {
+            .admin-unified-page .admin-container {
+                padding: 15px 20px;
+            }
+            
+            .admin-unified-page .admin-header {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .admin-unified-page .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            
+            .admin-unified-page .filters-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .admin-unified-page .filter-group {
+                width: 100%;
+                min-width: unset;
+            }
+            
+            .admin-unified-page .search-input {
+                min-width: unset;
+                width: 100%;
+            }
+            
+            .admin-unified-page .entity-card-header {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .admin-unified-page .entity-card-actions {
+                width: 100%;
+                justify-content: flex-end;
+            }
+            
+            .admin-unified-page .modal-content {
+                width: 95vw !important;
+                max-width: 95vw !important;
+                padding: 20px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .admin-unified-page .admin-container {
+                padding: 10px 15px;
+            }
+            
+            .admin-unified-page .admin-header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .admin-unified-page .filters-section {
+                padding: 15px;
+            }
+            
+            .admin-unified-page .entity-card {
+                padding: 12px;
+            }
+            
+            .admin-unified-page .entity-card-title {
+                font-size: 1rem;
+            }
+            
+            .admin-unified-page .entity-card-meta {
+                flex-direction: column;
+                gap: 6px;
+            }
+            
+            .admin-unified-page .entity-card-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .admin-unified-page .entity-card-actions button {
+                width: 100%;
+            }
+            
+            .admin-unified-page .modal-content {
+                width: 98vw !important;
+                max-width: 98vw !important;
+                padding: 15px;
+                max-height: 95vh;
+            }
+            
+            .admin-unified-page .form-group {
+                margin-bottom: 15px;
+            }
+            
+            .admin-unified-page .form-group input,
+            .admin-unified-page .form-group textarea,
+            .admin-unified-page .form-group select {
+                font-size: 16px; /* Предотвращает зум на iOS */
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .admin-unified-page .admin-header {
+                padding: 10px 0;
+            }
+            
+            .admin-unified-page .logo-section {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .admin-unified-page .admin-logo {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .admin-unified-page .admin-header h1 {
+                font-size: 1.25rem;
+            }
+            
+            .admin-unified-page .filters-section {
+                padding: 10px;
+            }
+            
+            .admin-unified-page .filter-group label {
+                font-size: 0.8rem;
+            }
+            
+            .admin-unified-page .entity-card {
+                padding: 10px;
+            }
+            
+            .admin-unified-page .entity-card-title {
+                font-size: 0.95rem;
+            }
+            
+            .admin-unified-page .entity-type-badge {
+                font-size: 0.65rem;
+                padding: 3px 8px;
+            }
+            
+            .admin-unified-page .pdf-badge {
+                font-size: 0.65rem;
+                padding: 3px 8px;
+            }
+        }
+        
+        /* Бейдж для PDF */
+        .pdf-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+        
+        .pdf-badge.has-pdf {
+            background: #d1fae5;
+            color: #065f46;
+        }
+        
+        .pdf-badge.no-pdf {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+        
+        /* Увеличение размера модальных окон и центрирование */
+        .admin-unified-page .modal {
+            display: none !important;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .admin-unified-page .modal[style*="flex"] {
+            display: flex !important;
+        }
+        
+        .admin-unified-page .modal-content {
+            max-width: 95vw !important;
+            width: 1200px !important;
+            max-height: 90vh;
+            overflow-y: auto;
+            margin: auto;
+            position: relative;
+            top: auto;
+            left: auto;
+            transform: none;
+        }
+        
+        .admin-unified-page .modal-body {
+            max-height: calc(90vh - 140px);
+            overflow-y: auto;
+            padding: 30px;
+        }
+        
+        .admin-unified-page .modal-header {
+            padding: 25px 30px;
+        }
+        
+        .admin-unified-page .form-group {
+            margin-bottom: 20px;
+        }
+        
+        /* Стилизация чекбокса */
+        .admin-unified-page .form-group.checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            margin-bottom: 20px;
+        }
+        
+        .admin-unified-page .form-group.checkbox-group label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 0;
+            cursor: pointer;
+            font-weight: 500;
+            color: #374151;
+            user-select: none;
+        }
+        
+        .admin-unified-page .form-group.checkbox-group input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin: 0;
+            cursor: pointer;
+            accent-color: #3498db;
+            flex-shrink: 0;
+        }
+        
+        .admin-unified-page .form-group input,
+        .admin-unified-page .form-group textarea,
+        .admin-unified-page .form-group select {
+            font-size: 1rem;
+            padding: 10px 14px;
+        }
+        
+        /* Стили для загрузки файлов */
+        .admin-unified-page .file-upload-container {
+            position: relative;
+            margin-bottom: 10px;
+        }
+        
+        .admin-unified-page .file-upload-container input[type="file"] {
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+            z-index: 2;
+        }
+        
+        .admin-unified-page .file-upload-preview {
+            border: 2px dashed #e0e0e0;
+            border-radius: 12px;
+            padding: 30px 20px;
+            text-align: center;
+            background: #fafafa;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            min-height: 120px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .admin-unified-page .file-upload-preview:hover {
+            border-color: #3498db;
+            background: #f8f9ff;
+        }
+        
+        .admin-unified-page .file-upload-preview.has-file {
+            border-color: #28a745;
+            background: #f0fff4;
+            border-style: solid;
+        }
+        
+        .admin-unified-page .file-upload-preview i {
+            font-size: 2.5rem;
+            color: #999999;
+        }
+        
+        .admin-unified-page .file-upload-preview span {
+            color: #666666;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+        
+        .admin-unified-page .file-upload-preview small {
+            color: #999999;
+            font-size: 0.85rem;
+        }
+        
+        .admin-unified-page .file-upload-preview img {
+            max-width: 100%;
+            max-height: 200px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        
+        .admin-unified-page .file-info {
+            margin-top: 10px;
+            padding: 10px;
+            background: #e8f5e9;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+        }
+        
+        .admin-unified-page .file-info i {
+            color: #28a745;
+            font-size: 1.2rem;
+        }
+        
+        .admin-unified-page .file-info-text {
+            flex: 1;
+            text-align: left;
+        }
+        
+        .admin-unified-page .file-info-name {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+            word-break: break-word;
+        }
+        
+        .admin-unified-page .file-info-size {
+            color: #666;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body class="admin-unified-page">
+    <div class="admin-container auth-hidden" data-auth-protected>
+        <!-- Заголовок -->
+        <header class="admin-header">
+            <div class="header-content">
+                <div class="logo-section">
+                    <img src="img/Logo-ABU.png" alt="ABU Logo" class="admin-logo">
+                    <h1>Unified Admin Panel</h1>
+                </div>
+                <div class="header-actions">
+                    <button type="button" id="adminLogoutBtn" class="btn btn-outline logout-btn" style="display: none;">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Выйти
+                    </button>
+                    <a href="erasmus+circulen.html" class="back-btn">
+                        <i class="fas fa-arrow-left"></i>
+                        Вернуться к сайту
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <!-- Навигация между админками -->
+        <nav class="admin-nav">
+            <a href="admin.html" class="admin-nav-link">
+                <i class="fas fa-newspaper"></i>
+                Админка новостей
+            </a>
+            <a href="admin-main-news.html" class="admin-nav-link">
+                <i class="fas fa-home"></i>
+                Новости главной страницы
+            </a>
+            <a href="admin-footer.html" class="admin-nav-link">
+                <i class="fas fa-address-card"></i>
+                Данные футера
+            </a>
+            <a href="admin-unified.html" class="admin-nav-link active">
+                <i class="fas fa-th"></i>
+                Unified Admin
+            </a>
+        </nav>
+
+        <!-- Основной контент -->
+        <main class="admin-main">
+            <!-- Фильтры и поиск -->
+            <section class="filters-section">
+                <div class="filters-row">
+                    <div class="filter-group">
+                        <label for="entityTypeFilter">Тип сущности</label>
+                        <select id="entityTypeFilter">
+                            <option value="">Все типы</option>
+                            <option value="our_partners">Наши партнеры</option>
+                            <option value="students_appendices">Студенты</option>
+                            <option value="teachers_documents">Преподаватели</option>
+                            <option value="mschool_documents">MSchool</option>
+                            <option value="brochure_documents">Брошюры</option>
+                            <option value="eramus_documents">Академическая мобильность</option>
+                            <option value="for_foreign_students_documents">Иностранным студентам</option>
+                        </select>
+                    </div>
+                    <div class="filter-group" id="countryFilterGroup" style="display: none;">
+                        <label for="countryFilter">Страна</label>
+                        <select id="countryFilter">
+                            <option value="">Все страны</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="statusFilter">Статус</label>
+                        <select id="statusFilter">
+                            <option value="">Все</option>
+                            <option value="true">Активные</option>
+                            <option value="false">Неактивные</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="pdfFilter">PDF</label>
+                        <select id="pdfFilter">
+                            <option value="">Все</option>
+                            <option value="has">Есть PDF</option>
+                            <option value="no">Нет PDF</option>
+                        </select>
+                    </div>
+                    <div class="filter-group search-input">
+                        <label for="searchInput">Поиск</label>
+                        <input type="text" id="searchInput" placeholder="Поиск по названию, описанию...">
+                    </div>
+                    <div class="filter-group" style="justify-content: flex-end;">
+                        <label>&nbsp;</label>
+                        <button type="button" id="addEntityBtn" class="btn btn-primary">
+                            <i class="fas fa-plus"></i>
+                            Добавить
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Статистика -->
+            <div class="stats-bar">
+                <div class="stat-item">
+                    <strong id="totalCount">0</strong>
+                    <span>Всего сущностей</span>
+                </div>
+                <div class="stat-item">
+                    <strong id="activeCount">0</strong>
+                    <span>Активных</span>
+                </div>
+                <div class="stat-item">
+                    <strong id="inactiveCount">0</strong>
+                    <span>Неактивных</span>
+                </div>
+            </div>
+
+            <!-- Список сущностей -->
+            <section class="news-list-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-list"></i> Список сущностей</h2>
+                    <button type="button" id="refreshBtn" class="btn btn-outline">
+                        <i class="fas fa-sync-alt"></i>
+                        Обновить
+                    </button>
+                </div>
+                <div id="entitiesList" class="news-list">
+                    <div class="loading-message">
+                        <i class="fas fa-spinner fa-spin"></i> Загрузка...
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Модальное окно для создания/редактирования -->
+    <div id="entityModal" class="modal" style="display: none !important;">
+        <div class="modal-content" style="max-width: 800px;">
+            <div class="modal-header">
+                <h2 id="modalTitle">Добавить сущность</h2>
+                <button type="button" class="modal-close" id="closeModalBtn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="entityForm">
+                    <input type="hidden" id="entityId" name="entity_id">
+                    <input type="hidden" id="entityType" name="entity_type">
+                    
+                    <div id="entityFormFields">
+                        <!-- Поля формы будут динамически добавлены через JS -->
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" id="cancelBtn" class="btn btn-outline">Отмена</button>
+                        <button type="submit" class="btn btn-primary">Сохранить</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase-config.js?v=20250108120000"></script>
+    <script src="js/admin-auth.js"></script>
+    <script src="js/admin-unified.js"></script>
+    <script>
+        // Принудительно закрываем модальное окно при загрузке
+        (function() {
+            const modal = document.getElementById('entityModal');
+            if (modal) {
+                modal.style.display = 'none';
+                modal.style.setProperty('display', 'none', 'important');
+            }
+        })();
+        
+        // Инициализация после загрузки
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Принудительно закрываем модальное окно
+            const modal = document.getElementById('entityModal');
+            if (modal) {
+                modal.style.display = 'none';
+                modal.style.setProperty('display', 'none', 'important');
+            }
+            
+            // Проверка авторизации
+            await window.ABU_ADMIN_AUTH?.guardAdminPage();
+            
+            // Инициализация unified admin
+            if (window.UnifiedAdmin) {
+                window.unifiedAdmin = new UnifiedAdmin();
+            }
+        });
+    </script>
+</body>
+</html>
+

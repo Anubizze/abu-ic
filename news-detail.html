@@ -33,12 +33,21 @@
         .news-detail-image {
             width: 100%;
             margin-bottom: 1rem;
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            background-color: #f0f0f0;
+            min-height: 400px;
+            max-height: 600px;
+            aspect-ratio: 16 / 9;
         }
         .news-detail-image img {
             width: 100%;
-            height: auto;
+            height: 100%;
+            object-fit: cover;
+            display: block;
             border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
         .news-detail-description {
             font-size: 1.3rem;
@@ -140,22 +149,34 @@
             overflow: hidden;
             border-radius: 12px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            background-color: #f0f0f0;
+            min-height: 400px;
+            max-height: 600px;
+            aspect-ratio: 16 / 9;
         }
         
         .slider-wrapper {
             display: flex;
             transition: transform 0.5s ease-in-out;
+            height: 100%;
         }
         
         .slider-slide {
             min-width: 100%;
             width: 100%;
             flex-shrink: 0;
+            position: relative;
+            overflow: hidden;
+            background-color: #f0f0f0;
+            min-height: 400px;
+            max-height: 600px;
+            aspect-ratio: 16 / 9;
         }
         
         .slider-slide img {
             width: 100%;
-            height: auto;
+            height: 100%;
+            object-fit: cover;
             display: block;
             border-radius: 12px;
         }
@@ -434,6 +455,21 @@
         }
         
         @media (max-width: 768px) {
+            .news-detail-image {
+                min-height: 250px;
+                max-height: 400px;
+            }
+            
+            .slider-container {
+                min-height: 250px;
+                max-height: 400px;
+            }
+            
+            .slider-slide {
+                min-height: 250px;
+                max-height: 400px;
+            }
+            
             .other-news-container {
                 grid-template-columns: 1fr;
             }
@@ -562,10 +598,10 @@
                 <div class="logo__footer">
                     <img src="img/Logo-ABU.png" alt="Логотип">
                 </div>
-                <div class="address">Ильяшева 94, 101 каб, Семей, 071400</div>
-                <div class="footer__phone">+7 (7222) 42-32-24</div>
-                <div class="footer__email">internationaloffice@abu.edu.kz</div>
-                <div class="schedule">понедельник – пятница, 9:00 – 18:00 <br>						
+                <div class="address" data-footer="address">Ильяшева 94, 101 каб, Семей, 071400</div>
+                <div class="footer__phone" data-footer="phone">+7 (7222) 42-32-24</div>
+                <div class="footer__email" data-footer="email">internationaloffice@abu.edu.kz</div>
+                <div class="schedule" data-footer="schedule">понедельник – пятница, 9:00 – 18:00 <br>						
                     обеденный перерыв: 13:00 – 14:00
                 </div>
             </div>
@@ -600,7 +636,7 @@
 
     <!-- Supabase JS Client -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="js/supabase-config.js"></script>
+    <script src="js/supabase-config.js?v=20250108120000"></script>
     <script src="js/erasmuscirculen.js"></script>
     <script src="js/language-switcher.js"></script>
     
@@ -1179,6 +1215,7 @@
             }, 100);
         });
     </script>
+    <script src="js/footer-loader.js?v=20250106"></script>
 </body>
 </html>
 
