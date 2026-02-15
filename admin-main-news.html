@@ -4,54 +4,58 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Админ-панель новостей главной страницы - ABU</title>
+    <link rel="stylesheet" href="css/admin-layout.css">
     <link rel="stylesheet" href="css/admin-news.css">
     <link rel="icon" type="img/abuicon" href="img/favicon.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
     <div class="admin-container auth-hidden" data-auth-protected>
-        <!-- Заголовок -->
-        <header class="admin-header">
-            <div class="header-content">
-                <div class="logo-section">
-                    <img src="img/Logo-ABU.png" alt="ABU Logo" class="admin-logo">
-                    <h1>Админ-панель новостей главной страницы</h1>
-                </div>
-                <div class="header-actions">
-                    <button type="button" id="adminLogoutBtn" class="btn btn-outline logout-btn" style="display: none;">
-                        <i class="fas fa-sign-out-alt"></i>
-                        Выйти
-                    </button>
-                    <a href="index.html" class="back-btn">
-                        <i class="fas fa-arrow-left"></i>
-                        Вернуться к сайту
+        <div class="admin-layout">
+            <aside class="admin-sidebar" id="adminSidebar" aria-hidden="false">
+                <nav class="admin-nav">
+                    <a href="admin.html" class="admin-nav-link">
+                        <i class="fas fa-newspaper"></i>
+                        <span class="admin-nav-text">Админка новостей</span>
                     </a>
-                </div>
-            </div>
-        </header>
-
-        <!-- Навигация между админками -->
-        <nav class="admin-nav">
-            <a href="admin.html" class="admin-nav-link">
-                <i class="fas fa-newspaper"></i>
-                Админка новостей
-            </a>
-            <a href="admin-main-news.html" class="admin-nav-link active">
-                <i class="fas fa-home"></i>
-                Новости главной страницы
-            </a>
-            <a href="admin-footer.html" class="admin-nav-link">
-                <i class="fas fa-address-card"></i>
-                Данные футера
-            </a>
-            <a href="admin-unified.html" class="admin-nav-link">
-                <i class="fas fa-th"></i>
-                Unified Admin
-            </a>
-        </nav>
-
-        <!-- Основной контент -->
-        <main class="admin-main">
+                    <a href="admin-main-news.html" class="admin-nav-link active">
+                        <i class="fas fa-home"></i>
+                        <span class="admin-nav-text">Новости главной страницы</span>
+                    </a>
+                    <a href="admin-footer.html" class="admin-nav-link">
+                        <i class="fas fa-address-card"></i>
+                        <span class="admin-nav-text">Данные футера</span>
+                    </a>
+                    <a href="admin-unified.html" class="admin-nav-link">
+                        <i class="fas fa-th"></i>
+                        <span class="admin-nav-text">Unified Admin</span>
+                    </a>
+                </nav>
+            </aside>
+            <div class="admin-sidebar-overlay" id="adminSidebarOverlay" aria-hidden="true"></div>
+            <div class="admin-content">
+                <header class="admin-header">
+                    <div class="header-content">
+                        <button type="button" class="admin-burger" id="adminBurger" aria-label="Открыть меню" aria-expanded="false">
+                            <i class="fas fa-bars" aria-hidden="true"></i>
+                        </button>
+                        <div class="logo-section">
+                            <img src="img/Logo-ABU.png" alt="ABU Logo" class="admin-logo">
+                            <h1>Админ-панель новостей главной страницы</h1>
+                        </div>
+                        <div class="header-actions">
+                            <button type="button" id="adminLogoutBtn" class="btn btn-outline logout-btn" style="display: none;">
+                                <i class="fas fa-sign-out-alt"></i>
+                                Выйти
+                            </button>
+                            <a href="index.html" class="back-btn">
+                                <i class="fas fa-arrow-left"></i>
+                                Вернуться к сайту
+                            </a>
+                        </div>
+                    </div>
+                </header>
+                <main class="admin-main">
             <!-- Форма добавления новости -->
             <section class="add-news-section">
                 <div class="section-header">
@@ -181,6 +185,8 @@
                 </div>
             </section>
         </main>
+            </div>
+        </div>
 
         <!-- Модальное окно редактирования -->
         <div id="editModal" class="modal">
@@ -306,6 +312,37 @@
     <script src="js/r2-config.js"></script>
     <script src="js/admin-auth.js"></script>
     <script src="js/admin-main-news.js"></script>
+    <script>
+        (function () {
+            var burger = document.getElementById('adminBurger');
+            var sidebar = document.getElementById('adminSidebar');
+            var overlay = document.getElementById('adminSidebarOverlay');
+            if (!burger || !sidebar || !overlay) return;
+            function openSidebar() {
+                sidebar.classList.add('sidebar-open');
+                overlay.classList.add('is-open');
+                overlay.setAttribute('aria-hidden', 'false');
+                burger.setAttribute('aria-expanded', 'true');
+                burger.setAttribute('aria-label', 'Закрыть меню');
+                document.body.classList.add('sidebar-open');
+            }
+            function closeSidebar() {
+                sidebar.classList.remove('sidebar-open');
+                overlay.classList.remove('is-open');
+                overlay.setAttribute('aria-hidden', 'true');
+                burger.setAttribute('aria-expanded', 'false');
+                burger.setAttribute('aria-label', 'Открыть меню');
+                document.body.classList.remove('sidebar-open');
+            }
+            burger.addEventListener('click', function () {
+                if (sidebar.classList.contains('sidebar-open')) closeSidebar(); else openSidebar();
+            });
+            overlay.addEventListener('click', closeSidebar);
+            sidebar.querySelectorAll('.admin-nav-link').forEach(function (link) {
+                link.addEventListener('click', closeSidebar);
+            });
+        })();
+    </script>
 </body>
 </html>
 

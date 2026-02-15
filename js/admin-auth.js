@@ -3,7 +3,7 @@
     const AUTH_EVENT_LOGIN = 'abu-admin-authenticated';
     const AUTH_EVENT_LOGOUT = 'abu-admin-logout';
     const DEFAULT_LOGIN_PAGE = 'admin-login.html';
-    const DEFAULT_HOME_PAGE = 'admin-documents.html';
+    const DEFAULT_HOME_PAGE = 'admin-unified.html';
     const PROTECTED_SELECTOR = '[data-auth-protected]';
 
     let supabaseReadyPromise = null;

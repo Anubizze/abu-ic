@@ -47,7 +47,11 @@ class NewsAdmin {
         // Кнопка отмены редактирования
         const cancelEditBtn = document.getElementById('cancelEdit');
         cancelEditBtn.addEventListener('click', () => {
-            document.getElementById('editModal').style.display = 'none';
+            const editModalEl = document.getElementById('editModal');
+            if (editModalEl) {
+                editModalEl.style.display = 'none';
+                document.body.classList.remove('modal-open');
+            }
             this.currentEditId = null;
         });
 
@@ -296,6 +300,7 @@ class NewsAdmin {
         
         closePreview.addEventListener('click', () => {
             previewModal.style.display = 'none';
+            document.body.classList.remove('modal-open');
         });
 
         // Редактирование
@@ -304,15 +309,18 @@ class NewsAdmin {
         
         closeEdit.addEventListener('click', () => {
             editModal.style.display = 'none';
+            document.body.classList.remove('modal-open');
         });
 
         // Закрытие по клику вне модального окна
         window.addEventListener('click', (e) => {
             if (e.target === previewModal) {
                 previewModal.style.display = 'none';
+                document.body.classList.remove('modal-open');
             }
             if (e.target === editModal) {
                 editModal.style.display = 'none';
+                document.body.classList.remove('modal-open');
             }
         });
     }
@@ -391,7 +399,11 @@ class NewsAdmin {
             
             await this.updateNews(this.currentEditId, formData);
             
-            document.getElementById('editModal').style.display = 'none';
+            const editModalEl = document.getElementById('editModal');
+            if (editModalEl) {
+                editModalEl.style.display = 'none';
+                document.body.classList.remove('modal-open');
+            }
             this.currentEditId = null;
             await this.loadNewsFromSupabase();
             this.renderNewsList();
@@ -678,7 +690,11 @@ class NewsAdmin {
                 if (firstTab) firstTab.classList.add('active');
                 if (firstPanel) firstPanel.classList.add('active');
             }
-            document.getElementById('editModal').style.display = 'block';
+            const editModalEl = document.getElementById('editModal');
+            if (editModalEl) {
+                editModalEl.style.display = 'block';
+                document.body.classList.add('modal-open');
+            }
         }
     }
 
@@ -808,7 +824,11 @@ class NewsAdmin {
                 date: contentData.date || news.created_at,
                 imageSrc: news.image_url || 'img/news_first_card.jpg'
             });
-            document.getElementById('previewModal').style.display = 'block';
+            const previewModalEl = document.getElementById('previewModal');
+            if (previewModalEl) {
+                previewModalEl.style.display = 'block';
+                document.body.classList.add('modal-open');
+            }
         }
     }
 
@@ -875,7 +895,11 @@ class NewsAdmin {
             </div>
         `;
         
-        document.getElementById('previewModal').style.display = 'block';
+        const previewModalEl = document.getElementById('previewModal');
+        if (previewModalEl) {
+            previewModalEl.style.display = 'block';
+            document.body.classList.add('modal-open');
+        }
     }
 
     renderNewsList() {
@@ -905,29 +929,16 @@ class NewsAdmin {
             
             return `
             <div class="news-item">
-                <div class="news-item-header">
-                    <div class="news-item-info">
-                        <h4 class="news-item-title">${news.title}</h4>
-                        <div class="news-item-date">${this.formatDate(date)}</div>
-                        <p class="news-item-description">${description}</p>
-                    </div>
-                    ${news.image_url ? `
-                        <img src="${news.image_url}" alt="${news.title}" class="news-item-image">
-                    ` : ''}
+                <div class="news-item-image-wrapper">
+                    ${news.image_url ? `<img src="${news.image_url}" alt="${news.title}" loading="lazy">` : '<div class="no-image"><i class="fas fa-image"></i><span>Нет изображения</span></div>'}
                 </div>
+                <h4 class="news-item-title">${news.title}</h4>
+                <div class="news-item-date">${this.formatDate(date)}</div>
+                <p class="news-item-description">${description}</p>
                 <div class="news-item-actions">
-                    <button class="btn btn-secondary" onclick="newsAdmin.editNews('${news.id}')">
-                        <i class="fas fa-edit"></i>
-                        Редактировать
-                    </button>
-                    <button class="btn btn-outline" onclick="newsAdmin.showPreviewById('${news.id}')">
-                        <i class="fas fa-eye"></i>
-                        Просмотр
-                    </button>
-                    <button class="btn btn-danger" onclick="newsAdmin.deleteNews('${news.id}')">
-                        <i class="fas fa-trash"></i>
-                        Удалить
-                    </button>
+                    <button type="button" class="btn btn-sm btn-primary" onclick="newsAdmin.editNews('${news.id}')"><i class="fas fa-edit"></i> Редактировать</button>
+                    <button type="button" class="btn btn-sm btn-outline" onclick="newsAdmin.showPreviewById('${news.id}')"><i class="fas fa-eye"></i> Просмотр</button>
+                    <button type="button" class="btn btn-sm btn-danger" onclick="newsAdmin.deleteNews('${news.id}')"><i class="fas fa-trash"></i> Удалить</button>
                 </div>
             </div>
         `;

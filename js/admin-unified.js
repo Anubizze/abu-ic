@@ -374,8 +374,10 @@ class UnifiedAdmin {
         }
 
         if (modalTitle) modalTitle.textContent = 'Добавить сущность';
-        if (modal) modal.style.display = 'flex';
-        
+        if (modal) {
+            modal.style.display = 'flex';
+            document.body.classList.add('modal-open');
+        }
         this.currentEditId = null;
         this.renderEntityForm(entityType);
     }
@@ -391,8 +393,10 @@ class UnifiedAdmin {
         const modalTitle = document.getElementById('modalTitle');
         
         if (modalTitle) modalTitle.textContent = 'Редактировать сущность';
-        if (modal) modal.style.display = 'flex';
-        
+        if (modal) {
+            modal.style.display = 'flex';
+            document.body.classList.add('modal-open');
+        }
         this.currentEditId = entityId;
         this.renderEntityForm(entityType, entity);
     }
@@ -539,7 +543,10 @@ class UnifiedAdmin {
 
     closeModal() {
         const modal = document.getElementById('entityModal');
-        if (modal) modal.style.display = 'none';
+        if (modal) {
+            modal.style.display = 'none';
+            document.body.classList.remove('modal-open');
+        }
         this.currentEditId = null;
     }
 

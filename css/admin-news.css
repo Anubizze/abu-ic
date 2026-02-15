@@ -1,8 +1,14 @@
-/* Сброс стилей и базовые настройки */
-* {
+/* Сброс стилей и базовые настройки (mobile-first) */
+*,
+*::before,
+*::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -11,7 +17,9 @@ body {
     min-height: 100vh;
     color: #333;
     line-height: 1.6;
+    overflow-x: hidden;
 }
+
 
 .auth-hidden {
     display: none !important;
@@ -274,36 +282,33 @@ body {
     color: #f8fafc;
 }
 
-/* Основной контейнер */
-.admin-container {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 20px;
-    min-height: 100vh;
-}
-
-/* Заголовок */
+/* Заголовок (layout в admin-layout.css) */
 .admin-header {
     background: #ffffff;
-    border-radius: 20px;
-    padding: 25px 30px;
-    margin-bottom: 30px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    padding: 16px 12px;
+    margin-bottom: 16px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
     border: 1px solid #e0e0e0;
+    width: 100%;
+    max-width: 100%;
 }
 
 .header-content {
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
-    gap: 20px;
+    flex-wrap: nowrap;
+    gap: 12px;
 }
 
 .logo-section {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 12px;
+    min-width: 0;
+    flex: 1;
 }
 
 .admin-logo {
@@ -311,25 +316,38 @@ body {
 }
 
 .logo-section h1 {
-    font-size: 2.2rem;
+    font-size: clamp(1.1rem, 4vw, 1.5rem);
     font-weight: 700;
     color: #333333;
     text-shadow: none;
+    word-wrap: break-word;
+}
+
+/* В одну линию на всех админ-страницах (как в Unified) */
+.header-actions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: nowrap;
+    min-width: 0;
 }
 
 .back-btn {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
-    padding: 12px 24px;
+    gap: 8px;
+    padding: 10px 16px;
     background: linear-gradient(135deg, #3498db, #2980b9);
     color: white;
     text-decoration: none;
     border-radius: 50px;
     font-weight: 600;
+    font-size: clamp(0.875rem, 2vw, 1rem);
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
     border: none;
+    white-space: nowrap;
 }
 
 .back-btn:hover {
@@ -337,40 +355,52 @@ body {
     box-shadow: 0 8px 25px rgba(52, 152, 219, 0.4);
 }
 
-/* Основной контент */
+/* Основной контент: колонка на mobile */
 .admin-main {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
 }
 
 /* Секции */
 .add-news-section,
 .news-list-section {
     background: #ffffff;
-    border-radius: 20px;
-    padding: 30px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
     border: 1px solid #e0e0e0;
     color: #333333;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
 }
 
 .section-header {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 25px;
-    padding-bottom: 15px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
     border-bottom: 2px solid #f0f0f0;
 }
 
 .section-header h2 {
-    font-size: 1.8rem;
+    font-size: clamp(1.2rem, 3.5vw, 1.8rem);
     font-weight: 700;
     color: #333333;
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
+}
+
+.list-actions {
+    width: 100%;
+    max-width: 100%;
 }
 
 .section-header h2 i {
@@ -385,9 +415,9 @@ body {
 }
 
 .form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
 
 .form-group {
@@ -404,6 +434,8 @@ body {
 
 .form-group input,
 .form-group textarea {
+    width: 100%;
+    max-width: 100%;
     padding: 12px 16px;
     border: 2px solid #e0e0e0;
     border-radius: 12px;
@@ -478,10 +510,10 @@ body {
 }
 
 .images-preview {
-    min-height: 120px;
+    min-height: 100px;
     border: 2px dashed #dee2e6;
     border-radius: 8px;
-    padding: 15px;
+    padding: 12px;
     background: #f8f9fa;
     text-align: center;
     cursor: pointer;
@@ -490,6 +522,9 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 .images-preview.has-images {
@@ -499,9 +534,10 @@ body {
 
 .preview-images-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 15px;
+    grid-template-columns: repeat(auto-fill, minmax(min(120px, 100%), 1fr));
+    gap: 12px;
     width: 100%;
+    max-width: 100%;
     margin-bottom: 10px;
 }
 
@@ -572,16 +608,18 @@ body {
 /* Многоязычность */
 .multilang-section {
     background: #f8f9ff;
-    border-radius: 15px;
-    padding: 25px;
+    border-radius: 12px;
+    padding: 16px;
     border: 1px solid #e8ecff;
+    width: 100%;
+    max-width: 100%;
 }
 
 .multilang-section h3 {
-    font-size: 1.3rem;
+    font-size: clamp(1.1rem, 3vw, 1.3rem);
     font-weight: 700;
     color: #333333;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -593,17 +631,19 @@ body {
 
 .lang-tabs {
     display: flex;
-    gap: 5px;
-    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 16px;
     background: #ffffff;
-    padding: 5px;
+    padding: 6px;
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
 .lang-tab {
-    flex: 1;
-    padding: 12px 20px;
+    flex: 1 1 auto;
+    min-width: 0;
+    padding: 10px 14px;
     border: none;
     background: transparent;
     border-radius: 8px;
@@ -630,24 +670,37 @@ body {
 /* Кнопки */
 .form-actions {
     display: flex;
-    gap: 15px;
-    flex-wrap: wrap;
-    margin-top: 20px;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 16px;
 }
 
+.form-actions .btn {
+    width: 100%;
+    max-width: 100%;
+}
+
+/* Единые кнопки: одинаковый размер, компактные в карточках */
 .btn {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    padding: 12px 24px;
+    gap: 6px;
+    padding: 8px 16px;
     border: none;
-    border-radius: 12px;
+    border-radius: 10px;
     font-weight: 600;
-    font-size: 1rem;
+    font-size: 0.875rem;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
     text-decoration: none;
     justify-content: center;
+}
+
+.btn-sm {
+    padding: 8px 14px;
+    font-size: 0.875rem;
+    border-radius: 8px;
+    white-space: nowrap;
 }
 
 .btn-primary {
@@ -703,16 +756,21 @@ body {
     padding: 10px 0;
 }
 
-/* Карточки новостей - одна на строку */
+/* Карточки новостей (главная страница): [image] [title] [description] [meta] [actions] */
 .news-card {
     background: #ffffff;
     border: 1px solid #e5e7eb;
     border-radius: 12px;
-    padding: 20px;
+    overflow: hidden;
+    padding: 0;
     display: flex;
-    gap: 20px;
-    transition: all 0.3s ease;
+    flex-direction: column;
+    gap: 0;
+    transition: all 0.2s ease;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
 }
 
 .news-card:hover {
@@ -728,9 +786,10 @@ body {
 
 .news-card-image {
     flex-shrink: 0;
-    width: 200px;
-    height: 150px;
-    border-radius: 8px;
+    width: 100%;
+    max-width: 100%;
+    aspect-ratio: 16 / 10;
+    border-radius: 12px 12px 0 0;
     overflow: hidden;
     background: #f3f4f6;
     display: flex;
@@ -753,20 +812,32 @@ body {
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
+    min-width: 0;
+    padding: 12px 16px 0;
 }
 
 .news-card-content h3 {
-    font-size: 1.25rem;
+    font-size: 1.1rem;
     font-weight: 600;
     color: #1f2937;
     margin: 0;
+    line-height: 1.35;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .news-card-content p {
     color: #6b7280;
     margin: 0;
+    font-size: 0.9rem;
     line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .news-card-meta {
@@ -774,8 +845,8 @@ body {
     gap: 12px;
     align-items: center;
     flex-wrap: wrap;
-    margin-top: auto;
-    font-size: 0.875rem;
+    margin-top: 8px;
+    font-size: 0.8rem;
 }
 
 .news-status {
@@ -813,24 +884,15 @@ body {
 
 .news-card-actions {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     gap: 8px;
     flex-shrink: 0;
+    padding: 12px 16px 16px;
+    border-top: 1px solid #f0f0f0;
 }
 
-@media (max-width: 768px) {
-    .news-card {
-        flex-direction: column;
-    }
-    
-    .news-card-image {
-        width: 100%;
-        height: 200px;
-    }
-    
-    .news-card-actions {
-        flex-direction: row;
-    }
+.news-card-actions .btn {
+    width: auto;
 }
 
 /* Карточка новости */
@@ -871,7 +933,8 @@ body {
 .news-item-image-wrapper {
     position: relative;
     width: 100%;
-    height: 200px;
+    max-width: 100%;
+    height: 180px;
     overflow: hidden;
     background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
 }
@@ -1024,7 +1087,7 @@ body {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    max-width: 250px;
+    max-width: 100%;
     display: inline-block;
 }
 
@@ -1076,22 +1139,13 @@ body {
     box-shadow: 0 4px 12px rgba(231, 76, 60, 0.4);
 }
 
-@media (max-width: 768px) {
-    .news-item-actions {
-        flex-direction: column;
-    }
-    
-    .news-item-actions .btn {
-        width: 100%;
-    }
-    
-    .news-item-title {
-        font-size: 1.1rem;
-    }
-    
-    .news-item-image-wrapper {
-        height: 180px;
-    }
+.news-item-actions .btn {
+    flex: 1;
+    min-width: 0;
+}
+
+.news-item-title {
+    font-size: clamp(1.05rem, 2.5vw, 1.25rem);
 }
 
 /* Пустое состояние */
@@ -1136,52 +1190,73 @@ body {
     to { transform: rotate(360deg); }
 }
 
-/* Модальные окна */
+/* Модальные окна: перекрывают всю админку (sidebar + header), overlay поверх */
 .modal {
     display: none;
     position: fixed;
-    top: 0;
-    left: 0;
+    inset: 0;
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(5px);
-    z-index: 1000;
+    z-index: 2000;
     animation: fadeIn 0.3s ease;
-}
-
-.modal.show {
-    display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.modal-content {
-    background: white;
-    border-radius: 20px;
-    max-width: 90%;
-    max-height: 90%;
+.modal.show {
+    display: flex;
+    padding: 16px;
+    align-items: flex-start;
+    justify-content: center;
     overflow-y: auto;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-    animation: slideIn 0.3s ease;
 }
 
-.modal-content.large {
-    width: 800px;
+/* При открытом модальном окне: не скроллить страницу */
+body:has(.modal.show),
+body.modal-open {
+    overflow: hidden;
+}
+
+.modal-content {
+    background: white;
+    border-radius: 16px;
+    width: 100%;
+    max-width: min(calc(100vw - 32px), 400px);
+    max-height: min(90vh, calc(100vh - 32px));
+    overflow-y: auto;
+    overflow-x: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: slideIn 0.3s ease;
+    margin: auto;
+}
+
+.modal-content.large,
+.modal-content-preview {
+    max-width: min(calc(100vw - 32px), 800px);
+}
+
+.modal-body#previewContent,
+#previewContent {
+    padding: 16px 20px;
 }
 
 .modal-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 25px 30px;
+    padding: 16px 20px;
     border-bottom: 1px solid #e0e0e0;
+    flex-shrink: 0;
 }
 
 .modal-header h3 {
-    font-size: 1.5rem;
+    font-size: clamp(1.1rem, 3vw, 1.5rem);
     font-weight: 700;
     color: #333;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .close-btn {
@@ -1190,9 +1265,12 @@ body {
     font-size: 1.5rem;
     color: #666;
     cursor: pointer;
-    padding: 5px;
+    padding: 8px;
+    min-width: 44px;
+    min-height: 44px;
     border-radius: 50%;
     transition: all 0.3s ease;
+    flex-shrink: 0;
 }
 
 .close-btn:hover {
@@ -1200,8 +1278,31 @@ body {
     color: #333;
 }
 
+.modal-close {
+    background: none;
+    border: none;
+    font-size: 1.25rem;
+    color: #666;
+    cursor: pointer;
+    padding: 8px;
+    min-width: 44px;
+    min-height: 44px;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-close:hover {
+    background: #f0f0f0;
+    color: #333;
+}
+
 .modal-body {
-    padding: 30px;
+    padding: 16px 20px;
+    min-width: 0;
 }
 
 /* Анимации */
@@ -1221,91 +1322,136 @@ body {
     }
 }
 
-/* Адаптивность */
-@media (max-width: 1200px) {
-    .admin-main {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 768px) {
+/* ========== Адаптивность: tablet/desktop (769px+) — sidebar виден, burger скрыт ========== */
+@media (min-width: 769px) {
     .admin-container {
-        padding: 15px;
-    }
-    
-    .admin-header {
         padding: 20px;
     }
-    
-    .header-content {
-        flex-direction: column;
-        text-align: center;
-    }
-    
-    .logo-section h1 {
-        font-size: 1.8rem;
-    }
-    
-    .form-row {
-        grid-template-columns: 1fr;
-    }
-    
-    .form-actions {
-        flex-direction: column;
-    }
-    
-    .btn {
-        width: 100%;
-    }
-    
-    .news-item-header {
-        flex-direction: column;
-        gap: 15px;
-    }
-    
-    .news-item-actions {
-        width: 100%;
-        justify-content: center;
-    }
-    
-    .modal-content {
-        margin: 20px;
-        max-width: calc(100% - 40px);
-    }
-    
-    .modal-content.large {
-        width: auto;
-    }
-}
 
-@media (max-width: 480px) {
-    .admin-header {
-        padding: 15px;
+    .admin-layout {
+        flex-direction: row;
     }
-    
+
+    .admin-sidebar {
+        position: relative;
+        transform: none;
+        width: 260px;
+        flex-shrink: 0;
+        max-height: none;
+    }
+
+    .admin-sidebar-overlay {
+        display: none;
+    }
+
+    .admin-burger {
+        display: none !important;
+    }
+
+    .admin-header {
+        padding: 20px 24px;
+        margin-bottom: 24px;
+        border-radius: 16px;
+    }
+
+    .header-content {
+        flex-wrap: nowrap;
+    }
+
+    .admin-main {
+        gap: 24px;
+    }
+
     .add-news-section,
     .news-list-section {
-        padding: 20px;
+        padding: 24px;
+        border-radius: 16px;
     }
-    
-    .logo-section h1 {
-        font-size: 1.5rem;
+
+    .section-header {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
     }
-    
-    .admin-logo {
-        height: 50px;
+
+    .form-row {
+        flex-direction: row;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
     }
-    
+
+    .form-actions {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .form-actions .btn {
+        width: auto;
+    }
+
+    .multilang-section {
+        padding: 24px;
+    }
+
+    .modal.show {
+        padding: 24px;
+        align-items: center;
+    }
+
+    .modal-content {
+        max-width: 90%;
+    }
+
+    .modal-content.large {
+        max-width: min(800px, 90vw);
+    }
+
+    .modal-header,
+    .modal-body {
+        padding: 24px 30px;
+    }
+
+    .news-item-actions {
+        flex-direction: row;
+    }
+
+    .news-item-image-wrapper {
+        height: 200px;
+    }
+}
+
+/* ========== Desktop (1024px+): две колонки контента ========== */
+@media (min-width: 1024px) {
+    .admin-container {
+        max-width: 1400px;
+    }
+
+    .admin-main {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+    }
+
+    .add-news-section,
+    .news-list-section {
+        padding: 30px;
+        border-radius: 20px;
+    }
+
     .section-header h2 {
-        font-size: 1.5rem;
+        font-size: 1.8rem;
     }
-    
-    .lang-tabs {
-        flex-direction: column;
+
+    .logo-section h1 {
+        font-size: 2.2rem;
     }
-    
-    .lang-tab {
-        text-align: center;
+}
+
+/* На очень узких экранах разрешаем перенос header */
+@media (max-width: 576px) {
+    .header-content {
+        flex-wrap: wrap;
     }
 }
 
@@ -1318,63 +1464,125 @@ body {
     border-color: #27ae60;
 }
 
+/* Карточка новости (админка новостей): [image] [title] [date] [description] [actions] */
 .news-item {
     position: relative;
     background: #ffffff;
     border: 1px solid #e5e7eb;
     border-radius: 12px;
-    padding: 20px;
+    overflow: hidden;
+    padding: 0;
     margin-bottom: 16px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
 }
 
 .news-item:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    border-color: #2a5298;
-    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    border-color: #3498db;
 }
 
-.news-item::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(135deg, #3498db, #2980b9);
-    border-radius: 12px 12px 0 0;
-}
-
-.news-item-header {
-    display: flex;
-    gap: 20px;
-    margin-bottom: 16px;
-}
-
-.news-item-info {
-    flex: 1;
-}
-
-.news-item-image {
-    width: 150px;
-    height: 100px;
-    object-fit: cover;
-    border-radius: 8px;
+.news-item .news-item-image-wrapper {
+    width: 100%;
+    aspect-ratio: 16 / 10;
     flex-shrink: 0;
+    border-radius: 0;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e2e8f0 100%);
+}
+
+.news-item .news-item-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.news-item .news-item-image-wrapper .no-image {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: #9ca3af;
+    font-size: 0.875rem;
+}
+
+.news-item .news-item-image-wrapper .no-image i {
+    font-size: 2rem;
+    opacity: 0.6;
+}
+
+.news-item-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #1f2937;
+    margin: 0;
+    padding: 12px 16px 0;
+    line-height: 1.35;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.news-item-date {
+    font-size: 0.8rem;
+    color: #6b7280;
+    padding: 4px 16px 0;
+}
+
+.news-item-description {
+    font-size: 0.9rem;
+    color: #6b7280;
+    margin: 0;
+    padding: 8px 16px 0;
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.news-item-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 12px 16px 16px;
+    margin-top: auto;
+    border-top: 1px solid #f0f0f0;
+}
+
+.news-item-actions .btn {
+    width: auto;
+    min-width: auto;
+    flex-shrink: 0;
+    white-space: nowrap;
+    padding: 6px 12px;
+    font-size: 0.8125rem;
 }
 
 /* Стили для уведомлений */
 .notification {
     position: fixed;
-    top: 20px;
-    right: 20px;
-    padding: 15px 25px;
+    top: 16px;
+    left: 16px;
+    right: 16px;
+    max-width: calc(100vw - 32px);
+    padding: 12px 20px;
     border-radius: 12px;
     color: white;
     font-weight: 600;
     z-index: 1001;
     animation: slideInRight 0.3s ease;
+}
+
+@media (min-width: 768px) {
+    .notification {
+        left: auto;
+        right: 20px;
+        max-width: 360px;
+    }
 }
 
 .notification.success {
@@ -1418,49 +1626,6 @@ body {
 .empty-state p {
     font-size: 1.1rem;
     line-height: 1.6;
-}
-
-/* Навигация между админками */
-.admin-nav {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 30px;
-    background: #ffffff;
-    border-radius: 15px;
-    padding: 15px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    border: 1px solid #e0e0e0;
-}
-
-.admin-nav-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 12px 24px;
-    background: transparent;
-    color: #666666;
-    text-decoration: none;
-    border-radius: 10px;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    border: 2px solid transparent;
-}
-
-.admin-nav-link:hover {
-    background: #f8f9fa;
-    color: #3498db;
-    transform: translateY(-2px);
-}
-
-.admin-nav-link.active {
-    background: linear-gradient(135deg, #3498db, #2980b9);
-    color: white;
-    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
-    border-color: #3498db;
-}
-
-.admin-nav-link i {
-    font-size: 1.1rem;
 }
 
 /* Загрузка файлов */
@@ -2027,6 +2192,7 @@ body {
 
 .file-path-code {
     flex: 1;
+    min-width: 0;
     background: #f5f5f5;
     padding: 6px 10px;
     border-radius: 6px;
@@ -2036,7 +2202,6 @@ body {
     max-width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap;
 }
 
 .btn-copy-path {
@@ -2099,8 +2264,15 @@ body {
 
 .info-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
+    grid-template-columns: 1fr;
+    gap: 12px;
+}
+
+@media (min-width: 768px) {
+    .info-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
 }
 
 .info-item {
@@ -2175,67 +2347,108 @@ body {
     color: #856404;
 }
 
-/* Адаптивность для навигации */
-@media (max-width: 1200px) {
+/* Documents layout: mobile-first (колонка), tablet+ sidebar */
+.documents-main {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    max-width: 100%;
+}
+
+.pages-sidebar {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.content-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.content-actions {
+    width: 100%;
+    flex-direction: column;
+}
+
+.content-actions .search-box {
+    width: 100%;
+    max-width: 100%;
+}
+
+.documents-table-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    max-width: 100%;
+}
+
+.documents-table {
+    font-size: 0.9rem;
+    min-width: 400px;
+}
+
+.documents-table th,
+.documents-table td {
+    padding: 10px 12px;
+}
+
+.table-actions {
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.document-item-header {
+    flex-direction: column;
+    gap: 12px;
+}
+
+.document-item-actions {
+    width: 100%;
+}
+
+@media (min-width: 768px) {
     .documents-main {
-        grid-template-columns: 250px 1fr;
+        display: grid;
+        grid-template-columns: 260px 1fr;
+        gap: 24px;
+    }
+
+    .pages-sidebar {
+        max-height: calc(100vh - 280px);
+    }
+
+    .content-header {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+
+    .content-actions {
+        width: auto;
+        flex-direction: row;
+    }
+
+    .content-actions .search-box {
+        width: 250px;
+    }
+
+    .table-actions {
+        flex-direction: row;
+    }
+
+    .document-item-header {
+        flex-direction: row;
+    }
+
+    .document-item-actions {
+        width: auto;
+        justify-content: flex-start;
     }
 }
 
-@media (max-width: 768px) {
-    .admin-nav {
-        flex-direction: column;
-    }
-    
-    .admin-nav-link {
-        width: 100%;
-        justify-content: center;
-    }
-    
+@media (min-width: 1200px) {
     .documents-main {
-        grid-template-columns: 1fr;
-    }
-    
-    .pages-sidebar {
-        max-height: 300px;
-    }
-    
-    .content-header {
-        flex-direction: column;
-    }
-    
-    .content-actions {
-        width: 100%;
-        flex-direction: column;
-    }
-    
-    .content-actions .search-box {
-        width: 100%;
-    }
-    
-    .documents-table {
-        font-size: 0.85rem;
-    }
-    
-    .documents-table th,
-    .documents-table td {
-        padding: 10px 8px;
-    }
-    
-    .table-actions {
-        flex-direction: column;
-    }
-    
-    .table-actions .btn {
-        width: 100%;
-    }
-    
-    .document-item-header {
-        flex-direction: column;
-    }
-    
-    .document-item-actions {
-        width: 100%;
-        justify-content: center;
+        grid-template-columns: 300px 1fr;
     }
 }
