@@ -3,12 +3,12 @@
 // Для локальной разработки эти значения переопределяются через r2-config.local.js
 
 // Базовые настройки по умолчанию
+// Worker загрузки: папка r2-upload-worker, в wrangler.toml указан bucket_name = "abu-ic"
 const defaultConfig = {
   ACCOUNT_ID: '629c800a0a89cb62795d6e16511cae7e',
-  BUCKET: 'abu-documents',
-  // Public URL для документов (bucket abu-documents)
+  BUCKET: 'abu-ic',
+  // Public URL для документов и изображений (bucket abu-ic, включи Public Access в R2)
   PUBLIC_URL: 'https://pub-a797bdf4261e4c448d835644b30caa41.r2.dev',
-  // Public URL для изображений флагов (тот же PUBLIC_URL, изображения в том же bucket)
   IMAGES_PUBLIC_URL: 'https://pub-a797bdf4261e4c448d835644b30caa41.r2.dev',
   // По умолчанию используем прокси через nginx для решения проблемы CORS
   // Это работает с любым origin (localhost:8080, localhost:3000, production domain)

@@ -1,4 +1,7 @@
 // Unified Admin Panel - управление всеми сущностями
+const PDF_MAX_MB = 15;
+const IMAGE_MAX_MB = 2;
+
 class UnifiedAdmin {
     constructor() {
         this.entities = [];
@@ -12,6 +15,85 @@ class UnifiedAdmin {
         };
         this.currentEditId = null;
         this.init();
+    }
+
+    getR2WorkerUrl() {
+        const r2Config = window.R2_CONFIG || {};
+        return r2Config.WORKER_URL || '/api/r2-upload';
+    }
+
+    getR2PublicBase() {
+        const r2Config = window.R2_CONFIG || {};
+        return r2Config.PUBLIC_URL || r2Config.IMAGES_PUBLIC_URL || 'https://pub-a797bdf4261e4c448d835644b30caa41.r2.dev';
+    }
+
+    buildR2PublicUrl(key) {
+        const base = this.getR2PublicBase();
+        if (!base || !key) return '';
+        const encodedPath = key.split('/').map(s => encodeURIComponent(s)).join('/');
+        return base + '/' + encodedPath;
+    }
+
+    getPdfPreviewUrl(pdfFileUrl, pdfFileKey) {
+        if (pdfFileUrl && (pdfFileUrl.startsWith('http://') || pdfFileUrl.startsWith('https://'))) return pdfFileUrl;
+        return this.buildR2PublicUrl(pdfFileKey || '');
+    }
+
+    getImagePreviewUrl(imageUrl, imageKey) {
+        if (imageUrl && (imageUrl.startsWith('http://') || imageUrl.startsWith('https://'))) return imageUrl;
+        return this.buildR2PublicUrl(imageKey || '');
+    }
+
+    // Для our_partners передавать только country_en (английское имя) — путь в R2 всегда OurPartners/Switzerland/ и т.д.
+    getPdfKeyPrefix(entityType, countryName = '') {
+        const country = (countryName || 'Other').replace(/\s+/g, ' ').trim().replace(/\s+/g, '_');
+        const prefixes = {
+            our_partners: `OurPartners/${country}`,
+            students_appendices: 'Students/regulation-in-Russian-language',
+            teachers_documents: 'files',
+            mschool_documents: 'pdf',
+            brochure_documents: 'files',
+            eramus_documents: 'files',
+            for_foreign_students_documents: 'files'
+        };
+        return prefixes[entityType] || 'files';
+    }
+
+    getImageKeyPrefix(entityType, imageType = 'card') {
+        if (imageType === 'flag') return 'img/our-partners-html';
+        if (entityType === 'eramus_documents') return 'img/eramus-html';
+        if (entityType === 'for_foreign_students_documents') return 'img/cards';
+        return 'img';
+    }
+
+    async uploadFileToR2(file, key) {
+        if (!file || file.size === 0) return null;
+        const workerUrl = this.getR2WorkerUrl();
+        if (!workerUrl) throw new Error('R2 WORKER_URL не задан. Проверьте js/r2-config.js');
+        const response = await fetch(`${workerUrl}/upload?name=${encodeURIComponent(key)}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': file.type || 'application/octet-stream' },
+            body: file
+        });
+        if (!response.ok) {
+            const err = await response.text();
+            throw new Error(`Загрузка в R2 не удалась: ${response.status} ${err}`);
+        }
+        let payload = null;
+        try { payload = await response.json(); } catch (_) {}
+        let url = payload?.url;
+        if (!url) url = this.buildR2PublicUrl(key);
+        if (!url) throw new Error('R2 не вернул URL файла. Проверь переменную PUBLIC_BASE_URL в настройках Worker.');
+        return url;
+    }
+
+    esc(v) {
+        if (v == null || v === '') return '';
+        return String(v)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;');
     }
 
     async init() {
@@ -236,15 +318,12 @@ class UnifiedAdmin {
             // Поиск
             if (this.filters.search) {
                 const searchText = this.filters.search;
-                const titleRu = (entity.title_ru || '').toLowerCase();
-                const titleEn = (entity.title_en || '').toLowerCase();
-                const titleKz = (entity.title_kz || '').toLowerCase();
+                const titleRu = (entity.title_ru || entity.university_name_ru || '').toLowerCase();
+                const titleEn = (entity.title_en || entity.university_name_en || '').toLowerCase();
+                const titleKz = (entity.title_kz || entity.university_name_kz || '').toLowerCase();
                 const descriptionRu = (entity.description_ru || '').toLowerCase();
-                
-                if (!titleRu.includes(searchText) && 
-                    !titleEn.includes(searchText) && 
-                    !titleKz.includes(searchText) &&
-                    !descriptionRu.includes(searchText)) {
+                if (!titleRu.includes(searchText) && !titleEn.includes(searchText) &&
+                    !titleKz.includes(searchText) && !descriptionRu.includes(searchText)) {
                     return false;
                 }
             }
@@ -407,106 +486,429 @@ class UnifiedAdmin {
 
         const entityIdInput = document.getElementById('entityId');
         const entityTypeInput = document.getElementById('entityType');
-        
         if (entityIdInput) entityIdInput.value = entity?.id || '';
         if (entityTypeInput) entityTypeInput.value = entityType;
 
-        // Простая форма (можно расширить)
+        const isPartner = entityType === 'our_partners';
+        const hasCard = entityType === 'eramus_documents' || entityType === 'for_foreign_students_documents';
+        const pdfRequired = !isPartner;
+
+        const titleRu = this.esc(entity?.title_ru || entity?.university_name_ru || '');
+        const titleKz = this.esc(entity?.title_kz || entity?.university_name_kz || '');
+        const titleEn = this.esc(entity?.title_en || entity?.university_name_en || '');
+        const descRu = this.esc(entity?.description_ru || '');
+        const descKz = this.esc(entity?.description_kz || '');
+        const descEn = this.esc(entity?.description_en || '');
+        const countryRu = this.esc(entity?.country_ru || '');
+        const countryKz = this.esc(entity?.country_kz || '');
+        const countryEn = this.esc(entity?.country_en || '');
+        const pdfUrl = this.esc(entity?.pdf_file_url || entity?.pdf_url || entity?.file_url || '');
+        const websiteUrl = this.esc(entity?.website_url || '');
+        const flagUrl = this.esc(entity?.flag_image_url || '');
+        const cardUrl = this.esc(entity?.card_image_url || '');
+        const pdfPreview = this.getPdfPreviewUrl(entity?.pdf_file_url || entity?.pdf_url || entity?.file_url, entity?.pdf_file_key);
+        const flagPreview = this.getImagePreviewUrl(entity?.flag_image_url, entity?.flag_image_key);
+        const cardPreview = this.getImagePreviewUrl(entity?.card_image_url, entity?.card_image_key);
+
         formFields.innerHTML = `
-            <div class="form-group">
-                <label>Название (RU) *</label>
-                <input type="text" name="title_ru" value="${entity?.title_ru || entity?.university_name_ru || ''}" required>
-            </div>
-            <div class="form-group">
-                <label>Описание (RU)</label>
-                <textarea name="description_ru" rows="3">${entity?.description_ru || ''}</textarea>
-            </div>
-            ${entityType === 'our_partners' ? `
-                <div class="form-group">
-                    <label>Страна (RU)</label>
-                    <input type="text" name="country_ru" value="${entity?.country_ru || ''}">
+            <div class="entity-form-unified">
+                <div class="form-section">
+                    <h3 class="form-section-title">Основные данные</h3>
+                    <div class="form-row form-row-2">
+                        <div class="form-group">
+                            <label>Название (RU) *</label>
+                            <input type="text" name="title_ru" value="${titleRu}" required placeholder="Название на русском">
+                        </div>
+                        <div class="form-group">
+                            <label>Название (KZ)</label>
+                            <input type="text" name="title_kz" value="${titleKz}" placeholder="Атауы (қазақша)">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Название (EN)</label>
+                        <input type="text" name="title_en" value="${titleEn}" placeholder="Title (English)">
+                    </div>
+                    ${isPartner ? `
+                    <div class="form-row form-row-2">
+                        <div class="form-group">
+                            <label>Страна (RU)</label>
+                            <input type="text" name="country_ru" value="${countryRu}" placeholder="Россия">
+                        </div>
+                        <div class="form-group">
+                            <label>Страна (KZ)</label>
+                            <input type="text" name="country_kz" value="${countryKz}" placeholder="Ресей">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Страна (EN)</label>
+                        <input type="text" name="country_en" value="${countryEn}" placeholder="Russia">
+                    </div>
+                    ` : ''}
+                    ${!isPartner ? `
+                    <div class="form-group">
+                        <label>Описание (RU)</label>
+                        <textarea name="description_ru" rows="2" placeholder="Краткое описание">${descRu}</textarea>
+                    </div>
+                    <div class="form-row form-row-2">
+                        <div class="form-group">
+                            <label>Описание (KZ)</label>
+                            <textarea name="description_kz" rows="2" placeholder="Сипаттама">${descKz}</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Описание (EN)</label>
+                            <textarea name="description_en" rows="2" placeholder="Description">${descEn}</textarea>
+                        </div>
+                    </div>
+                    ` : ''}
                 </div>
-            ` : ''}
-            <div class="form-group">
-                <label>PDF URL *</label>
-                <input type="url" name="pdf_url" value="${entity?.pdf_url || entity?.file_url || entity?.pdf_file_url || ''}" required>
-                <small style="color: #666; display: block; margin-top: 4px;">URL PDF файла (обязательно для большинства типов сущностей)</small>
-            </div>
-            <div class="form-group checkbox-group">
-                <label>
-                    <input type="checkbox" name="is_active" ${entity?.is_active !== false ? 'checked' : ''}>
-                    <span>Активна</span>
-                </label>
+
+                <div class="form-section">
+                    <h3 class="form-section-title">PDF документ</h3>
+                    <small class="form-hint">${isPartner ? 'Для партнёров PDF необязателен — можно добавить только ссылку на сайт.' : 'Обязательно: укажите URL или загрузите файл (до 15 МБ).'}</small>
+                    <div class="form-group">
+                        <label>URL файла (если уже загружен)</label>
+                        <input type="url" name="pdf_url" value="${pdfUrl}" placeholder="https://...r2.dev/.../file.pdf">
+                    </div>
+                    <div class="form-group">
+                        <label>Или загрузить PDF с компьютера</label>
+                        <div class="file-upload-zone" id="pdfUploadZone">
+                            <input type="file" name="pdf_file" id="pdfFileInput" accept=".pdf,application/pdf">
+                            <div class="file-upload-preview" id="pdfPreview">
+                                <i class="fas fa-file-pdf"></i>
+                                <span id="pdfPreviewText">Выберите PDF (до 15 МБ)</span>
+                                ${pdfPreview ? `<a href="${this.esc(pdfPreview)}" target="_blank" class="current-file-link">Текущий PDF</a>` : ''}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                ${isPartner ? `
+                <div class="form-section">
+                    <h3 class="form-section-title">Сайт и флаг (только для партнёров)</h3>
+                    <div class="form-group">
+                        <label>Ссылка на сайт университета</label>
+                        <input type="url" name="website_url" value="${websiteUrl}" placeholder="https://university.edu">
+                    </div>
+                    <div class="form-group">
+                        <label>Изображение флага (URL)</label>
+                        <input type="url" name="flag_image_url" value="${flagUrl}" placeholder="https://...r2.dev/img/...">
+                    </div>
+                    <div class="form-group">
+                        <label>Или загрузить флаг</label>
+                        <div class="file-upload-zone" id="flagUploadZone">
+                            <input type="file" name="flag_image_file" id="flagFileInput" accept=".jpg,.jpeg,.png,.webp">
+                            <div class="file-upload-preview" id="flagPreview">
+                                <i class="fas fa-image"></i>
+                                <span id="flagPreviewText">Выберите изображение (до 2 МБ)</span>
+                                ${flagPreview ? `<img src="${this.esc(flagPreview)}" alt="Флаг" class="preview-thumb" onerror="this.style.display='none'">` : ''}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                ` : ''}
+
+                ${hasCard ? `
+                <div class="form-section">
+                    <h3 class="form-section-title">Изображение карточки</h3>
+                    <div class="form-group">
+                        <label>URL изображения</label>
+                        <input type="url" name="card_image_url" value="${cardUrl}" placeholder="https://...r2.dev/img/...">
+                    </div>
+                    <div class="form-group">
+                        <label>Или загрузить изображение</label>
+                        <div class="file-upload-zone" id="cardUploadZone">
+                            <input type="file" name="card_image_file" id="cardFileInput" accept=".jpg,.jpeg,.png,.webp">
+                            <div class="file-upload-preview" id="cardPreview">
+                                <i class="fas fa-image"></i>
+                                <span id="cardPreviewText">Выберите изображение (до 2 МБ)</span>
+                                ${cardPreview ? `<img src="${this.esc(cardPreview)}" alt="Карточка" class="preview-thumb" onerror="this.style.display='none'">` : ''}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                ` : ''}
+
+                <div class="form-section">
+                    <div class="form-group checkbox-group">
+                        <label>
+                            <input type="checkbox" name="is_active" ${entity?.is_active !== false ? 'checked' : ''}>
+                            <span>Активна</span>
+                        </label>
+                    </div>
+                </div>
             </div>
         `;
+
+        this.setupFileUploadListeners(entityType);
+        if (pdfRequired) {
+            const pdfInput = formFields.querySelector('input[name="pdf_url"]');
+            const pdfFileInput = formFields.querySelector('#pdfFileInput');
+            if (pdfInput && pdfFileInput) {
+                const validatePdf = () => {
+                    const hasUrl = pdfInput.value.trim().length > 0;
+                    const hasFile = pdfFileInput.files && pdfFileInput.files.length > 0;
+                    pdfInput.setCustomValidity(hasUrl || hasFile ? '' : 'Укажите URL или загрузите PDF');
+                };
+                pdfInput.addEventListener('input', validatePdf);
+                pdfFileInput.addEventListener('change', validatePdf);
+                validatePdf();
+            }
+        }
+    }
+
+    setupFileUploadListeners(entityType) {
+        const pdfInput = document.getElementById('pdfFileInput');
+        const pdfPreview = document.getElementById('pdfPreview');
+        const pdfPreviewText = document.getElementById('pdfPreviewText');
+        if (pdfInput && pdfPreviewText) {
+            pdfInput.addEventListener('change', () => {
+                const f = pdfInput.files?.[0];
+                if (f) {
+                    if (f.size > PDF_MAX_MB * 1024 * 1024) {
+                        this.showNotification(`PDF не должен превышать ${PDF_MAX_MB} МБ`, 'error');
+                        pdfInput.value = '';
+                        pdfPreviewText.textContent = 'Выберите PDF (до 15 МБ)';
+                        return;
+                    }
+                    pdfPreviewText.textContent = f.name + ' (' + (f.size / 1024).toFixed(1) + ' КБ)';
+                } else {
+                    pdfPreviewText.textContent = 'Выберите PDF (до 15 МБ)';
+                }
+            });
+        }
+
+        const flagInput = document.getElementById('flagFileInput');
+        const flagPreviewText = document.getElementById('flagPreviewText');
+        if (flagInput && flagPreviewText) {
+            flagInput.addEventListener('change', () => {
+                const f = flagInput.files?.[0];
+                if (f) {
+                    if (f.size > IMAGE_MAX_MB * 1024 * 1024) {
+                        this.showNotification(`Изображение не должно превышать ${IMAGE_MAX_MB} МБ`, 'error');
+                        flagInput.value = '';
+                        flagPreviewText.textContent = 'Выберите изображение (до 2 МБ)';
+                        return;
+                    }
+                    flagPreviewText.textContent = f.name;
+                } else {
+                    flagPreviewText.textContent = 'Выберите изображение (до 2 МБ)';
+                }
+            });
+        }
+
+        const cardInput = document.getElementById('cardFileInput');
+        const cardPreviewText = document.getElementById('cardPreviewText');
+        if (cardInput && cardPreviewText) {
+            cardInput.addEventListener('change', () => {
+                const f = cardInput.files?.[0];
+                if (f) {
+                    if (f.size > IMAGE_MAX_MB * 1024 * 1024) {
+                        this.showNotification(`Изображение не должно превышать ${IMAGE_MAX_MB} МБ`, 'error');
+                        cardInput.value = '';
+                        cardPreviewText.textContent = 'Выберите изображение (до 2 МБ)';
+                        return;
+                    }
+                    cardPreviewText.textContent = f.name;
+                } else {
+                    cardPreviewText.textContent = 'Выберите изображение (до 2 МБ)';
+                }
+            });
+        }
     }
 
     async handleSubmit(e) {
         const form = e.target;
+        const submitBtn = form.querySelector('button[type="submit"]');
+        if (submitBtn && submitBtn.disabled) return;
+
         const formData = new FormData(form);
         const entityType = formData.get('entity_type');
         const entityId = formData.get('entity_id');
+        const isPartner = entityType === 'our_partners';
+        const hasCard = entityType === 'eramus_documents' || entityType === 'for_foreign_students_documents';
 
         try {
-            const submitBtn = form.querySelector('button[type="submit"]');
-            const originalText = submitBtn.innerHTML;
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Сохранение...';
-            submitBtn.disabled = true;
-
-            const pdfUrl = formData.get('pdf_url') || null;
-            
-            const entityData = {
-                title_ru: formData.get('title_ru'),
-                description_ru: formData.get('description_ru') || null,
-                is_active: formData.get('is_active') === 'on'
-            };
-
-            // Сохраняем PDF URL в правильное поле в зависимости от типа сущности
-            if (entityType === 'our_partners') {
-                entityData.country_ru = formData.get('country_ru') || null;
-                entityData.university_name_ru = formData.get('title_ru');
-                entityData.pdf_url = pdfUrl;
-            } else if (entityType === 'students_appendices' || entityType === 'teachers_documents' || 
-                       entityType === 'mschool_documents' || entityType === 'brochure_documents' ||
-                       entityType === 'eramus_documents' || entityType === 'for_foreign_students_documents') {
-                // Для этих типов может использоваться pdf_file_url или file_url
-                entityData.pdf_file_url = pdfUrl;
-                entityData.file_url = pdfUrl;
-            } else {
-                entityData.pdf_url = pdfUrl;
+            const originalText = submitBtn ? submitBtn.innerHTML : '';
+            if (submitBtn) {
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Сохранение...';
+                submitBtn.disabled = true;
             }
 
+            let pdfUrl = (formData.get('pdf_url') || '').trim() || null;
+            let pdfKey = null;
+            const pdfFile = form.querySelector('#pdfFileInput')?.files?.[0];
+            if (pdfFile && pdfFile.size > 0) {
+                let prefix;
+                if (entityType === 'our_partners') {
+                    const countryEn = (formData.get('country_en') || '').trim();
+                    if (!countryEn) throw new Error('Поле «Страна (EN)» обязательно для загрузки PDF партнёра. Укажите страну на английском (например Switzerland).');
+                    prefix = this.getPdfKeyPrefix(entityType, countryEn);
+                } else {
+                    prefix = this.getPdfKeyPrefix(entityType, '');
+                }
+                const ext = (pdfFile.name.split('.').pop() || 'pdf').toLowerCase();
+                pdfKey = `${prefix}/${Date.now()}_${Math.random().toString(36).substring(2)}.${ext}`;
+                pdfUrl = await this.uploadFileToR2(pdfFile, pdfKey);
+            } else if (pdfUrl) {
+                pdfKey = this.urlToKey(pdfUrl);
+            }
+
+            if (!isPartner && !pdfUrl) {
+                throw new Error('Укажите URL PDF или загрузите файл');
+            }
+            // #region agent log
+            fetch('http://127.0.0.1:7246/ingest/0e1bcba3-60e2-4f65-a79b-e540dc633b7e',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'admin-unified.js:afterUpload',message:'after R2 upload',data:{pdfUrl: pdfUrl ? pdfUrl.substring(0,80)+'...' : pdfUrl,pdfKey,isPartner,entityType,hasPdfFile:!!(pdfFile&&pdfFile.size>0)},timestamp:Date.now(),hypothesisId:'H1'})}).catch(()=>{});
+            // #endregion
+
+            let flagUrl = (formData.get('flag_image_url') || '').trim() || null;
+            let flagKey = null;
+            const flagFile = form.querySelector('#flagFileInput')?.files?.[0];
+            if (flagFile && flagFile.size > 0) {
+                const prefix = this.getImageKeyPrefix(entityType, 'flag');
+                const ext = (flagFile.name.split('.').pop() || 'jpg').toLowerCase();
+                flagKey = `${prefix}/flag_${Date.now()}.${ext}`;
+                flagUrl = await this.uploadFileToR2(flagFile, flagKey);
+            } else if (flagUrl) {
+                flagKey = this.urlToKey(flagUrl);
+            }
+
+            let cardUrl = (formData.get('card_image_url') || '').trim() || null;
+            let cardKey = null;
+            const cardFile = form.querySelector('#cardFileInput')?.files?.[0];
+            if (cardFile && cardFile.size > 0) {
+                const prefix = this.getImageKeyPrefix(entityType, 'card');
+                const ext = (cardFile.name.split('.').pop() || 'jpg').toLowerCase();
+                cardKey = `${prefix}/${Date.now()}_${Math.random().toString(36).substring(2)}.${ext}`;
+                cardUrl = await this.uploadFileToR2(cardFile, cardKey);
+            } else if (cardUrl) {
+                cardKey = this.urlToKey(cardUrl);
+            }
+
+            const isUpdate = Boolean(entityId);
+
+            let entityData;
+            if (entityType === 'our_partners') {
+                entityData = {
+                    university_name_ru: formData.get('title_ru') || null,
+                    university_name_kz: formData.get('title_kz') || null,
+                    university_name_en: formData.get('title_en') || null,
+                    country_ru: formData.get('country_ru') || null,
+                    country_kz: formData.get('country_kz') || null,
+                    country_en: formData.get('country_en') || null,
+                    website_url: (formData.get('website_url') || '').trim() || null,
+                    description_ru: null,
+                    description_kz: null,
+                    description_en: null,
+                    is_active: formData.get('is_active') === 'on'
+                };
+                if (pdfUrl != null) {
+                    entityData.pdf_file_url = pdfUrl;
+                    entityData.pdf_file_key = pdfKey;
+                    entityData.r2_file_name = pdfKey;
+                } else {
+                    entityData.pdf_file_url = null;
+                    entityData.pdf_file_key = null;
+                    entityData.r2_file_name = null;
+                }
+                if (flagUrl != null) {
+                    entityData.flag_image_url = flagUrl;
+                    entityData.flag_image_key = flagKey;
+                } else {
+                    entityData.flag_image_url = null;
+                    entityData.flag_image_key = null;
+                }
+            }
+            // #region agent log
+            if (entityType === 'our_partners') {
+                fetch('http://127.0.0.1:7246/ingest/0e1bcba3-60e2-4f65-a79b-e540dc633b7e',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'admin-unified.js:entityDataBuilt',message:'entityData for our_partners',data:{hasPdfFileUrl:'pdf_file_url' in entityData && entityData.pdf_file_url != null,pdf_file_url: entityData.pdf_file_url ? String(entityData.pdf_file_url).substring(0,90)+'...' : entityData.pdf_file_url,pdf_file_key: entityData.pdf_file_key,keys:Object.keys(entityData)},timestamp:Date.now(),hypothesisId:'H1,H2'})}).catch(()=>{});
+            }
+            // #endregion
+            if (entityType !== 'our_partners') {
+                entityData = {
+                    title_ru: formData.get('title_ru') || null,
+                    title_kz: formData.get('title_kz') || null,
+                    title_en: formData.get('title_en') || null,
+                    description_ru: formData.get('description_ru') || null,
+                    description_kz: formData.get('description_kz') || null,
+                    description_en: formData.get('description_en') || null,
+                    is_active: formData.get('is_active') === 'on'
+                };
+                if (pdfUrl != null) {
+                    entityData.pdf_file_url = pdfUrl;
+                    entityData.pdf_file_key = pdfKey;
+                    entityData.r2_file_name = pdfKey;
+                } else {
+                    entityData.pdf_file_url = null;
+                    entityData.pdf_file_key = null;
+                    entityData.r2_file_name = null;
+                }
+                if (entityType === 'eramus_documents' || entityType === 'for_foreign_students_documents') {
+                    if (cardUrl != null) {
+                        entityData.card_image_url = cardUrl;
+                        entityData.card_image_key = cardKey;
+                    } else {
+                        entityData.card_image_url = null;
+                        entityData.card_image_key = null;
+                    }
+                }
+            }
+
+            if (!entityId) {
+                const { data: max } = await window.supabase.from(entityType).select('sort_order').order('sort_order', { ascending: false }).limit(1).maybeSingle();
+                entityData.sort_order = (max?.sort_order ?? -1) + 1;
+            }
+
+            // Если только что загрузили PDF — в entityData обязан быть pdf_file_url
+            const didUploadPdf = pdfFile && pdfFile.size > 0;
+            if (didUploadPdf && (!entityData.pdf_file_url || !entityData.pdf_file_key)) {
+                throw new Error('Ошибка: после загрузки PDF URL не попал в данные. Обновите страницу и попробуйте снова.');
+            }
+
+            // #region agent log
+            fetch('http://127.0.0.1:7246/ingest/0e1bcba3-60e2-4f65-a79b-e540dc633b7e',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'admin-unified.js:beforeSupabase',message:'payload before Supabase',data:{entityId,entityType,hasPdfFileUrl:'pdf_file_url' in entityData && entityData.pdf_file_url != null,pdf_file_url_len:entityData.pdf_file_url ? String(entityData.pdf_file_url).length : 0,payloadKeys:Object.keys(entityData)},timestamp:Date.now(),hypothesisId:'H2,H5'})}).catch(()=>{});
+            // #endregion
             let result;
             if (entityId) {
-                result = await window.supabase
-                    .from(entityType)
-                    .update(entityData)
-                    .eq('id', entityId);
+                result = await window.supabase.from(entityType).update(entityData).eq('id', entityId).select('id, pdf_file_url, pdf_file_key');
             } else {
-                result = await window.supabase
-                    .from(entityType)
-                    .insert([entityData]);
+                result = await window.supabase.from(entityType).insert([entityData]).select('id, pdf_file_url, pdf_file_key');
             }
+            // #region agent log
+            const row = result.data && (Array.isArray(result.data) ? result.data[0] : result.data);
+            fetch('http://127.0.0.1:7246/ingest/0e1bcba3-60e2-4f65-a79b-e540dc633b7e',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'admin-unified.js:afterSupabase',message:'Supabase result',data:{error: result.error ? String(result.error.message || result.error) : null,status: result.status,dataLength: result.data ? (Array.isArray(result.data)?result.data.length:1) : 0,returnedPdfUrl: row ? (row.pdf_file_url != null ? String(row.pdf_file_url).substring(0,80)+'...' : row.pdf_file_url) : undefined,returnedPdfKey: row ? row.pdf_file_key : undefined},timestamp:Date.now(),hypothesisId:'H3,H4,H6'})}).catch(()=>{});
+            // #endregion
+            if (result.error) throw result.error;
 
-            if (result.error) {
-                throw result.error;
-            }
-
-            this.showNotification(entityId ? 'Сущность успешно обновлена!' : 'Сущность успешно добавлена!', 'success');
+            this.showNotification(entityId ? 'Сущность обновлена!' : 'Сущность добавлена!', 'success');
             this.closeModal();
-            
             await this.loadEntities();
             this.applyFilters();
 
             submitBtn.innerHTML = originalText;
             submitBtn.disabled = false;
         } catch (error) {
-            console.error('Ошибка сохранения сущности:', error);
-            this.showNotification('Ошибка при сохранении: ' + error.message, 'error');
-            
+            console.error('Ошибка сохранения:', error);
+            this.showNotification('Ошибка: ' + error.message, 'error');
             const submitBtn = form.querySelector('button[type="submit"]');
-            submitBtn.innerHTML = '<i class="fas fa-save"></i> Сохранить';
-            submitBtn.disabled = false;
+            if (submitBtn) {
+                submitBtn.innerHTML = '<i class="fas fa-save"></i> Сохранить';
+                submitBtn.disabled = false;
+            }
+        }
+    }
+
+    urlToKey(url) {
+        if (!url) return null;
+        const base = this.getR2PublicBase();
+        if (url.startsWith(base + '/')) {
+            return decodeURIComponent(url.slice(base.length + 1));
+        }
+        try {
+            const u = new URL(url);
+            const path = u.pathname.replace(/^\/+/, '');
+            return decodeURIComponent(path) || null;
+        } catch (_) {
+            return null;
         }
     }
 

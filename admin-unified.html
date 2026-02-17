@@ -433,10 +433,19 @@
             display: none !important;
             align-items: center;
             justify-content: center;
+            z-index: 9999;
         }
         
         .admin-unified-page .modal[style*="flex"] {
             display: flex !important;
+        }
+        
+        /* При открытом модальном окне навигация не кликабельна */
+        body.admin-unified-page.modal-open .admin-sidebar,
+        body.admin-unified-page.modal-open .admin-sidebar-overlay,
+        body.admin-unified-page.modal-open .admin-burger {
+            pointer-events: none;
+            z-index: 0;
         }
         
         .admin-unified-page .modal-content {
@@ -498,6 +507,68 @@
         .admin-unified-page .form-group select {
             font-size: 1rem;
             padding: 10px 14px;
+        }
+        
+        /* Unified form layout */
+        .admin-unified-page .entity-form-unified {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+        .admin-unified-page .form-section {
+            padding: 16px 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .admin-unified-page .form-section:last-of-type {
+            border-bottom: none;
+        }
+        .admin-unified-page .form-section-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #374151;
+            margin: 0 0 12px 0;
+        }
+        .admin-unified-page .form-row {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        @media (min-width: 768px) {
+            .admin-unified-page .form-row.form-row-2 {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+            .admin-unified-page .form-row.form-row-2 .form-group {
+                flex: 1;
+                min-width: 200px;
+            }
+        }
+        .admin-unified-page .form-hint {
+            display: block;
+            color: #6b7280;
+            font-size: 0.875rem;
+            margin-bottom: 12px;
+        }
+        .admin-unified-page .file-upload-zone {
+            position: relative;
+            margin-bottom: 10px;
+        }
+        .admin-unified-page .file-upload-zone input[type="file"] {
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+            z-index: 2;
+        }
+        .admin-unified-page .current-file-link {
+            color: #2a5298;
+            font-size: 0.9rem;
+        }
+        .admin-unified-page .preview-thumb {
+            max-width: 120px;
+            max-height: 80px;
+            border-radius: 8px;
         }
         
         /* Стили для загрузки файлов */
@@ -744,7 +815,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="entityForm">
+                <form id="entityForm" enctype="multipart/form-data">
                     <input type="hidden" id="entityId" name="entity_id">
                     <input type="hidden" id="entityType" name="entity_type">
                     
@@ -763,6 +834,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="js/supabase-config.js?v=20250108120000"></script>
+    <script src="js/r2-config.js"></script>
     <script src="js/admin-auth.js"></script>
     <script src="js/admin-unified.js"></script>
     <script>
