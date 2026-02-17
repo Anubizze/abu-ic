@@ -1,4 +1,4 @@
-﻿const DocumentRenderer = (() => {
+const DocumentRenderer = (() => {
     const SELECTOR = '[data-documents]';
     
     // Р¤СѓРЅРєС†РёСЏ РґР»СЏ РїРѕР»СѓС‡РµРЅРёСЏ R2_PUBLIC_BASE РґРёРЅР°РјРёС‡РµСЃРєРё (РЅР° СЃР»СѓС‡Р°Р№, РµСЃР»Рё r2-config.js Р·Р°РіСЂСѓР·РёР»СЃСЏ РїРѕР·Р¶Рµ)
@@ -1144,6 +1144,66 @@
         });
     }
 
+    /** Динамическая отрисовка карточек документов для eramus.html: одна карточка на запись, новые сущности появляются под существующими (сетка) */
+    function renderErasmusCards(container, items) {
+        container.innerHTML = '';
+        const emptySpan = document.createElement('span');
+        emptySpan.className = 'documents-empty';
+        emptySpan.setAttribute('data-empty-state', '');
+        emptySpan.hidden = true;
+        emptySpan.textContent = 'Документы появятся позже.';
+        container.appendChild(emptySpan);
+
+        items.forEach((item) => {
+            const card = document.createElement('div');
+            card.className = 'document-card';
+
+            const imgWrapper = document.createElement('div');
+            imgWrapper.className = 'document-card__image-wrapper';
+            const img = document.createElement('img');
+            img.className = 'document-image';
+            img.setAttribute('data-document-image', '');
+            img.alt = item.link_text || getDisplayName(item);
+            const metadata = item.document?.metadata || {};
+            const imgUrl = resolveAssetUrl(metadata);
+            if (imgUrl) img.setAttribute('src', imgUrl);
+            imgWrapper.appendChild(img);
+
+            const info = document.createElement('div');
+            info.className = 'document-info';
+            const title = document.createElement('h3');
+            title.className = 'document-title';
+            title.setAttribute('data-document-title', '');
+            title.textContent = item.link_text || getDisplayName(item);
+            const description = document.createElement('p');
+            description.className = 'document-description';
+            description.setAttribute('data-document-description', '');
+            if (item.usage_text) {
+                description.textContent = item.usage_text;
+            } else {
+                description.hidden = true;
+            }
+            const link = document.createElement('a');
+            link.className = 'document-link';
+            link.setAttribute('data-document-action', '');
+            link.textContent = 'Посмотреть';
+            link.target = '_blank';
+            link.rel = 'noopener';
+            const url = getDocumentUrl(item);
+            if (url && url !== '#') {
+                link.href = url;
+            } else {
+                link.href = '#';
+                link.style.pointerEvents = 'none';
+                link.style.opacity = '0.6';
+                link.hidden = true;
+            }
+            info.append(title, description, link);
+            card.append(imgWrapper, info);
+            container.appendChild(card);
+        });
+    }
+
     function createPartnerCard(container, countryName) {
         const displayName = (countryName || '').trim();
         if (!displayName) return null;
@@ -2137,7 +2197,11 @@
                         file_name: doc.title_ru + '.pdf',
                         file_key: doc.pdf_file_key,
                         file_url: doc.pdf_file_url || doc.file_url,
-                        url: doc.pdf_file_url || doc.file_url
+                        url: doc.pdf_file_url || doc.file_url,
+                        metadata: {
+                            card_image_url: doc.card_image_url || '',
+                            card_image_key: doc.card_image_key || ''
+                        }
                     },
                     pdf_file_url: doc.pdf_file_url || doc.file_url
                 }));
@@ -2339,6 +2403,11 @@
 
         if (templateId) {
             renderWithTemplate(container, filtered, templateId);
+            return;
+        }
+
+        if (mode === 'cards' && container.dataset.page === 'eramus.html') {
+            renderErasmusCards(container, filtered);
             return;
         }
 

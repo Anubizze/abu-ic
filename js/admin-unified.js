@@ -66,6 +66,28 @@ class UnifiedAdmin {
         return 'img';
     }
 
+    /** Таблицы с колонками description_ru/kz/en в Supabase */
+    hasDescription(entityType) {
+        return ['eramus_documents', 'for_foreign_students_documents', 'teachers_documents', 'mschool_documents'].includes(entityType);
+    }
+
+    /** Таблицы с обязательными page_slug, section */
+    hasPageSlugSection(entityType) {
+        return ['teachers_documents', 'mschool_documents'].includes(entityType);
+    }
+
+    /** Автозаполнение page_slug и section для Преподаватели / MSchool (в форме не показываем) */
+    getPageSlugSection(entityType) {
+        if (entityType === 'teachers_documents') return { page_slug: 'Teachers.html', section: 'documents' };
+        if (entityType === 'mschool_documents') return { page_slug: 'mschool.html', section: 'documents' };
+        return { page_slug: null, section: null };
+    }
+
+    /** Таблица с обязательным card_id */
+    hasCardId(entityType) {
+        return entityType === 'for_foreign_students_documents';
+    }
+
     async uploadFileToR2(file, key) {
         if (!file || file.size === 0) return null;
         const workerUrl = this.getR2WorkerUrl();
@@ -333,6 +355,47 @@ class UnifiedAdmin {
 
         this.renderEntities();
         this.updateStats();
+        this.updateBrochureRestrictions();
+    }
+
+    /** Типы с ограничением «не более 2 сущностей»: Брошюры, Иностранным студентам */
+    getLimitedToTwoTypes() {
+        return ['brochure_documents', 'for_foreign_students_documents'];
+    }
+
+    /** Ограничение «не более 2»: кнопка Добавить неактивна при 2 записях, удаление разрешено. Сообщение для пользователей. */
+    updateBrochureRestrictions() {
+        const entityType = document.getElementById('entityTypeFilter')?.value || '';
+        const addBtn = document.getElementById('addEntityBtn');
+        const entitiesList = document.getElementById('entitiesList');
+        const limitedTypes = this.getLimitedToTwoTypes();
+        const isLimited = limitedTypes.includes(entityType);
+        const count = isLimited ? this.entities.filter(e => e.entity_type === entityType).length : 0;
+        const addDisabled = isLimited && count >= 2;
+
+        if (addBtn) {
+            addBtn.disabled = addDisabled;
+            if (addDisabled) {
+                addBtn.setAttribute('title', 'Доступно только 2 сущности. Для добавления новой удалите одну из текущих.');
+            } else {
+                addBtn.removeAttribute('title');
+            }
+        }
+
+        let notice = document.getElementById('entityLimitNotice');
+        if (isLimited && entitiesList) {
+            if (!notice) {
+                notice = document.createElement('div');
+                notice.id = 'entityLimitNotice';
+                notice.className = 'brochure-notice';
+                notice.setAttribute('role', 'status');
+                entitiesList.parentNode.insertBefore(notice, entitiesList);
+            }
+            notice.style.display = 'block';
+            notice.innerHTML = '<i class="fas fa-info-circle"></i> Доступно только <strong>2 сущности</strong>. Для добавления новой удалите одну из текущих.';
+        } else if (notice) {
+            notice.style.display = 'none';
+        }
     }
 
     renderEntities() {
@@ -451,6 +514,13 @@ class UnifiedAdmin {
             this.showNotification('Выберите тип сущности перед добавлением', 'error');
             return;
         }
+        if (this.getLimitedToTwoTypes().includes(entityType)) {
+            const count = this.entities.filter(e => e.entity_type === entityType).length;
+            if (count >= 2) {
+                this.showNotification('Доступно только 2 сущности. Для добавления новой удалите одну из текущих.', 'error');
+                return;
+            }
+        }
 
         if (modalTitle) modalTitle.textContent = 'Добавить сущность';
         if (modal) {
@@ -509,11 +579,18 @@ class UnifiedAdmin {
         const pdfPreview = this.getPdfPreviewUrl(entity?.pdf_file_url || entity?.pdf_url || entity?.file_url, entity?.pdf_file_key);
         const flagPreview = this.getImagePreviewUrl(entity?.flag_image_url, entity?.flag_image_key);
         const cardPreview = this.getImagePreviewUrl(entity?.card_image_url, entity?.card_image_key);
+        const cardIdVal = this.esc(entity?.card_id || '');
 
         formFields.innerHTML = `
             <div class="entity-form-unified">
                 <div class="form-section">
                     <h3 class="form-section-title">Основные данные</h3>
+                    ${this.hasCardId(entityType) ? `
+                    <div class="form-group">
+                        <label>ID карточки (card_id) *</label>
+                        <input type="text" name="card_id" value="${cardIdVal}" required placeholder="Уникальный идентификатор карточки">
+                    </div>
+                    ` : ''}
                     <div class="form-row form-row-2">
                         <div class="form-group">
                             <label>Название (RU) *</label>
@@ -544,7 +621,7 @@ class UnifiedAdmin {
                         <input type="text" name="country_en" value="${countryEn}" placeholder="Russia">
                     </div>
                     ` : ''}
-                    ${!isPartner ? `
+                    ${this.hasDescription(entityType) ? `
                     <div class="form-group">
                         <label>Описание (RU)</label>
                         <textarea name="description_ru" rows="2" placeholder="Краткое описание">${descRu}</textarea>
@@ -756,9 +833,6 @@ class UnifiedAdmin {
             if (!isPartner && !pdfUrl) {
                 throw new Error('Укажите URL PDF или загрузите файл');
             }
-            // #region agent log
-            fetch('http://127.0.0.1:7246/ingest/0e1bcba3-60e2-4f65-a79b-e540dc633b7e',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'admin-unified.js:afterUpload',message:'after R2 upload',data:{pdfUrl: pdfUrl ? pdfUrl.substring(0,80)+'...' : pdfUrl,pdfKey,isPartner,entityType,hasPdfFile:!!(pdfFile&&pdfFile.size>0)},timestamp:Date.now(),hypothesisId:'H1'})}).catch(()=>{});
-            // #endregion
 
             let flagUrl = (formData.get('flag_image_url') || '').trim() || null;
             let flagKey = null;
@@ -818,21 +892,32 @@ class UnifiedAdmin {
                     entityData.flag_image_key = null;
                 }
             }
-            // #region agent log
-            if (entityType === 'our_partners') {
-                fetch('http://127.0.0.1:7246/ingest/0e1bcba3-60e2-4f65-a79b-e540dc633b7e',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'admin-unified.js:entityDataBuilt',message:'entityData for our_partners',data:{hasPdfFileUrl:'pdf_file_url' in entityData && entityData.pdf_file_url != null,pdf_file_url: entityData.pdf_file_url ? String(entityData.pdf_file_url).substring(0,90)+'...' : entityData.pdf_file_url,pdf_file_key: entityData.pdf_file_key,keys:Object.keys(entityData)},timestamp:Date.now(),hypothesisId:'H1,H2'})}).catch(()=>{});
-            }
-            // #endregion
             if (entityType !== 'our_partners') {
+                const cardId = (formData.get('card_id') || '').trim() || null;
+                if (this.hasCardId(entityType) && !cardId) {
+                    throw new Error('Поле «ID карточки (card_id)» обязательно для раздела «Иностранным студентам».');
+                }
+
                 entityData = {
                     title_ru: formData.get('title_ru') || null,
                     title_kz: formData.get('title_kz') || null,
                     title_en: formData.get('title_en') || null,
-                    description_ru: formData.get('description_ru') || null,
-                    description_kz: formData.get('description_kz') || null,
-                    description_en: formData.get('description_en') || null,
                     is_active: formData.get('is_active') === 'on'
                 };
+                if (this.hasDescription(entityType)) {
+                    entityData.description_ru = formData.get('description_ru') || null;
+                    entityData.description_kz = formData.get('description_kz') || null;
+                    entityData.description_en = formData.get('description_en') || null;
+                }
+                if (this.hasPageSlugSection(entityType)) {
+                    const slugSection = this.getPageSlugSection(entityType);
+                    entityData.page_slug = slugSection.page_slug;
+                    entityData.section = slugSection.section;
+                    entityData.document_key = null;
+                }
+                if (this.hasCardId(entityType)) {
+                    entityData.card_id = cardId;
+                }
                 if (pdfUrl != null) {
                     entityData.pdf_file_url = pdfUrl;
                     entityData.pdf_file_key = pdfKey;
@@ -864,19 +949,12 @@ class UnifiedAdmin {
                 throw new Error('Ошибка: после загрузки PDF URL не попал в данные. Обновите страницу и попробуйте снова.');
             }
 
-            // #region agent log
-            fetch('http://127.0.0.1:7246/ingest/0e1bcba3-60e2-4f65-a79b-e540dc633b7e',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'admin-unified.js:beforeSupabase',message:'payload before Supabase',data:{entityId,entityType,hasPdfFileUrl:'pdf_file_url' in entityData && entityData.pdf_file_url != null,pdf_file_url_len:entityData.pdf_file_url ? String(entityData.pdf_file_url).length : 0,payloadKeys:Object.keys(entityData)},timestamp:Date.now(),hypothesisId:'H2,H5'})}).catch(()=>{});
-            // #endregion
             let result;
             if (entityId) {
                 result = await window.supabase.from(entityType).update(entityData).eq('id', entityId).select('id, pdf_file_url, pdf_file_key');
             } else {
                 result = await window.supabase.from(entityType).insert([entityData]).select('id, pdf_file_url, pdf_file_key');
             }
-            // #region agent log
-            const row = result.data && (Array.isArray(result.data) ? result.data[0] : result.data);
-            fetch('http://127.0.0.1:7246/ingest/0e1bcba3-60e2-4f65-a79b-e540dc633b7e',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'admin-unified.js:afterSupabase',message:'Supabase result',data:{error: result.error ? String(result.error.message || result.error) : null,status: result.status,dataLength: result.data ? (Array.isArray(result.data)?result.data.length:1) : 0,returnedPdfUrl: row ? (row.pdf_file_url != null ? String(row.pdf_file_url).substring(0,80)+'...' : row.pdf_file_url) : undefined,returnedPdfKey: row ? row.pdf_file_key : undefined},timestamp:Date.now(),hypothesisId:'H3,H4,H6'})}).catch(()=>{});
-            // #endregion
             if (result.error) throw result.error;
 
             this.showNotification(entityId ? 'Сущность обновлена!' : 'Сущность добавлена!', 'success');
