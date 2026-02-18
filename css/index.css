@@ -54,6 +54,8 @@ h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit;}
 body{
     font-family:Helvetica;
     background-color: #E9EAEF;
+    overflow-x: hidden;
+    max-width: 100vw;
 }
 
 
@@ -317,6 +319,10 @@ a{
   align-items: center;
   background-color: #F5F5F5;
   padding: 40px 20px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 .Students__row {
@@ -325,6 +331,8 @@ a{
   max-width: 1200px;
   width: 100%;
   margin-bottom: 40px;
+  box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 .Students__body {
@@ -333,10 +341,14 @@ a{
   justify-content: center;
   gap: 40px;
   flex-wrap: wrap;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .Students__woman {
-  width: 600px;
+  max-width: 600px;
+  width: 100%;
   height: 700px;
   border-radius: 10px;
   object-fit: cover;
@@ -344,9 +356,11 @@ a{
 
 .Students__content {
   max-width: 500px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  box-sizing: border-box;
 }
 
 .Students__title {
@@ -354,12 +368,16 @@ a{
   background-color: #004080;
   height: 60px;
   width: 100%;
+  max-width: 100%;
   border-radius: 8px;
   color: white;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 20px;
+  box-sizing: border-box;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .Students__intro {
@@ -381,6 +399,7 @@ a{
   font-weight: 600;
   height: 70px;
   width: 100%;
+  max-width: 100%;
   border: none;
   border-radius: 12px;
   cursor: pointer;
@@ -388,6 +407,10 @@ a{
   align-items: center;
   justify-content: center;
   transition: background-color 0.3s ease;
+  box-sizing: border-box;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  padding: 10px 5px;
 }
 
 .accordion-toggle:hover {
@@ -403,14 +426,13 @@ a{
   color: #333;
   font-size: 18px;
   line-height: 1.7;
-  width: 100%;  
-  box-sizing: border-box;
-}
-
-
-.accordion-content{
-  width: 1150px;
+  width: 100%;
+  max-width: 1150px;
   height: auto;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .accordion-content li {
@@ -422,17 +444,21 @@ a{
 .accordion-block {
   width: 100%;
   max-width: 1150px;
-  padding: 0 0;
+  padding: 0;
   box-sizing: border-box;
   margin-bottom: 35px;
+  overflow-x: hidden;
 }
 
 
 /* Стили для большого отдельного блока "Требования" */
 .requirements-block {
   width: 100%;
+  max-width: 100%;
   margin: 40px auto;
-  padding: 0 0
+  padding: 0;
+  box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 .requirements-button {
@@ -441,12 +467,16 @@ a{
   font-size: 24px;
   font-weight: 600;
   padding: 18px 24px;
-  width: 1150px;
+  width: 100%;
+  max-width: 1150px;
   border: none;
   border-radius: 12px;
   text-align: center;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  box-sizing: border-box;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .requirements-button:hover {
@@ -475,72 +505,272 @@ a{
 
 /* ===== АДАПТИВНОСТЬ ===== */
 @media (max-width: 1024px) {
+  .Students {
+    padding: 20px 15px;
+  }
+
+  .Students__row {
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+  }
+
   .Students__woman {
     width: 100%;
+    max-width: 100%;
     height: auto;
   }
 
   .Students__body {
     flex-direction: column;
     align-items: center;
+    gap: 20px;
+    width: 100%;
   }
 
   .Students__content {
     max-width: 100%;
-    padding: 0 20px;
+    width: 100%;
+    padding: 0 10px;
   }
 
   .accordion-content {
     width: 100%;
+    max-width: 100%;
+    padding: 15px;
+  }
+
+  .accordion-block {
+    max-width: 100%;
+    width: 100%;
+    padding: 0;
+  }
+
+  .requirements-button {
+    width: 100%;
+    max-width: 100%;
   }
 }
 
 @media (max-width: 768px) {
   .Students {
-    padding: 30px 15px;
+    padding: 20px 10px;
+  }
+
+  .Students__row {
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+    margin-bottom: 20px;
   }
 
   .Students__title {
-    font-size: 32px;
+    font-size: 28px;
     height: auto;
+    padding: 12px 8px;
+    width: 100%;
+  }
+
+  .Students__intro {
+    font-size: 16px;
     padding: 10px;
   }
 
-  .Students__intro {
-    font-size: 18px;
-  }
-
   .accordion-toggle {
-    font-size: 20px;
+    font-size: 18px;
     height: auto;
-    padding: 15px 10px;
-  }
-
-  .accordion-content {
-    font-size: 16px;
-    padding: 20px;
-  }
-}
-
-@media (max-width: 480px) {
-  .Students__title {
-    font-size: 26px;
-  }
-
-  .Students__intro {
-    font-size: 16px;
+    padding: 12px 8px;
+    width: 100%;
+    max-width: 100%;
   }
 
   .accordion-content {
     font-size: 15px;
-    padding: 15px 20px;
+    padding: 15px 10px;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .accordion-block {
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+  }
+
+  .requirements-button {
+    font-size: 20px;
+    padding: 14px 10px;
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .Students {
+    padding: 15px 8px;
+  }
+
+  .Students__row {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .Students__body {
+    gap: 15px;
+    width: 100%;
+  }
+
+  .Students__woman {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+
+  .Students__content {
+    width: 100%;
+    max-width: 100%;
+    padding: 0 5px;
+  }
+
+  .Students__title {
+    font-size: 22px;
+    height: auto;
+    padding: 10px 6px;
+    width: 100%;
+  }
+
+  .Students__intro {
+    font-size: 14px;
+    padding: 8px;
+    line-height: 1.5;
+  }
+
+  .accordion-block {
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+    margin-bottom: 20px;
   }
 
   .accordion-toggle {
-    font-size: 16px;        /* Было 18px — стало меньше */
-    padding: 8px 10px;      /* Меньше вертикальных отступов */
-    height: 50px;           /* Явно уменьшаем высоту */
-    border-radius: 8px;     /* Можно чуть скруглить меньше */
+    font-size: 14px;
+    padding: 10px 6px;
+    height: auto;
+    min-height: 45px;
+    width: 100%;
+    max-width: 100%;
+    border-radius: 8px;
+  }
+
+  .accordion-content {
+    font-size: 13px;
+    padding: 12px 8px;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .accordion-content li {
+    padding: 3px 0;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+
+  .requirements-button {
+    font-size: 18px;
+    padding: 12px 8px;
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+/* Специально для очень маленьких экранов (iPhone SE 375x667) */
+@media (max-width: 375px) {
+  .Students {
+    padding: 10px 5px;
+  }
+
+  .Students__row {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 15px;
+  }
+
+  .Students__body {
+    gap: 10px;
+    width: 100%;
+  }
+
+  .Students__woman {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+  }
+
+  .Students__content {
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+  }
+
+  .Students__title {
+    font-size: 20px;
+    padding: 8px 4px;
+    height: auto;
+    min-height: 40px;
+    width: 100%;
+  }
+
+  .Students__intro {
+    font-size: 13px;
+    padding: 6px;
+    line-height: 1.4;
+  }
+
+  .accordion-block {
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+    margin-bottom: 15px;
+  }
+
+  .accordion-toggle {
+    font-size: 13px;
+    padding: 8px 5px;
+    height: auto;
+    min-height: 40px;
+    width: 100%;
+    max-width: 100%;
+    line-height: 1.3;
+  }
+
+  .accordion-content {
+    font-size: 12px;
+    padding: 10px 6px;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .accordion-content li {
+    padding: 2px 0;
+    font-size: 12px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+
+  .requirements-block {
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+    margin: 20px auto;
+  }
+
+  .requirements-button {
+    width: 100%;
+    max-width: 100%;
+    font-size: 13px;
+    padding: 8px 5px;
   }
 
   .Students__woman {
@@ -668,6 +898,73 @@ a{
   text-decoration: underline;
 }
 
+/* Стили для блоков процедур (procedure-blocks-wrapper) */
+.procedure-blocks-wrapper {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Стили для отдельного блока процедуры */
+.procedure-block {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 0 30px 0;
+  padding: 0;
+  box-sizing: border-box;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Заголовок блока процедуры */
+.procedure-block > p {
+  margin: 0 0 15px 0;
+  padding: 0;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.5;
+  color: #004080;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.procedure-block > p > a {
+  color: #004080;
+  font-weight: 600;
+  text-decoration: none;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  display: inline-block;
+  max-width: 100%;
+}
+
+.procedure-block > p > a:hover {
+  text-decoration: underline;
+}
+
+/* Список шагов внутри блока */
+.procedure-block > ol {
+  margin: 0 0 0 25px;
+  padding: 0;
+  list-style-type: decimal;
+  font-size: 16px;
+  line-height: 1.8;
+  color: #333;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.procedure-block > ol > li {
+  margin: 0 0 12px 0;
+  padding: 0 0 0 5px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
 
 .Teacher__section-title {
   font-size: 36px;
@@ -714,6 +1011,27 @@ a{
   .documents-content ol,
   .documents-content ul {
     margin-left: 15px;
+  }
+
+  /* Адаптивные стили для блоков процедур */
+  .procedure-block {
+    margin-bottom: 25px;
+  }
+
+  .procedure-block > p {
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+
+  .procedure-block > ol {
+    margin-left: 20px;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .procedure-block > ol > li {
+    margin-bottom: 10px;
+    padding-left: 3px;
   }
 }
 
@@ -1027,7 +1345,7 @@ a{
 }
 
 
-/* Модалка */
+/* Модалка — display: flex задаётся JS при открытии, по умолчанию скрыта */
 .modal {
   display: none;
   position: fixed;
@@ -1035,8 +1353,7 @@ a{
   inset: 0;
   background-color: rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(6px);
-  animation: fadeIn 0.4s ease-in-out forwards; 
-  display: flex;
+  animation: fadeIn 0.4s ease-in-out forwards;
   justify-content: center;
   align-items: center;
 }
@@ -1133,8 +1450,13 @@ a{
   }
 
   .more-button {
-    font-size: 15px;
-    padding: 10px 20px;
+    font-size: 13px;
+    padding: 10px 16px;
+    white-space: nowrap;
+    min-width: fit-content;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 
@@ -1910,6 +2232,7 @@ a{
   padding: 20px 0  20px 0;
   background: linear-gradient(145deg, #ffffff, #f0f4ff);
   border-radius: 16px;
+  text-align: center;
   box-shadow:
     0 12px 28px rgba(0, 0, 0, 0.2),
     0 4px 8px rgba(0, 0, 0, 0.1);
@@ -1980,6 +2303,7 @@ a{
 .university-list ul {
   padding: 0;
   margin: 0;
+  text-align: center;
 }
 
 .university-list a {
@@ -2073,16 +2397,21 @@ a{
 
   /* Кнопка открытия */
   .more-button {
-    padding: 14px 17px;
+    padding: 12px 16px;
     background: linear-gradient(135deg, #003366, #0055aa);
     color: #fff;
     border: none;
     border-radius: 12px;
     cursor: pointer;
-    font-size: 17px;
+    font-size: 15px;
     font-weight: 600;
     box-shadow: 0 5px 15px rgba(0, 51, 102, 0.4);
     transition: all 0.3s ease;
+    white-space: nowrap;
+    min-width: fit-content;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .submenu {
@@ -2131,16 +2460,21 @@ a{
 @media (max-width: 480px) {
   /* Кнопка открытия */
   .more-button {
-    padding: 14px 17px;
+    padding: 12px 16px;
     background: linear-gradient(135deg, #003366, #0055aa);
     color: #fff;
     border: none;
     border-radius: 12px;
     cursor: pointer;
-    font-size: 17px;
+    font-size: 15px;
     font-weight: 600;
     box-shadow: 0 5px 15px rgba(0, 51, 102, 0.4);
     transition: all 0.3s ease;
+    white-space: nowrap;
+    min-width: fit-content;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .submenu {
@@ -2701,5 +3035,149 @@ a{
 
 body {
   font-family: 'Segoe UI', 'Arial', sans-serif;
+}
+
+/* ================= КНОПКА "ПОСЕТИТЬ САЙТ" ДЛЯ УНИВЕРСИТЕТОВ ================= */
+.visit-site-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 2px;
+    padding: 10px 18px;
+    background: linear-gradient(135deg, #0066CC 0%, #0055AA 100%);
+    color: #ffffff !important;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 91, 187, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    position: relative;
+    overflow: hidden;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4), 0 0 8px rgba(0, 0, 0, 0.2);
+    letter-spacing: 0.3px;
+}
+
+.visit-site-btn::before {
+    content: '🔗';
+    font-size: 16px;
+    margin-right: 4px;
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+}
+
+.visit-site-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 91, 187, 0.5);
+    color: #ffffff !important;
+    text-decoration: none;
+    background: linear-gradient(135deg, #0077DD 0%, #0066BB 100%);
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5), 0 0 10px rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.visit-site-btn:hover::before {
+    filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.4));
+}
+
+.visit-site-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(0, 91, 187, 0.3);
+    color: #ffffff !important;
+}
+
+.visit-site-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(0, 91, 187, 0.3);
+}
+
+/* Для списка университетов - кнопка должна быть на новой строке */
+.university-list li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    text-align: center;
+}
+
+.university-list li:last-child {
+    border-bottom: none;
+}
+
+.university-list li > span,
+.university-list li > a:not(.visit-site-btn) {
+    margin-bottom: 0;
+    text-align: center;
+    width: 100%;
+}
+
+/* Уменьшаем отступ между названием и кнопкой - делаем их очень близко */
+.university-list li > a:not(.visit-site-btn) + .visit-site-btn,
+.university-list li > span + .visit-site-btn {
+    margin-top: 2px !important;
+}
+
+/* Улучшение для университетов без PDF, но с сайтом */
+.university-list li > span.university-name-no-pdf {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 2px;
+    line-height: 1.4;
+}
+
+.university-list li > span.university-name-no-pdf + .visit-site-btn {
+    margin-top: 2px !important;
+    align-self: center;
+}
+
+/* Уменьшаем отступ сверху для кнопки "Посетить сайт" */
+.visit-site-btn {
+    margin-top: 4px !important;
+}
+
+/* Стили для ссылок appendices - делаем их заметными и кликабельными */
+[data-section="appendices"] a.appendices-link,
+[data-section="appendices"] .appendices-list a,
+.appendices-list a.appendices-link {
+    color: #0066cc !important;
+    text-decoration: none !important;
+    font-weight: 500;
+    transition: color 0.2s ease;
+    display: inline-block;
+    padding: 2px 4px;
+    border-radius: 3px;
+}
+
+[data-section="appendices"] a.appendices-link:hover,
+[data-section="appendices"] .appendices-list a:hover,
+.appendices-list a.appendices-link:hover {
+    color: #0052a3 !important;
+    text-decoration: none !important;
+    cursor: pointer;
+    background-color: transparent;
+}
+
+[data-section="appendices"] a.appendices-link:active,
+[data-section="appendices"] .appendices-list a:active,
+.appendices-list a.appendices-link:active {
+    color: #003d7a !important;
+    text-decoration: none !important;
+}
+
+[data-section="appendices"] a.appendices-link:visited,
+[data-section="appendices"] .appendices-list a:visited,
+.appendices-list a.appendices-link:visited {
+    color: #0066cc !important;
+    text-decoration: none !important;
+}
+
+[data-section="appendices"] a.appendices-link:visited:hover,
+[data-section="appendices"] .appendices-list a:visited:hover,
+.appendices-list a.appendices-link:visited:hover {
+    color: #0052a3 !important;
+    text-decoration: none !important;
+    background-color: transparent;
 }
 

@@ -1,0 +1,196 @@
+/**
+ * Единый AdminLayout для всех админ-страниц.
+ * Подключать первым, затем admin-news.css (или страничные стили).
+ * max-width: 1200px, один sidebar, на mobile — burger menu.
+ */
+
+/* Контейнер: на desktop (1024px+) — шире, контент использует доступную ширину */
+.admin-container {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 12px;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+@media (min-width: 1024px) {
+    .admin-container {
+        max-width: 1400px;
+    }
+
+    .admin-content {
+        flex: 1;
+        min-width: 0;
+        width: 100%;
+    }
+}
+
+@media (min-width: 769px) {
+    .admin-container {
+        padding: 20px;
+    }
+}
+
+/* Layout: sidebar + content */
+.admin-layout {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    width: 100%;
+    max-width: 100%;
+}
+
+/* Sidebar: скрыт на mobile, открывается по бургеру */
+.admin-sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: min(280px, 85vw);
+    max-width: 100%;
+    z-index: 1001;
+    background: #ffffff;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06);
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.admin-sidebar.sidebar-open {
+    transform: translateX(0);
+}
+
+.admin-sidebar-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+}
+
+.admin-sidebar-overlay.is-open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.admin-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-width: 0;
+}
+
+/* Бургер: только на mobile */
+.admin-burger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
+    margin: 0;
+    margin-right: 8px;
+    border: none;
+    background: #f0f0f0;
+    border-radius: 10px;
+    cursor: pointer;
+    color: #333;
+    font-size: 1.25rem;
+}
+
+.admin-burger:hover {
+    background: #e0e0e0;
+}
+
+@media (max-width: 767px) {
+    body.sidebar-open {
+        overflow: hidden;
+    }
+}
+
+/* Desktop/tablet: sidebar виден, burger скрыт. Строго > 768px */
+@media (min-width: 769px) {
+    .admin-layout {
+        flex-direction: row;
+    }
+
+    .admin-sidebar {
+        position: relative;
+        transform: none;
+        width: 260px;
+        flex-shrink: 0;
+        max-height: none;
+    }
+
+    .admin-sidebar-overlay {
+        display: none;
+    }
+
+    .admin-burger {
+        display: none !important;
+    }
+}
+
+/* Единый header (дополняется в admin-news.css) */
+.admin-layout .admin-header {
+    width: 100%;
+    max-width: 100%;
+}
+
+/* Sidebar навигация: вертикальное меню */
+.admin-sidebar .admin-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 16px 12px;
+    background: transparent;
+    border-radius: 0;
+    box-shadow: none;
+    border: none;
+}
+
+.admin-nav-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background: transparent;
+    color: #666666;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    border: 2px solid transparent;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+}
+
+.admin-nav-link:hover {
+    background: #f8f9fa;
+    color: #3498db;
+}
+
+.admin-nav-link.active {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: white;
+    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+    border-color: #3498db;
+}
+
+.admin-nav-link i {
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+
+.admin-nav-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

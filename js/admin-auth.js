@@ -3,12 +3,14 @@
     const AUTH_EVENT_LOGIN = 'abu-admin-authenticated';
     const AUTH_EVENT_LOGOUT = 'abu-admin-logout';
     const DEFAULT_LOGIN_PAGE = 'admin-login.html';
-    const DEFAULT_HOME_PAGE = 'admin-documents.html';
+    const DEFAULT_HOME_PAGE = 'admin-unified.html';
     const PROTECTED_SELECTOR = '[data-auth-protected]';
 
     let supabaseReadyPromise = null;
     let authSubscription = null;
 
+    const SESSION_STORAGE_KEY = 'abu_admin_session';
+    
     const authState = {
         isAuthenticated: false,
         session: null
@@ -32,18 +34,6 @@
 
             const check = () => {
                 if (typeof supabase !== 'undefined' && supabase) {
-                    if (!authSubscription && supabase.auth?.onAuthStateChange) {
-                        authSubscription = supabase.auth.onAuthStateChange((event, session) => {
-                            if ((event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') && session) {
-                                applySession(session, { silent: true });
-                            }
-
-                            if (event === 'SIGNED_OUT' || event === 'USER_DELETED') {
-                                clearSession({ silent: true });
-                            }
-                        });
-                    }
-
                     resolve(supabase);
                     return;
                 }
@@ -63,15 +53,28 @@
     }
 
     function applySession(session, { silent = false } = {}) {
-        const previousToken = authState.session?.access_token;
+        const previousSession = authState.session;
         authState.session = session;
         authState.isAuthenticated = Boolean(session);
 
-        if (!silent && session?.user?.email) {
-            console.info('Пользователь авторизован:', session.user.email);
+        // Сохраняем сессию в localStorage
+        if (session) {
+            try {
+                localStorage.setItem(SESSION_STORAGE_KEY, JSON.stringify({
+                    id: session.id,
+                    username: session.username,
+                    expiresAt: session.expiresAt || Date.now() + (24 * 60 * 60 * 1000) // 24 часа по умолчанию
+                }));
+            } catch (e) {
+                console.error('Ошибка сохранения сессии:', e);
+            }
         }
 
-        if (session?.access_token && session.access_token !== previousToken) {
+        if (!silent && session?.username) {
+            console.info('Пользователь авторизован:', session.username);
+        }
+
+        if (session && (!previousSession || previousSession.id !== session.id)) {
             window.dispatchEvent(
                 new CustomEvent(AUTH_EVENT_LOGIN, { detail: { session } })
             );
@@ -85,6 +88,14 @@
 
         authState.session = null;
         authState.isAuthenticated = false;
+        
+        // Удаляем сессию из localStorage
+        try {
+            localStorage.removeItem(SESSION_STORAGE_KEY);
+        } catch (e) {
+            console.error('Ошибка удаления сессии:', e);
+        }
+        
         window.dispatchEvent(new CustomEvent(AUTH_EVENT_LOGOUT));
     }
 
@@ -92,46 +103,70 @@
         await ensureSupabaseReady();
 
         try {
-            const { data, error } = await supabase.auth.getSession();
-            if (error) throw error;
-
-            if (data?.session) {
-                applySession(data.session, { silent: true });
-                return data.session;
+            // Проверяем сессию в localStorage
+            const storedSession = localStorage.getItem(SESSION_STORAGE_KEY);
+            if (!storedSession) {
+                clearSession({ silent: true });
+                return null;
             }
 
-            clearSession({ silent: true });
-            return null;
+            const session = JSON.parse(storedSession);
+            
+            // Проверяем, не истекла ли сессия
+            if (session.expiresAt && Date.now() > session.expiresAt) {
+                clearSession({ silent: true });
+                return null;
+            }
+
+            // Восстанавливаем сессию
+            applySession(session, { silent: true });
+            return session;
         } catch (error) {
-            console.error('Ошибка получения сессии Supabase:', error);
+            console.error('Ошибка получения сессии:', error);
             clearSession({ silent: true });
             return null;
         }
     }
 
-    async function login(email, password) {
+    async function login(username, password) {
         await ensureSupabaseReady();
 
-        const { data, error } = await supabase.auth.signInWithPassword({ email, password });
-        if (error) throw error;
+        // Вызываем RPC функцию для проверки учетных данных
+        const { data, error } = await supabase.rpc('verify_admin_credentials', {
+            p_username: username,
+            p_password: password
+        });
 
-        if (!data?.session) {
-            throw new Error('Не удалось получить сессию. Проверьте учетные данные.');
+        if (error) {
+            console.error('Ошибка проверки учетных данных:', error);
+            throw new Error('Ошибка при проверке учетных данных. Попробуйте позже.');
         }
 
-        applySession(data.session);
-        return data.session;
+        // Проверяем результат
+        if (!data || !Array.isArray(data) || data.length === 0 || !data[0].success) {
+            throw new Error('Неверный логин или пароль.');
+        }
+
+        const userData = data[0];
+        
+        // Создаем сессию
+        const session = {
+            id: userData.id,
+            username: userData.username,
+            expiresAt: Date.now() + (24 * 60 * 60 * 1000) // 24 часа
+        };
+
+        applySession(session);
+        return session;
     }
 
     async function logout({ redirect = true, loginPage, returnTo } = {}) {
-        await ensureSupabaseReady();
-
         try {
-            await supabase.auth.signOut();
+            // Просто очищаем сессию, так как мы не используем Supabase Auth
+            clearSession();
         } catch (error) {
             console.error('Ошибка при выходе из аккаунта:', error);
         } finally {
-            clearSession();
             if (redirect) {
                 const url = createLoginUrl(loginPage || DEFAULT_LOGIN_PAGE, 'logged_out');
                 if (returnTo) {

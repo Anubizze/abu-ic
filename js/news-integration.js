@@ -162,15 +162,29 @@ class NewsIntegration {
         const paginatedNews = sortedNews.slice(startIndex, endIndex);
 
         // Отображаем новости текущей страницы
-        newsContainer.innerHTML = paginatedNews.map(news => `
+        newsContainer.innerHTML = paginatedNews.map(news => {
+            const title = news.title_ru || news.title;
+            const titleEn = news.title_en || news.title;
+            const titleKz = news.title_kz || news.title;
+            
+            return `
             <div class="news-card">
                 <a href="${this.getNewsDetailUrl(news)}" class="news-link">
                     <div class="single-image">
-                        <img src="${this.getNewsImage(news)}" alt="${news.title}">
+                        <img src="${this.getNewsImage(news)}" alt="${title}">
+                        <!-- Логотипы на изображении -->
+                        <div class="news-card-logos">
+                            <img src="img/Logo-ABU.png" alt="ABU Logo" class="news-logo-abu">
+                            <img src="img/LogoCirculEC.png" alt="CirculEC Logo" class="news-logo-circulen" onerror="this.src='img/logocirculec2.png'">
+                        </div>
+                        <!-- Оранжевый баннер с заголовком -->
+                        <div class="news-card-banner" data-ru="${title}" data-en="${titleEn}" data-kz="${titleKz}">
+                            ${title}
+                        </div>
                     </div>
                     <div class="news-content">
-                        <div class="news-title" data-ru="${news.title_ru || news.title}" data-en="${news.title_en || news.title}" data-kz="${news.title_kz || news.title}">
-                            ${news.title_ru || news.title}
+                        <div class="news-title" data-ru="${title}" data-en="${titleEn}" data-kz="${titleKz}">
+                            ${title}
                         </div>
                         <span class="news-date" data-ru="${this.formatDate(news.date)}" data-en="${this.formatDateEn(news.date)}" data-kz="${this.formatDateKz(news.date)}">
                             ${this.formatDate(news.date)}
@@ -186,7 +200,8 @@ class NewsIntegration {
                     </div>
                 </a>
             </div>
-        `).join('');
+        `;
+        }).join('');
         
         // Отображаем пагинацию
         this.renderPagination(totalPages);

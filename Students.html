@@ -150,6 +150,20 @@
                     </div>
                 </div>
 
+                <!-- Приложения -->
+                <div class="accordion-block">
+                    <button class="accordion-toggle big-blue-button" data-ru="Приложения" data-kz="Қосымшалар" data-en="Appendices">Приложения / Қосымшалар / Appendices</button>
+                    <div class="accordion-content styled-content">
+                        <ul class="appendices-list"
+                            data-documents
+                            data-page="Students.html"
+                            data-section="appendices"
+                            data-mode="list">
+                            <span class="appendices-empty" data-empty-state hidden>Документы появятся позже.</span>
+                        </ul>
+                    </div>
+                </div>
+
                 <!-- Подробная информация -->
                 <div class="accordion-block">
                 <button class="accordion-toggle big-blue-button" data-ru="Порядок действий" data-kz="Әрекеттер тәртібі" data-en="Procedure">Порядок действий</button>
@@ -200,10 +214,10 @@
                             <div class="logo__footer">
                                 <img src="img/Logo-ABU.png" alt="Логотип">
                             </div>
-                            <div class="address">Ильяшева 94, 101 каб, Семей, 071400</div>
-                            <div class="footer__phone">+7 (7222) 42-32-24</div>
-                            <div class="footer__email">internationaloffice@abu.edu.kz</div>
-                            <div class="schedule">понедельник – пятница, 9:00 – 18:00 <br>						
+                            <div class="address" data-footer="address">Ильяшева 94, 101 каб, Семей, 071400</div>
+                            <div class="footer__phone" data-footer="phone">+7 (7222) 42-32-24</div>
+                            <div class="footer__email" data-footer="email">internationaloffice@abu.edu.kz</div>
+                            <div class="schedule" data-footer="schedule">понедельник – пятница, 9:00 – 18:00 <br>						
                                                   обеденный перерыв: 13:00 – 14:00
                             </div>
                         </div>
@@ -236,5 +250,10 @@
     </div>
     
     <script src="js/language-switcher.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/r2-config.js"></script>
+    <script src="js/supabase-config.js?v=20250108120000"></script>
+    <script src="js/document-renderer.js?v=20251216_5"></script>
+    <script src="js/footer-loader.js?v=20250106"></script>
 </body>
 </html>
