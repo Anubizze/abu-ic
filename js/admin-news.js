@@ -421,37 +421,80 @@ class NewsAdmin {
         }
     }
 
+    getR2WorkerUrl() {
+        const r2Config = window.R2_CONFIG || {};
+        return r2Config.WORKER_URL || '/api/r2-upload';
+    }
+
+    getR2PublicBase() {
+        const r2Config = window.R2_CONFIG || {};
+        return r2Config.IMAGES_PUBLIC_URL || r2Config.PUBLIC_URL || 'https://pub-a797bdf4261e4c448d835644b30caa41.r2.dev';
+    }
+
+    getNewsImagesR2Prefix() {
+        return 'img/news';
+    }
+
+    buildR2PublicUrl(key) {
+        const base = this.getR2PublicBase();
+        if (!base) return '';
+        const safeKey = (key || '').replace(/^\/+/, '');
+        const cleanKey = safeKey.replace(/^abu-ic\//, '');
+        return `${base}/${cleanKey}`;
+    }
+
     async uploadImageToStorage(file) {
         if (!file || file.size === 0) {
             return null;
         }
         
         try {
-            // Генерируем уникальное имя файла
-            const fileExt = file.name.split('.').pop();
-            const fileName = `${Date.now()}_${Math.random().toString(36).substring(2)}.${fileExt}`;
-            const filePath = `news/${fileName}`;
-            
-            // Загружаем файл в Supabase Storage
-            const { data, error } = await supabase.storage
-                .from(STORAGE_BUCKET)
-                .upload(filePath, file, {
-                    cacheControl: '3600',
-                    upsert: false
-                });
-            
-            if (error) {
-                throw error;
+            const workerUrl = this.getR2WorkerUrl();
+            if (!workerUrl) {
+                throw new Error('R2 WORKER_URL не задан. Проверьте js/r2-config.js (WORKER_URL).');
             }
-            
-            // Получаем публичный URL
-            const { data: urlData } = supabase.storage
-                .from(STORAGE_BUCKET)
-                .getPublicUrl(filePath);
-            
-            return urlData.publicUrl;
+
+            const ext = (file.name.split('.').pop() || 'jpg').toLowerCase();
+            const safeExt = ext.replace(/[^a-z0-9]/g, '') || 'jpg';
+            const fileName = `${Date.now()}_${Math.random().toString(36).substring(2)}.${safeExt}`;
+            const key = `${this.getNewsImagesR2Prefix()}/${fileName}`;
+
+            console.log('Отправляем изображение новости в R2:', { key, fileName, workerUrl });
+
+            const response = await fetch(`${workerUrl}/upload?name=${encodeURIComponent(key)}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': file.type || 'application/octet-stream'
+                },
+                body: file
+            });
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error(`Не удалось загрузить изображение в R2: ${response.status} ${errorText}`);
+            }
+
+            let payload = null;
+            try {
+                payload = await response.json();
+            } catch (e) {
+                payload = null;
+            }
+
+            let url = payload?.url;
+            if (!url) {
+                url = this.buildR2PublicUrl(key);
+            }
+
+            if (url && url.includes('%2F')) {
+                url = decodeURIComponent(url);
+            }
+
+            console.log('Изображение новости загружено в R2:', { key, url });
+
+            return url || null;
         } catch (error) {
-            console.error('Ошибка загрузки изображения:', error);
+            console.error('Ошибка загрузки изображения в R2:', error);
             throw new Error('Не удалось загрузить изображение: ' + error.message);
         }
     }
